@@ -17,14 +17,20 @@ import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+/**
+ * 
+ * @author Jaga
+ *
+ */
 public class LoginToOrangeHRM {
 
-	WebDriver driver;
-	JSONParser jsonParser;
-	FileReader fileReader;
-	Object obj;
-	JSONObject userloginObj, users;
-	JSONArray userloginArray;
+	private WebDriver driver;
+	private JSONParser jsonParser;
+	private FileReader fileReader;
+	private Object object;
+	private JSONObject userloginObj, users;
+	private JSONArray userloginArray;
+	private static final String jsonFilePath = "//src//main//java//testData.json";
 
 	@BeforeClass
 	public void setup() {
@@ -39,7 +45,7 @@ public class LoginToOrangeHRM {
 	}
 
 	@Test(dataProvider = "LoginData")
-	public void login(String data) {
+	public void loginToHRMApp(String data) {
 		String users[] = data.split(",");
 		driver.get("https://opensource-demo.orangehrmlive.com/");
 		driver.findElement(By.xpath("//input[@id='txtUsername']")).sendKeys(users[0]);
@@ -50,9 +56,9 @@ public class LoginToOrangeHRM {
 	@DataProvider(name = "LoginData")
 	public String[] readJson() throws IOException, ParseException {
 		jsonParser = new JSONParser();
-		fileReader = new FileReader(System.getProperty("user.dir")+"//src//main//java//testData.json");
-		obj = jsonParser.parse(fileReader);
-		userloginObj = (JSONObject) obj;
+		fileReader = new FileReader(System.getProperty("user.dir") + jsonFilePath);
+		object = jsonParser.parse(fileReader);
+		userloginObj = (JSONObject) object;
 		userloginArray = (JSONArray) userloginObj.get("userlogins");
 		String[] userArray = new String[userloginArray.size()];
 		for (int i = 0; i < userloginArray.size(); i++) {

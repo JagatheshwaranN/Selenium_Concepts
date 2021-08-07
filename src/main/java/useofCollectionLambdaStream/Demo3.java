@@ -11,12 +11,19 @@ import org.openqa.selenium.support.ui.Select;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+/**
+ * 
+ * @author Jaga
+ *
+ */
 public class Demo3 {
+	
+	private static WebDriver driver;
 
 	public static void main(String ar[]) {
 
 		WebDriverManager.chromedriver().setup();
-		WebDriver driver = new ChromeDriver();
+		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
 		driver.get("http://demowebshop.tricentis.com/");

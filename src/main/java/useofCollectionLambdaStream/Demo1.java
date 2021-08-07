@@ -7,13 +7,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+/**
+ * 
+ * @author Jaga
+ *
+ */
 public class Demo1 {
+
+	private static WebDriver driver;
 
 	public static void main(String[] args) {
 
-		System.setProperty("webdriver.chrome.driver", ".\\BrowserDrivers\\chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
 		driver.get("http://demowebshop.tricentis.com/");
+
 		List<WebElement> links = driver.findElements(By.tagName("a"));
 		int totalLinks = links.size();
 		System.out.println("Total links on the page : " + totalLinks);

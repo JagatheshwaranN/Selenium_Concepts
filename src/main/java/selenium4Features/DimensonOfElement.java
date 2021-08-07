@@ -8,22 +8,29 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+/**
+ * 
+ * @author Jaga
+ *
+ */
 public class DimensonOfElement {
+
+	private static WebDriver driver;
+	private static WebElement login;
+	private static Rectangle loginButton;
 
 	public static void main(String ar[]) {
 
 		WebDriverManager.chromedriver().setup();
-		WebDriver driver = new ChromeDriver();
-
+		driver = new ChromeDriver();
 		driver.get("https://opensource-demo.orangehrmlive.com/index.php");
-		WebElement login = driver.findElement(By.xpath("//input[@id='btnLogin']"));
-
-		Rectangle loginButton = login.getRect();
+		login = driver.findElement(By.xpath("//input[@id='btnLogin']"));
+		loginButton = login.getRect();
 		System.out.println(loginButton.getHeight());
 		System.out.println(loginButton.getWidth());
 		System.out.println(loginButton.getX());
 		System.out.println(loginButton.getY());
-
 		driver.close();
+
 	}
 }
