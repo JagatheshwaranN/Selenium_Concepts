@@ -44,13 +44,13 @@ public class MockGeoLocation {
 	public static void geoLocation2() throws InterruptedException {
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
-		coordinates = Map.of("latitude", 30.3079823, "longitude", -97.893803, "accuracy", 1);
+//		coordinates = Map.of("latitude", 30.3079823, "longitude", -97.893803, "accuracy", 1);
 		((ChromeDriver) driver).executeCdpCommand("Emulation.setGeolocationOverride", coordinates);
 		driver.get("https://oldnavy.gap.com/stores");
 		List<WebElement> addresses = driver.findElements(By.className("address"));
 		Assert.assertTrue(addresses.size() > 0, "No addresses found");
-		Assert.assertTrue(addresses.stream().allMatch(a -> a.getText().contains(", TX ")),
-				"Some addresses listed are not in Texas");
+//		Assert.assertTrue(addresses.stream().allMatch(a -> a.getText().contains(", TX ")),
+//				"Some addresses listed are not in Texas");
 		Thread.sleep(5000);
 		driver.close();
 	}

@@ -33,8 +33,8 @@ public class BasicAuthentication {
 		driver = new ChromeDriver();
 		devTools = ((ChromeDriver) driver).getDevTools();
 		devTools.createSession();
-		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
-		header = new HashMap<>();
+//		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+//		header = new HashMap<>();
 		basicAuthentication = "Basic "
 				+ new String(new Base64().encode(String.format("%s:%s", username, password).getBytes()));
 		header.put("Authorization", basicAuthentication);
