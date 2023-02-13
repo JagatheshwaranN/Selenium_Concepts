@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
 import static org.openqa.selenium.support.locators.RelativeLocator.*;
-import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 /**
  * 
@@ -22,7 +22,7 @@ public class RelativeLocators {
 
 	public static void main(String ar[]) throws InterruptedException {
 
-		WebDriverManager.chromedriver().setup();
+		
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get("https://app.testproject.io/");

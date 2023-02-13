@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 /**
  * 
@@ -21,7 +21,7 @@ public class ActionClassUpdate {
 
 	public static void main(String ar[]) throws InterruptedException {
 
-		WebDriverManager.chromedriver().setup();
+		
 		rightClickDemo();
 		doubleClickDemo();
 		clickAndHoldDemo();

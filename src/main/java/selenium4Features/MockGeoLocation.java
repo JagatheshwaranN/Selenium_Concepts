@@ -10,8 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-
 /**
  * 
  * @author Jaga
@@ -29,7 +27,7 @@ public class MockGeoLocation {
 	}
 
 	public static void geoLocation1() throws InterruptedException {
-		WebDriverManager.chromedriver().setup();
+
 		driver = new ChromeDriver();
 		location = new HashMap<String, Object>();
 		location.put("latitude", 34.052235);
@@ -42,7 +40,7 @@ public class MockGeoLocation {
 	}
 
 	public static void geoLocation2() throws InterruptedException {
-		WebDriverManager.chromedriver().setup();
+
 		driver = new ChromeDriver();
 //		coordinates = Map.of("latitude", 30.3079823, "longitude", -97.893803, "accuracy", 1);
 		((ChromeDriver) driver).executeCdpCommand("Emulation.setGeolocationOverride", coordinates);

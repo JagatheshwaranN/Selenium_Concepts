@@ -15,8 +15,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-
 /**
  * 
  * @author Jaga
@@ -34,7 +32,7 @@ public class LoginToOrangeHRM {
 
 	@BeforeClass
 	public void setup() {
-		WebDriverManager.chromedriver().setup();
+
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 	}
