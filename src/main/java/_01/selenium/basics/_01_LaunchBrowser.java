@@ -39,18 +39,10 @@ public class _01_LaunchBrowser {
 	}
 
 	public static WebDriver get_driver() {
-		if (_driver == null) {
-			return _driver = new ChromeDriver();
-		} else {
-			return _driver;
-		}
+		return _driver = new ChromeDriver();
 	}
 
 	public static WebDriver get_driver(ChromeOptions options) {
-		if (_driver == null) {
-			return _driver = new ChromeDriver(options);
-		} else {
-			return _driver;
-		}
+		return _driver = new ChromeDriver(options);
 	}
 }
