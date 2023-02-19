@@ -21,7 +21,8 @@ public class _03_ChromeOptions extends _01_LaunchBrowser {
 //		acceptSSLSecurityIssue();
 //		pageLoadStrategy();
 //		waitTimeout();
-		unHandledPrompt();
+//		unHandledPrompt();
+		browserDetails();
 	}
 
 	public static void openMaximizedBrowser() {
@@ -78,16 +79,25 @@ public class _03_ChromeOptions extends _01_LaunchBrowser {
 		_driver.findElement(By.cssSelector(".light-mode-item.navbar-brand-item")).isDisplayed();
 		_driver.quit();
 	}
-	
+
 	// Not Complete
 	public static void unHandledPrompt() {
 		options = new ChromeOptions();
-		//options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+		// options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
 		options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
 		_driver = get_driver(options);
 		_driver.get("https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_prompt");
-		//_driver.quit();
+		// _driver.quit();
 	}
-	
-	
+
+	public static void browserDetails() {
+		options = new ChromeOptions();
+		_driver = get_driver(options);
+		System.out.println("Browser Name >> " + options.getBrowserName());
+		// Not Working
+		// System.out.println("Browser Version >> " + options.getBrowserVersion());
+		_driver.get("https://www.selenium.dev/documentation/webdriver/drivers/options/");
+		_driver.quit();
+	}
+
 }
