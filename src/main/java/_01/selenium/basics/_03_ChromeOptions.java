@@ -22,7 +22,9 @@ public class _03_ChromeOptions extends _01_LaunchBrowser {
 //		pageLoadStrategy();
 //		waitTimeout();
 //		unHandledPrompt();
-		browserDetails();
+//		browserDetails();
+//		headlessBrowserLaunch();
+		browserDetach();
 	}
 
 	public static void openMaximizedBrowser() {
@@ -98,6 +100,26 @@ public class _03_ChromeOptions extends _01_LaunchBrowser {
 		// System.out.println("Browser Version >> " + options.getBrowserVersion());
 		_driver.get("https://www.selenium.dev/documentation/webdriver/drivers/options/");
 		_driver.quit();
+	}
+
+	public static void headlessBrowserLaunch() {
+		options = new ChromeOptions();
+		options.addArguments("--headless=new");
+		_driver = get_driver(options);
+		_driver.get("https://www.selenium.dev/documentation/webdriver/browsers/chrome/");
+		System.out.println(_driver.getTitle());
+		_driver.quit();
+	}
+	
+	// Not sure about this usecase.
+	public static void browserDetach() {
+		options = new ChromeOptions();
+//		options.setExperimentalOption("detach", true);
+//		options.setCapability("detach", true);
+		_driver = get_driver(options);
+		_driver.get("https://www.selenium.dev/documentation/webdriver/browsers/chrome/");
+		System.out.println(_driver.getTitle());
+		_driver.close();
 	}
 
 }
