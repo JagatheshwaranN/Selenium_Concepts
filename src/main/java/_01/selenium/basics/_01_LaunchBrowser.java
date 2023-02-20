@@ -4,7 +4,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeDriverService;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 
 public class _01_LaunchBrowser {
 
@@ -44,5 +49,13 @@ public class _01_LaunchBrowser {
 
 	public static WebDriver get_driver(ChromeOptions options) {
 		return _driver = new ChromeDriver(options);
+	}
+
+	public static WebDriver get_ffDriver(FirefoxOptions options) {
+		return _driver = new FirefoxDriver(options);
+	}
+
+	public static WebDriver get_edgeDriver(EdgeOptions options) {
+		return _driver = new EdgeDriver(options);
 	}
 }

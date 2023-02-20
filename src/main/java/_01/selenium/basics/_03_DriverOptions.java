@@ -7,12 +7,17 @@ import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
-public class _03_ChromeOptions extends _01_LaunchBrowser {
+public class _03_DriverOptions extends _01_LaunchBrowser {
 
 	public static WebDriver _driver;
 	public static ChromeOptions options = new ChromeOptions();
+	public static FirefoxOptions ffOptions = new FirefoxOptions();
+	public static EdgeOptions edgeOptions = new EdgeOptions();
 
 	public static void main(String[] args) {
 
@@ -23,12 +28,13 @@ public class _03_ChromeOptions extends _01_LaunchBrowser {
 //		waitTimeout();
 //		unHandledPrompt();
 //		browserDetails();
-//		headlessBrowserLaunch();
-		browserDetach();
+//		headlessChromeBrowserLaunch();
+//		browserDetach();
+//		headlessFirefoxBrowserLaunch();
+		headlessIEBrowserLaunch();
 	}
 
 	public static void openMaximizedBrowser() {
-		options = new ChromeOptions();
 		options.addArguments("start-maximized");
 		_driver = get_driver(options);
 		_driver.get("https://www.selenium.dev/documentation/webdriver/browsers/chrome/");
@@ -36,7 +42,6 @@ public class _03_ChromeOptions extends _01_LaunchBrowser {
 	}
 
 	public static void openChromeIncognito() {
-		options = new ChromeOptions();
 		options.addArguments("incognito");
 		_driver = get_driver(options);
 		_driver.get("https://www.google.com/");
@@ -57,7 +62,6 @@ public class _03_ChromeOptions extends _01_LaunchBrowser {
 	}
 
 	public static void pageLoadStrategy() {
-		options = new ChromeOptions();
 		options.setPageLoadStrategy(PageLoadStrategy.EAGER);
 		_driver = get_driver(options);
 		_driver.get("https://unsplash.com/t/people");
@@ -70,7 +74,6 @@ public class _03_ChromeOptions extends _01_LaunchBrowser {
 	}
 
 	public static void waitTimeout() {
-		options = new ChromeOptions();
 		options.setPageLoadTimeout(Duration.ofSeconds(10));
 		options.setImplicitWaitTimeout(Duration.ofSeconds(10));
 		options.setScriptTimeout(Duration.ofSeconds(10));
@@ -84,7 +87,6 @@ public class _03_ChromeOptions extends _01_LaunchBrowser {
 
 	// Not Complete
 	public static void unHandledPrompt() {
-		options = new ChromeOptions();
 		// options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
 		options.setCapability(CapabilityType.UNHANDLED_PROMPT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
 		_driver = get_driver(options);
@@ -93,7 +95,6 @@ public class _03_ChromeOptions extends _01_LaunchBrowser {
 	}
 
 	public static void browserDetails() {
-		options = new ChromeOptions();
 		_driver = get_driver(options);
 		System.out.println("Browser Name >> " + options.getBrowserName());
 		// Not Working
@@ -102,24 +103,38 @@ public class _03_ChromeOptions extends _01_LaunchBrowser {
 		_driver.quit();
 	}
 
-	public static void headlessBrowserLaunch() {
-		options = new ChromeOptions();
-		options.addArguments("--headless=new");
-		_driver = get_driver(options);
-		_driver.get("https://www.selenium.dev/documentation/webdriver/browsers/chrome/");
-		System.out.println(_driver.getTitle());
-		_driver.quit();
-	}
-	
 	// Not sure about this usecase.
 	public static void browserDetach() {
-		options = new ChromeOptions();
 //		options.setExperimentalOption("detach", true);
 //		options.setCapability("detach", true);
 		_driver = get_driver(options);
 		_driver.get("https://www.selenium.dev/documentation/webdriver/browsers/chrome/");
 		System.out.println(_driver.getTitle());
 		_driver.close();
+	}
+
+	public static void headlessChromeBrowserLaunch() {
+		options.addArguments("--headless=new");
+		_driver = get_driver(options);
+		_driver.get("https://www.selenium.dev/documentation/webdriver/browsers/chrome/");
+		System.out.println(_driver.getTitle());
+		_driver.quit();
+	}
+
+	public static void headlessFirefoxBrowserLaunch() {
+		ffOptions.addArguments("-headless");
+		_driver = get_ffDriver(ffOptions);
+		_driver.get("https://www.selenium.dev/documentation/webdriver/browsers/firefox/");
+		System.out.println(_driver.getTitle());
+		_driver.quit();
+	}
+
+	public static void headlessIEBrowserLaunch() {
+		edgeOptions.addArguments("--headless=new");
+		_driver = get_edgeDriver(edgeOptions);
+		_driver.get("https://www.selenium.dev/documentation/webdriver/browsers/edge/");
+		System.out.println(_driver.getTitle());
+		_driver.quit();
 	}
 
 }
