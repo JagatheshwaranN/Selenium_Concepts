@@ -9,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 
 public class _03_DriverOptions extends _01_LaunchBrowser {
@@ -21,16 +20,16 @@ public class _03_DriverOptions extends _01_LaunchBrowser {
 
 	public static void main(String[] args) {
 
-//		openMaximizedBrowser();
-//		openChromeIncognito();
-//		acceptSSLSecurityIssue();
-//		pageLoadStrategy();
-//		waitTimeout();
-//		unHandledPrompt();
-//		browserDetails();
-//		headlessChromeBrowserLaunch();
-//		browserDetach();
-//		headlessFirefoxBrowserLaunch();
+		openMaximizedBrowser();
+		openChromeIncognito();
+		acceptSSLSecurityIssue();
+		pageLoadStrategy();
+		waitTimeout();
+		unHandledPrompt();
+		browserDetails();
+		headlessChromeBrowserLaunch();
+		browserDetach();
+		headlessFirefoxBrowserLaunch();
 		headlessIEBrowserLaunch();
 	}
 
