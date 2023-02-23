@@ -19,6 +19,7 @@ public class _04_BrowserActions extends _01_LaunchBrowser {
 
 	public static void typeInAnElement() throws InterruptedException {
 		_driver = get_driver();
+		_driver.manage().window().maximize();
 		_driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
 		Thread.sleep(8000);
 		_driver.findElement(By.cssSelector("input[name='username']")).sendKeys("admin");
@@ -27,6 +28,7 @@ public class _04_BrowserActions extends _01_LaunchBrowser {
 
 	public static void clickOnAnElement() throws InterruptedException {
 		_driver = get_driver();
+		_driver.manage().window().maximize();
 		_driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
 		Thread.sleep(8000);
 		_driver.findElement(By.cssSelector(".oxd-button.oxd-button--medium.oxd-button--main.orangehrm-login-button"))
