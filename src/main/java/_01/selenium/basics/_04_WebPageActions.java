@@ -3,7 +3,7 @@ package _01.selenium.basics;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class _04_BrowserActions extends _01_LaunchBrowser {
+public class _04_WebPageActions extends _01_LaunchBrowser {
 
 	public static WebDriver _driver;
 
