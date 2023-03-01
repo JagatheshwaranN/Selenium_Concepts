@@ -15,6 +15,9 @@ public class _06_WebPageElements extends _01_LaunchBrowser {
 		elementSelected();
 		getElementTagName();
 		getElementSize();
+		getElementCSSProperties();
+		getElementText();
+		getElementAttribute();
 	}
 
 	public static void gotoTestSite() {
@@ -65,4 +68,29 @@ public class _06_WebPageElements extends _01_LaunchBrowser {
 		System.out.println("Element Y-Axis Using Rectangle Class ==> " + rectangle.getY());
 	}
 
+	public static void getElementCSSProperties() {
+
+		gotoTestSite();
+		String elementColor = _driver.findElement(By.cssSelector("input[name='color_input']")).getCssValue("color");
+		String elementBGColor = _driver.findElement(By.cssSelector("input[name='color_input']"))
+				.getCssValue("background-color");
+		System.out.println("Element Color ==> " + elementColor);
+		System.out.println("Element Color ==> " + elementBGColor);
+	}
+
+	public static void getElementText() {
+
+		gotoTestSite();
+		String elementText = _driver.findElement(By.tagName("h1")).getText();
+		System.out.println("Element Text Content ==> " + elementText);
+	}
+	
+	public static void getElementAttribute() {
+
+		gotoTestSite();
+		String elementValue = _driver.findElement(By.cssSelector("input[name='no_type']")).getAttribute("value");
+		String elementName = _driver.findElement(By.cssSelector("input[name='no_type']")).getAttribute("name");
+		System.out.println("Element Attribute Value ==> " + elementValue);
+		System.out.println("Element Attribute Name ==> " + elementName);
+	}
 }
