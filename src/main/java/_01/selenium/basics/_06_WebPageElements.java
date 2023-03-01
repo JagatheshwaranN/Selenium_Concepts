@@ -1,6 +1,7 @@
 package _01.selenium.basics;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriver;
 
 public class _06_WebPageElements extends _01_LaunchBrowser {
@@ -12,6 +13,8 @@ public class _06_WebPageElements extends _01_LaunchBrowser {
 		elementDisplay();
 		elementEnabled();
 		elementSelected();
+		getElementTagName();
+		getElementSize();
 	}
 
 	public static void gotoTestSite() {
@@ -40,4 +43,26 @@ public class _06_WebPageElements extends _01_LaunchBrowser {
 		boolean isElementSelected = _driver.findElement(By.cssSelector("input[name='checkbox_input']")).isSelected();
 		System.out.println("Element Selected Status ==> " + isElementSelected);
 	}
+
+	public static void getElementTagName() {
+
+		gotoTestSite();
+		String elementTag = _driver.findElement(By.cssSelector("input[name='number_input']")).getTagName();
+		System.out.println("Element Tag Name ==> " + elementTag);
+	}
+
+	public static void getElementSize() {
+
+		gotoTestSite();
+		int elementHeight = _driver.findElement(By.cssSelector("input[name='no_type']")).getSize().getHeight();
+		int elementWidth = _driver.findElement(By.cssSelector("input[name='no_type']")).getSize().getWidth();
+		Rectangle rectangle = _driver.findElement(By.cssSelector("input[name='no_type']")).getRect();
+		System.out.println("Element Dimension Height ==> " + elementHeight);
+		System.out.println("Element Dimension Width ==> " + elementWidth);
+		System.out.println("Element Height Using Rectangle Class ==> " + rectangle.getHeight());
+		System.out.println("Element Width Using Rectangle Class ==> " + rectangle.getWidth());
+		System.out.println("Element X-Axis Using Rectangle Class ==> " + rectangle.getX());
+		System.out.println("Element Y-Axis Using Rectangle Class ==> " + rectangle.getY());
+	}
+
 }
