@@ -2,7 +2,6 @@ package _01.selenium.basics;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class _04_WebPageActions extends _01_LaunchBrowser {
@@ -13,11 +12,12 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	public static void main(String[] args) {
 
 		try {
-//			clearAnAnElement();
-//			clickOnAnElement();
+			clearAnAnElement();
+			clickOnAnElement();
+			selectDropDownByIndex();
 			selectDropDownByVisibleText();
-			//typeInAnElement();
-			
+			selectDropDownByValue();	
+			typeInAnElement();	
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -53,6 +53,29 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 		Thread.sleep(2000);
 		_driver.quit();
 	}
+	
+	public static void selectDropDownByValue() throws InterruptedException {
+		_driver = get_driver();
+		_driver.manage().window().maximize();
+		_driver.get("https://letcode.in/dropdowns");
+		Thread.sleep(8000);
+		_selectObject = new Select(_driver.findElement(By.cssSelector("#fruits")));
+		_selectObject.selectByValue("1");
+		Thread.sleep(2000);
+		_driver.quit();
+	}
+	
+	public static void selectDropDownByIndex() throws InterruptedException {
+		_driver = get_driver();
+		_driver.manage().window().maximize();
+		_driver.get("https://letcode.in/dropdowns");
+		Thread.sleep(8000);
+		_selectObject = new Select(_driver.findElement(By.cssSelector("#fruits")));
+		_selectObject.selectByIndex(2);
+		Thread.sleep(2000);
+		_driver.quit();
+	}
+	
 
 	public static void typeInAnElement() throws InterruptedException {
 		_driver = get_driver();
@@ -63,5 +86,6 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 		_driver.quit();
 	}
 
+	//https://github.com/SeleniumHQ/seleniumhq.github.io/blob/trunk//examples/java/src/test/java/dev/selenium/support/SelectListTest.java#L66
 	
 }
