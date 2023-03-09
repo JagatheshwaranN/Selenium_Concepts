@@ -40,6 +40,11 @@ public class _01_LaunchBrowser {
 		_driver.quit();
 	}
 
+	/**
+	 * After Chrome Version 110. The ChromeDriver() will not work as before due to
+	 * the security constraint added. To fix this issue we must provide the
+	 * ChromeOptions to the driver instance.
+	 */
 	public static WebDriver get_driver() {
 		return _driver = new ChromeDriver();
 	}
