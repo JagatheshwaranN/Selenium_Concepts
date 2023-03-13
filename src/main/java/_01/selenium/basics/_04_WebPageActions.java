@@ -42,7 +42,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	}
 
 	public static void clearAnAnElement() throws InterruptedException {
-		_driver = browserSetup();
+		browserSetup();
 		_driver.manage().window().maximize();
 		_driver.get("https://admin-demo.nopcommerce.com/login");
 		Thread.sleep(8000);
@@ -52,7 +52,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	}
 
 	public static void clickOnAnElement() throws InterruptedException {
-		_driver = browserSetup();
+		browserSetup();
 		_driver.manage().window().maximize();
 		_driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
 		Thread.sleep(8000);
@@ -62,7 +62,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	}
 
 	public static void selectDropDownSingleOptionByVisibleText() throws InterruptedException {
-		_driver = browserSetup();
+		browserSetup();
 		_driver.manage().window().maximize();
 		_driver.get("https://letcode.in/dropdowns");
 		Thread.sleep(8000);
@@ -73,7 +73,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	}
 
 	public static void selectDropDownSingleOptionByValue() throws InterruptedException {
-		_driver = browserSetup();
+		browserSetup();
 		_driver.manage().window().maximize();
 		_driver.get("https://letcode.in/dropdowns");
 		Thread.sleep(8000);
@@ -84,7 +84,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	}
 
 	public static void selectDropDownSingleOptionByIndex() throws InterruptedException {
-		_driver = browserSetup();
+		browserSetup();
 		_driver.manage().window().maximize();
 		_driver.get("https://letcode.in/dropdowns");
 		Thread.sleep(8000);
@@ -95,7 +95,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	}
 
 	public static void selectDropDownMultipleOptions() throws InterruptedException {
-		_driver = browserSetup();
+		browserSetup();
 		_driver.manage().window().maximize();
 		_driver.get("https://letcode.in/dropdowns");
 		Thread.sleep(8000);
@@ -109,7 +109,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	}
 
 	public static void deSelectDropDownMultipleOptions() throws InterruptedException {
-		_driver = browserSetup();
+		browserSetup();
 		_driver.manage().window().maximize();
 		_driver.get("https://letcode.in/dropdowns");
 		Thread.sleep(8000);
@@ -128,7 +128,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	}
 
 	public static void dropDownOptions() throws InterruptedException {
-		_driver = browserSetup();
+		browserSetup();
 		_driver.manage().window().maximize();
 		_driver.get("https://letcode.in/dropdowns");
 		Thread.sleep(8000);
@@ -139,7 +139,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	}
 
 	public static void dropDownSelectedOption() throws InterruptedException {
-		_driver = browserSetup();
+		browserSetup();
 		_driver.manage().window().maximize();
 		_driver.get("https://letcode.in/dropdowns");
 		Thread.sleep(8000);
@@ -151,7 +151,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	}
 
 	public static void selectDisabledOption() throws InterruptedException {
-		_driver = browserSetup();
+		browserSetup();
 		_driver.manage().window().maximize();
 		_driver.get(
 				"file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/disabledSelect.html");
@@ -164,7 +164,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	}
 
 	public static void typeInAnElement() throws InterruptedException {
-		_driver = browserSetup();
+		browserSetup();
 		_driver.manage().window().maximize();
 		_driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
 		Thread.sleep(8000);
