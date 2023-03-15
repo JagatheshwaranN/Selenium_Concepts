@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -14,6 +15,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	public static WebDriver _driver;
 	public static ChromeOptions _chromeOptions;
 	public static Select _selectObject;
+	public static Actions _actions;
 
 	public static void main(String[] args) {
 
@@ -29,6 +31,9 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 			selectDropDownSingleOptionByValue();
 			selectDropDownMultipleOptions();
 			typeInAnElement();
+			mouseHover();
+			mouseDragDrop();
+			mouseClickAndHold();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -169,6 +174,39 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 		_driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
 		Thread.sleep(8000);
 		_driver.findElement(By.cssSelector("input[name='username']")).sendKeys("admin");
+		_driver.quit();
+	}
+
+	public static void mouseHover() throws InterruptedException {
+		browserSetup();
+		_driver.manage().window().maximize();
+		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		_actions = new Actions(_driver);
+		_actions.moveToElement(_driver.findElement(By.xpath("//input[@id='hover']"))).build().perform();
+		Thread.sleep(5000);
+		_driver.findElement(By.xpath("//strong[@id='move-status']")).isDisplayed();
+		_driver.quit();
+	}
+
+	public static void mouseDragDrop() throws InterruptedException {
+		browserSetup();
+		_driver.manage().window().maximize();
+		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		_actions = new Actions(_driver);
+		_actions.dragAndDrop(_driver.findElement(By.id("draggable")), _driver.findElement(By.id("droppable"))).build().perform();
+		Thread.sleep(5000);
+		_driver.findElement(By.xpath("//strong[@id='drop-status']")).isDisplayed();
+		_driver.quit();
+	}
+	
+	public static void mouseClickAndHold() throws InterruptedException {
+		browserSetup();
+		_driver.manage().window().maximize();
+		_driver.get("https://letcode.in/buttons");
+		_actions = new Actions(_driver);
+		_actions.clickAndHold(_driver.findElement(By.xpath("(//button[@class='button is-primary'])[2]"))).build().perform();
+		Thread.sleep(5000);
+		_driver.findElement(By.xpath("//h2[text()='Button has been long pressed']")).isDisplayed();
 		_driver.quit();
 	}
 
