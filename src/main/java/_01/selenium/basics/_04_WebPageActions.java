@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -34,10 +35,12 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 			typeInAnElement();
 			mouseHover();
 			mouseDragDrop();
+			mouseDragDropByOffset();
 			mouseClickAndHold();
 			mouseRightClick();
 			mouseDoubleClick();
 			mouseClick();
+			mouseMoveByOffset();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -186,7 +189,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 		_driver.manage().window().maximize();
 		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
 		_actions = new Actions(_driver);
-		_actions.moveToElement(_driver.findElement(By.xpath("//input[@id='hover']"))).build().perform();
+		_actions.moveToElement(_driver.findElement(By.xpath("//input[@id='hover']"))).perform();
 		Thread.sleep(5000);
 		_driver.findElement(By.xpath("//strong[@id='move-status']")).isDisplayed();
 		_driver.quit();
@@ -197,8 +200,22 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 		_driver.manage().window().maximize();
 		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
 		_actions = new Actions(_driver);
-		_actions.dragAndDrop(_driver.findElement(By.id("draggable")), _driver.findElement(By.id("droppable"))).build()
+		_actions.dragAndDrop(_driver.findElement(By.id("draggable")), _driver.findElement(By.id("droppable")))
 				.perform();
+		Thread.sleep(5000);
+		_driver.findElement(By.xpath("//strong[@id='drop-status']")).isDisplayed();
+		_driver.quit();
+	}
+
+	public static void mouseDragDropByOffset() throws InterruptedException {
+		browserSetup();
+		_driver.manage().window().maximize();
+		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		_actions = new Actions(_driver);
+		Rectangle start = _driver.findElement(By.id("draggable")).getRect();
+		Rectangle finish = _driver.findElement(By.id("droppable")).getRect();
+		_actions.dragAndDropBy(_driver.findElement(By.id("draggable")), finish.getX() - start.getX(),
+				finish.getY() - start.getY()).perform();
 		Thread.sleep(5000);
 		_driver.findElement(By.xpath("//strong[@id='drop-status']")).isDisplayed();
 		_driver.quit();
@@ -209,8 +226,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 		_driver.manage().window().maximize();
 		_driver.get("https://letcode.in/buttons");
 		_actions = new Actions(_driver);
-		_actions.clickAndHold(_driver.findElement(By.xpath("(//button[@class='button is-primary'])[2]"))).build()
-				.perform();
+		_actions.clickAndHold(_driver.findElement(By.xpath("(//button[@class='button is-primary'])[2]"))).perform();
 		Thread.sleep(5000);
 		_driver.findElement(By.xpath("//h2[text()='Button has been long pressed']")).isDisplayed();
 		_driver.quit();
@@ -221,8 +237,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 		_driver.manage().window().maximize();
 		_driver.get("https://demo.guru99.com/test/simple_context_menu.html");
 		_actions = new Actions(_driver);
-		_actions.contextClick(_driver.findElement(By.xpath("//span[contains(@class,'context-menu-one')]"))).build()
-				.perform();
+		_actions.contextClick(_driver.findElement(By.xpath("//span[contains(@class,'context-menu-one')]"))).perform();
 		Thread.sleep(2000);
 		_driver.findElement(By.cssSelector(".context-menu-item.context-menu-icon.context-menu-icon-copy"))
 				.isDisplayed();
@@ -251,6 +266,16 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 		_actions.click(_driver.findElement(By.xpath("//input[@id='clickable']"))).perform();
 		Thread.sleep(2000);
 		_driver.findElement(By.xpath("//strong[@id='click-status']")).isDisplayed();
+		_driver.quit();
+	}
+
+	public static void mouseMoveByOffset() throws InterruptedException {
+		browserSetup();
+		_driver.manage().window().maximize();
+		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		_actions = new Actions(_driver);
+		_actions.moveToElement(_driver.findElement(By.id("mouse-tracker")), 20, 0).perform();
+		Thread.sleep(5000);
 		_driver.quit();
 	}
 
