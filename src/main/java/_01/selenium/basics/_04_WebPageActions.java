@@ -1,5 +1,6 @@
 package _01.selenium.basics;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.openqa.selenium.Alert;
@@ -9,6 +10,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -18,29 +22,33 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	public static ChromeOptions _chromeOptions;
 	public static Select _selectObject;
 	public static Actions _actions;
+	public static PointerInput mouse;
+	public static Sequence sequence;
 
 	public static void main(String[] args) {
 
 		try {
-			clearAnElement();
-			clickOnAnElement();
-			dropDownOptions();
-			dropDownSelectedOption();
-			deSelectDropDownMultipleOptions();
-			selectDisabledOption();
-			selectDropDownSingleOptionByIndex();
-			selectDropDownSingleOptionByVisibleText();
-			selectDropDownSingleOptionByValue();
-			selectDropDownMultipleOptions();
-			typeInAnElement();
-			mouseHover();
-			mouseDragDrop();
-			mouseDragDropByOffset();
-			mouseClickAndHold();
-			mouseRightClick();
-			mouseDoubleClick();
-			mouseClick();
-			mouseMoveByOffset();
+//			clearAnElement();
+//			clickOnAnElement();
+//			dropDownOptions();
+//			dropDownSelectedOption();
+//			deSelectDropDownMultipleOptions();
+//			selectDisabledOption();
+//			selectDropDownSingleOptionByIndex();
+//			selectDropDownSingleOptionByVisibleText();
+//			selectDropDownSingleOptionByValue();
+//			selectDropDownMultipleOptions();
+//			typeInAnElement();
+//			mouseHover();
+//			mouseDragDrop();
+//			mouseDragDropByOffset();
+//			mouseClickAndHold();
+//			mouseRightClick();
+//			mouseDoubleClick();
+//			mouseClick();
+//			mouseMoveByOffset();
+//			mouseBackClick();
+			mouseForwardClick();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -276,6 +284,45 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 		_actions = new Actions(_driver);
 		_actions.moveToElement(_driver.findElement(By.id("mouse-tracker")), 20, 0).perform();
 		Thread.sleep(5000);
+		_driver.quit();
+	}
+
+	public static void mouseBackClick() throws InterruptedException {
+		browserSetup();
+		_driver.manage().window().maximize();
+		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		_driver.findElement(By.id("click")).click();
+		Assert.assertEquals(_driver.getTitle(), "We Arrive Here");
+		Thread.sleep(5000);
+		mouse = new PointerInput(PointerInput.Kind.MOUSE, "Default Mouse");
+		sequence = new Sequence(mouse, 0).addAction(mouse.createPointerDown(PointerInput.MouseButton.BACK.asArg()))
+				.addAction(mouse.createPointerUp(PointerInput.MouseButton.BACK.asArg()));
+		((RemoteWebDriver) _driver).perform(Collections.singletonList(sequence));
+		Assert.assertEquals(_driver.getTitle(), "BasicMouseInterfaceTest");
+		Thread.sleep(5000);
+		_driver.quit();
+	}
+
+	public static void mouseForwardClick() throws InterruptedException {
+		browserSetup();
+		_driver.manage().window().maximize();
+		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		_driver.findElement(By.id("click")).click();
+		Assert.assertEquals(_driver.getTitle(), "We Arrive Here");
+		Thread.sleep(3000);
+		PointerInput mouse = new PointerInput(PointerInput.Kind.MOUSE, "Default Mouse");
+		Sequence sequence = new Sequence(mouse, 0)
+				.addAction(mouse.createPointerDown(PointerInput.MouseButton.BACK.asArg()))
+				.addAction(mouse.createPointerUp(PointerInput.MouseButton.BACK.asArg()));
+		((RemoteWebDriver) _driver).perform(Collections.singletonList(sequence));
+		Assert.assertEquals(_driver.getTitle(), "BasicMouseInterfaceTest");
+		Thread.sleep(3000);
+		mouse = new PointerInput(PointerInput.Kind.MOUSE, "Default Mouse");
+		sequence = new Sequence(mouse, 0).addAction(mouse.createPointerDown(PointerInput.MouseButton.FORWARD.asArg()))
+				.addAction(mouse.createPointerUp(PointerInput.MouseButton.FORWARD.asArg()));
+		((RemoteWebDriver) _driver).perform(Collections.singletonList(sequence));
+		Assert.assertEquals(_driver.getTitle(), "We Arrive Here");
+		Thread.sleep(2000);
 		_driver.quit();
 	}
 
