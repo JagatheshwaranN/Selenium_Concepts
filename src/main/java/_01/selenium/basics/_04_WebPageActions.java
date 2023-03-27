@@ -1,5 +1,6 @@
 package _01.selenium.basics;
 
+import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 
@@ -48,7 +49,8 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 //			mouseClick();
 //			mouseMoveByOffset();
 //			mouseBackClick();
-			mouseForwardClick();
+//			mouseForwardClick();
+			mouseMoveByViewport();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -323,6 +325,18 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 		((RemoteWebDriver) _driver).perform(Collections.singletonList(sequence));
 		Assert.assertEquals(_driver.getTitle(), "We Arrive Here");
 		Thread.sleep(2000);
+		_driver.quit();
+	}
+
+	public static void mouseMoveByViewport() throws InterruptedException {
+		browserSetup();
+		_driver.manage().window().maximize();
+		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		PointerInput mouse = new PointerInput(PointerInput.Kind.MOUSE, "Default Mouse");
+		Sequence sequence = new Sequence(mouse, 0)
+				.addAction(mouse.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), 10, 12));
+		((RemoteWebDriver) _driver).perform(Collections.singletonList(sequence));
+		Thread.sleep(5000);
 		_driver.quit();
 	}
 
