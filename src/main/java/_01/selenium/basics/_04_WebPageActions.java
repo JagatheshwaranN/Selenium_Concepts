@@ -50,7 +50,8 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 //			mouseMoveByOffset();
 //			mouseBackClick();
 //			mouseForwardClick();
-			mouseMoveByViewport();
+//			mouseMoveByViewport();
+			mouseMoveByOffset();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -336,6 +337,22 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 		Sequence sequence = new Sequence(mouse, 0)
 				.addAction(mouse.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), 10, 12));
 		((RemoteWebDriver) _driver).perform(Collections.singletonList(sequence));
+		Thread.sleep(5000);
+		_driver.quit();
+	}
+	
+	public static void mouseMoveByCurrentPosition() throws InterruptedException {
+		browserSetup();
+		_driver.manage().window().maximize();
+		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		PointerInput mouse = new PointerInput(PointerInput.Kind.MOUSE, "Default Mouse");
+		Sequence sequence = new Sequence(mouse, 0)
+				.addAction(mouse.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), 10, 12));
+		((RemoteWebDriver) _driver).perform(Collections.singletonList(sequence));
+		new Actions(_driver).moveByOffset(12, 15).perform();
+		String[] result = _driver.findElement(By.id("absolute-location")).getText().split(",");
+		Assert.assertTrue(Math.abs(Integer.parseInt(result[0])-10-12) < 2);
+		Assert.assertTrue(Math.abs(Integer.parseInt(result[1])-12-15) < 3);
 		Thread.sleep(5000);
 		_driver.quit();
 	}
