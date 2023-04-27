@@ -13,8 +13,8 @@ public class _02_BrowserActions extends _01_LaunchBrowser {
 			reloadBrowser();
 			movePageBackward();
 			movePageForward();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		} catch (InterruptedException ex) {
+			ex.printStackTrace();
 		}
 	}
 

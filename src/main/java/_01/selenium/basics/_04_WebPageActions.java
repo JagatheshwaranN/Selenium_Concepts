@@ -29,29 +29,18 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 	public static void main(String[] args) {
 
 		try {
-//			clearAnElement();
-//			clickOnAnElement();
-//			dropDownOptions();
-//			dropDownSelectedOption();
-//			deSelectDropDownMultipleOptions();
-//			selectDisabledOption();
-//			selectDropDownSingleOptionByIndex();
-//			selectDropDownSingleOptionByVisibleText();
-//			selectDropDownSingleOptionByValue();
-//			selectDropDownMultipleOptions();
-//			typeInAnElement();
-//			mouseHover();
-//			mouseDragDrop();
-//			mouseDragDropByOffset();
-//			mouseClickAndHold();
-//			mouseRightClick();
-//			mouseDoubleClick();
-//			mouseClick();
-//			mouseMoveByOffset();
-//			mouseBackClick();
-//			mouseForwardClick();
-//			mouseMoveByViewport();
-			mouseMoveByOffset();
+			clearAnElement();
+			clickOnAnElement();
+			dropDownOptions();
+			dropDownSelectedOption();
+			deSelectDropDownMultipleOptions();
+			selectDisabledOption();
+			selectDropDownSingleOptionByIndex();
+			selectDropDownSingleOptionByVisibleText();
+			selectDropDownSingleOptionByValue();
+			selectDropDownMultipleOptions();
+			typeInAnElement();
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

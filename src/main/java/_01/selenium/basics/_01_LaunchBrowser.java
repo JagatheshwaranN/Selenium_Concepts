@@ -13,28 +13,24 @@ public class _01_LaunchBrowser {
 	public static WebDriver _driver;
 
 	public static void main(String[] args) {
-
 		launchChromeBrowser();
 		launchEdgeBrowser();
 		launchFirefoxBrowser();
 	}
 
 	public static void launchChromeBrowser() {
-
 		_driver = new ChromeDriver();
 		_driver.get("https://www.google.com/");
 		_driver.quit();
 	}
 
 	public static void launchEdgeBrowser() {
-
 		_driver = new EdgeDriver();
 		_driver.get("https://www.google.com/");
 		_driver.quit();
 	}
 
 	public static void launchFirefoxBrowser() {
-
 		_driver = new FirefoxDriver();
 		_driver.get("https://www.google.com/");
 		_driver.quit();
