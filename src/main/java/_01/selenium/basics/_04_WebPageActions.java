@@ -1,19 +1,14 @@
 package _01.selenium.basics;
 
-import java.time.Duration;
-import java.util.Collections;
 import java.util.List;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -40,7 +35,7 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 			selectDropDownSingleOptionByValue();
 			selectDropDownMultipleOptions();
 			typeInAnElement();
-			
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -181,168 +176,6 @@ public class _04_WebPageActions extends _01_LaunchBrowser {
 		_driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
 		Thread.sleep(8000);
 		_driver.findElement(By.cssSelector("input[name='username']")).sendKeys("admin");
-		_driver.quit();
-	}
-
-	public static void mouseHover() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-		_actions = new Actions(_driver);
-		_actions.moveToElement(_driver.findElement(By.xpath("//input[@id='hover']"))).perform();
-		Thread.sleep(5000);
-		_driver.findElement(By.xpath("//strong[@id='move-status']")).isDisplayed();
-		_driver.quit();
-	}
-
-	public static void mouseDragDrop() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-		_actions = new Actions(_driver);
-		_actions.dragAndDrop(_driver.findElement(By.id("draggable")), _driver.findElement(By.id("droppable")))
-				.perform();
-		Thread.sleep(5000);
-		_driver.findElement(By.xpath("//strong[@id='drop-status']")).isDisplayed();
-		_driver.quit();
-	}
-
-	public static void mouseDragDropByOffset() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-		_actions = new Actions(_driver);
-		Rectangle start = _driver.findElement(By.id("draggable")).getRect();
-		Rectangle finish = _driver.findElement(By.id("droppable")).getRect();
-		_actions.dragAndDropBy(_driver.findElement(By.id("draggable")), finish.getX() - start.getX(),
-				finish.getY() - start.getY()).perform();
-		Thread.sleep(5000);
-		_driver.findElement(By.xpath("//strong[@id='drop-status']")).isDisplayed();
-		_driver.quit();
-	}
-
-	public static void mouseClickAndHold() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://letcode.in/buttons");
-		_actions = new Actions(_driver);
-		_actions.clickAndHold(_driver.findElement(By.xpath("(//button[@class='button is-primary'])[2]"))).perform();
-		Thread.sleep(5000);
-		_driver.findElement(By.xpath("//h2[text()='Button has been long pressed']")).isDisplayed();
-		_driver.quit();
-	}
-
-	public static void mouseRightClick() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://demo.guru99.com/test/simple_context_menu.html");
-		_actions = new Actions(_driver);
-		_actions.contextClick(_driver.findElement(By.xpath("//span[contains(@class,'context-menu-one')]"))).perform();
-		Thread.sleep(2000);
-		_driver.findElement(By.cssSelector(".context-menu-item.context-menu-icon.context-menu-icon-copy"))
-				.isDisplayed();
-		_driver.quit();
-	}
-
-	public static void mouseDoubleClick() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://demo.guru99.com/test/simple_context_menu.html");
-		_actions = new Actions(_driver);
-		_actions.doubleClick(_driver.findElement(By.xpath("//button[contains(text(),'Double-Click Me To See Alert')]")))
-				.perform();
-		Thread.sleep(2000);
-		Alert alert = _driver.switchTo().alert();
-		System.out.println(alert.getText());
-		alert.dismiss();
-		_driver.quit();
-	}
-
-	public static void mouseClick() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-		_actions = new Actions(_driver);
-		_actions.click(_driver.findElement(By.xpath("//input[@id='clickable']"))).perform();
-		Thread.sleep(2000);
-		_driver.findElement(By.xpath("//strong[@id='click-status']")).isDisplayed();
-		_driver.quit();
-	}
-
-	public static void mouseMoveByOffset() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-		_actions = new Actions(_driver);
-		_actions.moveToElement(_driver.findElement(By.id("mouse-tracker")), 20, 0).perform();
-		Thread.sleep(5000);
-		_driver.quit();
-	}
-
-	public static void mouseBackClick() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-		_driver.findElement(By.id("click")).click();
-		Assert.assertEquals(_driver.getTitle(), "We Arrive Here");
-		Thread.sleep(5000);
-		mouse = new PointerInput(PointerInput.Kind.MOUSE, "Default Mouse");
-		sequence = new Sequence(mouse, 0).addAction(mouse.createPointerDown(PointerInput.MouseButton.BACK.asArg()))
-				.addAction(mouse.createPointerUp(PointerInput.MouseButton.BACK.asArg()));
-		((RemoteWebDriver) _driver).perform(Collections.singletonList(sequence));
-		Assert.assertEquals(_driver.getTitle(), "BasicMouseInterfaceTest");
-		Thread.sleep(5000);
-		_driver.quit();
-	}
-
-	public static void mouseForwardClick() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-		_driver.findElement(By.id("click")).click();
-		Assert.assertEquals(_driver.getTitle(), "We Arrive Here");
-		Thread.sleep(3000);
-		PointerInput mouse = new PointerInput(PointerInput.Kind.MOUSE, "Default Mouse");
-		Sequence sequence = new Sequence(mouse, 0)
-				.addAction(mouse.createPointerDown(PointerInput.MouseButton.BACK.asArg()))
-				.addAction(mouse.createPointerUp(PointerInput.MouseButton.BACK.asArg()));
-		((RemoteWebDriver) _driver).perform(Collections.singletonList(sequence));
-		Assert.assertEquals(_driver.getTitle(), "BasicMouseInterfaceTest");
-		Thread.sleep(3000);
-		mouse = new PointerInput(PointerInput.Kind.MOUSE, "Default Mouse");
-		sequence = new Sequence(mouse, 0).addAction(mouse.createPointerDown(PointerInput.MouseButton.FORWARD.asArg()))
-				.addAction(mouse.createPointerUp(PointerInput.MouseButton.FORWARD.asArg()));
-		((RemoteWebDriver) _driver).perform(Collections.singletonList(sequence));
-		Assert.assertEquals(_driver.getTitle(), "We Arrive Here");
-		Thread.sleep(2000);
-		_driver.quit();
-	}
-
-	public static void mouseMoveByViewport() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-		PointerInput mouse = new PointerInput(PointerInput.Kind.MOUSE, "Default Mouse");
-		Sequence sequence = new Sequence(mouse, 0)
-				.addAction(mouse.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), 10, 12));
-		((RemoteWebDriver) _driver).perform(Collections.singletonList(sequence));
-		Thread.sleep(5000);
-		_driver.quit();
-	}
-	
-	public static void mouseMoveByCurrentPosition() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-		PointerInput mouse = new PointerInput(PointerInput.Kind.MOUSE, "Default Mouse");
-		Sequence sequence = new Sequence(mouse, 0)
-				.addAction(mouse.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), 10, 12));
-		((RemoteWebDriver) _driver).perform(Collections.singletonList(sequence));
-		new Actions(_driver).moveByOffset(12, 15).perform();
-		String[] result = _driver.findElement(By.id("absolute-location")).getText().split(",");
-		Assert.assertTrue(Math.abs(Integer.parseInt(result[0])-10-12) < 2);
-		Assert.assertTrue(Math.abs(Integer.parseInt(result[1])-12-15) < 3);
-		Thread.sleep(5000);
 		_driver.quit();
 	}
 

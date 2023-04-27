@@ -16,11 +16,11 @@ import org.testng.Assert;
 
 public class _MouseActions extends _01_LaunchBrowser {
 
-	public static WebDriver driver;
-	public static ChromeOptions chromeOptions;
-	public static Actions actions;
-	public static PointerInput mouse;
-	public static Sequence sequence;
+	private static WebDriver driver;
+	private static ChromeOptions chromeOptions;
+	private static Actions actions;
+	private static PointerInput mouse;
+	private static Sequence sequence;
 
 	public static void main(String[] args) {
 
@@ -42,14 +42,14 @@ public class _MouseActions extends _01_LaunchBrowser {
 		}
 	}
 
-	public static WebDriver browserSetup() {
+	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--remote-allow-origins=*");
 		driver = get_driver(chromeOptions);
 		return driver;
 	}
 
-	public static void mouseClickAndHold() throws InterruptedException {
+	private static void mouseClickAndHold() throws InterruptedException {
 		browserSetup();
 		driver.manage().window().maximize();
 		driver.get("https://letcode.in/buttons");
@@ -60,7 +60,7 @@ public class _MouseActions extends _01_LaunchBrowser {
 		driver.quit();
 	}
 
-	public static void mouseClickAndRelease() throws InterruptedException {
+	private static void mouseClickAndRelease() throws InterruptedException {
 		browserSetup();
 		driver.manage().window().maximize();
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
@@ -71,7 +71,7 @@ public class _MouseActions extends _01_LaunchBrowser {
 		driver.quit();
 	}
 
-	public static void mouseRightClick() throws InterruptedException {
+	private static void mouseRightClick() throws InterruptedException {
 		browserSetup();
 		driver.manage().window().maximize();
 		driver.get("https://demo.guru99.com/test/simple_context_menu.html");
@@ -82,7 +82,7 @@ public class _MouseActions extends _01_LaunchBrowser {
 		driver.quit();
 	}
 
-	public static void mouseBackClick() throws InterruptedException {
+	private static void mouseBackClick() throws InterruptedException {
 		browserSetup();
 		driver.manage().window().maximize();
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
@@ -98,7 +98,7 @@ public class _MouseActions extends _01_LaunchBrowser {
 		driver.quit();
 	}
 
-	public static void mouseForwardClick() throws InterruptedException {
+	private static void mouseForwardClick() throws InterruptedException {
 		browserSetup();
 		driver.manage().window().maximize();
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
@@ -121,7 +121,7 @@ public class _MouseActions extends _01_LaunchBrowser {
 		driver.quit();
 	}
 
-	public static void mouseDoubleClick() throws InterruptedException {
+	private static void mouseDoubleClick() throws InterruptedException {
 		browserSetup();
 		driver.manage().window().maximize();
 		driver.get("https://demo.guru99.com/test/simple_context_menu.html");
@@ -135,7 +135,7 @@ public class _MouseActions extends _01_LaunchBrowser {
 		driver.quit();
 	}
 
-	public static void mouseHover_MoveToElement() throws InterruptedException {
+	private static void mouseHover_MoveToElement() throws InterruptedException {
 		browserSetup();
 		driver.manage().window().maximize();
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
@@ -146,7 +146,7 @@ public class _MouseActions extends _01_LaunchBrowser {
 		driver.quit();
 	}
 
-	public static void mouseMoveByOffsetElement() throws InterruptedException {
+	private static void mouseMoveByOffsetElement() throws InterruptedException {
 		browserSetup();
 		driver.manage().window().maximize();
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
@@ -156,7 +156,7 @@ public class _MouseActions extends _01_LaunchBrowser {
 		driver.quit();
 	}
 
-	public static void mouseMoveByViewport() throws InterruptedException {
+	private static void mouseMoveByViewport() throws InterruptedException {
 		browserSetup();
 		driver.manage().window().maximize();
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
@@ -168,7 +168,7 @@ public class _MouseActions extends _01_LaunchBrowser {
 		driver.quit();
 	}
 
-	public static void mouseMoveByCurrentPosition() throws InterruptedException {
+	private static void mouseMoveByCurrentPosition() throws InterruptedException {
 		browserSetup();
 		driver.manage().window().maximize();
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
@@ -184,7 +184,7 @@ public class _MouseActions extends _01_LaunchBrowser {
 		driver.quit();
 	}
 
-	public static void mouseDragDrop() throws InterruptedException {
+	private static void mouseDragDrop() throws InterruptedException {
 		browserSetup();
 		driver.manage().window().maximize();
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
@@ -195,7 +195,7 @@ public class _MouseActions extends _01_LaunchBrowser {
 		driver.quit();
 	}
 
-	public static void mouseDragDropByOffset() throws InterruptedException {
+	private static void mouseDragDropByOffset() throws InterruptedException {
 		browserSetup();
 		driver.manage().window().maximize();
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
