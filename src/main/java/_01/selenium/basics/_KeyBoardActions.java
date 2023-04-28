@@ -15,8 +15,8 @@ public class _KeyBoardActions extends _01_LaunchBrowser {
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions;
 
-	@Test(enabled = true, priority = 1)
-	private static void verifyKeyDown() {
+	@Test(enabled = false, priority = 1)
+	private static void KeyDown() {
 		browserSetup();
 		driver.get("https://www.selenium.dev/selenium/web/single_text_input.html");
 		new Actions(driver).keyDown(Keys.SHIFT).sendKeys("app").perform();
@@ -25,6 +25,18 @@ public class _KeyBoardActions extends _01_LaunchBrowser {
 		waitForSomeTime();
 		driver.close();
 	}
+	
+	@Test(enabled = true, priority = 2)
+	private static void keyDownAndUp() {
+		browserSetup();
+		driver.get("https://www.selenium.dev/selenium/web/single_text_input.html");
+		new Actions(driver).keyDown(Keys.SHIFT).sendKeys("app").keyUp(Keys.SHIFT).sendKeys("url").perform();
+		WebElement input = driver.findElement(By.id("textInput"));
+		Assert.assertEquals("APPurl", input.getAttribute("value"));
+		waitForSomeTime();
+		driver.close();
+	}
+	
 	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--remote-allow-origins=*");
@@ -32,7 +44,7 @@ public class _KeyBoardActions extends _01_LaunchBrowser {
 		driver.manage().window().maximize();
 		return driver;
 	}
-
+	
 	private static void waitForSomeTime() {
 		try {
 			Thread.sleep(3000);
@@ -40,5 +52,4 @@ public class _KeyBoardActions extends _01_LaunchBrowser {
 			ex.printStackTrace();
 		}
 	}
-
 }
