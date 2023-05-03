@@ -5,8 +5,10 @@ import java.util.Collections;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.PointerInput;
@@ -37,6 +39,8 @@ public class _MouseActions extends _01_LaunchBrowser {
 			mouseMoveByCurrentPosition();
 			mouseDragDrop();
 			mouseDragDropByOffset();
+			actionPause();
+			actionReset();
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}
@@ -207,5 +211,34 @@ public class _MouseActions extends _01_LaunchBrowser {
 		Thread.sleep(5000);
 		driver.findElement(By.xpath("//strong[@id='drop-status']")).isDisplayed();
 		driver.quit();
+	}
+
+	private static void actionPause() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		long startTime = System.currentTimeMillis();
+		new Actions(driver).moveToElement(driver.findElement(By.id("clickable"))).pause(Duration.ofSeconds(1))
+				.clickAndHold().pause(Duration.ofSeconds(1)).sendKeys("action pause").perform();
+		long endTime = System.currentTimeMillis() - startTime;
+		Assert.assertTrue(endTime > 2000);
+		Assert.assertTrue(endTime < 3000);
+		Thread.sleep(5000);
+		driver.close();
+	}
+	
+	private static void actionReset() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		Actions actions = new Actions(driver);
+		WebElement clickable = driver.findElement(By.id("clickable"));
+		actions.clickAndHold(clickable).keyDown(Keys.SHIFT).sendKeys("a").perform();
+		((RemoteWebDriver)driver).resetInputState();
+		actions.sendKeys("a").perform();
+		Assert.assertEquals("A", String.valueOf(clickable.getAttribute("value").charAt(0)));
+		Assert.assertEquals("a", String.valueOf(clickable.getAttribute("value").charAt(1)));
+		Thread.sleep(5000);
+		driver.close();
 	}
 }
