@@ -7,33 +7,31 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.testng.annotations.Test;
 
 public class _01_LaunchBrowser {
 
-	public static WebDriver _driver;
+	public static WebDriver driver;
 
-	public static void main(String[] args) {
-		launchChromeBrowser();
-		launchEdgeBrowser();
-		launchFirefoxBrowser();
-	}
-
+	@Test(priority = 1, enabled = true)
 	public static void launchChromeBrowser() {
-		_driver = new ChromeDriver();
-		_driver.get("https://www.google.com/");
-		_driver.quit();
+		driver = new ChromeDriver();
+		driver.get("https://www.google.com/");
+		driver.quit();
 	}
 
+	@Test(priority = 2, enabled = true)
 	public static void launchEdgeBrowser() {
-		_driver = new EdgeDriver();
-		_driver.get("https://www.google.com/");
-		_driver.quit();
+		driver = new EdgeDriver();
+		driver.get("https://www.google.com/");
+		driver.quit();
 	}
 
+	@Test(priority = 3, enabled = true)
 	public static void launchFirefoxBrowser() {
-		_driver = new FirefoxDriver();
-		_driver.get("https://www.google.com/");
-		_driver.quit();
+		driver = new FirefoxDriver();
+		driver.get("https://www.google.com/");
+		driver.quit();
 	}
 
 	/**
@@ -42,18 +40,18 @@ public class _01_LaunchBrowser {
 	 * ChromeOptions to the driver instance.
 	 */
 	public static WebDriver get_driver() {
-		return _driver = new ChromeDriver();
+		return driver = new ChromeDriver();
 	}
 
 	public static WebDriver get_driver(ChromeOptions options) {
-		return _driver = new ChromeDriver(options);
+		return driver = new ChromeDriver(options);
 	}
 
 	public static WebDriver get_ffDriver(FirefoxOptions options) {
-		return _driver = new FirefoxDriver(options);
+		return driver = new FirefoxDriver(options);
 	}
 
 	public static WebDriver get_edgeDriver(EdgeOptions options) {
-		return _driver = new EdgeDriver(options);
+		return driver = new EdgeDriver(options);
 	}
 }

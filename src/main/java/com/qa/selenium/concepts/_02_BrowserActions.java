@@ -1,53 +1,57 @@
 package com.qa.selenium.concepts;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.Test;
 
 public class _02_BrowserActions extends _01_LaunchBrowser {
 
-	public static WebDriver _driver = get_driver();
+	private static WebDriver driver;
+	private static ChromeOptions chromeOptions;
 
-	public static void main(String[] args) {
+	@Test(priority = 1, enabled = true)
+	public static void reloadBrowser() throws InterruptedException {
+		browserSetup();
+		driver.get("https://github.com/");
+		driver.navigate().refresh();
+		waitForSomeTime();
+		driver.close();
+	}
 
+	@Test(priority = 2, enabled = true)
+	public static void movePageBackward() throws InterruptedException {
+		browserSetup();
+		reloadBrowser();
+		driver.navigate().to("https://www.selenium.dev/");
+		driver.navigate().back();
+		System.out.println("Current WebPage URL ==> " + driver.getCurrentUrl());
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 3, enabled = true)
+	public static void movePageForward() throws InterruptedException {
+		browserSetup();
+		movePageBackward();
+		driver.navigate().forward();
+		System.out.println("Current WebPage URL ==> " + driver.getCurrentUrl());
+		waitForSomeTime();
+		driver.quit();
+	}
+
+	private static WebDriver browserSetup() {
+		chromeOptions = new ChromeOptions();
+		chromeOptions.addArguments("--remote-allow-origins=*");
+		driver = get_driver(chromeOptions);
+		driver.manage().window().maximize();
+		return driver;
+	}
+
+	private static void waitForSomeTime() {
 		try {
-			maximizeBrowser();
-			reloadBrowser();
-			movePageBackward();
-			movePageForward();
+			Thread.sleep(3000);
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}
 	}
-
-	public static void maximizeBrowser() throws InterruptedException {
-
-		_driver.manage().window().maximize();
-		_driver.get("https://www.google.com/");
-		Thread.sleep(5000);
-	}
-
-	public static void reloadBrowser() throws InterruptedException {
-
-		maximizeBrowser();
-		_driver.navigate().refresh();
-		Thread.sleep(5000);
-	}
-
-	public static void movePageBackward() throws InterruptedException {
-
-		maximizeBrowser();
-		_driver.navigate().to("https://www.selenium.dev/");
-		_driver.navigate().back();
-		System.out.println("Current WebPage URL ==> " + _driver.getCurrentUrl());
-		Thread.sleep(5000);
-	}
-
-	public static void movePageForward() throws InterruptedException {
-
-		movePageBackward();
-		_driver.navigate().forward();
-		System.out.println("Current WebPage URL ==> " + _driver.getCurrentUrl());
-		Thread.sleep(5000);
-		_driver.quit();
-	}
-
 }
