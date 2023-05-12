@@ -4,13 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.WheelInput;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class _WheelActions extends _01_LaunchBrowser {
+public class _WheelActions {
 
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions;
@@ -80,7 +81,7 @@ public class _WheelActions extends _01_LaunchBrowser {
 	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--remote-allow-origins=*");
-		driver = get_driver(chromeOptions);
+		driver = new ChromeDriver(chromeOptions);
 		driver.manage().window().maximize();
 		return driver;
 	}

@@ -5,13 +5,14 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
 import junit.framework.Assert;
 
-public class _KeyBoardActions extends _01_LaunchBrowser {
+public class _KeyBoardActions {
 
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions;
@@ -76,7 +77,7 @@ public class _KeyBoardActions extends _01_LaunchBrowser {
 	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--remote-allow-origins=*");
-		driver = get_driver(chromeOptions);
+		driver = new ChromeDriver(chromeOptions);
 		driver.manage().window().maximize();
 		return driver;
 	}
