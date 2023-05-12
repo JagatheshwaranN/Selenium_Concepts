@@ -17,7 +17,7 @@ public class _AlertHandle extends _01_LaunchBrowser {
 	private static WebDriverWait wait;
 
 	@Test(priority = 1, enabled = false)
-	public static void verifyAlert() {
+	private static void verifyAlert() {
 		browserSetup();
 		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		driver.get("https://the-internet.herokuapp.com/javascript_alerts");
@@ -31,7 +31,7 @@ public class _AlertHandle extends _01_LaunchBrowser {
 	}
 
 	@Test(priority = 2, enabled = false)
-	public static void verifyConfirmAlert() {
+	private static void verifyConfirmAlert() {
 		browserSetup();
 		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		driver.get("https://the-internet.herokuapp.com/javascript_alerts");
@@ -46,7 +46,7 @@ public class _AlertHandle extends _01_LaunchBrowser {
 	}
 
 	@Test(priority = 3, enabled = true)
-	public static void verifyPromptAlert() {
+	private static void verifyPromptAlert() {
 		browserSetup();
 		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		driver.get("https://the-internet.herokuapp.com/javascript_alerts");
