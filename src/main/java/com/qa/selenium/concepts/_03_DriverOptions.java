@@ -27,8 +27,8 @@ public class _03_DriverOptions extends _01_LaunchBrowser {
 		waitTimeout();
 		unHandledPrompt();
 		browserDetails();
-		headlessChromeBrowserLaunch();
 		browserDetach();
+		headlessChromeBrowserLaunch();
 		headlessFirefoxBrowserLaunch();
 		headlessIEBrowserLaunch();
 	}

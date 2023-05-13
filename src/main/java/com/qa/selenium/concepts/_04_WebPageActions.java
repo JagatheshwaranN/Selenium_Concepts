@@ -5,178 +5,173 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.PointerInput;
-import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
-public class _04_WebPageActions extends _01_LaunchBrowser {
+public class _04_WebPageActions {
 
-	public static WebDriver _driver;
-	public static ChromeOptions _chromeOptions;
-	public static Select _selectObject;
-	public static Actions _actions;
-	public static PointerInput mouse;
-	public static Sequence sequence;
+	public static WebDriver driver;
+	public static ChromeOptions chromeOptions;
 
-	public static void main(String[] args) {
-
-		try {
-			clearAnElement();
-			clickOnAnElement();
-			dropDownOptions();
-			dropDownSelectedOption();
-			deSelectDropDownMultipleOptions();
-			selectDisabledOption();
-			selectDropDownSingleOptionByIndex();
-			selectDropDownSingleOptionByVisibleText();
-			selectDropDownSingleOptionByValue();
-			selectDropDownMultipleOptions();
-			typeInAnElement();
-
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static WebDriver browserSetup() {
-		_chromeOptions = new ChromeOptions();
-		_chromeOptions.addArguments("--remote-allow-origins=*");
-		_driver = get_driver(_chromeOptions);
-		return _driver;
-	}
-
+	@Test(priority = 1, enabled = true)
 	public static void clearAnElement() throws InterruptedException {
 		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://admin-demo.nopcommerce.com/login");
+		driver.manage().window().maximize();
+		driver.get("https://admin-demo.nopcommerce.com/login");
 		Thread.sleep(8000);
-		_driver.findElement(By.cssSelector("input[name='Email']")).clear();
-		Thread.sleep(3000);
-		_driver.quit();
+		driver.findElement(By.cssSelector("input[name='Email']")).clear();
+		waitForSomeTime();
+		driver.close();
 	}
 
+	@Test(priority = 2, enabled = true)
 	public static void clickOnAnElement() throws InterruptedException {
 		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
+		driver.manage().window().maximize();
+		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
 		Thread.sleep(8000);
-		_driver.findElement(By.cssSelector(".oxd-button.oxd-button--medium.oxd-button--main.orangehrm-login-button"))
+		driver.findElement(By.cssSelector(".oxd-button.oxd-button--medium.oxd-button--main.orangehrm-login-button"))
 				.click();
-		_driver.quit();
+		waitForSomeTime();
+		driver.close();
 	}
 
-	public static void selectDropDownSingleOptionByVisibleText() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://letcode.in/dropdowns");
-		Thread.sleep(8000);
-		_selectObject = new Select(_driver.findElement(By.cssSelector("#fruits")));
-		_selectObject.selectByVisibleText("Apple");
-		Thread.sleep(2000);
-		_driver.quit();
-	}
-
-	public static void selectDropDownSingleOptionByValue() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://letcode.in/dropdowns");
-		Thread.sleep(8000);
-		_selectObject = new Select(_driver.findElement(By.cssSelector("#fruits")));
-		_selectObject.selectByValue("1");
-		Thread.sleep(2000);
-		_driver.quit();
-	}
-
-	public static void selectDropDownSingleOptionByIndex() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://letcode.in/dropdowns");
-		Thread.sleep(8000);
-		_selectObject = new Select(_driver.findElement(By.cssSelector("#fruits")));
-		_selectObject.selectByIndex(2);
-		Thread.sleep(2000);
-		_driver.quit();
-	}
-
-	public static void selectDropDownMultipleOptions() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://letcode.in/dropdowns");
-		Thread.sleep(8000);
-		_selectObject = new Select(_driver.findElement(By.cssSelector("#superheros")));
-		boolean isMultiSelect = _selectObject.isMultiple();
-		System.out.println("DropDown Has Multi Select Option : " + isMultiSelect);
-		_selectObject.selectByValue("am");
-		_selectObject.selectByValue("aq");
-		Thread.sleep(2000);
-		_driver.quit();
-	}
-
-	public static void deSelectDropDownMultipleOptions() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://letcode.in/dropdowns");
-		Thread.sleep(8000);
-		_selectObject = new Select(_driver.findElement(By.cssSelector("#superheros")));
-		boolean isMultiSelect = _selectObject.isMultiple();
-		System.out.println("DropDown Has Multi Select Option : " + isMultiSelect);
-		_selectObject.selectByIndex(0);
-		_selectObject.selectByValue("aq");
-		_selectObject.selectByVisibleText("The Avengers");
-		Thread.sleep(2000);
-		_selectObject.deselectByIndex(0);
-		_selectObject.deselectByValue("aq");
-		_selectObject.deselectByVisibleText("The Avengers");
-		Thread.sleep(2000);
-		_driver.quit();
-	}
-
-	public static void dropDownOptions() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://letcode.in/dropdowns");
-		Thread.sleep(8000);
-		_selectObject = new Select(_driver.findElement(By.cssSelector("#superheros")));
-		List<WebElement> _dropDownOptions = _selectObject.getOptions();
-		_dropDownOptions.forEach(e -> System.out.println(e.getText()));
-		_driver.quit();
-	}
-
-	public static void dropDownSelectedOption() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://letcode.in/dropdowns");
-		Thread.sleep(8000);
-		_selectObject = new Select(_driver.findElement(By.cssSelector("#superheros")));
-		_selectObject.selectByValue("aq");
-		List<WebElement> _dropDownOptions = _selectObject.getAllSelectedOptions();
-		_dropDownOptions.forEach(e -> System.out.println(e.getText()));
-		_driver.quit();
-	}
-
-	public static void selectDisabledOption() throws InterruptedException {
-		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get(
-				"file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/disabledSelect.html");
-		Thread.sleep(8000);
-		_selectObject = new Select(_driver.findElement(By.name("single_disabled")));
-		Assert.assertThrows(UnsupportedOperationException.class, () -> {
-			_selectObject.selectByValue("disabled");
-		});
-		_driver.quit();
-	}
-
+	@Test(priority = 3, enabled = true)
 	public static void typeInAnElement() throws InterruptedException {
 		browserSetup();
-		_driver.manage().window().maximize();
-		_driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
+		driver.manage().window().maximize();
+		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
 		Thread.sleep(8000);
-		_driver.findElement(By.cssSelector("input[name='username']")).sendKeys("admin");
-		_driver.quit();
+		driver.findElement(By.cssSelector("input[name='username']")).sendKeys("admin");
+		waitForSomeTime();
+		driver.close();
 	}
 
+	@Test(priority = 4, enabled = true)
+	public static void selectDropDownSingleOptionByVisibleText() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get("https://letcode.in/dropdowns");
+		Thread.sleep(8000);
+		new Select(driver.findElement(By.cssSelector("#fruits"))).selectByVisibleText("Apple");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 5, enabled = true)
+	public static void selectDropDownSingleOptionByValue() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get("https://letcode.in/dropdowns");
+		Thread.sleep(8000);
+		new Select(driver.findElement(By.cssSelector("#fruits"))).selectByValue("1");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 6, enabled = true)
+	public static void selectDropDownSingleOptionByIndex() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get("https://letcode.in/dropdowns");
+		Thread.sleep(8000);
+		new Select(driver.findElement(By.cssSelector("#fruits"))).selectByIndex(2);
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 7, enabled = true)
+	public static void selectDropDownMultipleOptions() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get("https://letcode.in/dropdowns");
+		Thread.sleep(8000);
+		Select selectObj = new Select(driver.findElement(By.cssSelector("#superheros")));
+		boolean isMultiSelect = selectObj.isMultiple();
+		System.out.println("DropDown Has Multi Select Option : " + isMultiSelect);
+		selectObj.selectByValue("am");
+		selectObj.selectByValue("aq");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 8, enabled = true)
+	public static void deSelectDropDownMultipleOptions() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get("https://letcode.in/dropdowns");
+		Thread.sleep(8000);
+		Select selectObj = new Select(driver.findElement(By.cssSelector("#superheros")));
+		boolean isMultiSelect = selectObj.isMultiple();
+		System.out.println("DropDown Has Multi Select Option : " + isMultiSelect);
+		selectObj.selectByIndex(0);
+		selectObj.selectByValue("aq");
+		selectObj.selectByVisibleText("The Avengers");
+		waitForSomeTime();
+		selectObj.deselectByIndex(0);
+		selectObj.deselectByValue("aq");
+		selectObj.deselectByVisibleText("The Avengers");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 9, enabled = true)
+	public static void dropDownOptions() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get("https://letcode.in/dropdowns");
+		Thread.sleep(8000);
+		List<WebElement> dropDownOptions = new Select(driver.findElement(By.cssSelector("#superheros"))).getOptions();
+		dropDownOptions.forEach(e -> System.out.println(e.getText()));
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 10, enabled = true)
+	public static void dropDownSelectedOption() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get("https://letcode.in/dropdowns");
+		Thread.sleep(8000);
+		Select selectObject = new Select(driver.findElement(By.cssSelector("#superheros")));
+		selectObject.selectByValue("aq");
+		List<WebElement> dropDownOptions = selectObject.getAllSelectedOptions();
+		dropDownOptions.forEach(e -> System.out.println(e.getText()));
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 11, enabled = true)
+	public static void selectDisabledOption() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get(
+				"file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/disabledSelect.html");
+		Thread.sleep(8000);
+		Select selectObject = new Select(driver.findElement(By.name("single_disabled")));
+		Assert.assertThrows(UnsupportedOperationException.class, () -> {
+			selectObject.selectByValue("disabled");
+		});
+		waitForSomeTime();
+		driver.close();
+	}
+
+	private static WebDriver browserSetup() {
+		chromeOptions = new ChromeOptions();
+		chromeOptions.addArguments("--remote-allow-origins=*");
+		driver = new ChromeDriver(chromeOptions);
+		driver.manage().window().maximize();
+		return driver;
+	}
+
+	private static void waitForSomeTime() {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException ex) {
+			ex.printStackTrace();
+		}
+	}
 }
