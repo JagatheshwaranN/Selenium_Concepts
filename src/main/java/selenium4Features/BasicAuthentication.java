@@ -6,8 +6,6 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v109.network.Network;
-import org.openqa.selenium.devtools.v109.network.model.Headers;
 
 /**
  * 
@@ -33,7 +31,7 @@ public class BasicAuthentication {
 //		basicAuthentication = "Basic "
 //				+ new String(new Base64().encode(String.format("%s:%s", username, password).getBytes()));
 //		header.put("Authorization", basicAuthentication);
-		devTools.send(Network.setExtraHTTPHeaders(new Headers(header)));
+//		devTools.send(Network.setExtraHTTPHeaders(new Headers(header)));
 		driver.get("http://the-internet.herokuapp.com/basic_auth");
 		driver.close();
 
