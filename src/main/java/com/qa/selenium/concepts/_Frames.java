@@ -46,8 +46,9 @@ public class _Frames {
 	private static void moveInsideFrameUsingWebElement() {
 		browserSetup();
 		driver.get("https://demo.automationtesting.in/Frames.html");
-		driver.switchTo()
-				.frame(driver.findElement(By.xpath("//iframe[@src='SingleFrame.html' and @name='SingleFrame']")));
+		WebElement frameElement = driver
+				.findElement(By.xpath("//iframe[@src='SingleFrame.html' and @name='SingleFrame']"));
+		driver.switchTo().frame(frameElement);
 		driver.findElement(By.tagName("input")).sendKeys("John");
 		waitForSomeTime();
 		driver.close();
