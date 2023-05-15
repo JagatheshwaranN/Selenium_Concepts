@@ -21,7 +21,7 @@ public class _05_Waits {
 
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions;
-	private static Wait<WebDriver> wait2;
+	private static Wait<WebDriver> wait;
 
 	@Test(priority = 1, enabled = true)
 	private static void implicitWait() {
@@ -75,22 +75,22 @@ public class _05_Waits {
 	private static void fluentWait() {
 		browserSetup();
 		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
-		wait2 = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
+		wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
 				.pollingEvery(Duration.ofMillis(1500)).ignoring(NoSuchElementException.class)
 				.ignoring(NotFoundException.class);
-		WebElement username = wait2.until(driver -> driver.findElement(By.cssSelector("input[name='username']")));
+		WebElement username = wait.until(driver -> driver.findElement(By.cssSelector("input[name='username']")));
 		username.sendKeys("admin");
 		driver.close();
 	}
 
 	@Test(priority = 6, enabled = true)
-	private static void fluentWait2() {
+	private static void fluentwait() {
 		browserSetup();
 		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
-		wait2 = new FluentWait<WebDriver>(driver, Clock.systemDefaultZone(), Sleeper.SYSTEM_SLEEPER)
+		wait = new FluentWait<WebDriver>(driver, Clock.systemDefaultZone(), Sleeper.SYSTEM_SLEEPER)
 				.withTimeout(Duration.ofSeconds(10)).pollingEvery(Duration.ofMillis(1500))
 				.ignoring(NotFoundException.class);
-		WebElement username = wait2.until(driver -> driver.findElement(By.cssSelector("input[name='username']")));
+		WebElement username = wait.until(driver -> driver.findElement(By.cssSelector("input[name='username']")));
 		username.sendKeys("admin");
 		driver.close();
 	}
