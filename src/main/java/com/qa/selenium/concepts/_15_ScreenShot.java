@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 import com.google.common.io.Files;
 
-public class _ScreenShot {
+public class _15_ScreenShot {
 
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions;

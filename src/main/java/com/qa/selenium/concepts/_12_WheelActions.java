@@ -11,7 +11,7 @@ import org.openqa.selenium.interactions.WheelInput;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class _WheelActions {
+public class _12_WheelActions {
 
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions;

@@ -18,7 +18,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class _MouseActions {
+public class _10_MouseActions {
 
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions;

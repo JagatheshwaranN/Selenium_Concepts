@@ -7,13 +7,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
 
-public class _06_WebPageElements {
+public class _07_Elements {
 
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions;
 
 	@Test(priority = 1, enabled = true)
-	public static void elementDisplay() {
+	private static void elementDisplay() {
 		gotoTestSite();
 		boolean isElementDisplay = driver.findElement(By.cssSelector("input[name='no_type']")).isDisplayed();
 		System.out.println("Element Display Status ==> " + isElementDisplay);
@@ -22,7 +22,7 @@ public class _06_WebPageElements {
 	}
 
 	@Test(priority = 2, enabled = true)
-	public static void elementEnabled() {
+	private static void elementEnabled() {
 		gotoTestSite();
 		boolean isElementEnabled = driver.findElement(By.cssSelector("input[name='no_type']")).isEnabled();
 		System.out.println("Element Enable Status ==> " + isElementEnabled);
@@ -31,7 +31,7 @@ public class _06_WebPageElements {
 	}
 
 	@Test(priority = 3, enabled = true)
-	public static void elementSelected() {
+	private static void elementSelected() {
 		gotoTestSite();
 		boolean isElementSelected = driver.findElement(By.cssSelector("input[name='checkbox_input']")).isSelected();
 		System.out.println("Element Selected Status ==> " + isElementSelected);
@@ -40,7 +40,7 @@ public class _06_WebPageElements {
 	}
 
 	@Test(priority = 4, enabled = true)
-	public static void getElementTagName() {
+	private static void getElementTagName() {
 		gotoTestSite();
 		String elementTag = driver.findElement(By.cssSelector("input[name='number_input']")).getTagName();
 		System.out.println("Element Tag Name ==> " + elementTag);
@@ -49,7 +49,7 @@ public class _06_WebPageElements {
 	}
 
 	@Test(priority = 5, enabled = true)
-	public static void getElementSize() {
+	private static void getElementSize() {
 		gotoTestSite();
 		int elementHeight = driver.findElement(By.cssSelector("input[name='no_type']")).getSize().getHeight();
 		int elementWidth = driver.findElement(By.cssSelector("input[name='no_type']")).getSize().getWidth();
@@ -65,7 +65,7 @@ public class _06_WebPageElements {
 	}
 
 	@Test(priority = 6, enabled = true)
-	public static void getElementCSSProperties() {
+	private static void getElementCSSProperties() {
 		gotoTestSite();
 		String elementColor = driver.findElement(By.cssSelector("input[name='color_input']")).getCssValue("color");
 		String elementBGColor = driver.findElement(By.cssSelector("input[name='color_input']"))
@@ -77,7 +77,7 @@ public class _06_WebPageElements {
 	}
 
 	@Test(priority = 7, enabled = true)
-	public static void getElementText() {
+	private static void getElementText() {
 		gotoTestSite();
 		String elementText = driver.findElement(By.tagName("h1")).getText();
 		System.out.println("Element Text Content ==> " + elementText);
@@ -86,7 +86,7 @@ public class _06_WebPageElements {
 	}
 
 	@Test(priority = 8, enabled = true)
-	public static void getElementAttribute() {
+	private static void getElementAttribute() {
 		gotoTestSite();
 		String elementValue = driver.findElement(By.cssSelector("input[name='no_type']")).getAttribute("value");
 		String elementName = driver.findElement(By.cssSelector("input[name='no_type']")).getAttribute("name");
@@ -96,7 +96,7 @@ public class _06_WebPageElements {
 		driver.close();
 	}
 
-	public static void gotoTestSite() {
+	private static void gotoTestSite() {
 		browserSetup();
 		driver.get("https://www.selenium.dev/selenium/web/inputs.html");
 	}

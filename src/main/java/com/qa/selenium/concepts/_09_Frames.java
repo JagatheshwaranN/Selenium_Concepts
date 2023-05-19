@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
 
-public class _Frames {
+public class _09_Frames {
 
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions;

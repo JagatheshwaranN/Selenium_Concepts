@@ -17,7 +17,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-public class _05_Waits {
+public class _04_Waits {
 
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions;
@@ -42,6 +42,7 @@ public class _05_Waits {
 		WebElement username = new WebDriverWait(driver, Duration.ofSeconds(5))
 				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='username']")));
 		username.sendKeys("admin");
+		waitForSomeTime();
 		driver.close();
 		/**
 		 * More Options available under ExpectedCondition Class
@@ -57,6 +58,7 @@ public class _05_Waits {
 				.until(ExpectedConditions.elementToBeClickable(
 						By.cssSelector(".oxd-button.oxd-button--medium.oxd-button--main.orangehrm-login-button")));
 		loginButton.click();
+		waitForSomeTime();
 		driver.close();
 	}
 
@@ -68,6 +70,7 @@ public class _05_Waits {
 				Clock.systemDefaultZone(), Sleeper.SYSTEM_SLEEPER)
 				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='password']")));
 		password.sendKeys("admin123");
+		waitForSomeTime();
 		driver.close();
 	}
 
@@ -80,6 +83,7 @@ public class _05_Waits {
 				.ignoring(NotFoundException.class);
 		WebElement username = wait.until(driver -> driver.findElement(By.cssSelector("input[name='username']")));
 		username.sendKeys("admin");
+		waitForSomeTime();
 		driver.close();
 	}
 
@@ -92,6 +96,7 @@ public class _05_Waits {
 				.ignoring(NotFoundException.class);
 		WebElement username = wait.until(driver -> driver.findElement(By.cssSelector("input[name='username']")));
 		username.sendKeys("admin");
+		waitForSomeTime();
 		driver.close();
 	}
 

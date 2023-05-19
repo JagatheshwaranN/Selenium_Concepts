@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
 
-public class _Cookies {
+public class _14_Cookies {
 
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions;

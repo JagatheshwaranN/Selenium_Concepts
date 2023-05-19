@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-public class _AlertHandle {
+public class _13_Alerts {
 
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions;

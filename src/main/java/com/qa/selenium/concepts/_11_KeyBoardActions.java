@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import junit.framework.Assert;
 
-public class _KeyBoardActions {
+public class _11_KeyBoardActions {
 
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions;
