@@ -15,6 +15,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.testng.annotations.Test;
 
+import junit.framework.Assert;
+
 public class _02_DriverOptions {
 
 	private static WebDriver driver;
@@ -26,7 +28,8 @@ public class _02_DriverOptions {
 	private static void openMaximizedBrowser() {
 		chromeOptions.addArguments("start-maximized");
 		driver = new ChromeDriver(chromeOptions);
-		driver.get("https://www.selenium.dev/documentation/webdriver/browsers/chrome/");
+		driver.get("https://www.google.com/");
+		Assert.assertEquals(driver.getTitle(), "Google");
 		waitForSomeTime();
 		driver.close();
 	}
@@ -37,6 +40,7 @@ public class _02_DriverOptions {
 		driver = new ChromeDriver(chromeOptions);
 		driver.manage().window().maximize();
 		driver.get("https://www.google.com/");
+		Assert.assertEquals(driver.getTitle(), "Google");
 		waitForSomeTime();
 		driver.close();
 	}
@@ -48,6 +52,7 @@ public class _02_DriverOptions {
 		driver = new ChromeDriver(chromeOptions);
 		driver.manage().window().maximize();
 		driver.get("https://untrusted-root.badssl.com/");
+		Assert.assertEquals(driver.getTitle(), "untrusted-root.badssl.com");
 		waitForSomeTime();
 		driver.close();
 	}
@@ -58,6 +63,7 @@ public class _02_DriverOptions {
 		driver = new ChromeDriver(chromeOptions);
 		driver.manage().window().maximize();
 		driver.get("https://unsplash.com/t/people");
+		Assert.assertEquals(driver.getTitle(), "People | Unsplash");
 		waitForSomeTime();
 		driver.close();
 	}
@@ -73,6 +79,7 @@ public class _02_DriverOptions {
 				"file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/SiteLoadDelay.html");
 		driver.findElement(By.xpath("//button[@onclick='load()']")).click();
 		driver.findElement(By.cssSelector(".light-mode-item.navbar-brand-item")).isDisplayed();
+		Assert.assertEquals(driver.getTitle(), "Online Courses and eBooks Library");
 		waitForSomeTime();
 		driver.close();
 	}
