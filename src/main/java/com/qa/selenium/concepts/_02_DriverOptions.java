@@ -26,6 +26,7 @@ public class _02_DriverOptions {
 
 	@Test(priority = 1, enabled = true)
 	private static void openMaximizedBrowser() {
+		chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("start-maximized");
 		driver = new ChromeDriver(chromeOptions);
 		driver.get("https://www.google.com/");
@@ -36,6 +37,7 @@ public class _02_DriverOptions {
 
 	@Test(priority = 2, enabled = true)
 	private static void openChromeIncognito() {
+		chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("incognito");
 		driver = new ChromeDriver(chromeOptions);
 		driver.manage().window().maximize();
@@ -103,7 +105,8 @@ public class _02_DriverOptions {
 		// Not Working
 		// System.out.println("Browser Version >> " +
 		// chromeOptions.getBrowserVersion());
-		driver.get("https://www.selenium.dev/documentation/webdriver/drivers/options/");
+		driver.get("https://www.google.com/");
+		Assert.assertEquals(driver.getTitle(), "Google");
 		waitForSomeTime();
 		driver.close();
 	}
@@ -114,46 +117,49 @@ public class _02_DriverOptions {
 //		options.setExperimentalOption("detach", true);
 //		options.setCapability("detach", true);
 		browserSetup();
-		driver.get("https://www.selenium.dev/documentation/webdriver/browsers/chrome/");
-		System.out.println(driver.getTitle());
+		driver.get("https://www.google.com/");
+		Assert.assertEquals(driver.getTitle(), "Google");
 		waitForSomeTime();
 		driver.close();
 	}
 
 	@Test(priority = 9, enabled = true)
 	private static void headlessChromeBrowserLaunch() {
+		chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--headless=new");
 		chromeOptions.addArguments("--remote-allow-origins=*");
 		driver = new ChromeDriver(chromeOptions);
 		driver.manage().window().maximize();
-		driver.get("https://www.selenium.dev/documentation/webdriver/browsers/chrome/");
-		System.out.println(driver.getTitle());
+		driver.get("https://www.google.com/");
+		Assert.assertEquals(driver.getTitle(), "Google");
 		driver.close();
 	}
 
 	@Test(priority = 10, enabled = true)
 	private static void headlessFirefoxBrowserLaunch() {
+		firefoxOptions = new FirefoxOptions();
 		firefoxOptions.addArguments("-headless");
 		driver = new FirefoxDriver(firefoxOptions);
 		driver.manage().window().maximize();
-		driver.get("https://www.selenium.dev/documentation/webdriver/browsers/firefox/");
-		System.out.println(driver.getTitle());
+		driver.get("https://www.google.com/");
+		Assert.assertEquals(driver.getTitle(), "Google");
 		driver.close();
 	}
 
 	@Test(priority = 11, enabled = true)
 	private static void headlessIEBrowserLaunch() {
+		edgeOptions = new EdgeOptions();
 		edgeOptions.addArguments("--headless=new");
 		driver = new EdgeDriver(edgeOptions);
 		driver.manage().window().maximize();
-		driver.get("https://www.selenium.dev/documentation/webdriver/browsers/edge/");
-		System.out.println(driver.getTitle());
+		driver.get("https://www.google.com/");
+		Assert.assertEquals(driver.getTitle(), "Google");
 		driver.close();
 	}
 
 	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
-		chromeOptions.addArguments("--remote-allow-origins=*");
+		// chromeOptions.addArguments("--remote-allow-origins=*");
 		driver = new ChromeDriver(chromeOptions);
 		driver.manage().window().maximize();
 		return driver;
