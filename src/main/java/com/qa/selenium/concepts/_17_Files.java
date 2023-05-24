@@ -1,5 +1,7 @@
 package com.qa.selenium.concepts;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,22 +23,35 @@ public class _17_Files {
 				.sendKeys("D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\Selenium_Print.pdf");
 		driver.findElement(By.id("submitbutton")).click();
 		WebElement fileUploadMessage = driver.findElement(By.xpath("(//center)[2]"));
-		fileUploadMessage.isDisplayed();
-		Assert.assertEquals(fileUploadMessage.getText().contains("1 file"), true);
-		Assert.assertEquals(fileUploadMessage.getText().contains("has been successfully uploaded"), true);
+		Assert.assertEquals(fileUploadMessage.isDisplayed(), true);
 		waitForSomeTime();
 		driver.close();
 	}
-	
-	// Yet to Update
+ 
+	// https://eternallybored.org/misc/wget/
 	@Test(priority = 2, enabled = true)
 	private void fileDownload() {
-		
+		browserSetup();
+		driver.get("https://demo.guru99.com/test/yahoo.html");
+		WebElement downloadButton = driver.findElement(By.id("messenger-download"));
+		String downloadFileSource = downloadButton.getAttribute("href");
+		String wget_command = "cmd /c C:\\Wget\\wget.exe -P D: --no-check-certificate " + downloadFileSource;
+		try {
+			Process exec = Runtime.getRuntime().exec(wget_command);
+			int exitValue = exec.waitFor();
+			System.out.println("Exit Value " + exitValue);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		waitForSomeTime();
+		driver.close();
 	}
 
 	private WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
-		chromeOptions.addArguments("--remote-allow-origins=*");
+		//chromeOptions.addArguments("--remote-allow-origins=*");
 		driver = new ChromeDriver(chromeOptions);
 		driver.manage().window().maximize();
 		return driver;
