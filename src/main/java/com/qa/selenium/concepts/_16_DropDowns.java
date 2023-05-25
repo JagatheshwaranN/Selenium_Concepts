@@ -22,7 +22,9 @@ public class _16_DropDowns {
 		driver.manage().window().maximize();
 		driver.get("https://letcode.in/dropdowns");
 		waitForSomeTime();
-		new Select(driver.findElement(By.cssSelector("#fruits"))).selectByVisibleText("Apple");
+		WebElement dropDown = driver.findElement(By.cssSelector("#fruits"));
+		new Select(dropDown).selectByVisibleText("Apple");
+		Assert.assertEquals(dropDown.getText().contains("Apple"), true);
 		waitForSomeTime();
 		driver.close();
 	}
@@ -148,7 +150,7 @@ public class _16_DropDowns {
 
 	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
-		chromeOptions.addArguments("--remote-allow-origins=*");
+		// chromeOptions.addArguments("--remote-allow-origins=*");
 		driver = new ChromeDriver(chromeOptions);
 		driver.manage().window().maximize();
 		return driver;

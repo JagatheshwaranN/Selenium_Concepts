@@ -9,6 +9,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import org.testng.annotations.Test;
 
+import junit.framework.Assert;
+
 public class _18_WebTable {
 
 	private WebDriver driver;
@@ -28,6 +30,7 @@ public class _18_WebTable {
 			for (WebElement cell : cells) {
 				if (cell.getText().equalsIgnoreCase("UK")) {
 					System.out.println("The Table Row Data is ==> " + row.getText());
+					Assert.assertEquals(row.getText().contains("UK"), true);
 				}
 			}
 		}
