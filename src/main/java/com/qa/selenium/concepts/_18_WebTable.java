@@ -38,6 +38,31 @@ public class _18_WebTable {
 		driver.close();
 	}
 
+	@Test(priority = 2, enabled = true)
+	private void getTableRowAndCellNumber() {
+		browserSetup();
+		driver.get(
+				"D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\WebTable.html");
+		WebElement table = driver.findElement(By.id("data-table"));
+		List<WebElement> totalRows = table.findElements(By.tagName("tr"));
+		System.out.println("Number of table rows  => " + (totalRows.size() - 1));
+		int rows = totalRows.size() - 1;
+		for (int row = 0; row < rows; row++) {
+			List<WebElement> rowCells = totalRows.get(row).findElements(By.tagName("td"));
+			int cells = rowCells.size();
+			for (int cell = 0; cell < cells; cell++) {
+				String cellData = rowCells.get(cell).getText();
+				if (cellData.contains("UK")) {
+					System.out.println("The Table Cell which has " + cellData + " whose Row Number is " + row
+							+ " and Column Number is " + cell);
+					Assert.assertEquals(cellData.contains("UK"), true);
+				}
+			}
+		}
+		waitForSomeTime();
+		driver.close();
+	}
+
 	private WebDriver browserSetup() {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
