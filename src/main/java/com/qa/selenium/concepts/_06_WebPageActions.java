@@ -1,10 +1,15 @@
 package com.qa.selenium.concepts;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
+
+import junit.framework.Assert;
 
 public class _06_WebPageActions {
 
@@ -12,42 +17,75 @@ public class _06_WebPageActions {
 	private static ChromeOptions chromeOptions;
 
 	@Test(priority = 1, enabled = true)
-	private static void clearAnElement() throws InterruptedException {
+	private void clearAnElement() {
 		browserSetup();
-		driver.manage().window().maximize();
 		driver.get("https://admin-demo.nopcommerce.com/login");
 		waitForSomeTime();
-		driver.findElement(By.cssSelector("input[name='Email']")).clear();
+		WebElement email = driver.findElement(By.cssSelector("input[name='Email']"));
+		email.clear();
+		email.click();
+		new Actions(driver).keyDown(Keys.ENTER).perform();
+		var errorText = driver.findElement(By.xpath("//span[@id='Email-error']")).getText();
+		Assert.assertEquals(errorText, "Please enter your email");
 		waitForSomeTime();
 		driver.close();
 	}
 
 	@Test(priority = 2, enabled = true)
-	private static void clickOnAnElement() throws InterruptedException {
+	private void clickOnAnElement() {
 		browserSetup();
-		driver.manage().window().maximize();
-		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
+		driver.get("https://admin-demo.nopcommerce.com/login");
 		waitForSomeTime();
-		driver.findElement(By.cssSelector(".oxd-button.oxd-button--medium.oxd-button--main.orangehrm-login-button"))
-				.click();
+		driver.findElement(By.xpath("//button[@class='button-1 login-button']")).click();
+		Assert.assertEquals(driver.getTitle(), "Dashboard / nopCommerce administration");
 		waitForSomeTime();
 		driver.close();
 	}
 
 	@Test(priority = 3, enabled = true)
-	private static void typeInAnElement() throws InterruptedException {
+	private void typeInAnElement() {
 		browserSetup();
-		driver.manage().window().maximize();
-		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
+		driver.get("https://accounts.google.com/");
+		driver.findElement(By.name("identifier")).sendKeys("google");
+		var userName = driver.findElement(By.name("identifier")).getAttribute("data-initial-value");
+		Assert.assertEquals(userName, "google");
 		waitForSomeTime();
-		driver.findElement(By.cssSelector("input[name='username']")).sendKeys("admin");
+		driver.close();
+	}
+
+	@Test(priority = 4, enabled = true)
+	private void getPageSource() {
+		browserSetup();
+		driver.get("https://www.example.com/");
+		var pageSource = driver.getPageSource();
+		Assert.assertEquals(pageSource.contains("<title>Example Domain</title>"), true);
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 5, enabled = true)
+	private void getPageTitle() {
+		browserSetup();
+		driver.get("https://www.example.com/");
+		var pageTitle = driver.getTitle();
+		Assert.assertEquals(pageTitle, "Example Domain");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 6, enabled = true)
+	private void getPageUrl() {
+		browserSetup();
+		driver.get("https://www.example.com/");
+		var pageURL = driver.getCurrentUrl();
+		Assert.assertEquals(pageURL, "https://www.example.com/");
 		waitForSomeTime();
 		driver.close();
 	}
 
 	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
-		chromeOptions.addArguments("--remote-allow-origins=*");
+		// chromeOptions.addArguments("--remote-allow-origins=*");
 		driver = new ChromeDriver(chromeOptions);
 		driver.manage().window().maximize();
 		return driver;
