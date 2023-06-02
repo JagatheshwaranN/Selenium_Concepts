@@ -29,7 +29,6 @@ public class _10_MouseActions {
 	@Test(priority = 1, enabled = true)
 	private static void mouseClickAndHold() throws InterruptedException {
 		browserSetup();
-		driver.manage().window().maximize();
 		driver.get("https://letcode.in/buttons");
 		actions = new Actions(driver);
 		actions.clickAndHold(driver.findElement(By.xpath("(//button[@class='button is-primary'])[2]"))).perform();
@@ -43,7 +42,6 @@ public class _10_MouseActions {
 	@Test(priority = 2, enabled = true)
 	private static void mouseClickAndRelease() throws InterruptedException {
 		browserSetup();
-		driver.manage().window().maximize();
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
 		actions = new Actions(driver);
 		actions.click(driver.findElement(By.xpath("//input[@id='clickable']"))).perform();
@@ -56,7 +54,6 @@ public class _10_MouseActions {
 	@Test(priority = 3, enabled = true)
 	private static void mouseRightClick() throws InterruptedException {
 		browserSetup();
-		driver.manage().window().maximize();
 		driver.get("https://demo.guru99.com/test/simple_context_menu.html");
 		actions = new Actions(driver);
 		actions.contextClick(driver.findElement(By.xpath("//span[contains(@class,'context-menu-one')]"))).perform();
@@ -69,7 +66,6 @@ public class _10_MouseActions {
 	@Test(priority = 4, enabled = true)
 	private static void mouseBackClick() throws InterruptedException {
 		browserSetup();
-		driver.manage().window().maximize();
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
 		driver.findElement(By.id("click")).click();
 		Assert.assertEquals(driver.getTitle(), "We Arrive Here");
@@ -86,7 +82,6 @@ public class _10_MouseActions {
 	@Test(priority = 5, enabled = true)
 	private static void mouseForwardClick() throws InterruptedException {
 		browserSetup();
-		driver.manage().window().maximize();
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
 		driver.findElement(By.id("click")).click();
 		Assert.assertEquals(driver.getTitle(), "We Arrive Here");
@@ -110,7 +105,6 @@ public class _10_MouseActions {
 	@Test(priority = 6, enabled = true)
 	private static void mouseDoubleClick() throws InterruptedException {
 		browserSetup();
-		driver.manage().window().maximize();
 		driver.get("https://demo.guru99.com/test/simple_context_menu.html");
 		WebElement dblClkBtn = driver
 				.findElement(By.xpath("//button[contains(text(),'Double-Click Me To See Alert')]"));
@@ -123,9 +117,8 @@ public class _10_MouseActions {
 	}
 
 	@Test(priority = 7, enabled = true)
-	private static void mouseHover_MoveToElement() throws InterruptedException {
+	private static void moveToElement() throws InterruptedException {
 		browserSetup();
-		driver.manage().window().maximize();
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
 		actions = new Actions(driver);
 		actions.moveToElement(driver.findElement(By.xpath("//input[@id='hover']"))).perform();
@@ -138,7 +131,6 @@ public class _10_MouseActions {
 	@Test(priority = 8, enabled = true)
 	private static void mouseMoveByOffsetElement() throws InterruptedException {
 		browserSetup();
-		driver.manage().window().maximize();
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
 		actions = new Actions(driver);
 		actions.moveToElement(driver.findElement(By.id("mouse-tracker")), 20, 0).perform();
@@ -147,36 +139,38 @@ public class _10_MouseActions {
 		waitForSomeTime();
 		driver.close();
 	}
-//
-//	@Test(priority = 9, enabled = true)
-//	private static void mouseMoveByViewport() throws InterruptedException {
-//		browserSetup();
-//		driver.manage().window().maximize();
-//		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-//		PointerInput mouse = new PointerInput(PointerInput.Kind.MOUSE, "Default Mouse");
-//		Sequence sequence = new Sequence(mouse, 0)
-//				.addAction(mouse.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), 10, 12));
-//		((RemoteWebDriver) driver).perform(Collections.singletonList(sequence));
-//		waitForSomeTime();
-//		driver.close();
-//	}
-//
-//	@Test(priority = 10, enabled = true)
-//	private static void mouseMoveByCurrentPosition() throws InterruptedException {
-//		browserSetup();
-//		driver.manage().window().maximize();
-//		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-//		PointerInput mouse = new PointerInput(PointerInput.Kind.MOUSE, "Default Mouse");
-//		Sequence sequence = new Sequence(mouse, 0)
-//				.addAction(mouse.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), 10, 12));
-//		((RemoteWebDriver) driver).perform(Collections.singletonList(sequence));
-//		new Actions(driver).moveByOffset(12, 15).perform();
-//		String[] result = driver.findElement(By.id("absolute-location")).getText().split(",");
-//		Assert.assertTrue(Math.abs(Integer.parseInt(result[0]) - 10 - 12) < 2);
-//		Assert.assertTrue(Math.abs(Integer.parseInt(result[1]) - 12 - 15) < 3);
-//		waitForSomeTime();
-//		driver.close();
-//	}
+
+	@Test(priority = 9, enabled = true)
+	private static void mouseMoveByViewport() throws InterruptedException {
+		browserSetup();
+		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		PointerInput mouse = new PointerInput(PointerInput.Kind.MOUSE, "Default Mouse");
+		Sequence sequence = new Sequence(mouse, 0)
+				.addAction(mouse.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), 8, 12));
+		((RemoteWebDriver) driver).perform(Collections.singletonList(sequence));
+		String[] result = driver.findElement(By.id("absolute-location")).getText().split(",");
+		Assert.assertTrue(Math.abs(Integer.parseInt(result[0].strip()) - 8) < 2);
+		Assert.assertTrue(Math.abs(Integer.parseInt(result[1].strip()) - 12) < 2);
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 10, enabled = true)
+	private static void mouseMoveByCurrentPosition() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		PointerInput mouse = new PointerInput(PointerInput.Kind.MOUSE, "Default Mouse");
+		Sequence sequence = new Sequence(mouse, 0)
+				.addAction(mouse.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), 8, 11));
+		((RemoteWebDriver) driver).perform(Collections.singletonList(sequence));
+		new Actions(driver).moveByOffset(13, 15).perform();
+		String[] result = driver.findElement(By.id("absolute-location")).getText().split(",");
+		Assert.assertTrue(Math.abs(Integer.parseInt(result[0].strip()) - 13) < 2);
+		Assert.assertTrue(Math.abs(Integer.parseInt(result[1].strip()) - 15) < 2);
+		waitForSomeTime();
+		driver.close();
+	}
 //
 //	@Test(priority = 11, enabled = true)
 //	private static void mouseDragDrop() throws InterruptedException {
@@ -236,23 +230,36 @@ public class _10_MouseActions {
 //		driver.close();
 //	}
 //
-//	/*
-//	 * The below method is used to handle the moving slider usecase.
-//	 */
-//	@Test(priority = 15, enabled = true)
-//	private static void dragAndDropBy() {
-//		browserSetup();
-//		driver.get("https://jqueryui.com/slider/");
-//		WebElement frameElement = driver.findElement(By.xpath("//iframe[@class='demo-frame']"));
-//		driver.switchTo().frame(frameElement);
-//		WebElement slider = driver.findElement(By.id("slider"));
-//		new Actions(driver).dragAndDropBy(slider, 50, 0).build().perform();
-//		String targetPosition = driver.findElement(By.xpath("//span[contains(@class,'ui-slider-handle')]"))
-//				.getAttribute("style");
-//		Assert.assertEquals(targetPosition, "left: 59%;");
-//		waitForSomeTime();
-//		driver.close();
-//	}
+	/*
+	 * The below method is used to handle the moving slider usecase.
+	 */
+	@Test(priority = 15, enabled = true)
+	private static void dragAndDropBy() {
+		browserSetup();
+		driver.get("https://jqueryui.com/slider/");
+		WebElement frameElement = driver.findElement(By.xpath("//iframe[@class='demo-frame']"));
+		driver.switchTo().frame(frameElement);
+		WebElement slider = driver.findElement(By.id("slider"));
+		new Actions(driver).dragAndDropBy(slider, 50, 0).build().perform();
+		String targetPosition = driver.findElement(By.xpath("//span[contains(@class,'ui-slider-handle')]"))
+				.getAttribute("style");
+		Assert.assertEquals(targetPosition, "left: 59%;");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 16, enabled = true)
+	private static void toolTipUsingMoveToElement() {
+		browserSetup();
+		driver.get("https://jqueryui.com/tooltip/");
+		WebElement frameElement = driver.findElement(By.xpath("//iframe[@class='demo-frame']"));
+		driver.switchTo().frame(frameElement);
+		new Actions(driver).moveToElement(driver.findElement(By.id("age"))).perform();
+		String toolTip = driver.findElement(By.xpath("//div[@class='ui-tooltip-content']")).getText();
+		Assert.assertEquals(toolTip, "We ask for your age only for statistical purposes.");
+		waitForSomeTime();
+		driver.close();
+	}
 
 	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
