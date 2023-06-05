@@ -171,65 +171,67 @@ public class _10_MouseActions {
 		waitForSomeTime();
 		driver.close();
 	}
-//
-//	@Test(priority = 11, enabled = true)
-//	private static void mouseDragDrop() throws InterruptedException {
-//		browserSetup();
-//		driver.manage().window().maximize();
-//		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-//		actions = new Actions(driver);
-//		actions.dragAndDrop(driver.findElement(By.id("draggable")), driver.findElement(By.id("droppable"))).perform();
-//		waitForSomeTime();
-//		driver.findElement(By.xpath("//strong[@id='drop-status']")).isDisplayed();
-//		driver.close();
-//	}
-//
-//	@Test(priority = 12, enabled = true)
-//	private static void mouseDragDropByOffset() throws InterruptedException {
-//		browserSetup();
-//		driver.manage().window().maximize();
-//		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-//		actions = new Actions(driver);
-//		Rectangle start = driver.findElement(By.id("draggable")).getRect();
-//		Rectangle finish = driver.findElement(By.id("droppable")).getRect();
-//		actions.dragAndDropBy(driver.findElement(By.id("draggable")), finish.getX() - start.getX(),
-//				finish.getY() - start.getY()).perform();
-//		waitForSomeTime();
-//		driver.findElement(By.xpath("//strong[@id='drop-status']")).isDisplayed();
-//		driver.close();
-//	}
-//
-//	@Test(priority = 13, enabled = true)
-//	private static void actionPause() throws InterruptedException {
-//		browserSetup();
-//		driver.manage().window().maximize();
-//		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-//		long startTime = System.currentTimeMillis();
-//		new Actions(driver).moveToElement(driver.findElement(By.id("clickable"))).pause(Duration.ofSeconds(1))
-//				.clickAndHold().pause(Duration.ofSeconds(1)).sendKeys("action pause").perform();
-//		long endTime = System.currentTimeMillis() - startTime;
-//		Assert.assertTrue(endTime > 2000);
-//		Assert.assertTrue(endTime < 3000);
-//		waitForSomeTime();
-//		driver.close();
-//	}
-//
-//	@Test(priority = 14, enabled = true)
-//	private static void actionReset() throws InterruptedException {
-//		browserSetup();
-//		driver.manage().window().maximize();
-//		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-//		actions = new Actions(driver);
-//		WebElement clickable = driver.findElement(By.id("clickable"));
-//		actions.clickAndHold(clickable).keyDown(Keys.SHIFT).sendKeys("a").perform();
-//		((RemoteWebDriver) driver).resetInputState();
-//		actions.sendKeys("a").perform();
-//		Assert.assertEquals("A", String.valueOf(clickable.getAttribute("value").charAt(0)));
-//		Assert.assertEquals("a", String.valueOf(clickable.getAttribute("value").charAt(1)));
-//		waitForSomeTime();
-//		driver.close();
-//	}
-//
+
+	@Test(priority = 11, enabled = true)
+	private static void mouseDragDrop() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		actions = new Actions(driver);
+		actions.dragAndDrop(driver.findElement(By.id("draggable")), driver.findElement(By.id("droppable"))).perform();
+		String result = driver.findElement(By.xpath("//strong[@id='drop-status']")).getText();
+		Assert.assertEquals(result, "dropped");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 12, enabled = true)
+	private static void mouseDragDropByOffset() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		actions = new Actions(driver);
+		Rectangle start = driver.findElement(By.id("draggable")).getRect();
+		Rectangle finish = driver.findElement(By.id("droppable")).getRect();
+		actions.dragAndDropBy(driver.findElement(By.id("draggable")), finish.getX() - start.getX(),
+				finish.getY() - start.getY()).perform();
+		String result = driver.findElement(By.xpath("//strong[@id='drop-status']")).getText();
+		Assert.assertEquals(result, "dropped");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 13, enabled = true)
+	private static void actionPause() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		long startTime = System.currentTimeMillis();
+		new Actions(driver).moveToElement(driver.findElement(By.id("clickable"))).pause(Duration.ofSeconds(1))
+				.clickAndHold().pause(Duration.ofSeconds(1)).sendKeys("action pause").perform();
+		long endTime = System.currentTimeMillis() - startTime;
+		Assert.assertTrue(endTime > 2000);
+		Assert.assertTrue(endTime < 3000);
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 14, enabled = true)
+	private static void actionReset() throws InterruptedException {
+		browserSetup();
+		driver.manage().window().maximize();
+		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
+		actions = new Actions(driver);
+		WebElement clickable = driver.findElement(By.id("clickable"));
+		actions.clickAndHold(clickable).keyDown(Keys.SHIFT).sendKeys("a").perform();
+		((RemoteWebDriver) driver).resetInputState();
+		actions.sendKeys("a").perform();
+		Assert.assertEquals("A", String.valueOf(clickable.getAttribute("value").charAt(0)));
+		Assert.assertEquals("a", String.valueOf(clickable.getAttribute("value").charAt(1)));
+		waitForSomeTime();
+		driver.close();
+	}
+
 	/*
 	 * The below method is used to handle the moving slider usecase.
 	 */
