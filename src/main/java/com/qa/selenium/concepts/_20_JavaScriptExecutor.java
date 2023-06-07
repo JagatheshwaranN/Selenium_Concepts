@@ -63,7 +63,7 @@ public class _20_JavaScriptExecutor {
 		waitForSomeTime();
 		driver.close();
 	}
-	
+
 	@Test(priority = 4, enabled = true)
 	private void clearElement() {
 		browserSetup();
@@ -72,10 +72,130 @@ public class _20_JavaScriptExecutor {
 		WebElement input = driver.findElement(By.id("myText"));
 		input.sendKeys("Selenium");
 		waitForSomeTime();
-		jsExecutor = (JavascriptExecutor)driver;
+		jsExecutor = (JavascriptExecutor) driver;
 		jsExecutor.executeScript("arguments[0].value='';", input);
 		String getTextWhenEnable = input.getAttribute("value");
 		Assert.assertEquals(getTextWhenEnable, "");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 5, enabled = true)
+	private void scrollToElementType1() {
+		browserSetup();
+		driver.get("https://www.selenium.dev/");
+		WebElement element = driver.findElement(By.xpath("//h2[@class='selenium text-center']"));
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("window.scrollTo(arguments[0],arguments[1]);", element.getLocation().x,
+				element.getLocation().y);
+		Assert.assertTrue(inViewport(element));
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 6, enabled = true)
+	private void scrollToElementType2() {
+		browserSetup();
+		driver.get("https://www.selenium.dev/");
+		WebElement element = driver.findElement(By.xpath("//h2[@class='selenium text-center']"));
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].scrollIntoView()", element);
+		Assert.assertTrue(inViewport(element));
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 7, enabled = true)
+	private void scrollPageUp() {
+		browserSetup();
+		driver.get("https://www.selenium.dev/");
+		WebElement element = driver.findElement(By.xpath("//h2[@class='selenium text-center']"));
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].scrollIntoView()", element);
+		waitForSomeTime();
+		jsExecutor.executeScript("window.scrollTo(0, -document.body.scrollHeight)");
+		WebElement seleniumTagLine = driver.findElement(By.xpath("//h1[@class='display-1']"));
+		Assert.assertTrue(inViewport(seleniumTagLine));
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 8, enabled = true)
+	private void scrollPageDown() {
+		browserSetup();
+		driver.get("https://www.selenium.dev/");
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		WebElement seleniumCopyRight = driver.findElement(By.xpath("//small[@class='text-white']"));
+		Assert.assertTrue(inViewport(seleniumCopyRight));
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 9, enabled = true)
+	private void scrollPageDownByPixel() {
+		int pixel = 1000;
+		browserSetup();
+		driver.get("https://www.selenium.dev/");
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("window.scrollBy(0, '" + pixel + "')");
+		WebElement result = driver.findElement(By.xpath("//h2[@class='selenium text-center']"));
+		Assert.assertTrue(inViewport(result));
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 10, enabled = true)
+	private void scrollPageUpByPixel() {
+		int pixel = 1000;
+		browserSetup();
+		driver.get("https://www.selenium.dev/");
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("window.scrollBy(0, '" + pixel + "')");
+		waitForSomeTime();
+		jsExecutor.executeScript("window.scrollBy(0, -'" + pixel + "')");
+		WebElement result = driver.findElement(By.xpath("//h1[@class='display-1']"));
+		Assert.assertTrue(inViewport(result));
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 11, enabled = true)
+	private void scrollPageRight() {
+		browserSetup();
+		driver.get("https://www.selenium.dev/");
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+		WebElement seleniumTagLine = driver.findElement(By.xpath("//h1[@class='display-1']"));
+		Assert.assertTrue(inViewport(seleniumTagLine));
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 12, enabled = true)
+	private void scrollPageLeft() {
+		browserSetup();
+		driver.get("https://www.selenium.dev/");
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+		waitForSomeTime();
+		jsExecutor.executeScript("window.scrollTo(-document.body.scrollHeight, 0)");
+		WebElement seleniumTagLine = driver.findElement(By.xpath("//h1[@class='display-1']"));
+		Assert.assertTrue(inViewport(seleniumTagLine));
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 13, enabled = true)
+	private void pageZoomByPercent() {
+		int percent = 3;
+		browserSetup();
+		driver.get("https://www.selenium.dev/");
+		waitForSomeTime();
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("document.body.style.zoom='" + percent + "'");
+		WebElement result = driver.findElement(By.xpath("//h1[@class='display-1']"));
+		Assert.assertTrue(inViewport(result));
 		waitForSomeTime();
 		driver.close();
 	}
@@ -92,5 +212,15 @@ public class _20_JavaScriptExecutor {
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	private boolean inViewport(WebElement element) {
+		String script = """
+				for(var e=arguments[0],f=e.offsetTop,t=e.offsetLeft,o=e.offsetWidth,n=e.offsetHeight;\
+				 e.offsetParent;)f+=(e=e.offsetParent).offsetTop,t+=e.offsetLeft;\
+				return f<window.pageYOffset+window.innerHeight&&t<window.pageXOffset+window.innerWidth&&f+n>\
+				window.pageYOffset&&t+o>window.pageXOffset
+				""";
+		return (boolean) ((JavascriptExecutor) driver).executeScript(script, element);
 	}
 }
