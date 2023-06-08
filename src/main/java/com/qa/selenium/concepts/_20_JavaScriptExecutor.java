@@ -200,6 +200,21 @@ public class _20_JavaScriptExecutor {
 		driver.close();
 	}
 
+	@Test(priority = 14, enabled = true)
+	private void highlightElement() {
+		browserSetup();
+		driver.get(
+				"D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
+		WebElement input = driver.findElement(By.id("myText"));
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid green;')",
+				input);
+		String result = driver.findElement(By.id("myText")).getCssValue("background");
+		Assert.assertEquals(result.contains("rgb(255, 255, 0)"), true);
+		waitForSomeTime();
+		driver.close();
+	}
+
 	private WebDriver browserSetup() {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
