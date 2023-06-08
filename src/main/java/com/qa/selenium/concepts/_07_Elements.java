@@ -1,6 +1,7 @@
 package com.qa.selenium.concepts;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -54,12 +55,15 @@ public class _07_Elements {
 		int elementHeight = driver.findElement(By.cssSelector("input[name='no_type']")).getSize().getHeight();
 		int elementWidth = driver.findElement(By.cssSelector("input[name='no_type']")).getSize().getWidth();
 		Rectangle rectangle = driver.findElement(By.cssSelector("input[name='no_type']")).getRect();
+		Point point = driver.findElement(By.cssSelector("input[name='no_type']")).getLocation();
 		System.out.println("Element Dimension Height ==> " + elementHeight);
 		System.out.println("Element Dimension Width ==> " + elementWidth);
 		System.out.println("Element Height Using Rectangle Class ==> " + rectangle.getHeight());
 		System.out.println("Element Width Using Rectangle Class ==> " + rectangle.getWidth());
 		System.out.println("Element X-Axis Using Rectangle Class ==> " + rectangle.getX());
 		System.out.println("Element Y-Axis Using Rectangle Class ==> " + rectangle.getY());
+		System.out.println("Element X-Axis Using Point Class ==> " + point.getX());
+		System.out.println("Element Y-Axis Using Point Class ==> " + point.getY());
 		waitForSomeTime();
 		driver.close();
 	}

@@ -56,56 +56,65 @@ public class _04_Waits {
 		 * https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/support/ui/ExpectedConditions.html
 		 */
 	}
-//
-//	@Test(priority = 3, enabled = true)
-//	private static void waitUntilType2() {
-//		browserSetup();
-//		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
-//		WebElement loginButton = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(1500))
-//				.until(ExpectedConditions.elementToBeClickable(
-//						By.cssSelector(".oxd-button.oxd-button--medium.oxd-button--main.orangehrm-login-button")));
-//		loginButton.click();
-//		waitForSomeTime();
-//		driver.close();
-//	}
-//
-//	@Test(priority = 4, enabled = true)
-//	private static void waitUntilType3() {
-//		browserSetup();
-//		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
-//		WebElement password = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(2000),
-//				Clock.systemDefaultZone(), Sleeper.SYSTEM_SLEEPER)
-//				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='password']")));
-//		password.sendKeys("admin123");
-//		waitForSomeTime();
-//		driver.close();
-//	}
-//
-//	@Test(priority = 5, enabled = true)
-//	private static void fluentWait() {
-//		browserSetup();
-//		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
-//		wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
-//				.pollingEvery(Duration.ofMillis(1500)).ignoring(NoSuchElementException.class)
-//				.ignoring(NotFoundException.class);
-//		WebElement username = wait.until(driver -> driver.findElement(By.cssSelector("input[name='username']")));
-//		username.sendKeys("admin");
-//		waitForSomeTime();
-//		driver.close();
-//	}
-//
-//	@Test(priority = 6, enabled = true)
-//	private static void fluentwait() {
-//		browserSetup();
-//		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
-//		wait = new FluentWait<WebDriver>(driver, Clock.systemDefaultZone(), Sleeper.SYSTEM_SLEEPER)
-//				.withTimeout(Duration.ofSeconds(10)).pollingEvery(Duration.ofMillis(1500))
-//				.ignoring(NotFoundException.class);
-//		WebElement username = wait.until(driver -> driver.findElement(By.cssSelector("input[name='username']")));
-//		username.sendKeys("admin");
-//		waitForSomeTime();
-//		driver.close();
-//	}
+
+	@Test(priority = 3, enabled = true)
+	private static void waitUntilType2() {
+		browserSetup();
+		driver.get("https://admin-demo.nopcommerce.com/login");
+		WebElement loginButton = new WebDriverWait(driver, Duration.ofSeconds(5), Duration.ofMillis(1500))
+				.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".button-1.login-button")));
+		loginButton.click();
+		var result = driver.findElement(By.xpath("//div[@class='content-header']//h1")).getText();
+		Assert.assertEquals(result, "Dashboard");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 4, enabled = true)
+	private static void waitUntilType3() {
+		browserSetup();
+		driver.get("https://admin-demo.nopcommerce.com/login");
+		WebElement loginButton = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(2000),
+				Clock.systemDefaultZone(), Sleeper.SYSTEM_SLEEPER)
+				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".button-1.login-button")));
+		loginButton.click();
+		var result = driver.findElement(By.xpath("//div[@class='content-header']//h1")).getText();
+		Assert.assertEquals(result, "Dashboard");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 5, enabled = true)
+	private static void fluentWait() {
+		browserSetup();
+		driver.get(
+				"D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
+		wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
+				.pollingEvery(Duration.ofMillis(1500)).ignoring(NoSuchElementException.class)
+				.ignoring(NotFoundException.class);
+		WebElement username = wait.until(driver -> driver.findElement(By.cssSelector("input[id='myText']")));
+		username.sendKeys("admin");
+		var result = username.getAttribute("value");
+		Assert.assertEquals(result, "admin");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 6, enabled = true)
+	private static void fluentwait() {
+		browserSetup();
+		driver.get(
+				"D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
+		wait = new FluentWait<WebDriver>(driver, Clock.systemDefaultZone(), Sleeper.SYSTEM_SLEEPER)
+				.withTimeout(Duration.ofSeconds(10)).pollingEvery(Duration.ofMillis(1500))
+				.ignoring(NotFoundException.class);
+		WebElement username = wait.until(driver -> driver.findElement(By.cssSelector("input[id='myText']")));
+		username.sendKeys("admin");
+		var result = username.getAttribute("value");
+		Assert.assertEquals(result, "admin");
+		waitForSomeTime();
+		driver.close();
+	}
 
 	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();

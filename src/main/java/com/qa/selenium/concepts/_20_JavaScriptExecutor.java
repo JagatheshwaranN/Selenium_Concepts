@@ -188,7 +188,7 @@ public class _20_JavaScriptExecutor {
 
 	@Test(priority = 13, enabled = true)
 	private void pageZoomByPercent() {
-		int percent = 3;
+		String percent = "50%";
 		browserSetup();
 		driver.get("https://www.selenium.dev/");
 		waitForSomeTime();
