@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
 
-public class _05_LocatorTypes extends _01_LaunchBrowser {
+public class _05_LocatorTypes {
 
 	public static WebDriver driver;
 	public static ChromeOptions chromeOptions;
@@ -38,9 +38,67 @@ public class _05_LocatorTypes extends _01_LaunchBrowser {
 		driver.close();
 	}
 
+	@Test(priority = 2, enabled = true)
+	private static void cssLocatorTypes() {
+		browserSetup();
+		driver.get("https://www.facebook.com/");
+		// css=tag#id
+		Assert.assertTrue(driver.findElement(By.cssSelector("input#email")).isDisplayed());
+		// css=tag.class[attribute=value]
+		Assert.assertTrue(driver.findElement(By.cssSelector("input.inputtext[name=email]")).isDisplayed());
+		// css=tag[attribute=value]
+		Assert.assertTrue(driver.findElement(By.cssSelector("button[name='login']")).isDisplayed());
+		// css=tag.class
+		Assert.assertTrue(driver.findElement(By.cssSelector("img.fb_logo._8ilh.img")).isDisplayed());
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 3, enabled = true)
+	private static void xpathLocatorTypes() {
+		browserSetup();
+		driver.get("https://www.facebook.com/");
+		// xpath=//tag[contains(@attribute, value)]
+		Assert.assertTrue(driver.findElement(By.xpath("//input[contains(@data-testid,'royal_email')]")).isDisplayed());
+		// xpath=//tag[@attribute=value or @attribute=value]
+		Assert.assertTrue(driver.findElement(By.xpath("//input[@type='password' or @name='pass']")).isDisplayed());
+		// xpath=//tag[@attribute=value and @attribute=value]
+		Assert.assertTrue(driver.findElement(By.xpath("//input[@type='password' and @name='pass']")).isDisplayed());
+		// xpath=//tag[starts-with(@attribute, value)]
+		Assert.assertTrue(driver.findElement(By.xpath("//input[starts-with(@data-testid,'royal')]")).isDisplayed());
+		// xpath=//tag[text()=value]
+		Assert.assertTrue(driver
+				.findElement(
+						By.xpath("//h2[text()='Facebook helps you connect and share with the people in your life.']"))
+				.isDisplayed());
+		// xpath=//tag[@attribute=value]//following::tag
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@id='passContainer']//following::button")).isDisplayed());
+		// xapth=//tag[@attribute=value]//ancestor::tag
+		Assert.assertTrue(driver.findElement(By.xpath("//button[@name='login']//ancestor::form")).isDisplayed());
+		// xpath=//tag[@attribute=value]//child::tag[@attribute=value]
+		Assert.assertTrue(
+				driver.findElement(By.xpath("//form[@data-testid='royal_login_form']//child::input[@name='email']"))
+						.isDisplayed());
+		// xpath=//tag[@attribute=value]//preceding::tag[@attribute=value]
+		Assert.assertTrue(
+				driver.findElement(By.xpath("//button[@name='login']//preceding::input[@name='email']")).isDisplayed());
+		// xpath=//tag[@attribute=value]//following-sibling::tag
+		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='_8esl']//following-sibling::h2")).isDisplayed());
+		// xpath=//tag[@attribute=value]//parent::tag
+		Assert.assertTrue(driver.findElement(By.xpath("//input[@name='email']//parent::div")).isDisplayed());
+		// xpath=//tag[@attribute=value]//self::same-tag
+		Assert.assertTrue(driver.findElement(By.xpath("//input[@type='password']//self::input")).isDisplayed());
+		// xpath=//tag[@attribute=value]//descendant::tag[@attribute=value]
+		Assert.assertTrue(driver
+				.findElement(By.xpath("//form[@data-testid='royal_login_form']//descendant::input[@name='email']"))
+				.isDisplayed());
+		waitForSomeTime();
+		driver.close();
+	}
+
 	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
-		chromeOptions.addArguments("--remote-allow-origins=*");
+		// chromeOptions.addArguments("--remote-allow-origins=*");
 		driver = new ChromeDriver(chromeOptions);
 		driver.manage().window().maximize();
 		return driver;
