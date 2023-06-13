@@ -50,6 +50,16 @@ public class _05_LocatorTypes {
 		Assert.assertTrue(driver.findElement(By.cssSelector("button[name='login']")).isDisplayed());
 		// css=tag.class
 		Assert.assertTrue(driver.findElement(By.cssSelector("img.fb_logo._8ilh.img")).isDisplayed());
+		// css=tag[attribute^=value]
+		Assert.assertTrue(driver.findElement(By.cssSelector("input[type^='pass']")).isDisplayed());
+		// css=tag[attribute$=value]
+		Assert.assertTrue(driver.findElement(By.cssSelector("input[type$='word']")).isDisplayed());
+		// css=tag[attribute*=value]
+		Assert.assertTrue(driver.findElement(By.cssSelector("input[type*='swo']")).isDisplayed());
+		// css=parentTag > childTag[attribute=value]
+		Assert.assertTrue(driver.findElement(By.cssSelector("div > button[name='login']")).isDisplayed());
+		// css=parentTag > childTag > subChildTag:nth-of-type(index)
+		Assert.assertTrue(driver.findElement(By.cssSelector("div[id='pageFooter'] > ul > li:nth-of-type(2)")).isDisplayed());
 		waitForSomeTime();
 		driver.close();
 	}
