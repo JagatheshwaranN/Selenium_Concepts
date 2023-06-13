@@ -6,6 +6,7 @@ import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class _07_Elements {
@@ -16,8 +17,7 @@ public class _07_Elements {
 	@Test(priority = 1, enabled = true)
 	private static void elementDisplay() {
 		gotoTestSite();
-		boolean isElementDisplay = driver.findElement(By.cssSelector("input[name='no_type']")).isDisplayed();
-		System.out.println("Element Display Status ==> " + isElementDisplay);
+		Assert.assertTrue(driver.findElement(By.cssSelector("input[name='no_type']")).isDisplayed());
 		waitForSomeTime();
 		driver.close();
 	}
@@ -25,8 +25,7 @@ public class _07_Elements {
 	@Test(priority = 2, enabled = true)
 	private static void elementEnabled() {
 		gotoTestSite();
-		boolean isElementEnabled = driver.findElement(By.cssSelector("input[name='no_type']")).isEnabled();
-		System.out.println("Element Enable Status ==> " + isElementEnabled);
+		Assert.assertTrue(driver.findElement(By.cssSelector("input[name='no_type']")).isEnabled());
 		waitForSomeTime();
 		driver.close();
 	}
@@ -34,8 +33,7 @@ public class _07_Elements {
 	@Test(priority = 3, enabled = true)
 	private static void elementSelected() {
 		gotoTestSite();
-		boolean isElementSelected = driver.findElement(By.cssSelector("input[name='checkbox_input']")).isSelected();
-		System.out.println("Element Selected Status ==> " + isElementSelected);
+		Assert.assertTrue(driver.findElement(By.cssSelector("input[name='checkbox_input']")).isSelected());
 		waitForSomeTime();
 		driver.close();
 	}
@@ -44,7 +42,7 @@ public class _07_Elements {
 	private static void getElementTagName() {
 		gotoTestSite();
 		String elementTag = driver.findElement(By.cssSelector("input[name='number_input']")).getTagName();
-		System.out.println("Element Tag Name ==> " + elementTag);
+		Assert.assertEquals(elementTag,"input");
 		waitForSomeTime();
 		driver.close();
 	}
@@ -56,14 +54,14 @@ public class _07_Elements {
 		int elementWidth = driver.findElement(By.cssSelector("input[name='no_type']")).getSize().getWidth();
 		Rectangle rectangle = driver.findElement(By.cssSelector("input[name='no_type']")).getRect();
 		Point point = driver.findElement(By.cssSelector("input[name='no_type']")).getLocation();
-		System.out.println("Element Dimension Height ==> " + elementHeight);
-		System.out.println("Element Dimension Width ==> " + elementWidth);
-		System.out.println("Element Height Using Rectangle Class ==> " + rectangle.getHeight());
-		System.out.println("Element Width Using Rectangle Class ==> " + rectangle.getWidth());
-		System.out.println("Element X-Axis Using Rectangle Class ==> " + rectangle.getX());
-		System.out.println("Element Y-Axis Using Rectangle Class ==> " + rectangle.getY());
-		System.out.println("Element X-Axis Using Point Class ==> " + point.getX());
-		System.out.println("Element Y-Axis Using Point Class ==> " + point.getY());
+		Assert.assertEquals(elementHeight, 21);
+		Assert.assertEquals(elementWidth, 177);
+		Assert.assertEquals(rectangle.getHeight(), 21);
+		Assert.assertEquals(rectangle.getWidth(), 177);
+		Assert.assertEquals(rectangle.getX(), 8);
+		Assert.assertEquals(rectangle.getY(), 66);
+		Assert.assertEquals(point.getX(), 8);
+		Assert.assertEquals(point.getY(), 66);
 		waitForSomeTime();
 		driver.close();
 	}
@@ -74,8 +72,8 @@ public class _07_Elements {
 		String elementColor = driver.findElement(By.cssSelector("input[name='color_input']")).getCssValue("color");
 		String elementBGColor = driver.findElement(By.cssSelector("input[name='color_input']"))
 				.getCssValue("background-color");
-		System.out.println("Element Color ==> " + elementColor);
-		System.out.println("Element Color ==> " + elementBGColor);
+		Assert.assertEquals(elementColor, "rgba(0, 0, 0, 1)");
+		Assert.assertEquals(elementBGColor, "rgba(240, 240, 240, 1)");
 		waitForSomeTime();
 		driver.close();
 	}
@@ -84,7 +82,7 @@ public class _07_Elements {
 	private static void getElementText() {
 		gotoTestSite();
 		String elementText = driver.findElement(By.tagName("h1")).getText();
-		System.out.println("Element Text Content ==> " + elementText);
+		Assert.assertEquals(elementText, "Testing Inputs");
 		waitForSomeTime();
 		driver.close();
 	}
@@ -94,8 +92,8 @@ public class _07_Elements {
 		gotoTestSite();
 		String elementValue = driver.findElement(By.cssSelector("input[name='no_type']")).getAttribute("value");
 		String elementName = driver.findElement(By.cssSelector("input[name='no_type']")).getAttribute("name");
-		System.out.println("Element Attribute Value ==> " + elementValue);
-		System.out.println("Element Attribute Name ==> " + elementName);
+		Assert.assertEquals(elementValue, "input with no type");
+		Assert.assertEquals(elementName, "no_type");
 		waitForSomeTime();
 		driver.close();
 	}
@@ -107,7 +105,7 @@ public class _07_Elements {
 
 	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
-		chromeOptions.addArguments("--remote-allow-origins=*");
+		// chromeOptions.addArguments("--remote-allow-origins=*");
 		driver = new ChromeDriver(chromeOptions);
 		driver.manage().window().maximize();
 		return driver;
