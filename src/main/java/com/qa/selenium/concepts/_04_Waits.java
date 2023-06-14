@@ -143,7 +143,7 @@ public class _04_Waits {
 		driver.close();
 	}
 
-	@Test(priority = 7, enabled = true)
+	@Test(priority = 8, enabled = true)
 	private static void pageLoadWait() {
 		browserSetup();
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
@@ -155,7 +155,7 @@ public class _04_Waits {
 		driver.close();
 	}
 
-	@Test(priority = 8, enabled = true)
+	@Test(priority = 9, enabled = true)
 	private static void scriptWait() {
 		browserSetup();
 		driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(15));
