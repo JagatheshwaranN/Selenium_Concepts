@@ -2,9 +2,10 @@ package com.qa.selenium.concepts;
 
 import java.time.Clock;
 import java.time.Duration;
-import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,9 +16,8 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Sleeper;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import junit.framework.Assert;
 
 public class _04_Waits {
 
@@ -112,6 +112,29 @@ public class _04_Waits {
 		username.sendKeys("admin");
 		var result = username.getAttribute("value");
 		Assert.assertEquals(result, "admin");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 7, enabled = true)
+	private static void pageLoadWait() {
+		browserSetup();
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		WebElement orangeHRMLogo = driver.findElement(By.cssSelector("div[class='orangehrm-login-logo']"));
+		Assert.assertTrue(orangeHRMLogo.isDisplayed());
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 8, enabled = true)
+	private static void scriptWait() {
+		browserSetup();
+		driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(15));
+		((JavascriptExecutor) driver).executeScript("alert('hello world');");
+		driver.switchTo().alert().accept();
+		((JavascriptExecutor) driver).executeAsyncScript("window.setTimeout(arguments[arguments.length - 1], 500);");
 		waitForSomeTime();
 		driver.close();
 	}
