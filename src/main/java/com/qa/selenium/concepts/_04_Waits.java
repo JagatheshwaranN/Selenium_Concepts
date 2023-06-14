@@ -19,6 +19,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.google.common.base.Function;
+
 public class _04_Waits {
 
 	private static WebDriver driver;
@@ -85,7 +87,7 @@ public class _04_Waits {
 	}
 
 	@Test(priority = 5, enabled = true)
-	private static void fluentWait() {
+	private static void fluentWaitType1() {
 		browserSetup();
 		driver.get(
 				"D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
@@ -101,7 +103,7 @@ public class _04_Waits {
 	}
 
 	@Test(priority = 6, enabled = true)
-	private static void fluentwait() {
+	private static void fluentWaitType2() {
 		browserSetup();
 		driver.get(
 				"D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
@@ -109,6 +111,31 @@ public class _04_Waits {
 				.withTimeout(Duration.ofSeconds(10)).pollingEvery(Duration.ofMillis(1500))
 				.ignoring(NotFoundException.class);
 		WebElement username = wait.until(driver -> driver.findElement(By.cssSelector("input[id='myText']")));
+		username.sendKeys("admin");
+		var result = username.getAttribute("value");
+		Assert.assertEquals(result, "admin");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 7, enabled = true)
+	private static void fluentWaitType3() {
+		browserSetup();
+		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+		wait = new FluentWait<WebDriver>(driver, Clock.systemDefaultZone(), Sleeper.SYSTEM_SLEEPER)
+				.withTimeout(Duration.ofSeconds(10)).pollingEvery(Duration.ofMillis(1500))
+				.ignoring(NotFoundException.class);
+		Function<WebDriver, Boolean> function = new Function<WebDriver, Boolean>() {
+			public Boolean apply(WebDriver driver) {
+				WebElement element = driver.findElement(By.cssSelector("input[name='username']"));
+				if (element.isDisplayed()) {
+					return true;
+				}
+				return false;
+			}
+		};
+		wait.until(function);
+		WebElement username = driver.findElement(By.cssSelector("input[name='username']"));
 		username.sendKeys("admin");
 		var result = username.getAttribute("value");
 		Assert.assertEquals(result, "admin");
