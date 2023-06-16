@@ -82,7 +82,7 @@ public class _06_WebPageActions {
 		waitForSomeTime();
 		driver.close();
 	}
-
+	
 	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
 		// chromeOptions.addArguments("--remote-allow-origins=*");

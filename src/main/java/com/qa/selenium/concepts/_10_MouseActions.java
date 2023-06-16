@@ -249,19 +249,18 @@ public class _10_MouseActions {
 		waitForSomeTime();
 		driver.close();
 	}
-
+	
 	@Test(priority = 16, enabled = true)
-	private static void toolTipUsingMoveToElement() {
+	private void sendKeys() {
 		browserSetup();
-		driver.get("https://jqueryui.com/tooltip/");
-		WebElement frameElement = driver.findElement(By.xpath("//iframe[@class='demo-frame']"));
-		driver.switchTo().frame(frameElement);
-		new Actions(driver).moveToElement(driver.findElement(By.id("age"))).perform();
-		String toolTip = driver.findElement(By.xpath("//div[@class='ui-tooltip-content']")).getText();
-		Assert.assertEquals(toolTip, "We ask for your age only for statistical purposes.");
+		driver.get("https://accounts.google.com/");
+		new Actions(driver).sendKeys(driver.findElement(By.name("identifier")), "google").perform();
+		var userName = driver.findElement(By.name("identifier")).getAttribute("data-initial-value");
+		Assert.assertEquals(userName, "google");
 		waitForSomeTime();
 		driver.close();
 	}
+
 
 	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
