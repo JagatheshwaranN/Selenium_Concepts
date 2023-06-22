@@ -50,7 +50,7 @@ public class _02_DriverOptions {
 	}
 
 	@Test(priority = 3, enabled = true)
-	private static void acceptSSLSecurityIssue() {
+	private static void acceptSSLSecurityIssueOnChrome() {
 		chromeOptions = new ChromeOptions();
 		chromeOptions.setAcceptInsecureCerts(true);
 		driver = new ChromeDriver(chromeOptions);
@@ -60,8 +60,32 @@ public class _02_DriverOptions {
 		waitForSomeTime();
 		driver.close();
 	}
-
+	
 	@Test(priority = 4, enabled = true)
+	private static void acceptSSLSecurityIssueOnFirefox() {
+		firefoxOptions = new FirefoxOptions();
+		firefoxOptions.setAcceptInsecureCerts(true);
+		driver = new FirefoxDriver(firefoxOptions);
+		driver.manage().window().maximize();
+		driver.get("https://untrusted-root.badssl.com/");
+		Assert.assertEquals(driver.getTitle(), "untrusted-root.badssl.com");
+		waitForSomeTime();
+		driver.close();
+	}
+	
+	@Test(priority = 5, enabled = true)
+	private static void acceptSSLSecurityIssueOnEdge() {
+		edgeOptions = new EdgeOptions();
+		edgeOptions.setAcceptInsecureCerts(true);
+		driver = new EdgeDriver(edgeOptions);
+		driver.manage().window().maximize();
+		driver.get("https://untrusted-root.badssl.com/");
+		Assert.assertEquals(driver.getTitle(), "untrusted-root.badssl.com");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 6, enabled = true)
 	private static void pageLoadStrategy() {
 		chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
 		driver = new ChromeDriver(chromeOptions);
@@ -72,7 +96,7 @@ public class _02_DriverOptions {
 		driver.close();
 	}
 
-	@Test(priority = 5, enabled = true)
+	@Test(priority = 7, enabled = true)
 	private static void waitTimeout() {
 		chromeOptions.setPageLoadTimeout(Duration.ofSeconds(10));
 		chromeOptions.setImplicitWaitTimeout(Duration.ofSeconds(10));
@@ -88,7 +112,7 @@ public class _02_DriverOptions {
 		driver.close();
 	}
 
-	@Test(priority = 6, enabled = true)
+	@Test(priority = 8, enabled = true)
 	// Not Complete
 	private static void unHandledPrompt() {
 		// options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
@@ -100,7 +124,7 @@ public class _02_DriverOptions {
 		driver.close();
 	}
 
-	@Test(priority = 7, enabled = true)
+	@Test(priority = 9, enabled = true)
 	private static void browserDetails() {
 		browserSetup();
 		System.out.println("Browser Name >> " + chromeOptions.getBrowserName());
@@ -113,7 +137,7 @@ public class _02_DriverOptions {
 		driver.close();
 	}
 
-	@Test(priority = 8, enabled = true)
+	@Test(priority = 10, enabled = true)
 	// Not sure about this usecase.
 	private static void browserDetach() {
 //		options.setExperimentalOption("detach", true);
@@ -125,7 +149,7 @@ public class _02_DriverOptions {
 		driver.close();
 	}
 
-	@Test(priority = 9, enabled = true)
+	@Test(priority = 11, enabled = true)
 	private static void headlessChromeBrowserLaunch() {
 		chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--headless=new");
@@ -137,7 +161,7 @@ public class _02_DriverOptions {
 		driver.close();
 	}
 
-	@Test(priority = 10, enabled = true)
+	@Test(priority = 12, enabled = true)
 	private static void headlessFirefoxBrowserLaunch() {
 		firefoxOptions = new FirefoxOptions();
 		firefoxOptions.addArguments("-headless");
@@ -148,7 +172,7 @@ public class _02_DriverOptions {
 		driver.close();
 	}
 
-	@Test(priority = 11, enabled = true)
+	@Test(priority = 13, enabled = true)
 	private static void headlessIEBrowserLaunch() {
 		edgeOptions = new EdgeOptions();
 		edgeOptions.addArguments("--headless=new");
@@ -159,7 +183,7 @@ public class _02_DriverOptions {
 		driver.close();
 	}
 	
-	@Test(priority = 12, enabled = true)
+	@Test(priority = 14, enabled = true)
 	private static void htmlUnitDriverLaunch() {
 		HtmlUnitDriver driver = new HtmlUnitDriver();
 		driver.get("https://www.google.com/");
@@ -167,7 +191,7 @@ public class _02_DriverOptions {
 		driver.close();
 	}
 	
-	@Test(priority = 13, enabled = true)
+	@Test(priority = 15, enabled = true)
 	private static void htmlUnitDriverChromeVersionLaunch() {
 		HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion.CHROME);
 		driver.get("https://www.google.com/");

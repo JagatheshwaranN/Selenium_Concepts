@@ -2,9 +2,12 @@ package com.qa.selenium.concepts;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
 import junit.framework.Assert;
@@ -211,6 +214,21 @@ public class _20_JavaScriptExecutor {
 				input);
 		String result = driver.findElement(By.id("myText")).getCssValue("background");
 		Assert.assertEquals(result.contains("rgb(255, 255, 0)"), true);
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 15, enabled = true)
+	private void refreshPage() {
+		browserSetup();
+		driver.get("https://www.selenium.dev/selenium/web/single_text_input.html");
+		waitForSomeTime();
+		WebElement input = driver.findElement(By.id("textInput"));
+		new Actions(driver).sendKeys(input, "Automation!").perform();
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("document.location.reload()");
+		input = driver.findElement(By.id("textInput"));
+		Assert.assertEquals("", input.getAttribute("value"));
 		waitForSomeTime();
 		driver.close();
 	}

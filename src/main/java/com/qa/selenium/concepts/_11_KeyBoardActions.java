@@ -74,6 +74,19 @@ public class _11_KeyBoardActions {
 		driver.close();
 	}
 
+//  Not working
+//	@Test(enabled = true, priority = 6)
+//	private static void browserRefresh() {
+//		browserSetup();
+//		driver.get("https://www.selenium.dev/selenium/web/single_text_input.html");
+//		waitForSomeTime();
+//		WebElement input = driver.findElement(By.id("textInput"));
+//		new Actions(driver).sendKeys(input, "Automation!").perform();
+//		new Actions(driver).sendKeys(input, Keys.F5).perform();
+//		waitForSomeTime();
+//		driver.close();
+//	}
+
 	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--remote-allow-origins=*");
