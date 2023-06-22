@@ -2,6 +2,7 @@ package com.qa.selenium.concepts;
 
 import java.time.Duration;
 
+import org.htmlunit.BrowserVersion;
 import org.openqa.selenium.By;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
@@ -12,6 +13,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.testng.annotations.Test;
 
@@ -156,7 +158,23 @@ public class _02_DriverOptions {
 		Assert.assertEquals(driver.getTitle(), "Google");
 		driver.close();
 	}
-
+	
+	@Test(priority = 12, enabled = true)
+	private static void htmlUnitDriverLaunch() {
+		HtmlUnitDriver driver = new HtmlUnitDriver();
+		driver.get("https://www.google.com/");
+		Assert.assertEquals(driver.getTitle(), "Google");
+		driver.close();
+	}
+	
+	@Test(priority = 13, enabled = true)
+	private static void htmlUnitDriverChromeVersionLaunch() {
+		HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion.CHROME);
+		driver.get("https://www.google.com/");
+		Assert.assertEquals(driver.getTitle(), "Google");
+		driver.close();
+	}
+	
 	private static WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
 		// chromeOptions.addArguments("--remote-allow-origins=*");
