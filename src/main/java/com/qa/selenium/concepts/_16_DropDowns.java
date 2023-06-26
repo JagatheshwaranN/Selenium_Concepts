@@ -130,7 +130,7 @@ public class _16_DropDowns {
 	@Test(priority = 9, enabled = true)
 	private static void chooseOptionFromDropdownWithoutSelectClass() {
 		browserSetup();
-		driver.get("D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\Dropdown.html");
+		driver.get("file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/Dropdown.html");
 		WebElement dropDown = driver.findElement(By.xpath("//div[@class='select-selected']"));
 		dropDown.click();
 		List<WebElement> dropDownOptions = driver.findElements(By.xpath("//ul[@class='select-items']//li"));
