@@ -1,6 +1,8 @@
 package com.qa.selenium.concepts;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -27,10 +29,10 @@ public class _17_Files {
 		waitForSomeTime();
 		driver.close();
 	}
- 
+
 	// https://eternallybored.org/misc/wget/
 	@Test(priority = 2, enabled = true)
-	private void fileDownload() {
+	private void fileDownloadUsingWget() {
 		browserSetup();
 		driver.get("https://demo.guru99.com/test/yahoo.html");
 		WebElement downloadButton = driver.findElement(By.id("messenger-download"));
@@ -49,9 +51,48 @@ public class _17_Files {
 		driver.close();
 	}
 
+	@Test(priority = 3, enabled = true)
+	private void fileDownload() {
+		browserSetupForDownload();
+		driver.get("https://chromedriver.storage.googleapis.com/index.html?path=114.0.5735.90/");
+		waitForSomeTime();
+		WebElement downloadLink = driver.findElement(By.xpath("//a[text()='chromedriver_win32.zip']"));
+		downloadLink.click();
+		waitForSomeTime();
+		File folder = new File(System.getProperty("user.dir"));
+		File[] files = folder.listFiles();
+		boolean found = false;
+		File downloadedfile = null;
+		for (File file : files) {
+			if (file.isFile()) {
+				String fileName = file.getName();
+				System.out.println("File : " + file.getName());
+				if (fileName.contains("chromedriver_win32.zip")) {
+					downloadedfile = new File(fileName);
+					found = true;
+				}
+			}
+		}
+		Assert.assertTrue(found, "Downloaded document is not found");
+		downloadedfile.deleteOnExit();
+		driver.close();
+	}
+
 	private WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
-		//chromeOptions.addArguments("--remote-allow-origins=*");
+		// chromeOptions.addArguments("--remote-allow-origins=*");
+		driver = new ChromeDriver(chromeOptions);
+		driver.manage().window().maximize();
+		return driver;
+	}
+
+	private WebDriver browserSetupForDownload() {
+		HashMap<String, Object> preferences = new HashMap<String, Object>();
+		preferences.put("profile.default_content_settings.popups", 0);
+		preferences.put("download.default_directory", System.getProperty("user.dir"));
+		chromeOptions = new ChromeOptions();
+		// chromeOptions.addArguments("--remote-allow-origins=*");
+		chromeOptions.setExperimentalOption("prefs", preferences);
 		driver = new ChromeDriver(chromeOptions);
 		driver.manage().window().maximize();
 		return driver;
