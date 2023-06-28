@@ -8,7 +8,7 @@ import com.blibli.oss.qa.util.services.NetworkListener;
 
 public class _04_Handle_Network_Calls {
 
-	private static WebDriver driver;
+	private WebDriver driver;
 
 	@Test(priority = 1, enabled = true)
 	private void captureNetworkLogs() {

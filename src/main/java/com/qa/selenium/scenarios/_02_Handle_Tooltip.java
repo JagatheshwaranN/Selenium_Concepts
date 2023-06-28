@@ -10,10 +10,10 @@ import org.testng.annotations.Test;
 
 public class _02_Handle_Tooltip {
 
-	private static WebDriver driver;
+	private WebDriver driver;
 
 	@Test(priority = 1, enabled = true)
-	private static void handleToolTip() {
+	private void handleToolTip() {
 		browserSetup();
 		driver.get("https://jqueryui.com/tooltip/");
 		WebElement frameElement = driver.findElement(By.xpath("//iframe[@class='demo-frame']"));
@@ -25,13 +25,13 @@ public class _02_Handle_Tooltip {
 		driver.close();
 	}
 
-	private static WebDriver browserSetup() {
+	private WebDriver browserSetup() {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		return driver;
 	}
 
-	private static void waitForSomeTime() {
+	private void waitForSomeTime() {
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException ex) {
