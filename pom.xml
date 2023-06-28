@@ -13,8 +13,15 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
+	<repositories>
+		<repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+	</repositories>
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<!--
+		https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
@@ -30,5 +37,22 @@
 			<artifactId>testng</artifactId>
 			<version>6.10</version>
 		</dependency>
+		<dependency>
+			<groupId>net.lightbody.bmp</groupId>
+			<artifactId>browsermob-core</artifactId>
+			<version>2.1.5</version>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/com.browserup/browserup-proxy-core -->
+		<dependency>
+			<groupId>com.browserup</groupId>
+			<artifactId>browserup-proxy-core</artifactId>
+			<version>2.1.2</version>
+		</dependency>
+        <dependency>
+            <groupId>com.github.blibli-badak</groupId>
+            <artifactId>selenium-har-util</artifactId>
+            <version>1.0.2</version>
+        </dependency>
 	</dependencies>
 </project>

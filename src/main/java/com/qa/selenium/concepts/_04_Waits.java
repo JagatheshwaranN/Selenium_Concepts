@@ -121,24 +121,24 @@ public class _04_Waits {
 	@Test(priority = 7, enabled = true)
 	private static void fluentWaitType3() {
 		browserSetup();
-		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+		driver.get("https://admin-demo.nopcommerce.com/login");
 		wait = new FluentWait<WebDriver>(driver, Clock.systemDefaultZone(), Sleeper.SYSTEM_SLEEPER)
 				.withTimeout(Duration.ofSeconds(10)).pollingEvery(Duration.ofMillis(1500))
 				.ignoring(NotFoundException.class);
 		Function<WebDriver, Boolean> function = new Function<WebDriver, Boolean>() {
 			public Boolean apply(WebDriver driver) {
-				WebElement element = driver.findElement(By.cssSelector("input[name='username']"));
+				WebElement element = driver.findElement(By.cssSelector(".button-1.login-button"));
 				if (element.isDisplayed()) {
 					return true;
 				}
 				return false;
 			}
 		};
-		wait.until(function);
-		WebElement username = driver.findElement(By.cssSelector("input[name='username']"));
-		username.sendKeys("admin");
-		var result = username.getAttribute("value");
-		Assert.assertEquals(result, "admin");
+		wait.until(driver -> function);
+		WebElement loginButton = driver.findElement(By.cssSelector(".button-1.login-button"));
+		loginButton.click();
+		var result = driver.findElement(By.xpath("//div[@class='content-header']//h1")).getText();
+		Assert.assertEquals(result, "Dashboard");
 		waitForSomeTime();
 		driver.close();
 	}
