@@ -230,7 +230,50 @@ public class _20_JavaScriptExecutor {
 		waitForSomeTime();
 		driver.close();
 	}
+	
+	@Test(priority = 16, enabled = true)
+	private void refreshPageType2() {
+		browserSetup();
+		driver.get("https://www.selenium.dev/selenium/web/single_text_input.html");
+		waitForSomeTime();
+		WebElement input = driver.findElement(By.id("textInput"));
+		new Actions(driver).sendKeys(input, "Automation!").perform();
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("history.go(0)");
+		input = driver.findElement(By.id("textInput"));
+		Assert.assertEquals("", input.getAttribute("value"));
+		waitForSomeTime();
+		driver.close();
+	}
+	
+	
+	@Test(priority = 17, enabled = true)
+	private void getText() {
+		browserSetup();
+		driver.get("https://www.google.com/");
+		waitForSomeTime();
+		WebElement input = driver.findElement(By.xpath("(//a[@class='gb_v'])[1]"));
+		jsExecutor = (JavascriptExecutor) driver;
+		String value = jsExecutor.executeScript("return document.documentElement.innerText;").toString();
+		input = driver.findElement(By.xpath("(//a[@class='gb_v'])[1]"));
+		Assert.assertEquals(value.contains(input.getText()), true);
+		waitForSomeTime();
+		driver.close();
+	}
 
+	@Test(priority = 18, enabled = true)
+	private void getTitle() {
+		browserSetup();
+		driver.get("https://www.google.com/");
+		waitForSomeTime();
+		jsExecutor = (JavascriptExecutor) driver;
+		String value = jsExecutor.executeScript("return document.title").toString();
+		Assert.assertEquals(value,"Google");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	
 	private WebDriver browserSetup() {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
