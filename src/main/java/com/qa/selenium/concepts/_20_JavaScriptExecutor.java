@@ -1,7 +1,10 @@
 package com.qa.selenium.concepts;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -272,8 +275,65 @@ public class _20_JavaScriptExecutor {
 		waitForSomeTime();
 		driver.close();
 	}
-
 	
+	
+	@Test(priority = 19, enabled = true)
+	private void getElement() {
+		browserSetup();
+		driver.get("https://www.google.com/");
+		waitForSomeTime();
+		jsExecutor = (JavascriptExecutor) driver;
+		WebElement searchBar = null;
+		searchBar = (WebElement) jsExecutor.executeScript("return document.getElementById('APjFqb');", searchBar);
+		searchBar.sendKeys("javascript");
+		new Actions(driver).sendKeys(Keys.ENTER).perform();
+		Assert.assertEquals(driver.getTitle(), "javascript - Google Search");
+		waitForSomeTime();
+		driver.close();
+	}
+	
+	@Test(priority = 20, enabled = true)
+	@SuppressWarnings("unchecked")
+	private void getElements() {
+		browserSetup();
+		driver.get("https://demoqa.com/broken");
+		waitForSomeTime();
+		jsExecutor = (JavascriptExecutor) driver;
+		List<WebElement> images = null;
+		images = (List<WebElement>) jsExecutor.executeScript("return document.getElementsByTagName('img');", images);		
+		Assert.assertEquals(images.size(), 4);
+		waitForSomeTime();
+		driver.close();
+	}
+	
+	@Test(priority = 21, enabled = true)
+	private void getWindowSize() {
+		browserSetup();
+		driver.get("https://www.google.com/");
+		waitForSomeTime();
+		jsExecutor = (JavascriptExecutor) driver;
+		long height = (long) jsExecutor.executeScript("return window.innerHeight;");
+		long width = (long) jsExecutor.executeScript("return window.innerWidth;");
+		System.out.println(height);
+		System.out.println(width);
+		Assert.assertEquals(height, 612);
+		Assert.assertEquals(width, 1366);
+		waitForSomeTime();
+		driver.close();
+	}
+	
+	@Test(priority = 22, enabled = true)
+	private void navigateToDifferentPage() {
+		browserSetup();
+		driver.get("https://www.google.com/");
+		waitForSomeTime();
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("window.location = 'https://www.selenium.dev/'");
+		Assert.assertEquals(driver.getTitle(), "Selenium");
+		waitForSomeTime();
+		driver.close();
+	}
+		
 	private WebDriver browserSetup() {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
