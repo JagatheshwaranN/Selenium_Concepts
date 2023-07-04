@@ -333,6 +333,21 @@ public class _20_JavaScriptExecutor {
 		waitForSomeTime();
 		driver.close();
 	}
+	
+	@Test(priority = 23, enabled = true)
+	private void scrollIntoElement() {
+		browserSetup();
+		driver.get("https://admin-demo.nopcommerce.com/login");
+		waitForSomeTime();
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		waitForSomeTime();
+		jsExecutor.executeScript("document.getElementById('Email').scrollIntoView(true);");
+		WebElement email = driver.findElement(By.id("Email"));
+		Assert.assertEquals(email.isDisplayed(), true);
+		waitForSomeTime();
+		driver.close();
+	}
 		
 	private WebDriver browserSetup() {
 		driver = new ChromeDriver();
