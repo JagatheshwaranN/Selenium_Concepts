@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
-public class _07_POM_CacheLookUp_Annotation {
+public class _07_Handle_POM_CacheLookUp_Annotation {
 	
 	static WebDriver driver;
 
@@ -27,8 +27,8 @@ public class _07_POM_CacheLookUp_Annotation {
 		browserSetup();
 		driver.get(
 				"file:///D://Environment_Collection//Eclipse_Env//Workspace//Selenium_Concepts//src//main//resources//supportFiles//DisabledElement.html");
-		_07_POM_CacheLookUp_Annotation pageObject = PageFactory.initElements(driver,
-				_07_POM_CacheLookUp_Annotation.class);
+		_07_Handle_POM_CacheLookUp_Annotation pageObject = PageFactory.initElements(driver,
+				_07_Handle_POM_CacheLookUp_Annotation.class);
 
 		pageObject.inputWithCache.sendKeys("Selenium");
 
