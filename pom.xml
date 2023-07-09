@@ -15,9 +15,9 @@
 	</properties>
 	<repositories>
 		<repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<!--
@@ -49,10 +49,22 @@
 			<artifactId>browserup-proxy-core</artifactId>
 			<version>2.1.2</version>
 		</dependency>
-        <dependency>
-            <groupId>com.github.blibli-badak</groupId>
-            <artifactId>selenium-har-util</artifactId>
-            <version>1.0.2</version>
-        </dependency>
+		<dependency>
+			<groupId>com.github.blibli-badak</groupId>
+			<artifactId>selenium-har-util</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>5.3.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20230618</version>
+		</dependency>
 	</dependencies>
 </project>
