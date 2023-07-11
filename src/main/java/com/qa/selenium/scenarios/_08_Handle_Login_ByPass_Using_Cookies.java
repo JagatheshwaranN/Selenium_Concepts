@@ -30,7 +30,6 @@ public class _08_Handle_Login_ByPass_Using_Cookies {
 
 	@Test(priority = 1, enabled = false)
 	private void loginOnceToCaptureSessionDetails() throws IOException {
-
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		webStorage = (WebStorage) new Augmenter().augment(driver);
@@ -48,7 +47,6 @@ public class _08_Handle_Login_ByPass_Using_Cookies {
 
 	@Test(priority = 2, enabled = true)
 	private void loginByPassUsingSessionData() throws IOException {
-
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		webStorage = (WebStorage) new Augmenter().augment(driver);
@@ -62,7 +60,6 @@ public class _08_Handle_Login_ByPass_Using_Cookies {
 
 	@Test(priority = 3, enabled = true)
 	private void loginByPassUsingCookies() throws IOException {
-
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		webStorage = (WebStorage) new Augmenter().augment(driver);
@@ -90,7 +87,6 @@ public class _08_Handle_Login_ByPass_Using_Cookies {
 	 */
 	@Test(priority = 4, enabled = true)
 	private void loginByPassUsingAPI() {
-
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		webStorage = (WebStorage) new Augmenter().augment(driver);
@@ -107,7 +103,6 @@ public class _08_Handle_Login_ByPass_Using_Cookies {
 	}
 
 	private JSONArray getCookiesData() {
-
 		JSONArray cookies = new JSONArray();
 		driver.manage().getCookies().stream().forEach(cookie -> {
 			JSONObject cookieJsonObject = new JSONObject();
@@ -136,7 +131,7 @@ public class _08_Handle_Login_ByPass_Using_Cookies {
 		SessionStorage sessionStorage = webStorage.getSessionStorage();
 		JSONObject sessionStorageJsonObject = new JSONObject();
 		sessionStorageJsonObject.keySet().stream()
-				.forEach(locStore -> sessionStorageJsonObject.put(locStore, sessionStorage.getItem(locStore)));
+				.forEach(sessionStore -> sessionStorageJsonObject.put(sessionStore, sessionStorage.getItem(sessionStore)));
 		return sessionStorageJsonObject;
 	}
 
@@ -198,7 +193,6 @@ public class _08_Handle_Login_ByPass_Using_Cookies {
 		applySessionStorage(sessionData);
 		waitForSomeTime();
 		driver.navigate().refresh();
-
 	}
 
 	private void setCookies(JSONObject cookies) {
@@ -248,7 +242,6 @@ public class _08_Handle_Login_ByPass_Using_Cookies {
 	}
 
 	private Map<String, String> postCallGetCookies(JSONObject payLoad, String Uri) {
-
 		return RestAssured.given().baseUri(Uri).accept(ContentType.JSON).body(payLoad.toString()).when().post()
 				.getCookies();
 	}
@@ -260,5 +253,4 @@ public class _08_Handle_Login_ByPass_Using_Cookies {
 			ex.printStackTrace();
 		}
 	}
-
 }
