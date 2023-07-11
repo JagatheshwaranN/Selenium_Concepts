@@ -22,7 +22,6 @@ import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.http.Cookies;
 
 public class _08_Handle_Login_ByPass_Using_Cookies {
 
@@ -47,7 +46,7 @@ public class _08_Handle_Login_ByPass_Using_Cookies {
 		storeSessionFile("nopcommerce", "admin@yourstore.com");
 	}
 
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	private void loginByPassUsingSessionData() throws IOException {
 
 		driver = new ChromeDriver();
@@ -60,50 +59,50 @@ public class _08_Handle_Login_ByPass_Using_Cookies {
 		driver.findElement(By.xpath("//h1[contains(text(),'Dashboard')]")).isDisplayed();
 		driver.quit();
 	}
-	
-	@Test(priority = 3, enabled = false)
+
+	@Test(priority = 3, enabled = true)
 	private void loginByPassUsingCookies() throws IOException {
 
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		webStorage = (WebStorage) new Augmenter().augment(driver);
 		driver.get("https://admin-demo.nopcommerce.com/");
-		
+
 		JSONObject previousSession = new JSONObject();
-		previousSession.put("path","/");
-		previousSession.put("domain","admin-demo.nopcommerce.com");
-		previousSession.put("name",".Nop.Authentication");
-		previousSession.put("isHttpOnly",true);
-		previousSession.put("isSecure",true);
-		previousSession.put("expiry","Tue Jul 09 16:27:34 IST 2024");
-		previousSession.put("value","CfDJ8JTcaVVzbwZIo9QJm7k7-zxjR3n_M7wf4Q0x5gOiGir9zLMsuEtj54FCwpxGUim9CpTgD8yXYoSL8oxVQlGLuGtIeZ0MsmzF9OTpFAnx9uCgo8Ch7tBOI0TuV6r0cH0-N4tcwkoQHiPfpmzYTKQMbEUWTO9FzjqvdGDEBRPoRyKzPpW1WLWyMu6MZYl79lOjYjbXqhCIozXivDWzPPWDlM_C4OfF9QCw_9R0XCrl3-B-jCqg5roOimQAu8NrWwdhHngH1dKFGK5zeO1Rbl6XhRggTb0X2OgddyrV9Vp1J1CDeCzzh2tLLkOkgh00sLALHqw22y99Nbam3jFnBldXuA7bIyDu9M8jnsAqYFO_IekXc5MkdCkWxtVnwW6ETw9cE-JjrJzNUIZgDolOStxtjAvCyqefmRRxSnaSaCdTk227noqTX4Z8R41KOuZGhsNnc9boJzSko4pyhyvlb3MdtpaA5t5TK-s2lcaso4ORT4frtVqcrJUssFwhUy_BOfOMAEoXvuy6qbXYAb-Kpup9LOmv_wqgmCpUC2gtO0c2ZG5K48W9RZypmvnIuo3h2CdzvQ");
+		previousSession.put("path", "/");
+		previousSession.put("domain", "admin-demo.nopcommerce.com");
+		previousSession.put("name", ".Nop.Authentication");
+		previousSession.put("isHttpOnly", true);
+		previousSession.put("isSecure", true);
+		previousSession.put("expiry", "Tue Jul 09 16:27:34 IST 2024");
+		previousSession.put("value",
+				"CfDJ8JTcaVVzbwZIo9QJm7k7-zxjR3n_M7wf4Q0x5gOiGir9zLMsuEtj54FCwpxGUim9CpTgD8yXYoSL8oxVQlGLuGtIeZ0MsmzF9OTpFAnx9uCgo8Ch7tBOI0TuV6r0cH0-N4tcwkoQHiPfpmzYTKQMbEUWTO9FzjqvdGDEBRPoRyKzPpW1WLWyMu6MZYl79lOjYjbXqhCIozXivDWzPPWDlM_C4OfF9QCw_9R0XCrl3-B-jCqg5roOimQAu8NrWwdhHngH1dKFGK5zeO1Rbl6XhRggTb0X2OgddyrV9Vp1J1CDeCzzh2tLLkOkgh00sLALHqw22y99Nbam3jFnBldXuA7bIyDu9M8jnsAqYFO_IekXc5MkdCkWxtVnwW6ETw9cE-JjrJzNUIZgDolOStxtjAvCyqefmRRxSnaSaCdTk227noqTX4Z8R41KOuZGhsNnc9boJzSko4pyhyvlb3MdtpaA5t5TK-s2lcaso4ORT4frtVqcrJUssFwhUy_BOfOMAEoXvuy6qbXYAb-Kpup9LOmv_wqgmCpUC2gtO0c2ZG5K48W9RZypmvnIuo3h2CdzvQ");
 		setCookies(previousSession);
 		driver.navigate().to("https://admin-demo.nopcommerce.com/admin/");
 		waitForSomeTime();
 		driver.findElement(By.xpath("//h1[contains(text(),'Dashboard')]")).isDisplayed();
 		driver.quit();
 	}
-	
+
+	/**
+	 * This approach will work ONLY when the API Post call is having status as 200
+	 * OK. It will not work when the status is 302 and redirect exists.
+	 */
 	@Test(priority = 4, enabled = true)
 	private void loginByPassUsingAPI() {
-		
+
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		webStorage = (WebStorage) new Augmenter().augment(driver);
-		driver.get("https://admin-demo.nopcommerce.com/");
-		
+		driver.get("https://www.99.co");
+
 		JSONObject payLoad = new JSONObject();
-		payLoad.put("Email", "admin@yourstore.com");
-		payLoad.put("Password", "admin");
-		String URI = "https://admin-demo.nopcommerce.com/login";
-		// Map<String, String> cookies = postCallGetCookies(payLoad, URI);
-		//byPassLoginUsingCookies(cookies, "admin-demo.nopcommerce.com");
-		Cookies cookies = postCallGetCookies1(payLoad, URI);
-		byPassLoginUsingCookies(cookies, "admin-demo.nopcommerce.com");
-		
-		driver.navigate().to("https://admin-demo.nopcommerce.com/admin/");
-		waitForSomeTime();
-		driver.findElement(By.xpath("//h1[contains(text(),'Dashboard')]")).isDisplayed();
+		payLoad.put("email", "woref59486@msback.com");
+		payLoad.put("password", "Welcome@123");
+		String URI = "https://www.99.co/api/v1/web/accounts/login";
+		Map<String, String> cookies = postCallGetCookies(payLoad, URI);
+		byPassLoginUsingCookies(cookies, "www.99.co");
+		driver.findElement(By.xpath("//a[@data-cy='navProfile']")).isDisplayed();
 		driver.quit();
 	}
 
@@ -224,23 +223,7 @@ public class _08_Handle_Login_ByPass_Using_Cookies {
 					.expiresOn(new Date(new Date().getTime() + 3600 * 1000)).isSecure(false).isHttpOnly(false).build();
 			driver.manage().addCookie(cookieData);
 		});
-		System.out.println("Cookies : "+cookies);
-		System.out.println("Cookies added successfully");
-		driver.navigate().refresh();
-		waitForSomeTime();
-	}
-	
-	private void byPassLoginUsingCookies(Cookies cookies, String domain) {
-		System.out.println("========== Deletion of all existing cookies ===========");
-		driver.manage().deleteAllCookies();
-		
-		cookies.forEach(cookie -> {
-			String value = cookie.getValue();
-			Cookie cookieData = new Cookie.Builder(cookie.getName(), value).path("/").domain(domain)
-					.expiresOn(new Date(new Date().getTime() + 3600 * 1000)).isSecure(false).isHttpOnly(false).build();
-			driver.manage().addCookie(cookieData);
-		});
-		System.out.println("Cookies : "+cookies);
+		System.out.println("Cookies : " + cookies);
 		System.out.println("Cookies added successfully");
 		driver.navigate().refresh();
 		waitForSomeTime();
@@ -263,27 +246,11 @@ public class _08_Handle_Login_ByPass_Using_Cookies {
 		assert content != null;
 		return new JSONObject(content);
 	}
-	
-	private Map<String, String> postCallGetCookies(JSONObject payLoad, String Uri){
-		
-		return RestAssured.given()
-				.baseUri(Uri)
-				.accept(ContentType.JSON)
-				.body(payLoad.toString())
-				.when()
-				.post()
+
+	private Map<String, String> postCallGetCookies(JSONObject payLoad, String Uri) {
+
+		return RestAssured.given().baseUri(Uri).accept(ContentType.JSON).body(payLoad.toString()).when().post()
 				.getCookies();
-	}
-	
-private Cookies postCallGetCookies1(JSONObject payLoad, String Uri){
-		
-		return RestAssured.given()
-				.baseUri(Uri)
-				.accept(ContentType.JSON)
-				.body(payLoad.toString())
-				.when()
-				.post()
-				.getDetailedCookies();
 	}
 
 	private void waitForSomeTime() {
