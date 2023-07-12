@@ -3,6 +3,8 @@ package com.qa.selenium.scenarios;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class _06_Handle_BrokenImages {
 	private WebDriver driver;
 
 	@Test
-	private void findBrokenImages() {
+	private void findBrokenImages() throws URISyntaxException {
 		browserSetup();
 		driver.get("https://demoqa.com/broken");
 		List<WebElement> images = driver.findElements(By.tagName("img"));
@@ -43,11 +45,11 @@ public class _06_Handle_BrokenImages {
 		driver.close();
 	}
 
-	private void verifyImageLink(String link) {
+	private void verifyImageLink(String link) throws URISyntaxException {
 
 		try {
-			URL url = new URL(link);
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			URI url = new URI(link);
+			HttpURLConnection connection = (HttpURLConnection) url.toURL().openConnection();
 			connection.setConnectTimeout(5000);
 			connection.connect();
 			if (connection.getResponseCode() != 200) {

@@ -3,7 +3,8 @@ package com.qa.selenium.scenarios;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -17,7 +18,7 @@ public class _05_Handle_BrokenLinks {
 	private WebDriver driver;
 
 	@Test
-	private void findBrokenLinks() {
+	private void findBrokenLinks() throws URISyntaxException {
 		browserSetup();
 		driver.get("https://demoqa.com/broken");
 		List<WebElement> links = driver.findElements(By.tagName("a"));
@@ -29,11 +30,11 @@ public class _05_Handle_BrokenLinks {
 		driver.close();
 	}
 
-	private void verifyLink(String link) {
+	private void verifyLink(String link) throws URISyntaxException {
 
 		try {
-			URL url = new URL(link);
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			URI url = new URI(link);
+			HttpURLConnection connection = (HttpURLConnection) url.toURL().openConnection();
 			connection.setConnectTimeout(5000);
 			connection.connect();
 			if (connection.getResponseCode() != 200) {

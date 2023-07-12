@@ -8,6 +8,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
@@ -198,13 +199,27 @@ public class _20_JavaScriptExecutor {
 		waitForSomeTime();
 		jsExecutor = (JavascriptExecutor) driver;
 		jsExecutor.executeScript("document.body.style.zoom='" + percent + "'");
-		WebElement result = driver.findElement(By.xpath("//h1[@class='display-1']"));
+		WebElement result = driver.findElement(By.xpath("//h2[text()='Getting Started']"));
 		Assert.assertTrue(inViewport(result));
 		waitForSomeTime();
 		driver.close();
 	}
 
 	@Test(priority = 14, enabled = true)
+	private void pageZoomOnFirefox() {
+		String percent = "0.75";
+		firefoxSetup();
+		driver.get("https://www.selenium.dev/");
+		waitForSomeTime();
+		jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("document.body.style.MozTransform='scale(" + percent + ")'");
+		WebElement result = driver.findElement(By.xpath("//h2[text()='Getting Started']"));
+		Assert.assertTrue(inViewport(result));
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 15, enabled = true)
 	private void highlightElement() {
 		browserSetup();
 		driver.get(
@@ -219,7 +234,7 @@ public class _20_JavaScriptExecutor {
 		driver.close();
 	}
 
-	@Test(priority = 15, enabled = true)
+	@Test(priority = 16, enabled = true)
 	private void refreshPage() {
 		browserSetup();
 		driver.get("https://www.selenium.dev/selenium/web/single_text_input.html");
@@ -234,7 +249,7 @@ public class _20_JavaScriptExecutor {
 		driver.close();
 	}
 	
-	@Test(priority = 16, enabled = true)
+	@Test(priority = 17, enabled = true)
 	private void refreshPageType2() {
 		browserSetup();
 		driver.get("https://www.selenium.dev/selenium/web/single_text_input.html");
@@ -250,7 +265,7 @@ public class _20_JavaScriptExecutor {
 	}
 	
 	
-	@Test(priority = 17, enabled = true)
+	@Test(priority = 18, enabled = true)
 	private void getText() {
 		browserSetup();
 		driver.get("https://www.google.com/");
@@ -264,7 +279,7 @@ public class _20_JavaScriptExecutor {
 		driver.close();
 	}
 
-	@Test(priority = 18, enabled = true)
+	@Test(priority = 19, enabled = true)
 	private void getTitle() {
 		browserSetup();
 		driver.get("https://www.google.com/");
@@ -277,7 +292,7 @@ public class _20_JavaScriptExecutor {
 	}
 	
 	
-	@Test(priority = 19, enabled = true)
+	@Test(priority = 20, enabled = true)
 	private void getElement() {
 		browserSetup();
 		driver.get("https://www.google.com/");
@@ -292,7 +307,7 @@ public class _20_JavaScriptExecutor {
 		driver.close();
 	}
 	
-	@Test(priority = 20, enabled = true)
+	@Test(priority = 21, enabled = true)
 	@SuppressWarnings("unchecked")
 	private void getElements() {
 		browserSetup();
@@ -306,7 +321,7 @@ public class _20_JavaScriptExecutor {
 		driver.close();
 	}
 	
-	@Test(priority = 21, enabled = true)
+	@Test(priority = 22, enabled = true)
 	private void getWindowSize() {
 		browserSetup();
 		driver.get("https://www.google.com/");
@@ -322,7 +337,7 @@ public class _20_JavaScriptExecutor {
 		driver.close();
 	}
 	
-	@Test(priority = 22, enabled = true)
+	@Test(priority = 23, enabled = true)
 	private void navigateToDifferentPage() {
 		browserSetup();
 		driver.get("https://www.google.com/");
@@ -334,7 +349,7 @@ public class _20_JavaScriptExecutor {
 		driver.close();
 	}
 	
-	@Test(priority = 23, enabled = true)
+	@Test(priority = 24, enabled = true)
 	private void scrollIntoElement() {
 		browserSetup();
 		driver.get("https://admin-demo.nopcommerce.com/login");
@@ -351,6 +366,12 @@ public class _20_JavaScriptExecutor {
 		
 	private WebDriver browserSetup() {
 		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		return driver;
+	}
+	
+	private WebDriver firefoxSetup() {
+		driver = new FirefoxDriver();
 		driver.manage().window().maximize();
 		return driver;
 	}
