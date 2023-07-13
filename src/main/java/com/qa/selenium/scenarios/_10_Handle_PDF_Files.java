@@ -19,10 +19,8 @@ import junit.framework.Assert;
 public class _10_Handle_PDF_Files {
 
 	private WebDriver driver;
-
 	String pdfURL = "https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf";
-	String pdfURL2 = "https://www.inkit.com/blog/pdf-the-best-digital-document-management";
-
+	
 	@Test(priority = 1, enabled = false)
 	private void getPDFFilePageCount() {
 		browserSetup();
