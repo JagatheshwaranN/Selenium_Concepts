@@ -201,7 +201,7 @@ public class _10_Handle_PDF_Files {
 	}
 
 	@SuppressWarnings("unused")
-	private void PDFBoxExtractImage(PDDocument document) {
+	private void pdfBoxExtractImages(PDDocument document) {
 		PDPageTree pdPageTree = document.getPages();
 		for (PDPage pdPage : pdPageTree) {
 			PDResources pdResources = pdPage.getResources();
