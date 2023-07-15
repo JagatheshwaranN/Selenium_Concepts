@@ -10,7 +10,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -110,7 +109,7 @@ public class _10_Handle_PDF_Files {
 		driver.close();
 	}
 
-	@Test(priority = 5, enabled = true)
+	@Test(priority = 5, enabled = false)
 	private void getPDFFileMetaData() {
 		browserSetup();
 		driver.get("https://www.inkit.com/blog/pdf-the-best-digital-document-management");
@@ -148,6 +147,23 @@ public class _10_Handle_PDF_Files {
 
 	}
 
+	@Test(priority = 6, enabled = true)
+	private void verifyTwoImages() {
+		String fileURL = "file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/devops.pdf";
+		PDDocument docx = getPDFDocument(fileURL);
+		int imagesCount = getImagesFromPDFDocument(docx).size();
+		System.out.println("Total Images Count : " + imagesCount);
+		pdfBoxExtractImages(docx);
+		File file1 = new File(
+				System.getProperty("user.dir") + "//src//main//resources//supportFiles//images//hdfc_color.png");
+		File file2 = new File(
+				System.getProperty("user.dir") + "//src//main//resources//supportFiles//images//hdfc_color.png");
+		File file3 = new File(
+				System.getProperty("user.dir") + "//src//main//resources//supportFiles//images//hdfc_black.png");
+		compareImages(file1, file2);
+		compareImages(file2, file3);
+	}
+
 	private PDDocument getPDFDocument(String pdfFileURL) {
 		PDDocument document = null;
 		try {
@@ -168,8 +184,6 @@ public class _10_Handle_PDF_Files {
 	 * code section Helps in dealing with PDF File image/s validation
 	 * ====================================================================
 	 */
-
-	@SuppressWarnings("unused")
 	private List<RenderedImage> getImagesFromPDFDocument(PDDocument document) {
 		List<RenderedImage> images = new ArrayList<>();
 		for (PDPage page : document.getPages()) {
@@ -200,7 +214,6 @@ public class _10_Handle_PDF_Files {
 		return images;
 	}
 
-	@SuppressWarnings("unused")
 	private void pdfBoxExtractImages(PDDocument document) {
 		PDPageTree pdPageTree = document.getPages();
 		for (PDPage pdPage : pdPageTree) {
@@ -209,7 +222,8 @@ public class _10_Handle_PDF_Files {
 				try {
 					PDXObject pdxObject = pdResources.getXObject(cosName);
 					if (pdxObject instanceof PDImageXObject) {
-						File file = new File("./pdfImages/" + System.nanoTime() + ".png");
+						File file = new File(
+								System.getProperty("user.dir") + "//pdfImages//" + System.nanoTime() + ".png");
 						ImageIO.write(((PDImageXObject) pdxObject).getImage(), "png", file);
 					}
 				} catch (IOException ex) {
@@ -219,7 +233,7 @@ public class _10_Handle_PDF_Files {
 		}
 	}
 
-	@SuppressWarnings("unused")
+	
 	private void compareImages(File file1, File file2) {
 		BufferedImage image1 = null;
 		BufferedImage image2 = null;
@@ -234,7 +248,7 @@ public class _10_Handle_PDF_Files {
 		int image1Height = image1.getHeight();
 		int image2Height = image2.getHeight();
 		if (image1Width != image2Width && image1Height != image2Height) {
-			
+
 			System.out.println("Error: Image1 and Image2 dimensions are mismatch");
 		} else {
 			long imagesDifference = 0;
@@ -258,7 +272,7 @@ public class _10_Handle_PDF_Files {
 			double totalImagePixels = image1Width * image1Height * 3;
 			double averageImageDifferencePixels = imagesDifference / totalImagePixels;
 			double imageDifferenceInpercentage = (averageImageDifferencePixels / 255) * 100;
-			System.out.println("Image Difference In Percentage: " + imageDifferenceInpercentage);
+			System.out.println("Image Difference In Percentage: " + String.format("%.2f", imageDifferenceInpercentage));
 		}
 	}
 
