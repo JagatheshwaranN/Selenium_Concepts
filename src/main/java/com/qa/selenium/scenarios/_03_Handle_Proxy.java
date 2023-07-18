@@ -104,7 +104,7 @@ public class _03_Handle_Proxy {
 
 	private void waitForSomeTime() {
 		try {
-			Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofSeconds(5));
+			Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofSeconds(3));
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}
