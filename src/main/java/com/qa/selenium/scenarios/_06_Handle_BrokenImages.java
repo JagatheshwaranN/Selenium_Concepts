@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -12,6 +13,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Sleeper;
 import org.testng.annotations.Test;
 
 public class _06_Handle_BrokenImages {
@@ -76,7 +78,7 @@ public class _06_Handle_BrokenImages {
 
 	private void waitForSomeTime() {
 		try {
-			Thread.sleep(3000);
+			Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofSeconds(3));
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}

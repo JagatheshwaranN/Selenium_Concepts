@@ -1,5 +1,6 @@
 package com.qa.selenium.scenarios;
 
+import java.time.Duration;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.ProfilesIni;
+import org.openqa.selenium.support.ui.Sleeper;
 import org.testng.annotations.Test;
 
 import junit.framework.Assert;
@@ -102,7 +104,7 @@ public class _03_Handle_Proxy {
 
 	private void waitForSomeTime() {
 		try {
-			Thread.sleep(3000);
+			Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofSeconds(5));
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}

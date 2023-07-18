@@ -1,10 +1,13 @@
 package com.qa.selenium.scenarios;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Sleeper;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -33,7 +36,7 @@ public class _02_Handle_Tooltip {
 
 	private void waitForSomeTime() {
 		try {
-			Thread.sleep(3000);
+			Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofSeconds(3));
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}

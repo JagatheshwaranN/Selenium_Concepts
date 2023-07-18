@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Map;
@@ -18,6 +19,7 @@ import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.support.ui.Sleeper;
 import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
@@ -248,7 +250,7 @@ public class _08_Handle_Login_ByPass_Using_Cookies {
 
 	private void waitForSomeTime() {
 		try {
-			Thread.sleep(3000);
+			Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofSeconds(3));
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}

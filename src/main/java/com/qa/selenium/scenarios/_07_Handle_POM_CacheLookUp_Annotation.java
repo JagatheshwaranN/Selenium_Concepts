@@ -1,5 +1,7 @@
 package com.qa.selenium.scenarios;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,6 +9,7 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Sleeper;
 
 public class _07_Handle_POM_CacheLookUp_Annotation {
 	
@@ -60,7 +63,7 @@ public class _07_Handle_POM_CacheLookUp_Annotation {
 
 	private static void waitForSomeTime() {
 		try {
-			Thread.sleep(3000);
+			Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofSeconds(3));
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}

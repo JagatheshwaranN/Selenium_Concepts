@@ -1,5 +1,6 @@
 package com.qa.selenium.scenarios;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.support.ui.Sleeper;
 import org.testng.annotations.Test;
 
 public class _09_Handle_LoadWebSiteFast_WithoutImages {
@@ -65,7 +67,7 @@ public class _09_Handle_LoadWebSiteFast_WithoutImages {
 
 	private void waitForSomeTime() {
 		try {
-			Thread.sleep(3000);
+			Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofSeconds(3));
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}

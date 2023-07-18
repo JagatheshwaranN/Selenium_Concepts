@@ -1,7 +1,10 @@
 package com.qa.selenium.scenarios;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Sleeper;
 import org.testng.annotations.Test;
 
 import com.blibli.oss.qa.util.services.NetworkListener;
@@ -29,7 +32,7 @@ public class _04_Handle_Network_Calls {
 	
 	private void waitForSomeTime() {
 		try {
-			Thread.sleep(3000);
+			Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofSeconds(3));
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}
