@@ -28,7 +28,7 @@ public class _12_Handle_FetchDataFromXmlForScript {
 	private WebDriver driver;
 
 	@Test(dataProvider = "loginData")
-	private void readDataFromJsonAndUseInAutomationFLow(String[] data) {
+	private void readDataFromXMLAndUseInAutomationFLow(String[] data) {
 		browserSetup();
 		driver.get("https://admin-demo.nopcommerce.com/login");
 		WebElement email = driver.findElement(By.id("Email"));
