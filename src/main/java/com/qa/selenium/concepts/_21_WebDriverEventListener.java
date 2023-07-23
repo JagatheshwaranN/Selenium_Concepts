@@ -86,8 +86,6 @@ public class _21_WebDriverEventListener implements WebDriverListener {
 		driver.findElement(By.xpath("//button[text()='Log in']")).click();
 		driver.getTitle();
 		driver.close();
-
 	}
-
 }
 
