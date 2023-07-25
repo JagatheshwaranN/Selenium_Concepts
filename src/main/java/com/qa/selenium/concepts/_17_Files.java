@@ -9,6 +9,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -16,8 +19,10 @@ public class _17_Files {
 
 	private WebDriver driver;
 	private ChromeOptions chromeOptions;
+	private FirefoxOptions firefoxOptions;
+	private FirefoxProfile firefoxProfile;
 
-	@Test(priority = 1, enabled = true)
+	@Test(priority = 1, enabled = false)
 	private void fileUpload() {
 		browserSetup();
 		driver.get("https://demo.guru99.com/test/upload/");
@@ -31,7 +36,7 @@ public class _17_Files {
 	}
 
 	// https://eternallybored.org/misc/wget/
-	@Test(priority = 2, enabled = true)
+	@Test(priority = 2, enabled = false)
 	private void fileDownloadUsingWget() {
 		browserSetup();
 		driver.get("https://demo.guru99.com/test/yahoo.html");
@@ -51,7 +56,7 @@ public class _17_Files {
 		driver.close();
 	}
 
-	@Test(priority = 3, enabled = true)
+	@Test(priority = 3, enabled = false)
 	private void fileDownload() {
 		browserSetupForDownload();
 		driver.get("https://chromedriver.storage.googleapis.com/index.html?path=114.0.5735.90/");
@@ -77,6 +82,35 @@ public class _17_Files {
 		downloadedfile.deleteOnExit();
 		driver.close();
 	}
+	
+	
+	@Test(priority = 4, enabled = true)
+	private void firefoxFileDownload() {
+		firefoxBrowserSetupForDownload();
+		driver.get("https://chromedriver.storage.googleapis.com/index.html?path=114.0.5735.90/");
+		waitForSomeTime();
+		WebElement downloadLink = driver.findElement(By.xpath("//a[text()='chromedriver_win32.zip']"));
+		downloadLink.click();
+		waitForSomeTime();
+		File folder = new File(System.getProperty("user.dir"));
+		File[] files = folder.listFiles();
+		boolean found = false;
+		File downloadedfile = null;
+		for (File file : files) {
+			if (file.isFile()) {
+				String fileName = file.getName();
+				System.out.println("File : " + file.getName());
+				if (fileName.contains("chromedriver_win32.zip")) {
+					downloadedfile = new File(fileName);
+					found = true;
+				}
+			}
+		}
+		Assert.assertTrue(found, "Downloaded document is not found");
+		downloadedfile.deleteOnExit();
+		waitForSomeTime();
+		driver.close();
+	}
 
 	private WebDriver browserSetup() {
 		chromeOptions = new ChromeOptions();
@@ -94,6 +128,18 @@ public class _17_Files {
 		// chromeOptions.addArguments("--remote-allow-origins=*");
 		chromeOptions.setExperimentalOption("prefs", preferences);
 		driver = new ChromeDriver(chromeOptions);
+		driver.manage().window().maximize();
+		return driver;
+	}
+
+	private WebDriver firefoxBrowserSetupForDownload() {
+		firefoxProfile = new FirefoxProfile();
+		firefoxOptions = new FirefoxOptions();
+		firefoxProfile.setPreference("browser.download.folderList", 2);
+		firefoxProfile.setPreference("browser.download.dir",System.getProperty("user.dir"));
+		firefoxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk","text/csv,application/zip");
+		firefoxOptions.setProfile(firefoxProfile);
+		driver = new FirefoxDriver(firefoxOptions);
 		driver.manage().window().maximize();
 		return driver;
 	}
