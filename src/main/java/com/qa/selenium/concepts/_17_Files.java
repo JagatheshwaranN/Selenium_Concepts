@@ -22,7 +22,7 @@ public class _17_Files {
 	private FirefoxOptions firefoxOptions;
 	private FirefoxProfile firefoxProfile;
 
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	private void fileUpload() {
 		browserSetup();
 		driver.get("https://demo.guru99.com/test/upload/");
@@ -36,7 +36,7 @@ public class _17_Files {
 	}
 
 	// https://eternallybored.org/misc/wget/
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	private void fileDownloadUsingWget() {
 		browserSetup();
 		driver.get("https://demo.guru99.com/test/yahoo.html");
@@ -56,7 +56,7 @@ public class _17_Files {
 		driver.close();
 	}
 
-	@Test(priority = 3, enabled = false)
+	@Test(priority = 3, enabled = true)
 	private void fileDownload() {
 		browserSetupForDownload();
 		driver.get("https://chromedriver.storage.googleapis.com/index.html?path=114.0.5735.90/");
