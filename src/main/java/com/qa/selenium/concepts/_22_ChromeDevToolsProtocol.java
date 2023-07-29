@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.apache.commons.net.util.Base64;
+import org.assertj.core.util.Arrays;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +17,7 @@ import org.openqa.selenium.devtools.v114.emulation.Emulation;
 import org.openqa.selenium.devtools.v114.log.Log;
 import org.openqa.selenium.devtools.v114.network.Network;
 import org.openqa.selenium.devtools.v114.network.model.ConnectionType;
+import org.openqa.selenium.devtools.v114.network.model.Headers;
 import org.openqa.selenium.devtools.v114.performance.Performance;
 import org.openqa.selenium.devtools.v114.performance.model.Metric;
 import org.testng.Assert;
@@ -35,11 +40,21 @@ public class _22_ChromeDevToolsProtocol {
 		DevTools devTools = driver.getDevTools();
 		devTools.createSession();
 		devTools.send(Performance.enable(Optional.empty()));
+
+		// Validate all metrics
 		List<Metric> metricList = devTools.send(Performance.getMetrics());
 		driver.get("https://selenium.dev/");
 		for (Metric metric : metricList) {
 			System.out.println(metric.getName() + " = " + metric.getValue());
 		}
+
+		// Validate subset of metrics
+		List<String> metricsName = metricList.stream().map(m -> m.getName()).collect(Collectors.toUnmodifiableList());
+		devTools.send(Performance.disable());
+		List<String> metricsToCheck = List.of("Timestamp", "Documents", "Frames", "JSEventListeners", "LayoutObjects",
+				"MediaKeySessions", "Nodes", "Resources", "DomContentLoaded", "NavigationStart");
+		metricsToCheck.forEach(
+				metric -> System.out.println(metric + " : " + metricList.get(metricsName.indexOf(metric)).getValue()));
 		waitForSomeTime();
 		driver.close();
 	}
@@ -125,22 +140,44 @@ public class _22_ChromeDevToolsProtocol {
 		waitForSomeTime();
 		driver.close();
 	}
-	
+
 	@Test(priority = 8, enabled = true)
 	private void getConsoleLogs() {
 		browserSetup();
 		DevTools devTools = driver.getDevTools();
 		devTools.createSessionIfThereIsNotOne();
 		devTools.send(Log.enable());
-		devTools.addListener(Log.entryAdded(),log -> {
-			System.out.println("Log              : "+log.getText());
-			System.out.println("Level            : "+log.getLevel());
-			System.out.println("Category         : "+log.getCategory().isPresent());
-			System.out.println("NetworkRequestId : "+log.getNetworkRequestId().isPresent());
-			System.out.println("Source           : "+log.getSource());
-			System.out.println("StackTrace       : "+log.getStackTrace().isPresent());
+		devTools.addListener(Log.entryAdded(), log -> {
+			System.out.println("Log              : " + log.getText());
+			System.out.println("Level            : " + log.getLevel());
+			System.out.println("Category         : " + log.getCategory().isPresent());
+			System.out.println("NetworkRequestId : " + log.getNetworkRequestId().isPresent());
+			System.out.println("Source           : " + log.getSource());
+			System.out.println("StackTrace       : " + log.getStackTrace().isPresent());
 		});
 		driver.get("https://google.com/");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 9, enabled = true)
+	private void setBasicAuthentication() {
+		// String username = "admin";
+		// String password = "admin";
+		browserSetup();
+		DevTools devTools = driver.getDevTools();
+		devTools.createSessionIfThereIsNotOne();
+		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+		Map<String, Object> header = new HashMap<>();
+		// Base64 Conversion is not accepted in Header value.		
+		// String baseAuth = "Basic "
+		//		+ new String(new Base64().encode(String.format("%s:%s", username, password).getBytes()));
+		header.put("Authorization", "Basic YWRtaW46YWRtaW4=");
+		devTools.send(Network.setExtraHTTPHeaders(new Headers(header)));
+		driver.get("https://the-internet.herokuapp.com/basic_auth");
+		String result = driver.findElement(By.xpath("//div[@class='example']//p")).getText();
+		Assert.assertEquals(result, "Congratulations! You must have the proper credentials.");
+		devTools.send(Network.disable());
 		waitForSomeTime();
 		driver.close();
 	}
