@@ -10,17 +10,24 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.v114.emulation.Emulation;
+import org.openqa.selenium.devtools.v114.log.Log;
+import org.openqa.selenium.devtools.v114.network.Network;
+import org.openqa.selenium.devtools.v114.network.model.ConnectionType;
 import org.openqa.selenium.devtools.v114.performance.Performance;
 import org.openqa.selenium.devtools.v114.performance.model.Metric;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * @resource https://applitools.com/blog/selenium-chrome-devtools-protocol-cdp-how-does-it-work/#:~:text=We%20can%20simulate%20things%20like,done%20from%20our%20automated%20tests!
+ * 
+ * @author Jagatheshwaran N
+ */
 public class _22_ChromeDevToolsProtocol {
 
 	private ChromeDriver driver;
 	private static Map<String, Object> location;
 	private static Map<String, Object> coordinates;
-
 
 	@Test(priority = 1, enabled = true)
 	private void getPerformanceMetricsUsingCDP() {
@@ -49,19 +56,20 @@ public class _22_ChromeDevToolsProtocol {
 		waitForSomeTime();
 		driver.close();
 	}
-	
+
 	@Test(priority = 3, enabled = true)
 	private void emulateGeoLocationUsingCDP() {
 		browserSetup();
 		DevTools devTools = driver.getDevTools();
 		devTools.createSession();
-		devTools.send(Emulation.setGeolocationOverride(Optional.of(36.778259), Optional.of(-119.417931), Optional.of(1)));
+		devTools.send(
+				Emulation.setGeolocationOverride(Optional.of(36.778259), Optional.of(-119.417931), Optional.of(1)));
 		driver.get("https://my-location.org/");
 		waitForSomeTime();
 		waitForSomeTime();
-		driver.close();	
+		driver.close();
 	}
-	
+
 	@Test(priority = 4, enabled = true)
 	private void emulateGeoLocationUsingCDPCommandApproach1() {
 		browserSetup();
@@ -74,7 +82,7 @@ public class _22_ChromeDevToolsProtocol {
 		waitForSomeTime();
 		driver.close();
 	}
-	
+
 	@Test(priority = 5, enabled = true)
 	private void emulateGeoLocationUsingCDPCommandApproach2() {
 		browserSetup();
@@ -85,6 +93,54 @@ public class _22_ChromeDevToolsProtocol {
 		Assert.assertTrue(addresses.size() > 0, "No addresses found");
 		Assert.assertTrue(addresses.stream().allMatch(a -> a.getText().contains(", TX ")),
 				"Some addresses listed are not in Texas");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 6, enabled = true)
+	private void emulateNetworkConnection() {
+		browserSetup();
+		DevTools devTools = driver.getDevTools();
+		devTools.createSessionIfThereIsNotOne();
+		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+		devTools.send(Network.emulateNetworkConditions(false, 200, 2048, 4096, Optional.of(ConnectionType.CELLULAR3G)));
+		driver.get("https://google.com/");
+		waitForSomeTime();
+		driver.close();
+	}
+
+	@Test(priority = 7, enabled = true)
+	private void getHttpRequests() {
+		browserSetup();
+		DevTools devTools = driver.getDevTools();
+		devTools.createSessionIfThereIsNotOne();
+		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+		devTools.addListener(Network.requestWillBeSent(), request -> {
+			System.out.println("Request URI 	 : " + request.getRequest().getUrl());
+			System.out.println("Request Method 	 : " + request.getRequest().getMethod());
+			System.out.println("Request Redirect : " + request.getRedirectResponse().isPresent());
+		});
+		driver.get("https://google.com/");
+		devTools.send(Network.disable());
+		waitForSomeTime();
+		driver.close();
+	}
+	
+	@Test(priority = 8, enabled = true)
+	private void getConsoleLogs() {
+		browserSetup();
+		DevTools devTools = driver.getDevTools();
+		devTools.createSessionIfThereIsNotOne();
+		devTools.send(Log.enable());
+		devTools.addListener(Log.entryAdded(),log -> {
+			System.out.println("Log              : "+log.getText());
+			System.out.println("Level            : "+log.getLevel());
+			System.out.println("Category         : "+log.getCategory().isPresent());
+			System.out.println("NetworkRequestId : "+log.getNetworkRequestId().isPresent());
+			System.out.println("Source           : "+log.getSource());
+			System.out.println("StackTrace       : "+log.getStackTrace().isPresent());
+		});
+		driver.get("https://google.com/");
 		waitForSomeTime();
 		driver.close();
 	}
