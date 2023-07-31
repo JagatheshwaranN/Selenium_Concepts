@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.net.util.Base64;
 import org.assertj.core.util.Arrays;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,6 +22,7 @@ import org.openqa.selenium.devtools.v114.network.model.ConnectionType;
 import org.openqa.selenium.devtools.v114.network.model.Headers;
 import org.openqa.selenium.devtools.v114.performance.Performance;
 import org.openqa.selenium.devtools.v114.performance.model.Metric;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -31,13 +34,14 @@ import org.testng.annotations.Test;
 public class _22_ChromeDevToolsProtocol {
 
 	private ChromeDriver driver;
+	private DevTools devTools;
 	private static Map<String, Object> location;
 	private static Map<String, Object> coordinates;
 
 	@Test(priority = 1, enabled = true)
 	private void getPerformanceMetricsUsingCDP() {
 		browserSetup();
-		DevTools devTools = driver.getDevTools();
+		devTools = driver.getDevTools();
 		devTools.createSession();
 		devTools.send(Performance.enable(Optional.empty()));
 
@@ -62,7 +66,7 @@ public class _22_ChromeDevToolsProtocol {
 	@Test(priority = 2, enabled = true)
 	private void overrideDeviceModUsingCDP() {
 		browserSetup();
-		DevTools devTools = driver.getDevTools();
+		devTools = driver.getDevTools();
 		devTools.createSession();
 		devTools.send(Emulation.setDeviceMetricsOverride(400, 900, 70, true, Optional.empty(), Optional.empty(),
 				Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(),
@@ -75,7 +79,7 @@ public class _22_ChromeDevToolsProtocol {
 	@Test(priority = 3, enabled = true)
 	private void emulateGeoLocationUsingCDP() {
 		browserSetup();
-		DevTools devTools = driver.getDevTools();
+		devTools = driver.getDevTools();
 		devTools.createSession();
 		devTools.send(
 				Emulation.setGeolocationOverride(Optional.of(36.778259), Optional.of(-119.417931), Optional.of(1)));
@@ -115,7 +119,7 @@ public class _22_ChromeDevToolsProtocol {
 	@Test(priority = 6, enabled = true)
 	private void emulateNetworkConnection() {
 		browserSetup();
-		DevTools devTools = driver.getDevTools();
+		devTools = driver.getDevTools();
 		devTools.createSessionIfThereIsNotOne();
 		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
 		devTools.send(Network.emulateNetworkConditions(false, 200, 2048, 4096, Optional.of(ConnectionType.CELLULAR3G)));
@@ -127,7 +131,7 @@ public class _22_ChromeDevToolsProtocol {
 	@Test(priority = 7, enabled = true)
 	private void getHttpRequests() {
 		browserSetup();
-		DevTools devTools = driver.getDevTools();
+		devTools = driver.getDevTools();
 		devTools.createSessionIfThereIsNotOne();
 		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
 		devTools.addListener(Network.requestWillBeSent(), request -> {
@@ -144,7 +148,7 @@ public class _22_ChromeDevToolsProtocol {
 	@Test(priority = 8, enabled = true)
 	private void getConsoleLogs() {
 		browserSetup();
-		DevTools devTools = driver.getDevTools();
+		devTools = driver.getDevTools();
 		devTools.createSessionIfThereIsNotOne();
 		devTools.send(Log.enable());
 		devTools.addListener(Log.entryAdded(), log -> {
@@ -165,13 +169,14 @@ public class _22_ChromeDevToolsProtocol {
 		// String username = "admin";
 		// String password = "admin";
 		browserSetup();
-		DevTools devTools = driver.getDevTools();
+		devTools = driver.getDevTools();
 		devTools.createSessionIfThereIsNotOne();
 		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
 		Map<String, Object> header = new HashMap<>();
-		// Base64 Conversion is not accepted in Header value.		
+		// Base64 Conversion is not accepted in Header value.
 		// String baseAuth = "Basic "
-		//		+ new String(new Base64().encode(String.format("%s:%s", username, password).getBytes()));
+		// + new String(new Base64().encode(String.format("%s:%s", username,
+		// password).getBytes()));
 		header.put("Authorization", "Basic YWRtaW46YWRtaW4=");
 		devTools.send(Network.setExtraHTTPHeaders(new Headers(header)));
 		driver.get("https://the-internet.herokuapp.com/basic_auth");
@@ -180,6 +185,58 @@ public class _22_ChromeDevToolsProtocol {
 		devTools.send(Network.disable());
 		waitForSomeTime();
 		driver.close();
+	}
+
+	@Test(priority = 10, enabled = true)
+	private void javaScriptNotification() {
+		browserSetup();
+		devTools = driver.getDevTools();
+		devTools.createSessionIfThereIsNotOne();
+		devTools.getDomains().javascript().pin("notification",
+				"""
+						window.onload = () => {
+							if(!window.jQuery) {
+							var jquery = document.createElement('script');
+							jquery.type = 'text/javascript';
+							jquery.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+							document.getElementByTagName('head')[0].appendChild(jquery);
+							} else {
+								$ = window.jQuery;
+							}
+							$.getScript('https://cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.8/jquery.jgrowl.min.js')
+							$('head').append('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-jgrowl/1.4.8/jquery.jgrowl.min.css" type="text/css" />');
+						}
+
+						function highlight(element) {
+							let defaultBG = element.style.backgroundColor;
+							let defaultOutline = element.style.outline;
+							element.style.backgroundColor = '#FAF8B1';
+							element.style.outline = '#09FA39 solid 3px';
+
+							setTimeout(function() {
+								element.style.backgroundColor = defaultBG;
+								element.style.outline = defaultOutline;
+								}, 1000);
+						}
+
+						""");
+		driver.get("https://todomvc.com/examples/backbone/");
+		enterTask("Clean the House", driver);
+		enterTask("Clean the Car", driver);
+		waitForSomeTime();
+		driver.close();
+	}
+
+	private void enterTask(String task, WebDriver driver) {
+		WebElement taskUpdateBar = driver.findElement(By.xpath("//input[@class='new-todo']"));
+		((JavascriptExecutor) driver).executeScript("highlight(arguments[0])", taskUpdateBar);
+		taskUpdateBar.sendKeys(task);
+		new Actions(driver).click(taskUpdateBar).sendKeys(Keys.ENTER).perform();
+		generateGrowlMessage(task, driver);
+	}
+
+	private void generateGrowlMessage(String message, WebDriver driver) {
+		((JavascriptExecutor) driver).executeScript(String.format("$.jGrowl('%s', { header: 'Important!'});", message));
 	}
 
 	private WebDriver browserSetup() {
