@@ -83,6 +83,8 @@ public class _22_ChromeDevToolsProtocol {
 		devTools.createSession();
 		devTools.send(
 				Emulation.setGeolocationOverride(Optional.of(36.778259), Optional.of(-119.417931), Optional.of(1)));
+		devTools.send(Emulation.setTimezoneOverride("US/Central"));
+		devTools.send(Emulation.setLocaleOverride(Optional.of("en_us")));
 		driver.get("https://my-location.org/");
 		waitForSomeTime();
 		waitForSomeTime();
