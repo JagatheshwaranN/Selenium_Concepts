@@ -3,9 +3,9 @@ package com.qa.selenium.concepts;
 import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -26,6 +26,8 @@ import org.openqa.selenium.remote.http.Route;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static org.openqa.selenium.devtools.events.CdpEventTypes.domMutation;
+
 import com.google.common.net.MediaType;
 
 public class _23_Bidirectional_API {
@@ -45,23 +47,31 @@ public class _23_Bidirectional_API {
 		driver.close();
 	}
 
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	private void getDomMutation() throws InterruptedException {
 		chromeBrowserSetup();
-		AtomicReference<DomMutationEvent> seen = new AtomicReference<>();
-		CountDownLatch latch = new CountDownLatch(1);
-		((HasLogEvents) chromeDriver).onLogEvent(mutation -> {
-			seen.set((DomMutationEvent) mutation);
-			latch.countDown();
-		});
-		chromeDriver.get("https://www.google.com");
-		WebElement span = chromeDriver.findElement(By.xpath("//span[]"));
-		((JavascriptExecutor) chromeDriver).executeScript("arguments[0].setAttribute('cheese', 'gouda');", span);
-		// Assert.assertEquals(latch.await(10, TimeUnit.SECONDS),true );
-		Assert.assertEquals(seen.get().getAttributeName(), "cheese");
-		Assert.assertEquals(seen.get().getCurrentValue(), "gouda");
+		List<DomMutationEvent> mutationList = Collections.synchronizedList(new ArrayList<>());
+		((HasLogEvents) chromeDriver).onLogEvent(domMutation(mutation -> {
+			mutationList.add(mutation);
+		}));
+		chromeDriver.get("https://www.gps-coordinates.net/");
+		WebElement latitude = chromeDriver.findElement(By.id("latitude"));
+		WebElement longitude = chromeDriver.findElement(By.id("longitude"));
+		latitude.clear();
+		longitude.clear();
+		latitude.sendKeys("52.520008");
+		longitude.sendKeys("13.404954");
+		chromeDriver.findElement(By.xpath("(//button[text()='Get Address'])[1]")).click();
+		for (var mutation : mutationList) {
+			var attributeName = Optional.ofNullable(mutation.getAttributeName()).orElse("NAN");
+			var oldValue = Optional.ofNullable(mutation.getOldValue()).orElse("NAN");
+			var currentValue = Optional.ofNullable(mutation.getCurrentValue()).orElse("NAN");
+			var element = Optional.ofNullable(mutation.getElement().toString()).orElse("NAN");
+			System.out.println(String.format("\nAttribute Name: %s\n Old Value: %s\n New Value: %s\n Element: %s\n",
+					attributeName, oldValue, currentValue, element));
+		}
 		waitForSomeTime();
-		driver.close();
+		chromeDriver.close();
 	}
 
 	@Test(priority = 3, enabled = false)
@@ -87,7 +97,7 @@ public class _23_Bidirectional_API {
 		chromeDriver.close();
 	}
 
-	@Test(priority = 4, enabled = true)
+	@Test(priority = 4, enabled = false)
 	private void handleNetworkIntercept() {
 		chromeBrowserSetup();
 		try (NetworkInterceptor interceptor = new NetworkInterceptor(chromeDriver,
