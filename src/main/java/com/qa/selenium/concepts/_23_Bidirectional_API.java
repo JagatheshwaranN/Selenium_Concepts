@@ -26,6 +26,7 @@ import org.openqa.selenium.devtools.v114.network.Network;
 import org.openqa.selenium.devtools.v114.network.model.BlockedReason;
 import org.openqa.selenium.devtools.v114.network.model.ResourceType;
 import org.openqa.selenium.devtools.v114.security.Security;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.logging.HasLogEvents;
 import org.openqa.selenium.remote.http.HttpResponse;
 import org.openqa.selenium.remote.http.Route;
@@ -149,7 +150,7 @@ public class _23_Bidirectional_API {
 		chromeDriver.close();
 	}
 	
-	@Test(priority = 6, enabled = true)
+	@Test(priority = 6, enabled = false)
 	private void mockAPIRequestTest() {
 		chromeBrowserSetup();
 		DevTools devTools = chromeDriver.getDevTools();
@@ -167,7 +168,97 @@ public class _23_Bidirectional_API {
 		waitForSomeTime();
 		chromeDriver.close();
 	}
+	
+	@Test(priority = 7, enabled = false)
+	private void requestHandledFromCache() {
+		chromeBrowserSetup();
+		DevTools devTools = chromeDriver.getDevTools();
+		devTools.createSessionIfThereIsNotOne();
+		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+		devTools.send(Network.setCacheDisabled(true));
+		devTools.send(Network.clearBrowserCache());
+		devTools.send(Network.clearBrowserCookies());
+		devTools.addListener(Network.requestServedFromCache(), cacheRequest -> {
+			System.out.println(cacheRequest);
+		});
+		chromeDriver.get("https://www.selenium.dev/");
+		waitForSomeTime();
+		chromeDriver.get("https://www.selenium.dev/");
+		waitForSomeTime();
+		chromeDriver.close();
+	}
+	
+	// Websocket - It is a next generation bidirectional communication technology for web 
+	// applications which operates over a single socket. It's exposed a javascript interface
+	// in a HTML5 component browsers. It's makes it possible to open a 2way interactive
+	// communication session between the user browser (client) and server.
+	// Using this API we can send the messages to the server and receive event driven responses
+	// without calling the server for a while.
+	// Many modern chat applications for example Whatsapp, viber and multiplier games uses 
+	// underneath Websockets to operate. So, we are able to work with them.
+	@Test(priority = 8, enabled = false)
+	private void websocketOperations() {
+		chromeBrowserSetup();
+		DevTools devTools = chromeDriver.getDevTools();
+		devTools.createSessionIfThereIsNotOne();
+		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+		devTools.addListener(Network.webSocketCreated(), socket -> {
+			System.out.println("WebSocket Created");
+			System.out.println(socket.getUrl());
+			System.out.println(socket.getRequestId());
+			System.out.println(socket.getInitiator().get().getLineNumber());
+		});
+		
+		devTools.addListener(Network.webSocketFrameReceived(), socket -> {
+			System.out.println("WebSocket Received");
+			System.out.println(socket.getResponse().getPayloadData());
+			System.out.println(socket.getResponse().getOpcode());
+		});
 
+		devTools.addListener(Network.webSocketFrameError(), socket -> {
+			System.out.println(socket.getErrorMessage());
+		});
+		
+		devTools.addListener(Network.webSocketClosed(), socket -> {
+			System.out.println("WebSocket Closed");
+			System.out.println(socket.getTimestamp());
+		});
+		
+		chromeDriver.get("https://www.piesocket.com/websocket-tester");
+		waitForSomeTime();
+		WebElement connect = chromeDriver.findElement(By.xpath("//button[@type='submit']"));
+		new Actions(chromeDriver).scrollToElement(connect).perform();
+		connect.click();
+		waitForSomeTime();
+		WebElement disconnect = chromeDriver.findElement(By.xpath("//button[text()='Disconnect']"));
+		disconnect.click();
+		waitForSomeTime();
+		chromeDriver.close();
+	}
+
+	// Event source messages - On live Websockets, this even source messages sometimes they are called as
+	// server sent events or one-way messaging are indirectional. The data messages are delivered in 
+	// one direction from the server to the client (basically to the browser) and we can use them when
+	// there is no need to send data from the client to the server in message form. 
+	// For example, event source messages are good for handling social media status updates, news feeds,
+	// delivering data into client-side storage mechanism.
+	@Test(priority = 8, enabled = true)
+	private void eventSourceMessages() {
+	chromeBrowserSetup();
+	DevTools devTools = chromeDriver.getDevTools();
+	devTools.createSessionIfThereIsNotOne();
+	devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+	devTools.addListener(Network.eventSourceMessageReceived(), message -> {
+		System.out.println(message.getEventName());
+		System.out.println(Optional.ofNullable(message.getEventId()));
+		System.out.println(message.getRequestId());
+		System.out.println(message.getData());
+	});
+	chromeDriver.get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_sse");
+	waitForSomeTime();
+	chromeDriver.close();
+	}
+	
 	private WebDriver browserSetup() {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
