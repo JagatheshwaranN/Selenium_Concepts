@@ -25,6 +25,7 @@ import org.openqa.selenium.devtools.v113.fetch.Fetch;
 import org.openqa.selenium.devtools.v114.network.Network;
 import org.openqa.selenium.devtools.v114.network.model.BlockedReason;
 import org.openqa.selenium.devtools.v114.network.model.ResourceType;
+import org.openqa.selenium.devtools.v114.network.model.Response;
 import org.openqa.selenium.devtools.v114.security.Security;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.logging.HasLogEvents;
@@ -242,7 +243,7 @@ public class _23_Bidirectional_API {
 	// there is no need to send data from the client to the server in message form. 
 	// For example, event source messages are good for handling social media status updates, news feeds,
 	// delivering data into client-side storage mechanism.
-	@Test(priority = 8, enabled = true)
+	@Test(priority = 8, enabled = false)
 	private void eventSourceMessages() {
 	chromeBrowserSetup();
 	DevTools devTools = chromeDriver.getDevTools();
@@ -259,6 +260,46 @@ public class _23_Bidirectional_API {
 	chromeDriver.close();
 	}
 	
+	@Test(priority = 9, enabled = true)
+	private void captureHttpTraffic() {
+		chromeBrowserSetup();
+		DevTools devTools = chromeDriver.getDevTools();
+		devTools.createSessionIfThereIsNotOne();
+		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+		List<Response> captureResponses = Collections.synchronizedList(new ArrayList<>());
+		devTools.addListener(Network.responseReceived(), response -> {
+			captureResponses.add(response.getResponse());
+		});
+		chromeDriver.get("https://www.selenium.dev/");
+		assertNoErrorResponse(captureResponses);
+		assertRequestMade(captureResponses, "https://www.selenium.dev/");
+		assertRequestNotMade(captureResponses, "https://www.youtube.com/playlist?list=PLRdSclUtJDYXDEsWI0vwBmJxW17NgsaAk");
+		assertNotLargeImagesRequested(captureResponses, 500);
+		waitForSomeTime();
+		chromeDriver.close();
+	}
+	
+	private void assertNoErrorResponse(List<Response> captureResponses) {
+		Boolean doWehaveErrorCodes = captureResponses.stream().anyMatch(response -> response.getStatus() > 400 && response.getStatus() < 599);
+		Assert.assertFalse(doWehaveErrorCodes,"Error response detected on the page");
+	}
+	
+	private void assertRequestMade(List<Response> captureResponses, String url) {
+		Boolean anyRequestsMade = captureResponses.stream().anyMatch(response -> response.getUrl(). contains(url));
+		Assert.assertTrue(anyRequestsMade, String.format("Request %s not made.", url));
+	}
+	
+	private void assertRequestNotMade(List<Response> captureResponses, String url) {
+		Boolean anyRequestsMade = captureResponses.stream().anyMatch(response -> response.getUrl(). contains(url));
+		Assert.assertFalse(anyRequestsMade, String.format("Request %s made.", url));
+	}
+	
+	private void assertNotLargeImagesRequested(List<Response> captureResponses, int contentLength) {
+		Boolean doWehaveLargeImages = captureResponses.stream().anyMatch(response -> response.getMimeType() == ResourceType.IMAGE.toString() &&
+				response.getHeaders() != null && Integer.parseInt(response.getHeaders().get("Content-Length").toString()) < contentLength);
+		Assert.assertFalse(doWehaveLargeImages, String.format("Images larger than %s size detected.", contentLength));
+	}
+
 	private WebDriver browserSetup() {
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
