@@ -1,8 +1,11 @@
 package com.qa.selenium.scenarios;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
+import org.assertj.core.util.Arrays;
 import org.testng.annotations.Test;
 
 import jakarta.mail.Authenticator;
@@ -25,15 +28,15 @@ import jakarta.mail.search.SubjectTerm;
 
 public class _19_Handle_Gmail_OTP {
 
-	@Test(priority = 1, enabled = true)
+	@Test(priority = 1, enabled = false)
 	private void mockSendOTPEmail() throws Exception {
-		sendEmail("test004@gmail.com", "abc@xyz", "test001@gmail.com", "Your Secure OTP",
+		sendEmail("test001@gmail.com", "abc@xyz", "test004@gmail.com", "Secure Code",
 				"Your secure OTP for login is 879245");
 	}
 
 	@Test(priority = 2, enabled = true)
 	private void mockReadOTPEmail() {
-		readEmail("test001@gmail.com", "abc@xyz", "test004@gmail.com", "Your Secure OTP", "Inbox");
+		readEmail("test004@gmail.com", "abc@xyz", "test001@gmail.com", "Secure Code", "Inbox");
 	}
 
 	private static void sendEmail(String username, String password, String to, String subject, String mailContent) {
@@ -115,22 +118,33 @@ public class _19_Handle_Gmail_OTP {
 			// Search for messages matching the search term
 			Message[] messages = folder.search(searchTerm);
 
-			// Read and print content of matching unread messages
-			for (Message message : messages) {
-				System.out.println("Subject: " + message.getSubject());
-				System.out.println("From: " + message.getFrom()[0]);
-				System.out.println("Date: " + message.getSentDate());
+			List<Object> messagesList = Arrays.asList(messages);
+
+			if (messagesList.size() < 1) {
+				throw new Exception("No OTP received");
+				
+			} else {
+				// Read and print content of matching unread messages
+				// for (Message message : messages) {
+				System.out.println("Subject: " + ((Message) messagesList.get(messagesList.size() - 1)).getSubject());
+				System.out.println("From: " + ((Message) messagesList.get(messagesList.size() - 1)).getFrom()[0]);
+				System.out.println("Date: " + ((Message) messagesList.get(messagesList.size() - 1)).getSentDate());
 
 				// Read message content
 				try {
-					String content = getTextFromMessage(message);
-					System.out.println("Content:\n" + content);
+					List<String> content = getTextFromMessage((Message) messagesList.get(messagesList.size() - 1));
+					if (content.size() != 0) {
+						System.out.println("Content:\n" + content);
+						String otpRegex = "[^\\d]+";
+						String otpText[] = content.get(0).split(otpRegex);
+						System.out.println("OTP : " + otpText[2]);
+					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
-				System.out.println("-------------------------");
 			}
+			System.out.println("-------------------------");
+			// }
 
 			// Close resources
 			folder.close(false);
@@ -140,10 +154,12 @@ public class _19_Handle_Gmail_OTP {
 		}
 	}
 
-	private static String getTextFromMessage(Message message) throws MessagingException, IOException {
-		String result = "";
+	private static ArrayList<String> getTextFromMessage(Message message) throws MessagingException, IOException {
+		// String result = "";
+		ArrayList<String> result = new ArrayList<>();
 		if (message.isMimeType("text/plain")) {
-			result = message.getContent().toString();
+			// result = message.getContent().toString();
+			result.add(message.getContent().toString());
 		} else if (message.isMimeType("multipart/*")) {
 			MimeMultipart mimeMultipart = (MimeMultipart) message.getContent();
 			result = getTextFromMimeMultipart(mimeMultipart);
@@ -151,20 +167,27 @@ public class _19_Handle_Gmail_OTP {
 		return result;
 	}
 
-	private static String getTextFromMimeMultipart(MimeMultipart mimeMultipart) throws MessagingException, IOException {
+	private static ArrayList<String> getTextFromMimeMultipart(MimeMultipart mimeMultipart)
+			throws MessagingException, IOException {
+		ArrayList<String> result = new ArrayList<>();
 		int count = mimeMultipart.getCount();
-		StringBuilder result = new StringBuilder();
+		// StringBuilder result = new StringBuilder();
 		for (int i = 0; i < count; i++) {
 			BodyPart bodyPart = mimeMultipart.getBodyPart(i);
 			if (bodyPart.isMimeType("text/plain")) {
-				result.append(bodyPart.getContent());
+				// result.append(bodyPart.getContent());
+				result.add(bodyPart.getContent().toString());
+
 			} else if (bodyPart.isMimeType("text/html")) {
 				String html = (String) bodyPart.getContent();
-				result.append(html);
+				// result.append(html);
+				result.add(html);
 			} else if (bodyPart.getContent() instanceof MimeMultipart) {
-				result.append(getTextFromMimeMultipart((MimeMultipart) bodyPart.getContent()));
+				// result.append(getTextFromMimeMultipart((MimeMultipart)
+				// bodyPart.getContent()));
+				result.addAll(getTextFromMimeMultipart((MimeMultipart) bodyPart.getContent()));
 			}
 		}
-		return result.toString();
+		return result;
 	}
 }
