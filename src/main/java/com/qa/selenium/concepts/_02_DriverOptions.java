@@ -2,7 +2,8 @@ package com.qa.selenium.concepts;
 
 import java.time.Duration;
 
-import org.htmlunit.BrowserVersion;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.openqa.selenium.By;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.UnexpectedAlertBehaviour;

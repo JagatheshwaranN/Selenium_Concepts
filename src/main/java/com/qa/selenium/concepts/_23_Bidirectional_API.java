@@ -21,7 +21,7 @@ import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.HasDevTools;
 import org.openqa.selenium.devtools.NetworkInterceptor;
 import org.openqa.selenium.devtools.events.DomMutationEvent;
-import org.openqa.selenium.devtools.v113.fetch.Fetch;
+import org.openqa.selenium.devtools.v114.fetch.Fetch;
 import org.openqa.selenium.devtools.v114.network.Network;
 import org.openqa.selenium.devtools.v114.network.model.BlockedReason;
 import org.openqa.selenium.devtools.v114.network.model.ResourceType;

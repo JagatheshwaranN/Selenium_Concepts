@@ -8,11 +8,14 @@ import java.net.URISyntaxException;
 import java.time.Duration;
 import java.util.List;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Sleeper;
 import org.testng.annotations.Test;
 
@@ -20,7 +23,7 @@ public class _06_Handle_BrokenImages {
 
 	private WebDriver driver;
 
-	@Test
+	@Test(priority = 1, enabled = true)
 	private void findBrokenImages() throws URISyntaxException {
 		browserSetup();
 		driver.get("https://demoqa.com/broken");
@@ -67,7 +70,20 @@ public class _06_Handle_BrokenImages {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+	}
 
+	@Test(priority = 2, enabled = true)
+	private void findBrokenImageType2() throws URISyntaxException {
+		browserSetup();
+		driver.get("https://demoqa.com/broken");
+		WebElement image = driver.findElement(By.xpath("//img[@src='/images/Toolsqa_1.jpg']"));
+		if(image.getAttribute("naturalWidth").equals("0")) {
+			System.out.println("Image display Broken");
+		} else {
+			System.out.println("Image display Ok");
+		}
+		waitForSomeTime();
+		driver.close();
 	}
 
 	private WebDriver browserSetup() {

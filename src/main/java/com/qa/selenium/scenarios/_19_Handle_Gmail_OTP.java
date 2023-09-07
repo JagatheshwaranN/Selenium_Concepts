@@ -2,10 +2,10 @@ package com.qa.selenium.scenarios;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
-import org.assertj.core.util.Arrays;
 import org.testng.annotations.Test;
 
 import jakarta.mail.Authenticator;
