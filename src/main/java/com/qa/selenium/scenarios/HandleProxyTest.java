@@ -40,6 +40,13 @@ public class HandleProxyTest {
         driver3.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
     }
 
+    @Test(priority = 1)
+    public void testProxyAuthentication() {
+        String result = driver1.findElement(By.xpath("//h3[text()='Basic Auth']")).getText();
+        Assert.assertEquals(result, "Basic Auth");
+        waitForSomeTime();
+    }
+
     @AfterMethod
     public void tearDown() {
         // Quit the WebDriver after each test.
@@ -52,13 +59,6 @@ public class HandleProxyTest {
         if (driver3 != null) {
             driver3.quit();
         }
-    }
-
-    @Test(priority = 1)
-    public void testProxyAuthentication() {
-        String result = driver1.findElement(By.xpath("//h3[text()='Basic Auth']")).getText();
-        Assert.assertEquals(result, "Basic Auth");
-        waitForSomeTime();
     }
 
     public void testProxyUsingChromeDevTool() {
