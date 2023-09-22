@@ -42,10 +42,13 @@ public class HandleProxyTest {
 
     @Test(priority = 1)
     public void testProxyAuthentication() {
+        // Find the web element with the specified XPath and get its text.
         String result = driver1.findElement(By.xpath("//h3[text()='Basic Auth']")).getText();
+
+        // Assert that the retrieved text matches the expected value ("Basic Auth").
         Assert.assertEquals(result, "Basic Auth");
-        waitForSomeTime();
     }
+
 
     @AfterMethod
     public void tearDown() {
@@ -62,27 +65,30 @@ public class HandleProxyTest {
     }
 
     public void testProxyUsingChromeDevTool() {
-        // Uncomment the setup method for Chrome browser.
+        // Uncomment the setup method for Chrome browser if needed.
         // chromeBrowserSetup();
+
+        // Initialize the DevTools for Chrome.
         devTools = ((ChromeDriver) driver1).getDevTools();
         devTools.createSession();
+
+        // Enable network interception in Chrome DevTools.
         devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+
+        // Prepare HTTP headers for Basic Authentication.
         header = new HashMap<>();
-        basicAuthentication = "Basic "
-                + new String(Base64.getEncoder().encode(String.format("%s:%s", username, password).getBytes()));
+        basicAuthentication = "Basic " + new String(Base64.getEncoder()
+                .encode(String.format("%s:%s", username, password).getBytes()));
         header.put("Authorization", basicAuthentication);
+
+        // Set extra HTTP headers with Basic Authentication.
         devTools.send(Network.setExtraHTTPHeaders(new Headers(header)));
+
+        // Find a web element and get its text.
         String result = driver1.findElement(By.xpath("//h3[text()='Basic Auth']")).getText();
+
+        // Assert that the retrieved text matches the expected value ("Basic Auth").
         Assert.assertEquals(result, "Basic Auth");
-        waitForSomeTime();
     }
 
-    private void waitForSomeTime() {
-        // Wait for a specified duration (not recommended in most cases).
-        try {
-            Thread.sleep(WAIT_DURATION.toMillis());
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-    }
 }

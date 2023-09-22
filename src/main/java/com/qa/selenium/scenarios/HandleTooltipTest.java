@@ -17,12 +17,11 @@ import org.testng.annotations.BeforeMethod;
 public class HandleTooltipTest {
 
     private WebDriver driver;
-    private static final Duration WAIT_DURATION = Duration.ofSeconds(3);
 
     @BeforeMethod
     public void setUp() {
         // Initialize the WebDriver and open the desired URL before each test.
-        driver = browserSetup();
+        driver = DriverConfiguration.browserSetup();
         driver.get("https://jqueryui.com/tooltip/");
     }
 
@@ -39,8 +38,6 @@ public class HandleTooltipTest {
         String toolTip = driver.findElement(By.xpath("//div[@class='ui-tooltip-content']")).getText();
         Assert.assertEquals(toolTip, "We ask for your age only for statistical purposes.");
 
-        // Wait for some time (not recommended, but added as per the original code).
-        waitForSomeTime();
     }
 
     @AfterMethod
@@ -51,19 +48,4 @@ public class HandleTooltipTest {
         }
     }
 
-    private WebDriver browserSetup() {
-        // Initialize and configure the WebDriver (ChromeDriver in this case).
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        return driver;
-    }
-
-    private void waitForSomeTime() {
-        // Wait for a specified duration (not recommended in most cases).
-        try {
-            Thread.sleep(WAIT_DURATION.toMillis());
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-    }
 }

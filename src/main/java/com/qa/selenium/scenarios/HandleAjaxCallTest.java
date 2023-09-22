@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 public class HandleAjaxCallTest {
 
 	private WebDriver driver;
+
 	private static final Duration WAIT_TIMEOUT = Duration.ofSeconds(10);
 
 	@BeforeMethod
@@ -49,8 +50,6 @@ public class HandleAjaxCallTest {
 		String result = driver.getCurrentUrl();
 		Assert.assertEquals(result, "https://www.flipkart.com/");
 
-		// Wait for some time (not recommended, but added as per the original code).
-		waitForSomeTime();
 	}
 
 	@AfterMethod
@@ -89,14 +88,4 @@ public class HandleAjaxCallTest {
 		}
 	}
 
-
-
-	private void waitForSomeTime() {
-		// Wait for a specified duration (not recommended in most cases).
-		try {
-			Thread.sleep(Duration.ofSeconds(3).toMillis());
-		} catch (InterruptedException ex) {
-			ex.printStackTrace();
-		}
-	}
 }
