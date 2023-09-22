@@ -1,6 +1,5 @@
 package com.qa.selenium.scenarios;
 
-import java.time.Duration;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +26,6 @@ public class HandleProxyTest {
     public DevTools devTools;
     public String username = "admin";
     public String password = "admin";
-    private static final Duration WAIT_DURATION = Duration.ofSeconds(3);
 
     @BeforeMethod
     public void setUp() {
@@ -64,6 +62,7 @@ public class HandleProxyTest {
         }
     }
 
+    @Test(priority = 2, enabled = false)
     public void testProxyUsingChromeDevTool() {
         // Uncomment the setup method for Chrome browser if needed.
         // chromeBrowserSetup();
