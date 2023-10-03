@@ -18,22 +18,35 @@ import org.testng.annotations.Test;
 
 public class HandleProxyTest {
 
+    // Create three WebDriver instances for interacting with web browsers.
     public WebDriver driver1;
     public WebDriver driver2;
     public WebDriver driver3;
+
+    // Define a map to store HTTP headers.
     public Map<String, Object> header;
+
+    // Store basic authentication credentials as a string.
     public String basicAuthentication;
+
+    // Create a DevTools instance for Chrome DevTools interactions.
     public DevTools devTools;
+
+    // Define username and password for basic authentication.
     public String username = "admin";
     public String password = "admin";
 
     @BeforeMethod
     public void setUp() {
-        // Initialize the WebDriver and open the desired URL before each test.
+        // Initialize the Chrome WebDriver and open the desired URL before each test.
         driver1 = DriverConfiguration.browserSetup();
         driver1.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
+
+        // Initialize the Edge WebDriver and open the desired URL before each test.
         driver2 = DriverConfiguration.edgeBrowserSetup();
         driver2.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
+
+        // Initialize the Firefox WebDriver and open the desired URL before each test.
         driver3 = DriverConfiguration.fireFoxBrowserSetup();
         driver3.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
     }
@@ -64,9 +77,6 @@ public class HandleProxyTest {
 
     @Test(priority = 2, enabled = false)
     public void testProxyUsingChromeDevTool() {
-        // Uncomment the setup method for Chrome browser if needed.
-        // chromeBrowserSetup();
-
         // Initialize the DevTools for Chrome.
         devTools = ((ChromeDriver) driver1).getDevTools();
         devTools.createSession();

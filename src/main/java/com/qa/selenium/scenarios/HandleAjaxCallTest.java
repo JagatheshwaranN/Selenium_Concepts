@@ -16,8 +16,10 @@ import org.testng.annotations.Test;
 
 public class HandleAjaxCallTest {
 
+	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
 
+	// Define a constant duration for the maximum wait time, set to 10 seconds.
 	private static final Duration WAIT_TIMEOUT = Duration.ofSeconds(10);
 
 	@BeforeMethod
@@ -49,7 +51,6 @@ public class HandleAjaxCallTest {
 		// Verify the current URL.
 		String result = driver.getCurrentUrl();
 		Assert.assertEquals(result, "https://www.flipkart.com/");
-
 	}
 
 	@AfterMethod

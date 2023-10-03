@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeMethod;
 
 public class HandleTooltipTest {
 
+    // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
 
     @BeforeMethod

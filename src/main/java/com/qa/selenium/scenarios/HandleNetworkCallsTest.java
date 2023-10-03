@@ -13,6 +13,7 @@ import com.blibli.oss.qa.util.services.NetworkListener;
 
 public class HandleNetworkCallsTest {
 
+	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
 
 	@BeforeMethod
