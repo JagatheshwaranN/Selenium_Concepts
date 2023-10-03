@@ -11,28 +11,50 @@ import org.openqa.selenium.firefox.ProfilesIni;
 public class DriverConfiguration {
 
     static WebDriver browserSetup() {
-        // Initialize and configure the WebDriver (ChromeDriver in this case).
+        // Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
         System.setProperty("webdriver.http.factory", "jdk-http-client");
+
+        // Initialize a ChromeDriver instance for browser automation.
         WebDriver driver = new ChromeDriver();
+
+        // Maximize the browser window for a better view.
         driver.manage().window().maximize();
+
+        // Return the initialized WebDriver instance.
         return driver;
     }
 
     static WebDriver edgeBrowserSetup() {
-        // Initialize and configure the WebDriver (EdgeDriver in this case).
+        // Initialize a EdgeDriver instance for browser automation.
         WebDriver driver = new EdgeDriver();
+
+        // Maximize the browser window for a better view.
         driver.manage().window().maximize();
+
+        // Return the initialized WebDriver instance.
         return driver;
     }
 
     static WebDriver fireFoxBrowserSetup() {
-        // Initialize and configure the WebDriver (FirefoxDriver in this case).
+        // Create a ProfilesIni instance to manage Firefox profiles.
         ProfilesIni profile = new ProfilesIni();
+
+        // Get the specific Firefox profile named "testAutomation."
         FirefoxProfile profileInstance = profile.getProfile("testAutomation");
+
+        // Create FirefoxOptions to customize the Firefox browser behavior.
         FirefoxOptions firefoxOptions = new FirefoxOptions();
+
+        // Set the Firefox profile to the FirefoxOptions.
         firefoxOptions.setProfile(profileInstance);
+
+        // Initialize a FirefoxDriver instance with the customized options.
         WebDriver driver = new FirefoxDriver(firefoxOptions);
+
+        // Maximize the browser window for a better view.
         driver.manage().window().maximize();
+
+        // Return the initialized WebDriver instance.
         return driver;
     }
 
