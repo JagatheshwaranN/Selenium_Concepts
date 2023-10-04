@@ -16,37 +16,43 @@ import org.testng.annotations.BeforeMethod;
 
 public class HandleBrokenLinksTest {
 
-    // Declare a WebDriver instance.
+    // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
 
     @BeforeMethod
     public void setUp() {
-        // Initialize WebDriver and maximize the browser window before each test.
+        // Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
         driver = DriverConfiguration.browserSetup();
-    }
-
-    @Test
-    public void findBrokenLinks() throws URISyntaxException {
-        // Open the web page containing links to check.
-        driver.get("https://bstackdemo.com/");
-
-        // Find all anchor elements on the page.
-        List<WebElement> links = driver.findElements(By.tagName("a"));
-
-        // Loop through each link and verify if it is broken.
-        for (WebElement link : links) {
-            String href = link.getAttribute("href");
-            verifyLink(href);
-        }
     }
 
     @AfterMethod
     public void tearDown() {
-        // Close the WebDriver after each test.
-        driver.quit();
+        // Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
+        if (driver != null) {
+            // If a WebDriver instance exists, quit/close the browser session.
+            driver.quit();
+        }
     }
 
-    // Verify if a link is broken or active.
+    @Test
+    public void findBrokenLinks() throws URISyntaxException {
+        // Navigate to the website "https://bstackdemo.com/"
+        driver.get("https://bstackdemo.com/");
+
+        // Find all the anchor (<a>) elements on the web page and store them in a list named 'links'
+        List<WebElement> links = driver.findElements(By.tagName("a"));
+
+        // Iterate through each 'link' WebElement in the 'links' list
+        for (WebElement link : links) {
+            // Get the value of the "href" attribute for the current 'link' WebElement
+            String href = link.getAttribute("href");
+
+            // Call a 'verifyLink' method to verify the validity of the 'href' attribute value
+            // (The implementation of 'verifyLink' is assumed to be elsewhere in the code)
+            verifyLink(href);
+        }
+    }
+
     private void verifyLink(String link) throws URISyntaxException {
         try {
             // Parse the link into a URI.
@@ -67,11 +73,13 @@ public class HandleBrokenLinksTest {
             // Print the link
             System.out.println(link);
 
-            // Verify the HTTP response code is equal to 200 or not.
+            // Check if the 'responseCode' is not equal to 200
             if (responseCode != 200) {
+                // If the response code is not 200, it indicates a broken link
                 System.out.println("Broken Link Http Request Status => " + responseCode);
                 System.out.println("Broken Link Http Request Body ===> " + connection.getResponseMessage());
             } else {
+                // If the response code is 200, it indicates an active link
                 System.out.println("Active Link Http Request Status => " + responseCode);
                 System.out.println("Active Link Http Request Body ===> " + connection.getResponseMessage());
             }

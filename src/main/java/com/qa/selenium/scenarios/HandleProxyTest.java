@@ -18,10 +18,8 @@ import org.testng.annotations.Test;
 
 public class HandleProxyTest {
 
-    // Create three WebDriver instances for interacting with web browsers.
-    public WebDriver driver1;
-    public WebDriver driver2;
-    public WebDriver driver3;
+    // Declare a WebDriver instance to interact with the web browser.
+    public WebDriver driver;
 
     // Define a map to store HTTP headers.
     public Map<String, Object> header;
@@ -38,63 +36,60 @@ public class HandleProxyTest {
 
     @BeforeMethod
     public void setUp() {
-        // Initialize the Chrome WebDriver and open the desired URL before each test.
-        driver1 = DriverConfiguration.browserSetup();
-        driver1.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
+        // Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
+        driver = DriverConfiguration.browserSetup();
+    }
 
-        // Initialize the Edge WebDriver and open the desired URL before each test.
-        driver2 = DriverConfiguration.edgeBrowserSetup();
-        driver2.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
-
-        // Initialize the Firefox WebDriver and open the desired URL before each test.
-        driver3 = DriverConfiguration.fireFoxBrowserSetup();
-        driver3.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
+    @AfterMethod
+    public void tearDown() {
+        // Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
+        if (driver != null) {
+            // If a WebDriver instance exists, quit/close the browser session.
+            driver.quit();
+        }
     }
 
     @Test(priority = 1)
     public void testProxyAuthentication() {
-        // Find the web element with the specified XPath and get its text.
-        String result = driver1.findElement(By.xpath("//h3[text()='Basic Auth']")).getText();
+        // Navigate to a URL that includes basic authentication credentials
+        driver.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
+
+        // Locate an <h3> element with the text "Basic Auth" using XPath and retrieve its text content
+        String result = driver.findElement(By.xpath("//h3[text()='Basic Auth']")).getText();
 
         // Assert that the retrieved text matches the expected value ("Basic Auth").
         Assert.assertEquals(result, "Basic Auth");
     }
 
-
-    @AfterMethod
-    public void tearDown() {
-        // Quit the WebDriver after each test.
-        if (driver1 != null) {
-            driver1.quit();
-        }
-        if (driver2 != null) {
-            driver2.quit();
-        }
-        if (driver3 != null) {
-            driver3.quit();
-        }
-    }
-
-    @Test(priority = 2, enabled = false)
+    @Test(priority = 2)
     public void testProxyUsingChromeDevTool() {
-        // Initialize the DevTools for Chrome.
-        devTools = ((ChromeDriver) driver1).getDevTools();
+        // Get the DevTools object associated with the 'driver' instance (assuming 'driver' is a ChromeDriver)
+        devTools = ((ChromeDriver) driver).getDevTools();
+
+        // Create a DevTools session for the 'devTools' object
         devTools.createSession();
 
-        // Enable network interception in Chrome DevTools.
+        // Send a command to enable the Network domain in the DevTools session
         devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
 
-        // Prepare HTTP headers for Basic Authentication.
+        // Create a HashMap named 'header' to store HTTP headers
         header = new HashMap<>();
+
+        // Create basic authentication credentials by encoding the username and password in Base64
         basicAuthentication = "Basic " + new String(Base64.getEncoder()
                 .encode(String.format("%s:%s", username, password).getBytes()));
+
+        // Add the "Authorization" header to the 'header' HashMap with the basic authentication credentials
         header.put("Authorization", basicAuthentication);
 
         // Set extra HTTP headers with Basic Authentication.
         devTools.send(Network.setExtraHTTPHeaders(new Headers(header)));
 
-        // Find a web element and get its text.
-        String result = driver1.findElement(By.xpath("//h3[text()='Basic Auth']")).getText();
+        // Navigate to a URL that includes basic authentication credentials
+        driver.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
+
+        // Locate an <h3> element with the text "Basic Auth" using XPath and retrieve its text content
+        String result = driver.findElement(By.xpath("//h3[text()='Basic Auth']")).getText();
 
         // Assert that the retrieved text matches the expected value ("Basic Auth").
         Assert.assertEquals(result, "Basic Auth");

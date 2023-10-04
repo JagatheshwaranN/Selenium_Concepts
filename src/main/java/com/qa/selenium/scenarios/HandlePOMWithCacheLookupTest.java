@@ -23,13 +23,14 @@ public class HandlePOMWithCacheLookupTest {
 	@CacheLookup
 	public WebElement inputWithCache;
 
-
 	public static void main(String[] args) {
-		// Set Chrome driver properties for logging.
+		// Set the system property to specify the log file for Chrome WebDriver
 		System.setProperty("webdriver.chrome.logfile", "TestExecutionLog.log");
+
+		// Set the system property to enable verbose logging for Chrome WebDriver
 		System.setProperty("webdriver.chrome.verboseLogging", "true");
 
-		// Initialize WebDriver and open the test page.
+		// Set up the WebDriver instance by calling the 'browserSetup' method or function
 		driver = DriverConfiguration.browserSetup();
 
 		// Navigate to the website you want to test.
@@ -44,34 +45,36 @@ public class HandlePOMWithCacheLookupTest {
 		// Record the current time before performing an operation without cache.
 		long withoutCacheStartTime = System.currentTimeMillis();
 
-		// Loop once (100 iteration) to perform the operation without cache.
+		// Repeat a certain operation 100 times in a loop
 		for (int i = 0; i < 100; i++) {
+			// Get the "value" attribute of the 'inputWithoutCache' element within the 'pageObject'
 			pageObject.inputWithoutCache.getAttribute("value");
 		}
 
 		// Record the current time after completing the operation without cache.
 		long withoutCacheEndTime = System.currentTimeMillis();
 
-		// Calculate and print time taken for operations.
+		// Calculate and print the time taken for a specific operation without cache
 		System.out.println("Time taken for the get value operation without cache is "
 				+ ((withoutCacheEndTime - withoutCacheStartTime) / 1000));
 
 		// Record the current time before performing an operation with cache.
 		long withCacheStartTime = System.currentTimeMillis();
 
-		// Loop once (100 iteration) to perform the operation with cache.
+		// Repeat a certain operation 100 times in a loop
 		for (int i = 0; i < 100; i++) {
+			// Get the "value" attribute of the 'inputWithoutCache' element within the 'pageObject'
 			pageObject.inputWithCache.getAttribute("value");
 		}
 
 		// Record the current time after completing the operation with cache.
 		long withCacheEndTime = System.currentTimeMillis();
 
-		// Calculate and print time taken for operations.
-		System.out.println("Time taken for the get value operation with cache is "
-				+ ((withCacheEndTime - withCacheStartTime) / 1000));
+		// Calculate and print the time taken for a specific operation with cache
+		System.out.println("Time taken for the get value operation with cache is " +
+				((withCacheEndTime - withCacheStartTime) / 1000));
 
-		// Quit the WebDriver after the test.
+		// Close and quit the WebDriver instance, ending the browser session
 		driver.quit();
 	}
 

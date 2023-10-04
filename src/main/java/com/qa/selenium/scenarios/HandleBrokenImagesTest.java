@@ -12,43 +12,51 @@ import org.testng.annotations.Test;
 
 public class HandleBrokenImagesTest {
 
-	// Declare a WebDriver instance.
+	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
 
 	@BeforeMethod
 	public void setUp() {
-		// Initialize WebDriver and maximize the browser window before each test.
+		// Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
 		driver = DriverConfiguration.browserSetup();
 	}
 
 	@AfterMethod
 	public void tearDown() {
-		// Close the WebDriver after each test.
-		driver.quit();
+		// Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
+		if (driver != null) {
+			// If a WebDriver instance exists, quit/close the browser session.
+			driver.quit();
+		}
 	}
 
 	@Test(priority = 1)
 	public void findBrokenImageApproach1() {
-		// Open the web page containing images to check.
+		// Instruct the WebDriver instance (already configured) to navigate to the URL "https://demoqa.com/broken"
 		driver.get("https://demoqa.com/broken");
 
-		// Find all image elements on the page.
+		// Find all the 'img' elements on the web page and store them in a list named 'images'
 		List<WebElement> images = driver.findElements(By.tagName("img"));
 
-		// Loop through each image and verify if it is broken.
+		// Iterate through a list of WebElements named 'images'
 		for (WebElement image : images) {
-
-			// Check if the image is displayed using JavaScript.
 			try {
+				// Use JavaScriptExecutor to check if an image is displayed
 				boolean imageDisplay = (Boolean) ((JavascriptExecutor) driver).executeScript(
+						// Execute a JavaScript snippet to determine if the 'naturalWidth' property of the image is defined and greater than 0
 						"return (typeof arguments[0].naturalWidth !== 'undefined' && arguments[0].naturalWidth > 0);",
-						image);
+						image
+				);
+				// Check the result of the JavaScript execution
 				if (imageDisplay) {
+					// If the image is displayed (naturalWidth > 0), print "Image display Ok"
 					System.out.println("Image display Ok");
 				} else {
+					// If the image is not displayed (naturalWidth <= 0), print "Image display Broken"
 					System.out.println("Image display Broken");
 				}
 			} catch (Exception ex) {
+				// Catch and print any exceptions that may occur during the process
 				ex.printStackTrace();
 			}
 		}
@@ -56,16 +64,18 @@ public class HandleBrokenImagesTest {
 
 	@Test(priority = 2)
 	public void findBrokenImageApproach2() {
-		// Open the web page containing images to check.
+		// Instruct the WebDriver instance (already configured) to navigate to the URL "https://demoqa.com/broken"
 		driver.get("https://demoqa.com/broken");
 
-		// Find a specific image element using XPath.
+		// Locate the 'img' element with the 'src' attribute set to '/images/Toolsqa_1.jpg' using XPath
 		WebElement image = driver.findElement(By.xpath("//img[@src='/images/Toolsqa_1.jpg']"));
 
-		// Check if the image is displayed by examining its naturalWidth attribute.
+		// Check if the 'naturalWidth' attribute of the 'image' WebElement is equal to "0"
 		if (image.getAttribute("naturalWidth").equals("0")) {
+			// If 'naturalWidth' is "0," it indicates that the image is not displayed, so print "Image display Broken"
 			System.out.println("Image display Broken");
 		} else {
+			// If 'naturalWidth' is not "0," it indicates that the image is displayed, so print "Image display Ok"
 			System.out.println("Image display Ok");
 		}
 	}

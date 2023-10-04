@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 public class HandleDisableExtensionsTest {
 
-	// Declare a WebDriver instance for browser automation.
+	// Declare a WebDriver instance to interact with the web browser.
 	public WebDriver driver;
 
 	// Declare a ChromeOptions instance to configure Chrome browser settings.
