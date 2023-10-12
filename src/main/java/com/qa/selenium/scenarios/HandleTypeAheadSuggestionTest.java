@@ -11,7 +11,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TypeAheadSuggestionTest  {
+public class HandleTypeAheadSuggestionTest  {
 
 	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
