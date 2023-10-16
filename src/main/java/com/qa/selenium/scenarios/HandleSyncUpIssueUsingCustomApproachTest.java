@@ -40,10 +40,10 @@ public class HandleSyncUpIssueUsingCustomApproachTest {
         driver.findElement(By.xpath("//button[@onclick='load()']")).click();
 
         // Handle synchronization issue for the specified element
-        handleElementSyncUp(By.xpath("//a[@href='/market/login.jsp']")).click();
+        handleElementSyncUp(By.xpath("//ul[@class='nav__list']//a[@href='/market/login.jsp']")).click();
 
         // Assert the title of the current web page
-        Assert.assertEquals(driver.getTitle(), "Login - Video Courses, eBooks, Prime Packs | Tutorialspoint");
+        Assert.assertEquals(driver.getTitle(), "Login - Video Courses, eBooks, Certifications | Tutorialspoint");
 
         // Wait for 3 seconds before closing the browser
         sleepInSeconds(3);
@@ -73,7 +73,6 @@ public class HandleSyncUpIssueUsingCustomApproachTest {
         // Return the web element after it is found
         return element;
     }
-
 
     private void sleepInSeconds(int seconds) {
         try {

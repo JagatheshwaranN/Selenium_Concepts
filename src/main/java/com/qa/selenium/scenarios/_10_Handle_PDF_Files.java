@@ -182,8 +182,8 @@ public class _10_Handle_PDF_Files {
 	}
 
 	/**
-	 * =================================================================== Below
-	 * code section Helps in dealing with PDF File image/s validation
+	 * ====================================================================
+	 * Below code section Helps in dealing with PDF File image/s validation
 	 * ====================================================================
 	 */
 	private List<RenderedImage> getImagesFromPDFDocument(PDDocument document) {
