@@ -79,7 +79,7 @@ public class HandleDataFromJsonFileTest {
 	}
 
 	@DataProvider(name = "loginData")
-	private Object[][] getDataFromJSonFile() {
+	private Object[][] getDataFromJsonFile() {
 		// Create a map to hold user data.
 		Map<String, String> userMap = new HashMap<>();
 
@@ -87,34 +87,41 @@ public class HandleDataFromJsonFileTest {
 		JSONParser jsonParser = new JSONParser();
 
 		// Initialize a 2D array to hold user data.
-		Object[][] userData = null;
+		Object[][] userData;
+
+		// Initialize a JSONArray instance.
+		JSONArray jsonArray = null;
 
 		try {
 			// Parse the JSON file and retrieve the JSON object.
 			JSONObject jsonObject = parseJsonFile(jsonParser);
 
 			// Extract the JSON array containing user logins.
-			JSONArray jsonArray = (JSONArray) jsonObject.get("userlogins");
+			jsonArray = (JSONArray) jsonObject.get("userlogins");
 
-			// Initialize the 2D array based on the size of the JSON array.
-			userData = new Object[jsonArray.size()][1];
-
-			// Iterate through the JSON array to retrieve user data.
-			for (int i = 0; i < userData.length; i++) {
-
-				// Retrieve the current user object from the JSON array.
-				JSONObject userObject = (JSONObject) jsonArray.get(i);
-
-				// Populate the map with the user email and password.
-				userMap.put("email", (String) userObject.get("email"));
-				userMap.put("password", (String) userObject.get("password"));
-
-				// Store the user map in the 2D array.
-				userData[i][0] = userMap;
-			}
 		} catch (IOException | ParseException ex) {
 			// Handle any exceptions that occur during JSON data processing.
 			handleJsonDataException(ex);
+		}
+
+		// Ensure that the jsonArray is not null before initializing the userData array.
+		assert jsonArray != null;
+
+		// Initialize the 2D array based on the size of the JSON array.
+		userData = new Object[jsonArray.size()][1];
+
+		// Iterate through the JSON array to retrieve user data.
+		for (int i = 0; i < userData.length; i++) {
+
+			// Retrieve the current user object from the JSON array.
+			JSONObject userObject = (JSONObject) jsonArray.get(i);
+
+			// Populate the map with the user email and password.
+			userMap.put("email", (String) userObject.get("email"));
+			userMap.put("password", (String) userObject.get("password"));
+
+			// Store the user map in the 2D array.
+			userData[i][0] = userMap;
 		}
 		// Return the 2D array containing user data.
 		return userData;
