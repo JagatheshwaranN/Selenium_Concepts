@@ -32,7 +32,7 @@ public class HandleDataFromXmlFileTest {
     // Specifies the path to the XML file containing the test data.
     // The path is constructed dynamically using the 'user.dir' property.
     // 'user.dir' refers to the current working directory where the Java process was launched.
-    // The path points to the 'testData.json' file in the 'supportFiles' directory.
+    // The path points to the 'testData.xml' file in the 'supportFiles' directory.
     private static final String XML_FILE_PATH = System.getProperty("user.dir")
             + "/src/main/resources/supportFiles/testData.xml";
 
