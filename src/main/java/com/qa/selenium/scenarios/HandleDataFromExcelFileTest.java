@@ -92,12 +92,15 @@ public class HandleDataFromExcelFileTest {
 				// Access the current row
 				XSSFRow row = sheet.getRow(i);
 
-				// Retrieve the email and password from the first and second columns respectively
-				String email = row.getCell(0).getStringCellValue();
-				String password = row.getCell(1).getStringCellValue();
+				// Checks the row is not null
+				if(row != null) {
+					// Retrieve the email and password from the first and second columns respectively
+					String email = row.getCell(0).getStringCellValue();
+					String password = row.getCell(1).getStringCellValue();
 
-				// Add the email and password as a string array to the list
-				data.add(new String[]{email, password});
+					// Add the email and password as a string array to the list
+					data.add(new String[]{email, password});
+				}
 			}
 		} catch (IOException ex) {
 			// Print the stack trace if an IOException occurs
