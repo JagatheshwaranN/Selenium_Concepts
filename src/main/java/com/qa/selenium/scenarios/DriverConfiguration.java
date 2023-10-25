@@ -10,7 +10,7 @@ import org.openqa.selenium.firefox.ProfilesIni;
 
 public class DriverConfiguration {
 
-    static WebDriver browserSetup() {
+    public static WebDriver browserSetup() {
         // Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
         System.setProperty("webdriver.http.factory", "jdk-http-client");
 
@@ -24,7 +24,7 @@ public class DriverConfiguration {
         return driver;
     }
 
-    static WebDriver edgeBrowserSetup() {
+    public static WebDriver edgeBrowserSetup() {
         // Initialize a EdgeDriver instance for browser automation.
         WebDriver driver = new EdgeDriver();
 
@@ -35,7 +35,7 @@ public class DriverConfiguration {
         return driver;
     }
 
-    static WebDriver fireFoxBrowserSetup() {
+    public static WebDriver fireFoxBrowserSetup() {
         // Create a ProfilesIni instance to manage Firefox profiles.
         ProfilesIni profile = new ProfilesIni();
 
