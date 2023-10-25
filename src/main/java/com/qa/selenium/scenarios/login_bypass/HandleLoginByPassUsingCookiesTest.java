@@ -1,29 +1,31 @@
 package com.qa.selenium.scenarios.login_bypass;
 
+import com.qa.selenium.scenarios.DriverConfiguration;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.html5.WebStorage;
-import org.openqa.selenium.remote.Augmenter;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.Date;
 
 public class HandleLoginByPassUsingCookiesTest {
 
     public WebDriver driver;
-    public WebStorage webStorage;
 
-    @Test(priority = 3, enabled = true)
-    public void loginByPassUsingCookies() throws IOException {
-        driver = new ChromeDriver();
+    @Test(priority = 1)
+    public void loginByPassUsingCookies() {
+        driver = DriverConfiguration.browserSetup();
         driver.manage().window().maximize();
-        webStorage = (WebStorage) new Augmenter().augment(driver);
         driver.get("https://admin-demo.nopcommerce.com/");
+        setCookies(previousSessionDetail());
+        driver.navigate().to("https://admin-demo.nopcommerce.com/admin/");
+        waitForSomeTime();
+        driver.findElement(By.xpath("//h1[contains(text(),'Dashboard')]")).isDisplayed();
+        driver.quit();
+    }
 
+    private JSONObject previousSessionDetail(){
         JSONObject previousSession = new JSONObject();
         previousSession.put("path", "/");
         previousSession.put("domain", "admin-demo.nopcommerce.com");
@@ -32,12 +34,8 @@ public class HandleLoginByPassUsingCookiesTest {
         previousSession.put("isSecure", true);
         previousSession.put("expiry", "Tue Jul 09 16:27:34 IST 2024");
         previousSession.put("value",
-                "CfDJ8JTcaVVzbwZIo9QJm7k7-zxjR3n_M7wf4Q0x5gOiGir9zLMsuEtj54FCwpxGUim9CpTgD8yXYoSL8oxVQlGLuGtIeZ0MsmzF9OTpFAnx9uCgo8Ch7tBOI0TuV6r0cH0-N4tcwkoQHiPfpmzYTKQMbEUWTO9FzjqvdGDEBRPoRyKzPpW1WLWyMu6MZYl79lOjYjbXqhCIozXivDWzPPWDlM_C4OfF9QCw_9R0XCrl3-B-jCqg5roOimQAu8NrWwdhHngH1dKFGK5zeO1Rbl6XhRggTb0X2OgddyrV9Vp1J1CDeCzzh2tLLkOkgh00sLALHqw22y99Nbam3jFnBldXuA7bIyDu9M8jnsAqYFO_IekXc5MkdCkWxtVnwW6ETw9cE-JjrJzNUIZgDolOStxtjAvCyqefmRRxSnaSaCdTk227noqTX4Z8R41KOuZGhsNnc9boJzSko4pyhyvlb3MdtpaA5t5TK-s2lcaso4ORT4frtVqcrJUssFwhUy_BOfOMAEoXvuy6qbXYAb-Kpup9LOmv_wqgmCpUC2gtO0c2ZG5K48W9RZypmvnIuo3h2CdzvQ");
-        setCookies(previousSession);
-        driver.navigate().to("https://admin-demo.nopcommerce.com/admin/");
-        waitForSomeTime();
-        driver.findElement(By.xpath("//h1[contains(text(),'Dashboard')]")).isDisplayed();
-        driver.quit();
+                "CfDJ8GzHBbiRzehKoRKEgRkEcjxx2Ot0gXFOzrK0e1vQBaoPLpszfPtRBu5QgBmrNQkve2JDHkWrjt8kl_EklzA4kyQnnQJpOSmBO8Ma-5vRS9oDo7KZswTaDgDFeSPVYKFkbt219HONhp8kRsS0bMOcHTj8b92Lke8AoU5fMnYnLULaxwE8YFAWQ04NTZZgw84t4XwUx8-rwIgioaZGJVP7UhsDp99jhpkqMayNHnO6MCebZqXTyk9uTNUM1YaJW-vhRhLgAW2tikJGenhNQiIz0xMY0KDsRGXY9hAGnEz-GQCf8KBUD9vDiMVpCfTPShYHWfe_HvsKIJ42WTVUSnMgi3RV3bHl93ZjUYr7XCjb7jLHj73axqoKxdXKBha0Z3gUP4lTC6rzUx-jtUFTDZl3qdec0cgL4dwsr7PUda02Qn8Go__uYt_JGIeCubqJkthQotHzciqhQRBu9-cBx6x725eWNnVPIvR21ij5ZH0jnyZZTFU0W2IyUMBtAlh6fvHz8dXz1QOSKJxNntrzbzNs_L-rmdq8QGtE-vCC7eTrVbbYf2QxsiXahJlv3810ZkdHQQ");
+        return previousSession;
     }
 
     private void setCookies(JSONObject cookies) {
@@ -60,7 +58,5 @@ public class HandleLoginByPassUsingCookiesTest {
             ex.printStackTrace();
         }
     }
-
-
 
 }

@@ -1,5 +1,6 @@
 package com.qa.selenium.scenarios.login_bypass;
 
+import com.qa.selenium.scenarios.DriverConfiguration;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
@@ -22,9 +23,9 @@ public class CaptureSessionDetailsTest {
     public WebDriver driver;
     public WebStorage webStorage;
 
-    @Test(priority = 1, enabled = false)
+    @Test(priority = 1)
     public void loginOnceToCaptureSessionDetails() throws IOException {
-        driver = new ChromeDriver();
+        driver = DriverConfiguration.browserSetup();
         driver.manage().window().maximize();
         webStorage = (WebStorage) new Augmenter().augment(driver);
 
@@ -37,11 +38,12 @@ public class CaptureSessionDetailsTest {
 
         driver.findElement(By.xpath("//h1[contains(text(),'Dashboard')]")).isDisplayed();
         storeSessionFile("nopcommerce", "admin@yourstore.com");
+        driver.quit();
     }
 
     public void storeSessionFile(String fileName, String userName) throws IOException {
-        if (Files.exists(Paths.get(System.getProperty("user.dir") + "/" + fileName + ".json"))) {
-            Files.deleteIfExists(Paths.get(System.getProperty("user.dir") + "/" + fileName + ".json"));
+        if (Files.exists(Paths.get(System.getProperty("user.dir") + "/src/main/java/com/qa/selenium/scenarios/login_bypass/" + fileName + ".json"))) {
+            Files.deleteIfExists(Paths.get(System.getProperty("user.dir") + "/src/main/java/com/qa/selenium/scenarios/login_bypass/" + fileName + ".json"));
         }
 
         JSONObject sessionObject = new JSONObject();
@@ -49,7 +51,7 @@ public class CaptureSessionDetailsTest {
         sessionObject.put("createdAt", LocalDateTime.now());
         sessionObject.put("session_data", getSessionData());
         System.out.println("JSON Object - Session Data : " + sessionObject);
-        writeJSONObjectToFile(sessionObject, "./" + fileName + ".json");
+        writeJSONObjectToFile(sessionObject, System.getProperty("user.dir") + "/src/main/java/com/qa/selenium/scenarios/login_bypass/" + fileName + ".json");
     }
 
     private JSONObject getSessionData() {
@@ -62,7 +64,7 @@ public class CaptureSessionDetailsTest {
 
     private JSONArray getCookiesData() {
         JSONArray cookies = new JSONArray();
-        driver.manage().getCookies().stream().forEach(cookie -> {
+        driver.manage().getCookies().forEach(cookie -> {
             JSONObject cookieJsonObject = new JSONObject();
             cookieJsonObject.put("name", cookie.getName());
             cookieJsonObject.put("value", cookie.getValue());
@@ -80,7 +82,7 @@ public class CaptureSessionDetailsTest {
     private JSONObject getLocalStorageData() {
         LocalStorage localStorage = webStorage.getLocalStorage();
         JSONObject localStorageJsonObject = new JSONObject();
-        localStorageJsonObject.keySet().stream()
+        localStorageJsonObject.keySet()
                 .forEach(locStore -> localStorageJsonObject.put(locStore, localStorage.getItem(locStore)));
         return localStorageJsonObject;
     }
@@ -88,7 +90,7 @@ public class CaptureSessionDetailsTest {
     private JSONObject getSessionStorageData() {
         SessionStorage sessionStorage = webStorage.getSessionStorage();
         JSONObject sessionStorageJsonObject = new JSONObject();
-        sessionStorageJsonObject.keySet().stream()
+        sessionStorageJsonObject.keySet()
                 .forEach(sessionStore -> sessionStorageJsonObject.put(sessionStore, sessionStorage.getItem(sessionStore)));
         return sessionStorageJsonObject;
     }

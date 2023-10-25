@@ -1,20 +1,18 @@
 package com.qa.selenium.scenarios.login_bypass;
 
+import com.qa.selenium.scenarios.DriverConfiguration;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.support.ui.Sleeper;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.Duration;
 import java.util.Date;
 
 public class HandleLoginByPassUsingSessionDataTest {
@@ -24,13 +22,14 @@ public class HandleLoginByPassUsingSessionDataTest {
     public WebStorage webStorage;
 
 
-    @Test(priority = 2, enabled = true)
-    private void loginByPassUsingSessionData() throws IOException {
-        driver = new ChromeDriver();
+    @Test(priority = 1)
+    public void loginByPassUsingSessionData() {
+        String fileName = "nopcommerce";
+        driver = DriverConfiguration.browserSetup();
         driver.manage().window().maximize();
         webStorage = (WebStorage) new Augmenter().augment(driver);
         driver.get("https://admin-demo.nopcommerce.com/");
-        usePreviousLoggedInSessionDetails("nopcommerce");
+        usePreviousLoggedInSessionDetails(fileName);
         driver.navigate().to("https://admin-demo.nopcommerce.com/admin/");
         waitForSomeTime();
         driver.findElement(By.xpath("//h1[contains(text(),'Dashboard')]")).isDisplayed();
@@ -39,8 +38,8 @@ public class HandleLoginByPassUsingSessionDataTest {
 
     private void usePreviousLoggedInSessionDetails(String fileName) {
         driver.manage().getCookies().clear();
-        JSONObject jsonObject = null;
-        jsonObject = parseJSONFile(System.getProperty("user.dir") + "/" + fileName + ".json");
+        JSONObject jsonObject;
+        jsonObject = parseJSONFile(System.getProperty("user.dir") + "/src/main/java/com/qa/selenium/scenarios/login_bypass/" + fileName + ".json");
         JSONObject sessionData = jsonObject.getJSONObject("session_data");
         applyCookiesToCurrentSession(sessionData);
         applyLocalStorage(sessionData);
@@ -75,16 +74,12 @@ public class HandleLoginByPassUsingSessionDataTest {
 
     private void applyLocalStorage(JSONObject sessionData) {
         JSONObject localStorageObject = sessionData.getJSONObject("local_storage");
-        localStorageObject.keySet().stream().forEach(localStorage -> {
-            webStorage.getLocalStorage().setItem(localStorage, localStorageObject.get(localStorage).toString());
-        });
+        localStorageObject.keySet().forEach(localStorage -> webStorage.getLocalStorage().setItem(localStorage, localStorageObject.get(localStorage).toString()));
     }
 
     private void applySessionStorage(JSONObject sessionData) {
         JSONObject sessionStorageObject = sessionData.getJSONObject("session_storage");
-        sessionStorageObject.keySet().stream().forEach(sessionStorage -> {
-            webStorage.getSessionStorage().setItem(sessionStorage, sessionStorageObject.get(sessionStorage).toString());
-        });
+        sessionStorageObject.keySet().forEach(sessionStorage -> webStorage.getSessionStorage().setItem(sessionStorage, sessionStorageObject.get(sessionStorage).toString()));
     }
 
     private void waitForSomeTime() {
