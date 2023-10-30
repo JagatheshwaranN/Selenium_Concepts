@@ -27,7 +27,6 @@ public class CaptureSessionDetailsTest {
     public void loginOnceToCaptureSessionDetails() throws IOException {
         driver = DriverConfiguration.browserSetup();
         driver.manage().window().maximize();
-        webStorage = (WebStorage) new Augmenter().augment(driver);
 
         driver.get("https://admin-demo.nopcommerce.com/");
         driver.findElement(By.id("Email")).clear();

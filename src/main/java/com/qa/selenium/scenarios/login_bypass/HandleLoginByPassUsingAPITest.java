@@ -20,6 +20,8 @@ public class HandleLoginByPassUsingAPITest {
 	/**
 	 * This approach will work ONLY when the API Post call is having status as 200
 	 * OK. It will not work when the status is 302 and redirect exists.
+	 * <p>
+	 * Note: This approach is not working as of now.
 	 */
 	@Test(priority = 1)
 	public void loginByPassUsingAPI() {
@@ -67,4 +69,5 @@ public class HandleLoginByPassUsingAPITest {
 			ex.printStackTrace();
 		}
 	}
+
 }
