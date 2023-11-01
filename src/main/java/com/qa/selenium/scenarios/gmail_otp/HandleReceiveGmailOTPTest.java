@@ -20,6 +20,11 @@ public class HandleReceiveGmailOTPTest {
 	public final int imapPort = 993;
 
 	@Test(priority = 1)
+	public void mockReadOTPEmail() {
+		// Print the OTP retrieved from the specified email parameters
+		System.out.println(retrieveOTP("test004@gmail.com", "abc@xyz", "test001@gmail.com", "Secure Code", "Inbox"));
+	}
+
 	public String retrieveOTP(String recipientEmail, String recipientPassword, String senderEmail, String subject, String folderType) {
 		try {
 			// Connects to the mailbox using the recipient's email and password
@@ -138,11 +143,11 @@ public class HandleReceiveGmailOTPTest {
 		// Split the text using the regular expression
 		String[] otpText = text.split(otpRegex);
 		// Check if the array length is at least 3
-		if (otpText.length >= 3) {
+		if (otpText.length >= 2) {
 			// Extract and return the third element from the array as the OTP
-			return otpText[2];
+			return otpText[1];
 		}
-		// Returns an empty string if the array length is less than 3
+		// Returns an empty string if the array length is less than 2
 		return "";
 	}
 

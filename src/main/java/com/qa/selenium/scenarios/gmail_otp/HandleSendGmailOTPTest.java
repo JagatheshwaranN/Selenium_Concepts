@@ -15,6 +15,13 @@ public class HandleSendGmailOTPTest {
     public final int smtpPort = 587;
 
     @Test(priority = 1)
+    public void mockSendOTPEmail() {
+        // Send the OTP email with the provided email parameters
+        sendOTP("test001@gmail.com", "abc@xyz", "test004@gmail.com", "Secure Code",
+                "Your secure OTP for login is 110123");
+    }
+
+
     public void sendOTP(String senderEmail, String senderPassword, String recipientEmail, String subject, String content) {
         // SMTP properties setup
         Properties smtpProperties = new Properties();
