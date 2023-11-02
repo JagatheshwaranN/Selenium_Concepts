@@ -39,93 +39,6 @@ public class HandlePDFTest {
 
 
 
-
-	@Test(priority = 4, enabled = false)
-	private void readPDFFileFromBrowser() {
-		browserSetup();
-		driver.get("https://www.inkit.com/blog/pdf-the-best-digital-document-management");
-		driver.findElement(By.id("ecSubmitAgreeButton")).click();
-		waitForSomeTime();
-		driver.findElement(By.xpath("//a[text()='trillions of PDFs']")).click();
-		waitForSomeTime();
-		String pdfFileURL = driver.getCurrentUrl();
-		try {
-			URL url = new URL(pdfFileURL);
-			URLConnection urlConnection = url.openConnection();
-			urlConnection.addRequestProperty("User-Agent", "Chrome"); // Optional statement
-			InputStream ipInputStream = urlConnection.getInputStream();
-			BufferedInputStream bufferedInputStream = new BufferedInputStream(ipInputStream);
-			PDDocument pdDocument = PDDocument.load(bufferedInputStream);
-			int pdfFilePages = pdDocument.getNumberOfPages();
-			Assert.assertEquals(pdfFilePages, 43);
-			PDFTextStripper pdfTextStripper = new PDFTextStripper();
-			String pdfFileContent = pdfTextStripper.getText(pdDocument);
-			System.out.println(pdfFileContent);
-			Assert.assertTrue(pdfFileContent.contains("PDF Days Europe 2018"));
-			Assert.assertTrue(pdfFileContent.contains("Thank you! Any questions?"));
-			pdDocument.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 5, enabled = false)
-	private void getPDFFileMetaData() {
-		browserSetup();
-		driver.get("https://www.inkit.com/blog/pdf-the-best-digital-document-management");
-		driver.findElement(By.id("ecSubmitAgreeButton")).click();
-		waitForSomeTime();
-		driver.findElement(By.xpath("//a[text()='trillions of PDFs']")).click();
-		waitForSomeTime();
-		String pdfFileURL = driver.getCurrentUrl();
-		try {
-			URL url = new URL(pdfFileURL);
-			URLConnection urlConnection = url.openConnection();
-			urlConnection.addRequestProperty("User-Agent", "Chrome"); // Optional statement
-			InputStream ipInputStream = urlConnection.getInputStream();
-			BufferedInputStream bufferedInputStream = new BufferedInputStream(ipInputStream);
-			PDDocument pdDocument = PDDocument.load(bufferedInputStream);
-			System.out.println("PDF File Version 		  ==> " + pdDocument.getVersion());
-			System.out.println("PDF File Print Option 	  ==> " + pdDocument.getCurrentAccessPermission().canPrint());
-			System.out.println("PDF File ReadOnly 		  ==> " + pdDocument.getCurrentAccessPermission().isReadOnly());
-			System.out.println(
-					"PDF File Owner Permission ==> " + pdDocument.getCurrentAccessPermission().isOwnerPermission());
-			System.out.println("PDF File Author 		  ==> " + pdDocument.getDocumentInformation().getAuthor());
-			System.out.println("PDF File Subject 		  ==> " + pdDocument.getDocumentInformation().getSubject());
-			System.out.println("PDF File Title            ==> " + pdDocument.getDocumentInformation().getTitle());
-			System.out.println("PDF File Creator          ==> " + pdDocument.getDocumentInformation().getCreator());
-			System.out
-					.println("PDF File Creator Date     ==> " + pdDocument.getDocumentInformation().getCreationDate());
-			System.out.println("PDF File Encrypted        ==> " + pdDocument.isEncrypted());
-			System.out.println("PDF File Document Id      ==> " + pdDocument.getDocumentId());
-			pdDocument.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-		waitForSomeTime();
-		driver.close();
-
-	}
-
-	@Test(priority = 6, enabled = true)
-	private void verifyTwoImages() {
-		String fileURL = "file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/devops.pdf";
-		PDDocument docx = getPDFDocument(fileURL);
-		int imagesCount = getImagesFromPDFDocument(docx).size();
-		System.out.println("Total Images Count : " + imagesCount);
-		pdfBoxExtractImages(docx);
-		File file1 = new File(
-				System.getProperty("user.dir") + "//src//main//resources//supportFiles//images//hdfc_color.png");
-		File file2 = new File(
-				System.getProperty("user.dir") + "//src//main//resources//supportFiles//images//hdfc_color.png");
-		File file3 = new File(
-				System.getProperty("user.dir") + "//src//main//resources//supportFiles//images//hdfc_black.png");
-		compareImages(file1, file2);
-		compareImages(file2, file3);
-	}
-
 	public static PDDocument getPDFDocument(String pdfFileURL) {
 		PDDocument document = null;
 		try {
@@ -144,7 +57,7 @@ public class HandlePDFTest {
 	 * Below code section Helps in dealing with PDF File image/s validation
 	 * ====================================================================
 	 */
-	private List<RenderedImage> getImagesFromPDFDocument(PDDocument document) {
+	public static List<RenderedImage> getImagesFromPDFDocument(PDDocument document) {
 		List<RenderedImage> images = new ArrayList<>();
 		for (PDPage page : document.getPages()) {
 			images.addAll(getImagesFromResource(page.getResources()));
@@ -152,7 +65,7 @@ public class HandlePDFTest {
 		return images;
 	}
 
-	private List<RenderedImage> getImagesFromResource(PDResources resources) {
+	public static List<RenderedImage> getImagesFromResource(PDResources resources) {
 		List<RenderedImage> images = new ArrayList<>();
 		for (COSName cosName : resources.getXObjectNames()) {
 			PDXObject pdxObject = null;
@@ -174,7 +87,7 @@ public class HandlePDFTest {
 		return images;
 	}
 
-	private void pdfBoxExtractImages(PDDocument document) {
+	public static void pdfBoxExtractImages(PDDocument document) {
 		PDPageTree pdPageTree = document.getPages();
 		for (PDPage pdPage : pdPageTree) {
 			PDResources pdResources = pdPage.getResources();
@@ -194,7 +107,7 @@ public class HandlePDFTest {
 	}
 
 	
-	private void compareImages(File file1, File file2) {
+	public static void compareImages(File file1, File file2) {
 		BufferedImage image1 = null;
 		BufferedImage image2 = null;
 		try {
