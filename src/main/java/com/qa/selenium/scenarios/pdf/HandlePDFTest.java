@@ -6,10 +6,8 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
-import java.net.URLConnection;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,26 +21,13 @@ import org.apache.pdfbox.pdmodel.PDResources;
 import org.apache.pdfbox.pdmodel.graphics.PDXObject;
 import org.apache.pdfbox.pdmodel.graphics.form.PDFormXObject;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
-import org.apache.pdfbox.text.PDFTextStripper;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Sleeper;
-import org.testng.annotations.Test;
-
-import junit.framework.Assert;
 
 public class HandlePDFTest {
-
-	private WebDriver driver;
-	String pdfURL = "https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf";
-
-
 
 	public static PDDocument getPDFDocument(String pdfFileURL) {
 		PDDocument document = null;
 		try {
-			URL url = new URL(pdfFileURL);
+			URL url = URI.create(pdfFileURL).toURL();
 			InputStream inputStream = url.openStream();
 			BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 			document = PDDocument.load(bufferedInputStream);
@@ -54,7 +39,7 @@ public class HandlePDFTest {
 
 	/**
 	 * ====================================================================
-	 * Below code section Helps in dealing with PDF File image/s validation
+	 * Below code section helps in dealing with PDF File image/s validation
 	 * ====================================================================
 	 */
 	public static List<RenderedImage> getImagesFromPDFDocument(PDDocument document) {
@@ -96,7 +81,7 @@ public class HandlePDFTest {
 					PDXObject pdxObject = pdResources.getXObject(cosName);
 					if (pdxObject instanceof PDImageXObject) {
 						File file = new File(
-								System.getProperty("user.dir") + "//pdfImages//" + System.nanoTime() + ".png");
+								System.getProperty("user.dir") + "//src//main//resources//supportFiles//pdfImages//" + System.nanoTime() + ".png");
 						ImageIO.write(((PDImageXObject) pdxObject).getImage(), "png", file);
 					}
 				} catch (IOException ex) {
@@ -106,7 +91,6 @@ public class HandlePDFTest {
 		}
 	}
 
-	
 	public static void compareImages(File file1, File file2) {
 		BufferedImage image1 = null;
 		BufferedImage image2 = null;
@@ -116,7 +100,9 @@ public class HandlePDFTest {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+		assert image1 != null;
 		int image1Width = image1.getWidth();
+		assert image2 != null;
 		int image2Width = image2.getWidth();
 		int image1Height = image1.getHeight();
 		int image2Height = image2.getHeight();
@@ -146,20 +132,6 @@ public class HandlePDFTest {
 			double averageImageDifferencePixels = imagesDifference / totalImagePixels;
 			double imageDifferenceInpercentage = (averageImageDifferencePixels / 255) * 100;
 			System.out.println("Image Difference In Percentage: " + String.format("%.2f", imageDifferenceInpercentage));
-		}
-	}
-
-	private WebDriver browserSetup() {
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		return driver;
-	}
-
-	private void waitForSomeTime() {
-		try {
-			Sleeper.SYSTEM_SLEEPER.sleep(Duration.ofSeconds(3));
-		} catch (InterruptedException ex) {
-			ex.printStackTrace();
 		}
 	}
 
