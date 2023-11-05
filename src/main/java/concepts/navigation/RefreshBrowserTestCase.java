@@ -2,8 +2,6 @@ package concepts.navigation;
 
 import junit.framework.Assert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -31,8 +29,13 @@ public class RefreshBrowserTestCase {
 
 	@Test(priority = 1)
 	public void reloadBrowser() {
+		// Navigate the driver to the specified URL
 		driver.get("https://github.com/");
+
+		// Refresh the current page in the driver's session
 		driver.navigate().refresh();
+
+		// Assert that the title of the page is equal to the specified title
 		Assert.assertEquals(driver.getTitle(), "GitHub: Let’s build from here · GitHub");
 	}
 

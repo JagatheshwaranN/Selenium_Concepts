@@ -2,64 +2,47 @@ package concepts.navigation;
 
 import junit.framework.Assert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import scenarios.DriverConfiguration;
 
 public class MovePageForwardTestCase {
 
-	private static WebDriver driver;
-	private static ChromeOptions chromeOptions;
+	// Declare a WebDriver instance to interact with the web browser.
+	private WebDriver driver;
 
-	@Test(priority = 1, enabled = true)
-	private static void reloadBrowser() throws InterruptedException {
-		browserSetup();
-		driver.get("https://github.com/");
-		driver.navigate().refresh();
-		Assert.assertEquals(driver.getTitle(), "GitHub: Let’s build from here · GitHub");
-		waitForSomeTime();
-		driver.close();
+	@BeforeMethod
+	public void setUp() {
+		// Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
+		driver = DriverConfiguration.browserSetup();
 	}
 
-	@Test(priority = 2, enabled = true)
-	private static void movePageBackward() throws InterruptedException {
-		browserSetup();
-		driver.get("https://github.com/");
-		waitForSomeTime();
-		driver.navigate().to("https://www.selenium.dev/");
-		driver.navigate().back();
-		Assert.assertEquals(driver.getTitle(), "GitHub: Let’s build from here · GitHub");
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 3, enabled = true)
-	private static void movePageForward() throws InterruptedException {
-		browserSetup();
-		driver.get("https://github.com/");
-		waitForSomeTime();
-		driver.navigate().to("https://www.selenium.dev/");
-		driver.navigate().back();
-		waitForSomeTime();
-		driver.navigate().forward();
-		Assert.assertEquals(driver.getTitle(), "Selenium");
-		waitForSomeTime();
-		driver.close();
-	}
-
-	private static WebDriver browserSetup() {
-		chromeOptions = new ChromeOptions();
-		// chromeOptions.addArguments("--remote-allow-origins=*");
-		driver = new ChromeDriver(chromeOptions);
-		driver.manage().window().maximize();
-		return driver;
-	}
-
-	private static void waitForSomeTime() {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException ex) {
-			ex.printStackTrace();
+	@AfterMethod
+	public void tearDown() {
+		// Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
+		if (driver != null) {
+			// If a WebDriver instance exists, quit/close the browser session.
+			driver.quit();
 		}
 	}
+
+	@Test(priority = 1)
+	public void movePageForward() {
+		// Navigates the driver to the GitHub website
+		driver.get("https://github.com/");
+
+		// Navigates to the Selenium website
+		driver.navigate().to("https://www.selenium.dev/");
+
+		// Navigates back to the previous page
+		driver.navigate().back();
+
+		// Navigates forward to the next page
+		driver.navigate().forward();
+
+		// Asserts that the title of the current page is equal to "Selenium"
+		Assert.assertEquals(driver.getTitle(), "Selenium");
+	}
+
 }
