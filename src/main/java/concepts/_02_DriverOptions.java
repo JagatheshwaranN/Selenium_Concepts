@@ -27,28 +27,7 @@ public class _02_DriverOptions {
 	private static FirefoxOptions firefoxOptions;
 	private static EdgeOptions edgeOptions;
 
-	@Test(priority = 1, enabled = true)
-	private static void openMaximizedBrowser() {
-		chromeOptions = new ChromeOptions();
-		chromeOptions.addArguments("start-maximized");
-		driver = new ChromeDriver(chromeOptions);
-		driver.get("https://www.google.com/");
-		Assert.assertEquals(driver.getTitle(), "Google");
-		waitForSomeTime();
-		driver.close();
-	}
 
-	@Test(priority = 2, enabled = true)
-	private static void openChromeIncognito() {
-		chromeOptions = new ChromeOptions();
-		chromeOptions.addArguments("incognito");
-		driver = new ChromeDriver(chromeOptions);
-		driver.manage().window().maximize();
-		driver.get("https://www.google.com/");
-		Assert.assertEquals(driver.getTitle(), "Google");
-		waitForSomeTime();
-		driver.close();
-	}
 
 	@Test(priority = 3, enabled = true)
 	private static void acceptSSLSecurityIssueOnChrome() {
