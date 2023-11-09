@@ -29,18 +29,7 @@ public class _02_DriverOptions {
 
 
 
-	@Test(priority = 3, enabled = true)
-	private static void acceptSSLSecurityIssueOnChrome() {
-		chromeOptions = new ChromeOptions();
-		chromeOptions.setAcceptInsecureCerts(true);
-		driver = new ChromeDriver(chromeOptions);
-		driver.manage().window().maximize();
-		driver.get("https://untrusted-root.badssl.com/");
-		Assert.assertEquals(driver.getTitle(), "untrusted-root.badssl.com");
-		waitForSomeTime();
-		driver.close();
-	}
-	
+
 	@Test(priority = 4, enabled = true)
 	private static void acceptSSLSecurityIssueOnFirefox() {
 		firefoxOptions = new FirefoxOptions();
@@ -65,32 +54,6 @@ public class _02_DriverOptions {
 		driver.close();
 	}
 
-	@Test(priority = 6, enabled = true)
-	private static void pageLoadStrategy() {
-		chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
-		driver = new ChromeDriver(chromeOptions);
-		driver.manage().window().maximize();
-		driver.get("https://unsplash.com/t/people");
-		Assert.assertEquals(driver.getTitle(), "People | Unsplash");
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 7, enabled = true)
-	private static void waitTimeout() {
-		chromeOptions.setPageLoadTimeout(Duration.ofSeconds(10));
-		chromeOptions.setImplicitWaitTimeout(Duration.ofSeconds(10));
-		chromeOptions.setScriptTimeout(Duration.ofSeconds(10));
-		driver = new ChromeDriver(chromeOptions);
-		driver.manage().window().maximize();
-		driver.get(
-				"file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/SiteLoadDelay.html");
-		driver.findElement(By.xpath("//button[@onclick='load()']")).click();
-		driver.findElement(By.cssSelector(".light-mode-item.navbar-brand-item")).isDisplayed();
-		Assert.assertEquals(driver.getTitle(), "Online Courses and eBooks Library");
-		waitForSomeTime();
-		driver.close();
-	}
 
 	@Test(priority = 8, enabled = true)
 	// Not Complete

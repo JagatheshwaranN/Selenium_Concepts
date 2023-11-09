@@ -1,27 +1,30 @@
 package concepts.driver.chrome;
 
-import junit.framework.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-public class IncognitoModeTestCase {
+public class SSLSecurityIssueTestCase {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
 
-    @Test(priority = 2, enabled = true)
-    public void openChromeIncognito() {
+    @Test(priority = 1)
+    public void acceptSSLSecurityIssueOnChrome() {
+        // Define the expected title for comparison
+        String expectedTitle = "untrusted-root.badssl.com";
+
         // Set the system property for the WebDriver to use the JDK HTTP client
         System.setProperty("webdriver.http.factory", "jdk-http-client");
 
         // Instantiate ChromeOptions to configure the ChromeDriver
         ChromeOptions chromeOptions = new ChromeOptions();
 
-        // Add the argument to launch the Chrome browser in incognito mode
-        chromeOptions.addArguments("incognito");
+        // Allow the acceptance of insecure certificates
+        chromeOptions.setAcceptInsecureCerts(true);
 
         // Initialize the ChromeDriver with the configured options
         driver = new ChromeDriver(chromeOptions);
@@ -29,11 +32,11 @@ public class IncognitoModeTestCase {
         // Maximize the browser window for better visibility
         driver.manage().window().maximize();
 
-        // Navigate to the specified URL
-        driver.get("https://www.google.com/");
+        // Navigate to the untrusted website
+        driver.get("https://untrusted-root.badssl.com/");
 
-        // Compare the actual title with the expected title and assert their equality
-        Assert.assertEquals(driver.getTitle(), "Google");
+        // Compare the expected title with the actual title and assert their equality
+        Assert.assertEquals(expectedTitle, driver.getTitle(), "Actual title does not match expected title.");
     }
 
     @AfterMethod
