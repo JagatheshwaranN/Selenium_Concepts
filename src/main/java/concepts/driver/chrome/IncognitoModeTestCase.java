@@ -1,9 +1,9 @@
 package concepts.driver.chrome;
 
-import junit.framework.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -12,7 +12,7 @@ public class IncognitoModeTestCase {
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
 
-    @Test(priority = 2, enabled = true)
+    @Test(priority = 1)
     public void openChromeIncognito() {
         // Set the system property for the WebDriver to use the JDK HTTP client
         System.setProperty("webdriver.http.factory", "jdk-http-client");

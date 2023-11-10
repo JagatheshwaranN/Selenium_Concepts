@@ -15,7 +15,7 @@ public class TimeOutTestCase {
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
 
-    @Test(priority = 7)
+    @Test(priority = 1)
     public void waitTimeout() {
         // Define the expected title for comparison
         String expectedTitle = "Online Tutorials, Courses, and eBooks Library | Tutorialspoint";

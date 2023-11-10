@@ -5,29 +5,38 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class MaximizeBrowserWindowTestCase {
+public class ChromeHeadlessModeTestCase {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
 
-    @Test(priority = 1)
-    public void openMaximizedBrowser() {
-        // Set the system property for the webdriver factory
+    @BeforeMethod
+    public void setUp() {
+        // Set the system property for the WebDriver to use the JDK HTTP client
         System.setProperty("webdriver.http.factory", "jdk-http-client");
 
-        // Initialize ChromeOptions and add arguments
+        // Instantiate ChromeOptions to configure the ChromeDriver
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("start-maximized");
 
-        // Initialize the ChromeDriver with the specified ChromeOptions
+        // Set the Chrome browser to run in headless mode with the specified argument
+        chromeOptions.addArguments("--headless=new");
+
+        // Initialize the ChromeDriver with the configured options
         driver = new ChromeDriver(chromeOptions);
 
-        // Open the Google homepage
+        // Maximize the browser window using WebDriver's manage() method
+        driver.manage().window().maximize();
+    }
+
+    @Test(priority = 1)
+    public void headlessChromeBrowserLaunch() {
+        // Navigate to the Google Home page.
         driver.get("https://www.google.com/");
 
-        // Assert that the title of the page is "Google"
+        // Assert that the page title is "Google".
         Assert.assertEquals(driver.getTitle(), "Google");
     }
 
@@ -40,5 +49,5 @@ public class MaximizeBrowserWindowTestCase {
         }
     }
 
-
 }
+

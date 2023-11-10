@@ -25,7 +25,7 @@ public class DriverConfiguration {
     }
 
     public static WebDriver edgeBrowserSetup() {
-        // Initialize a EdgeDriver instance for browser automation.
+        // Initialize an EdgeDriver instance for browser automation.
         WebDriver driver = new EdgeDriver();
 
         // Maximize the browser window for a better view.

@@ -83,8 +83,8 @@ public class _02_DriverOptions {
 	@Test(priority = 10, enabled = true)
 	// Not sure about this usecase.
 	private static void browserDetach() {
-//		options.setExperimentalOption("detach", true);
-//		options.setCapability("detach", true);
+		//options.setExperimentalOption("detach", true);
+		//options.setCapability("detach", true);
 		browserSetup();
 		driver.get("https://www.google.com/");
 		Assert.assertEquals(driver.getTitle(), "Google");
