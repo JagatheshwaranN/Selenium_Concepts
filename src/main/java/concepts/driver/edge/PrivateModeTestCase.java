@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-public class IncognitoModeTestCase {
+public class PrivateModeTestCase {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;

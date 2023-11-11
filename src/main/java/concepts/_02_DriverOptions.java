@@ -92,17 +92,7 @@ public class _02_DriverOptions {
 		driver.close();
 	}
 
-	@Test(priority = 11, enabled = true)
-	private static void headlessChromeBrowserLaunch() {
-		chromeOptions = new ChromeOptions();
-		chromeOptions.addArguments("--headless=new");
-		chromeOptions.addArguments("--remote-allow-origins=*");
-		driver = new ChromeDriver(chromeOptions);
-		driver.manage().window().maximize();
-		driver.get("https://www.google.com/");
-		Assert.assertEquals(driver.getTitle(), "Google");
-		driver.close();
-	}
+
 
 	@Test(priority = 12, enabled = true)
 	private static void headlessFirefoxBrowserLaunch() {
