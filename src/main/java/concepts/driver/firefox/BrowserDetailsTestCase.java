@@ -29,9 +29,6 @@ public class BrowserDetailsTestCase {
 
         // Initialize the FirefoxDriver with the configured options
         driver = new FirefoxDriver(firefoxOptions);
-
-        // Maximize the browser window using WebDriver's manage() method
-        driver.manage().window().maximize();
     }
 
     @Test(priority = 1)

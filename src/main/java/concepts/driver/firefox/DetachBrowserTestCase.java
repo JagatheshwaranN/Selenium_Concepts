@@ -45,9 +45,6 @@ public class DetachBrowserTestCase {
         // Initialize the FirefoxDriver with the configured options
         driver = new FirefoxDriver(firefoxOptions);
 
-        // Maximize the browser window using WebDriver's manage() method
-        driver.manage().window().maximize();
-
         // Starts the Firefox browser in detached mode.
         driver.get("https://www.google.com/");
 

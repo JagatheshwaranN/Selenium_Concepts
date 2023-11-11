@@ -26,9 +26,6 @@ public class FirefoxHeadlessModeTestCase {
 
         // Initialize FirefoxDriver with FirefoxOptions
         driver = new FirefoxDriver(firefoxOptions);
-
-        // Maximize the browser window
-        driver.manage().window().maximize();
     }
 
     @Test(priority = 1)
