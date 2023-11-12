@@ -29,7 +29,7 @@ public class AddCookieTest {
     }
 
     @Test(priority = 1)
-    public void addCookie() {
+    public void testAddCookie() {
         // Navigate to the example website.
         driver.get("http://www.example.com/");
 

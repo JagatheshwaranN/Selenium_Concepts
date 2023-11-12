@@ -14,7 +14,7 @@ import java.util.Map;
 public class LaunchBrowserTest {
 
 	@Test(priority = 1)
-	public void launchBrowsers() {
+	public void testLaunchBrowser() {
 
         // Create a map to store browser names and their corresponding WebDriver classes
         Map<String, Class<? extends WebDriver>> browsers = new HashMap<>();

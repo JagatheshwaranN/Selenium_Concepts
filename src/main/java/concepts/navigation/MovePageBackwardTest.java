@@ -28,7 +28,7 @@ public class MovePageBackwardTest {
 	}
 
 	@Test(priority = 1)
-	public void movePageBackward() {
+	public void testMovePageBackward() {
 		// Navigates the driver to the GitHub website
 		driver.get("https://github.com/");
 

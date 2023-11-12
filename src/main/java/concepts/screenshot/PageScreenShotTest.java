@@ -34,7 +34,7 @@ public class PageScreenShotTest {
     }
 
     @Test(priority = 1)
-    public void takeScreenshotOfCurrentPage() throws IOException {
+    public void testPageScreenShot() throws IOException {
 		/*
 			Another way of taking screenshot
 			================================

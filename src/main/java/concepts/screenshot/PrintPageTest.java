@@ -32,7 +32,7 @@ public class PrintPageTest {
     }
 
     @Test(priority = 1)
-	public void printCurrentPage() {
+	public void testPrintPage() {
 		// To set the page ranges to print
 		// printOptions.setPageRanges("1", "2");
 		try {

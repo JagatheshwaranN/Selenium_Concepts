@@ -31,7 +31,7 @@ public class ElementScreenShotTest {
     }
 
     @Test(priority = 1)
-    public void takeElementScreenShot() {
+    public void testElementScreenShot() {
 		try {
 			// Navigate to the specified URL using the WebDriver instance
 			driver.get("http://www.example.com");

@@ -43,7 +43,7 @@ public class RelativeLocatorsTest {
 	}
 
 	@Test(priority = 1)
-	public void getBelowElement() {
+	public void testGetBelowElement() {
 		// Navigate to the specified URL
 		driver.get("https://automationbookstore.dev/");
 
@@ -59,7 +59,7 @@ public class RelativeLocatorsTest {
 	}
 
 	@Test(priority = 2)
-	public void getAboveElement() {
+	public void testGetAboveElement() {
 		// Navigate to the specified URL
 		driver.get("https://automationbookstore.dev/");
 
@@ -76,7 +76,7 @@ public class RelativeLocatorsTest {
 
 
 	@Test(priority = 3)
-	public void getToLeftOfElement() {
+	public void testGetToLeftOfElement() {
 		// Navigate to the specified URL
 		driver.get("https://automationbookstore.dev/");
 
@@ -92,7 +92,7 @@ public class RelativeLocatorsTest {
 	}
 
 	@Test(priority = 4)
-	public void getToRightOfElement() {
+	public void testGetToRightOfElement() {
 		// Navigate to the specified URL
 		driver.get("https://automationbookstore.dev/");
 
@@ -108,7 +108,7 @@ public class RelativeLocatorsTest {
 	}
 
 	@Test(priority = 5)
-	public void getNearElement() {
+	public void testGetNearElement() {
 		// Navigate to the specified URL
 		driver.get("https://www.google.com/");
 

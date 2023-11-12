@@ -28,7 +28,7 @@ public class RefreshBrowserTest {
 	}
 
 	@Test(priority = 1)
-	public void reloadBrowser() {
+	public void testRefreshBrowser() {
 		// Navigate the driver to the specified URL
 		driver.get("https://github.com/");
 

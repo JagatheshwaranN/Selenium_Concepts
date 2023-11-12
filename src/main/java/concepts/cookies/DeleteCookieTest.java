@@ -31,7 +31,7 @@ public class DeleteCookieTest {
 	}
 
 	@Test(priority = 1)
-	public void deleteCookie() {
+	public void testDeleteCookie() {
 		// Set to store allCookies
 		Set<Cookie> allCookies;
 

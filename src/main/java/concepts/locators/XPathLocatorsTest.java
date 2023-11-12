@@ -29,7 +29,7 @@ public class XPathLocatorsTest {
     }
 
     @Test(priority = 1)
-    public void xpathLocatorTypes() {
+    public void testXPathLocator() {
         // Navigate to the facebook.com
         driver.get("https://www.facebook.com/");
 

@@ -31,7 +31,7 @@ public class GetCookiesTest {
 	}
 
 	@Test(priority = 1)
-	public void getCookies() {
+	public void testGetCookies() {
 		// Navigate to the example website
 		driver.get("http://www.example.com/");
 

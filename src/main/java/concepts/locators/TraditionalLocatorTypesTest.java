@@ -30,7 +30,7 @@ public class TraditionalLocatorTypesTest {
 	}
 
 	@Test(priority = 1)
-	public void traditionalLocators() {
+	public void testTraditionalLocatorTypes() {
 
 		// 1. Name
 		// Selects the input element with the name `no_type`.

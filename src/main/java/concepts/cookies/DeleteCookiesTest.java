@@ -31,7 +31,7 @@ public class DeleteCookiesTest {
 	}
 
 	@Test(priority = 1)
-	public void deleteAllCookies() {
+	public void testDeleteCookies() {
 		// Navigate to the example website
 		driver.get("http://www.example.com/");
 

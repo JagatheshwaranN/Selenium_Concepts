@@ -31,7 +31,7 @@ public class CookiesSameSiteTest {
 	}
 
 	@Test(priority = 1)
-	public void cookieSameSiteTest() {
+	public void testCookieSameSite() {
 		// Set to store allCookies
 		Set<Cookie> allCookies;
 

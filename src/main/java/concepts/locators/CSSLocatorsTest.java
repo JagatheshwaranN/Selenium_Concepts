@@ -30,7 +30,7 @@ public class CSSLocatorsTest {
 
 
     @Test(priority = 1)
-    public void cssLocatorTypes() {
+    public void testCSSLocators() {
         // Navigate to the facebook.com
         driver.get("https://www.facebook.com/");
 

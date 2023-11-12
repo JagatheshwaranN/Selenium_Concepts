@@ -28,7 +28,7 @@ public class MovePageForwardTest {
 	}
 
 	@Test(priority = 1)
-	public void movePageForward() {
+	public void testMovePageForward() {
 		// Navigates the driver to the GitHub website
 		driver.get("https://github.com/");
 
