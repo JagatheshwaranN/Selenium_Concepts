@@ -23,6 +23,10 @@ public class RelativeLocatorsTest {
 	// Declare a WebDriverWait instance to be used for explicit waits
 	private WebDriverWait wait;
 
+	// Define a constant duration for the maximum wait time, set to 10 seconds.
+	private static final Duration WAIT_TIMEOUT = Duration.ofSeconds(10);
+
+
 	@BeforeMethod
 	public void setUp() {
 		// Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
@@ -44,7 +48,7 @@ public class RelativeLocatorsTest {
 		driver.get("https://automationbookstore.dev/");
 
 		// Wait for the page to fully load before interacting with elements
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait = new WebDriverWait(driver, WAIT_TIMEOUT);
 		wait.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
 
 		// Find the element below the element with id "pid1" using RelativeLocator
@@ -60,7 +64,7 @@ public class RelativeLocatorsTest {
 		driver.get("https://automationbookstore.dev/");
 
 		// Wait for the page to fully load before interacting with elements
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait = new WebDriverWait(driver, WAIT_TIMEOUT);
 		wait.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
 
 		// Find the element above the element with id "pid8" using RelativeLocator
@@ -77,7 +81,7 @@ public class RelativeLocatorsTest {
 		driver.get("https://automationbookstore.dev/");
 
 		// Wait for the page to fully load before interacting with elements
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait = new WebDriverWait(driver, WAIT_TIMEOUT);
 		wait.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
 
 		// Find the element to the left of the element with id "pid2" using RelativeLocator
@@ -93,7 +97,7 @@ public class RelativeLocatorsTest {
 		driver.get("https://automationbookstore.dev/");
 
 		// Wait for the page to fully load before interacting with elements
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait = new WebDriverWait(driver, WAIT_TIMEOUT);
 		wait.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
 
 		// Find the element to the right of the element with id "pid5" using RelativeLocator
@@ -109,7 +113,7 @@ public class RelativeLocatorsTest {
 		driver.get("https://www.google.com/");
 
 		// Wait for the page to fully load before interacting with elements
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait = new WebDriverWait(driver, WAIT_TIMEOUT);
 		wait.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
 
 		// Find the input element near the element with the name "btnI" using RelativeLocator
