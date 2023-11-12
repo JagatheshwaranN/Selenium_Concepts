@@ -1,4 +1,4 @@
-package concepts;
+package scenarios;
 
 import java.util.List;
 
