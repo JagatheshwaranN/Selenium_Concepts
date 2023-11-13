@@ -1,4 +1,4 @@
-package concepts;
+package concepts.element;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
