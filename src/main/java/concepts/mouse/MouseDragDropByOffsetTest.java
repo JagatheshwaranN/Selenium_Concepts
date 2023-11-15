@@ -1,80 +1,70 @@
 package concepts.mouse;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.PointerInput;
-import org.openqa.selenium.interactions.Sequence;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import scenarios.DriverConfiguration;
 
-import java.time.Duration;
 
 public class MouseDragDropByOffsetTest {
 
-	public WebDriver driver;
-	public ChromeOptions chromeOptions;
-	public Actions actions;
-	public PointerInput mouse;
-	public Sequence sequence;
-	
-	@Test(priority = 12)
-	public void mouseDragDropByOffset() {
-		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-		actions = new Actions(driver);
-		Rectangle start = driver.findElement(By.id("draggable")).getRect();
-		Rectangle finish = driver.findElement(By.id("droppable")).getRect();
-		actions.dragAndDropBy(driver.findElement(By.id("draggable")), finish.getX() - start.getX(),
-				finish.getY() - start.getY()).perform();
-		String result = driver.findElement(By.xpath("//strong[@id='drop-status']")).getText();
-		Assert.assertEquals(result, "dropped");
+	// Declare a WebDriver instance to interact with the web browser.
+	private WebDriver driver;
+
+	@BeforeMethod
+	public void setUp() {
+		// Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
+		driver = DriverConfiguration.browserSetup();
 	}
 
-	@Test(priority = 13)
-	public void actionPause() {
-		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-		long startTime = System.currentTimeMillis();
-		new Actions(driver).moveToElement(driver.findElement(By.id("clickable"))).pause(Duration.ofSeconds(1))
-				.clickAndHold().pause(Duration.ofSeconds(1)).sendKeys("action pause").perform();
-		long endTime = System.currentTimeMillis() - startTime;
-		Assert.assertTrue(endTime > 2000);
-		Assert.assertTrue(endTime < 3000);
+	@AfterMethod
+	public void tearDown() {
+		// Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
+		if (driver != null) {
+			// If a WebDriver instance exists, quit/close the browser session.
+			driver.quit();
+		}
 	}
 
-	@Test(priority = 14)
-	public void actionReset() {
+	@Test(priority = 1)
+	public void testMouseDragDropByOffset() {
+		// Define the expected value after the drag-and-drop action
+		String expectedValue = "dropped";
+
+		// Open the web page with the drag-and-drop demo
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-		actions = new Actions(driver);
-		WebElement clickable = driver.findElement(By.id("clickable"));
-		actions.clickAndHold(clickable).keyDown(Keys.SHIFT).sendKeys("a").perform();
-		((RemoteWebDriver) driver).resetInputState();
-		actions.sendKeys("a").perform();
-		Assert.assertEquals("A", String.valueOf(clickable.getAttribute("value").charAt(0)));
-		Assert.assertEquals("a", String.valueOf(clickable.getAttribute("value").charAt(1)));
+		/*
+			Another way to get the element location
+			=======================================
+			Rectangle start = driver.findElement(By.id("draggable")).getRect();
+			Rectangle finish = driver.findElement(By.id("droppable")).getRect();
+		*/
+		// Create an Actions object for performing actions on the page
+		Actions actions = new Actions(driver);
+
+		// Find the draggable element and retrieve its location
+		WebElement draggableElement = driver.findElement(By.id("draggable"));
+		Point draggableCoords = draggableElement.getLocation();
+
+		// Find the droppable element and retrieve its location
+		WebElement droppableElement = driver.findElement(By.id("droppable"));
+		Point droppableCoords = droppableElement.getLocation();
+
+		// Calculate the offset between draggable and droppable elements and perform the drag-and-drop action
+		actions.dragAndDropBy(
+				draggableElement,
+				droppableCoords.getX() - draggableCoords.getX(), // Calculate X-axis offset
+				droppableCoords.getY() - draggableCoords.getY()  // Calculate Y-axis offset
+		).perform();
+
+		// Retrieve the text from the specified element to verify the drop status
+		String actualValue = driver.findElement(By.xpath("//strong[@id='drop-status']")).getText();
+
+		// Assert the expected drop status with the actual value
+		Assert.assertEquals(actualValue, expectedValue);
 	}
 
-	/*
-	 * The below method is used to handle the moving slider usecase.
-	 */
-	@Test(priority = 15)
-	public void dragAndDropBy() {
-		driver.get("https://jqueryui.com/slider/");
-		WebElement frameElement = driver.findElement(By.xpath("//iframe[@class='demo-frame']"));
-		driver.switchTo().frame(frameElement);
-		WebElement slider = driver.findElement(By.id("slider"));
-		new Actions(driver).dragAndDropBy(slider, 50, 0).build().perform();
-		String targetPosition = driver.findElement(By.xpath("//span[contains(@class,'ui-slider-handle')]"))
-				.getAttribute("style");
-		Assert.assertEquals(targetPosition, "left: 59%;");
-	}
-	
-	@Test(priority = 16)
-	private void sendKeys() {
-		driver.get("https://accounts.google.com/");
-		new Actions(driver).sendKeys(driver.findElement(By.name("identifier")), "google").perform();
-		var userName = driver.findElement(By.name("identifier")).getAttribute("data-initial-value");
-		Assert.assertEquals(userName, "google");
-	}
-	
 }
