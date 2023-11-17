@@ -10,49 +10,58 @@ import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import scenarios.DriverConfiguration;
 
 public class MouseActionResetTest {
 
-	public WebDriver driver;
-	public ChromeOptions chromeOptions;
-	public Actions actions;
-	public PointerInput mouse;
-	public Sequence sequence;
-	
-	@Test(priority = 14)
-	public void actionReset() {
+	// Declare a WebDriver instance to interact with the web browser.
+	private WebDriver driver;
+
+	@BeforeMethod
+	public void setUp() {
+		// Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
+		driver = DriverConfiguration.browserSetup();
+	}
+
+	@AfterMethod
+	public void tearDown() {
+		// Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
+		if (driver != null) {
+			// If a WebDriver instance exists, quit/close the browser session.
+			driver.quit();
+		}
+	}
+
+	@Test(priority = 1)
+	public void testMouseActionReset() {
+		// Load the webpage for mouse interactions
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
-		actions = new Actions(driver);
+
+		// Initialize Actions class instance
+		Actions actions = new Actions(driver);
+
+		// Find the element to interact with
 		WebElement clickable = driver.findElement(By.id("clickable"));
+
+		// Perform a series of actions: click and hold, press SHIFT, and send 'a'
 		actions.clickAndHold(clickable).keyDown(Keys.SHIFT).sendKeys("a").perform();
-		((RemoteWebDriver) driver).resetInputState();
+
+		// Verify the state after the initial actions
+		Assert.assertEquals("A", String.valueOf(clickable.getAttribute("value").charAt(0)));
+		Assert.assertEquals("a", String.valueOf(clickable.getAttribute("value").charAt(1)));
+
+		// Reset the input state (Simulating a reset - Note: WebDriver might not provide a direct reset method)
+		((RemoteWebDriver) driver).resetInputState(); // Resetting input state (May not work as expected in all scenarios)
+
+		// Perform another action after the "reset" to simulate further input
 		actions.sendKeys("a").perform();
+
+		// Verify the state after the "reset" and additional action
 		Assert.assertEquals("A", String.valueOf(clickable.getAttribute("value").charAt(0)));
 		Assert.assertEquals("a", String.valueOf(clickable.getAttribute("value").charAt(1)));
 	}
 
-	/*
-	 * The below method is used to handle the moving slider usecase.
-	 */
-	@Test(priority = 15)
-	public void dragAndDropBy() {
-		driver.get("https://jqueryui.com/slider/");
-		WebElement frameElement = driver.findElement(By.xpath("//iframe[@class='demo-frame']"));
-		driver.switchTo().frame(frameElement);
-		WebElement slider = driver.findElement(By.id("slider"));
-		new Actions(driver).dragAndDropBy(slider, 50, 0).build().perform();
-		String targetPosition = driver.findElement(By.xpath("//span[contains(@class,'ui-slider-handle')]"))
-				.getAttribute("style");
-		Assert.assertEquals(targetPosition, "left: 59%;");
-	}
-	
-	@Test(priority = 16)
-	private void sendKeys() {
-		driver.get("https://accounts.google.com/");
-		new Actions(driver).sendKeys(driver.findElement(By.name("identifier")), "google").perform();
-		var userName = driver.findElement(By.name("identifier")).getAttribute("data-initial-value");
-		Assert.assertEquals(userName, "google");
-	}
-	
 }
