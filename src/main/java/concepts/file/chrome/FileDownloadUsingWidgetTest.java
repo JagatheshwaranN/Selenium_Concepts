@@ -3,11 +3,6 @@ package concepts.file.chrome;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -16,7 +11,6 @@ import scenarios.DriverConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 
 public class FileDownloadUsingWidgetTest {
 
@@ -86,7 +80,10 @@ public class FileDownloadUsingWidgetTest {
 				Assert.assertTrue(downloadedFile.exists(), "Downloaded file is found in the directory");
 
 				// Cleanup: You may delete the file after test completion or keep it for further use
-				downloadedFile.deleteOnExit();
+				if (!downloadedFile.delete()) {
+					System.out.println("Error deleting file: " + downloadedFilePath);
+				}
+				System.out.println("File Deleted");
 			}
 		} catch (IOException | InterruptedException e) {
 			// Handle IOException or InterruptedException by printing the stack trace
