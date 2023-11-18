@@ -1,4 +1,4 @@
-package concepts.file.chrome;
+package concepts.file.edge;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -26,8 +26,8 @@ public class FileUploadUsingToolKitTest {
 
 	@BeforeMethod
 	public void setUp() {
-		// Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
-		driver = DriverConfiguration.browserSetup();
+		// Set up the WebDriver instance by calling a method named 'edgeBrowserSetup' from the 'DriverConfiguration' class
+		driver = DriverConfiguration.edgeBrowserSetup();
 	}
 
 	@AfterMethod
@@ -39,6 +39,7 @@ public class FileUploadUsingToolKitTest {
 		}
 	}
 
+	// Not Working
 	@Test(priority = 1)
 	public void testFileUploadUsingToolKit() {
 		// Navigate to the page where file upload functionality exists

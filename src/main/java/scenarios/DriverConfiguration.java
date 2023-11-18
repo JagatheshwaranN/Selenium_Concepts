@@ -25,6 +25,9 @@ public class DriverConfiguration {
     }
 
     public static WebDriver edgeBrowserSetup() {
+        // Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
+
         // Initialize an EdgeDriver instance for browser automation.
         WebDriver driver = new EdgeDriver();
 
@@ -36,6 +39,9 @@ public class DriverConfiguration {
     }
 
     public static WebDriver fireFoxBrowserSetup() {
+        // Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
+
         // Create a ProfilesIni instance to manage Firefox profiles.
         ProfilesIni profile = new ProfilesIni();
 
