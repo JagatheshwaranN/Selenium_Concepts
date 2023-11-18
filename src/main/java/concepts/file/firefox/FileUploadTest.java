@@ -1,4 +1,4 @@
-package concepts.file.chrome;
+package concepts.file.firefox;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,11 +20,11 @@ public class FileUploadTest {
 
 	// Define a constant duration for the maximum wait time, set to 5 seconds
 	private static final Duration WAIT_TIMEOUT = Duration.ofSeconds(5);
-	
+
 	@BeforeMethod
 	public void setUp() {
-		// Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
-		driver = DriverConfiguration.browserSetup();
+		// Set up the WebDriver instance by calling a method named 'firefoxBrowserSetup' from the 'DriverConfiguration' class
+		driver = DriverConfiguration.fireFoxBrowserSetup();
 	}
 	@AfterMethod
 	public void tearDown() {

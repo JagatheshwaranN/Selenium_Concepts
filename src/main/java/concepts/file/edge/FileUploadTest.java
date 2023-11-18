@@ -21,7 +21,6 @@ public class FileUploadTest {
 	// Define a constant duration for the maximum wait time, set to 5 seconds
 	private static final Duration WAIT_TIMEOUT = Duration.ofSeconds(5);
 
-
 	@BeforeMethod
 	public void setUp() {
 		// Set up the WebDriver instance by calling a method named 'edgeBrowserSetup' from the 'DriverConfiguration' class
