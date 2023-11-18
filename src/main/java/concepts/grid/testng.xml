@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Data Driven Test Automation" parallel="tests">
+	<test thread-count="1" name="Chrome Test">
+	<parameter name="browser" value="chrome"/>
+		<classes>
+			<class name="concepts.grid.SeleniumGridDemo2" />
+		</classes>
+	</test>
+<!-- 	<test thread-count="1" name="Edge Test">
+	<parameter name="browser" value="edge"></parameter>
+	<classes>
+		<class name="seleniumGrid.SeleniumGridDemo" />
+	</classes>
+</test>
+	<test thread-count="1" name="Firefox Test">
+	<parameter name="browser" value="firefox"></parameter>
+		<classes>
+			<class name="seleniumGrid.SeleniumGridDemo" />
+		</classes>
+	</test> -->
+</suite>
