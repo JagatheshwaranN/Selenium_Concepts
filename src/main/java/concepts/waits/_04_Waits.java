@@ -17,38 +17,6 @@ public class _04_Waits {
 	private static ChromeOptions chromeOptions;
 	private static Wait<WebDriver> wait;
 
-	@Test(priority = 5, enabled = true)
-	private static void fluentWaitType1() {
-		browserSetup();
-		driver.get(
-				"D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
-		wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
-				.pollingEvery(Duration.ofMillis(1500)).ignoring(NoSuchElementException.class)
-				.ignoring(NotFoundException.class);
-		WebElement username = wait.until(driver -> driver.findElement(By.cssSelector("input[id='myText']")));
-		username.sendKeys("admin");
-		var result = username.getAttribute("value");
-		Assert.assertEquals(result, "admin");
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 6, enabled = true)
-	private static void fluentWaitType2() {
-		browserSetup();
-		driver.get(
-				"D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
-		wait = new FluentWait<WebDriver>(driver, Clock.systemDefaultZone(), Sleeper.SYSTEM_SLEEPER)
-				.withTimeout(Duration.ofSeconds(10)).pollingEvery(Duration.ofMillis(1500))
-				.ignoring(NotFoundException.class);
-		WebElement username = wait.until(driver -> driver.findElement(By.cssSelector("input[id='myText']")));
-		username.sendKeys("admin");
-		var result = username.getAttribute("value");
-		Assert.assertEquals(result, "admin");
-		waitForSomeTime();
-		driver.close();
-	}
-
 	@Test(priority = 7, enabled = true)
 	private static void fluentWaitType3() {
 		browserSetup();

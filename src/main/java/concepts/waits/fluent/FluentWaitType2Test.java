@@ -2,6 +2,7 @@ package concepts.waits.fluent;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Sleeper;
 import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -9,10 +10,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.time.Clock;
 import java.time.Duration;
 import java.util.Arrays;
 
-public class FluentWaitType1Test {
+public class FluentWaitType2Test {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
@@ -39,7 +41,7 @@ public class FluentWaitType1Test {
     }
 
     @Test(priority = 1)
-	public void testFluentWaitType1() {
+	public void testFluentWaitType2() {
 		// Define the expected value
 		String expectedValue = "Selenium";
 
@@ -48,10 +50,10 @@ public class FluentWaitType1Test {
 
 		try {
 			// Set up FluentWait with specific timeout, polling interval, and exceptions to ignore
-			Wait<WebDriver> wait = new FluentWait<>(driver)
-					.withTimeout(WAIT_TIMEOUT) // Adjust timeout as needed
-					.pollingEvery(WAIT_SLEEP) // Adjust a polling interval as needed
-					.ignoreAll(Arrays.asList(NoSuchElementException.class, NotFoundException.class));
+			Wait<WebDriver> wait = new FluentWait<>(driver, Clock.systemDefaultZone(), Sleeper.SYSTEM_SLEEPER)
+					.withTimeout(WAIT_TIMEOUT)      // Define the maximum amount of time to wait for a condition
+					.pollingEvery(WAIT_SLEEP)      // Define the polling interval between attempts
+					.ignoreAll(Arrays.asList(NoSuchElementException.class, NotFoundException.class));  // Ignore specified exceptions
 
 			// Wait until the condition is met or timeout occurs
 			WebElement username = wait.until(driver -> {

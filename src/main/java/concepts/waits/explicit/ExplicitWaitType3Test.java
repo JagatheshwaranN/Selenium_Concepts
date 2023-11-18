@@ -23,7 +23,7 @@ public class ExplicitWaitType3Test {
 	// Define a constant duration for the maximum wait time, set to 5 seconds
 	private static final Duration WAIT_TIMEOUT = Duration.ofSeconds(5);
 
-	// Define a constant duration for the maximum wait time, set to 1.5 seconds
+	// Define a constant duration for the maximum sleep time, set to 1.5 seconds
 	private static final Duration WAIT_SLEEP = Duration.ofMillis(1500);
 
 
