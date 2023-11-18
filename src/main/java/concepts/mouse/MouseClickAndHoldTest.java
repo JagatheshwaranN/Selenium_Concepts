@@ -17,7 +17,7 @@ public class MouseClickAndHoldTest {
 	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
 
-	// Define a constant duration for the maximum wait time, set to 10 seconds
+	// Define a constant duration for the maximum wait time, set to 5 seconds
 	private static final Duration WAIT_TIMEOUT = Duration.ofSeconds(5);
 
 
