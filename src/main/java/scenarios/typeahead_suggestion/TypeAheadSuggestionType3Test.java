@@ -1,6 +1,4 @@
-package scenarios;
-
-import java.time.Duration;
+package scenarios.typeahead_suggestion;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,8 +8,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import scenarios.DriverConfiguration;
 
-public class HandleTypeAheadSuggestionTest  {
+import java.time.Duration;
+
+public class TypeAheadSuggestionType3Test {
 
 	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
@@ -44,63 +45,7 @@ public class HandleTypeAheadSuggestionTest  {
 	}
 
 	@Test(priority = 1)
-	public void selectValueFromTypeAheadSuggestionApproach1() {
-		// Navigate to the URL of the jQuery UI Autocomplete example.
-		driver.get("http://jqueryui.com/autocomplete/");
-
-		// Switch to the iframe containing the autocomplete input field.
-		driver.switchTo().frame(driver.findElement(By.className("demo-frame")));
-
-		// Locate the input field element for typing.
-		WebElement searchBar = driver.findElement(By.id("tags"));
-
-		// Type each character from the INPUT_TEXT into the search bar.
-		for (char c : INPUT_TEXT.toCharArray()) {
-			searchBar.sendKeys(String.valueOf(c));
-		}
-
-		// Find the type-ahead suggestion dropdown.
-		WebElement typeAheadSuggestion = driver.findElement(By.id("ui-id-1"));
-
-		// Wait for the suggestion dropdown to become visible.
-		wait.until(ExpectedConditions.visibilityOf(typeAheadSuggestion));
-
-		// Select the desired suggestion from the dropdown.
-		selectSuggestion(typeAheadSuggestion);
-	}
-
-	@Test(priority = 2)
-	public void selectValueFromTypeAheadSuggestionApproach2() {
-		// Navigate to the URL of the jQuery UI Autocomplete example.
-		driver.get("http://jqueryui.com/autocomplete/");
-
-		// Switch to the iframe containing the autocomplete input field.
-		driver.switchTo().frame(driver.findElement(By.className("demo-frame")));
-
-		// Locate the input field element for typing.
-		WebElement searchBar = driver.findElement(By.id("tags"));
-
-		// Loop through each character in the INPUT_TEXT string.
-		for (int i = 0; i < INPUT_TEXT.length(); i++) {
-			// Extract the character at the current index and convert it to a string.
-			searchBar.sendKeys(String.valueOf(INPUT_TEXT.charAt(i)));
-
-			// Add a delay or wait (e.g., for user interface responsiveness).
-			waitForSeconds();
-		}
-
-		// Find the type-ahead suggestion dropdown.
-		WebElement typeAheadSuggestion = driver.findElement(By.id("ui-id-1"));
-
-		// Wait for the suggestion dropdown to become visible.
-		wait.until(ExpectedConditions.visibilityOf(typeAheadSuggestion));
-
-		// Select the desired suggestion from the dropdown.
-		selectSuggestion(typeAheadSuggestion);
-	}
-
-	@Test(priority = 3)
-	public void selectValueFromTypeAheadSuggestionApproach3() {
+	public void testTypeAheadSuggestionType3() {
 		// Navigate to the URL of the jQuery UI Autocomplete example.
 		driver.get("http://jqueryui.com/autocomplete/");
 
