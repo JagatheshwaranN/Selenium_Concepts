@@ -43,7 +43,7 @@ public class GetPDFFileContentTest {
             PDFTextStripper pdfTextStripper = new PDFTextStripper();
 
             // Get the text content of the PDF document using the PDFTextStripper
-            String pdfFileContent = pdfTextStripper.getText(HandlePDFTest.getPDFDocument(PDF_URL));
+            String pdfFileContent = pdfTextStripper.getText(PDFTest.getPDFDocument(PDF_URL));
 
             // Print the extracted PDF content to the console
             System.out.println(pdfFileContent);

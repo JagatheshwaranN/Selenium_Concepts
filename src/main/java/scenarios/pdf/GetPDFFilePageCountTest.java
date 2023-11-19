@@ -37,7 +37,7 @@ public class GetPDFFilePageCountTest {
         driver.get(PDF_URL);
 
         // Retrieves the number of pages in the PDF document
-        int pages = HandlePDFTest.getPDFDocument(PDF_URL).getNumberOfPages();
+        int pages = PDFTest.getPDFDocument(PDF_URL).getNumberOfPages();
 
         // Verifies if the number of pages in the PDF document matches the expected value
         Assert.assertEquals(pages, 4);

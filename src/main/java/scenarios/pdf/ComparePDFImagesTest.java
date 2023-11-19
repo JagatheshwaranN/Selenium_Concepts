@@ -19,16 +19,16 @@ public class ComparePDFImagesTest {
     @Test(priority = 1)
     public void testComparePDFImages() {
         // Get the PDDocument object by providing the FILE_PATH
-        PDDocument docx = HandlePDFTest.getPDFDocument(FILE_PATH);
+        PDDocument docx = PDFTest.getPDFDocument(FILE_PATH);
 
         // Obtain the count of images from the PDF document
-        int imagesCount = HandlePDFTest.getImagesFromPDFDocument(docx).size();
+        int imagesCount = PDFTest.getImagesFromPDFDocument(docx).size();
 
         // Print the total count of images
         System.out.println("Total Images Count : " + imagesCount);
 
         // Extract images from the PDF document using PDFBox
-        HandlePDFTest.pdfBoxExtractImages(docx);
+        PDFTest.pdfBoxExtractImages(docx);
 
         // Create File objects for the specified image files
         File file1 = new File(HDFC_COLOR_FILE);
@@ -36,10 +36,10 @@ public class ComparePDFImagesTest {
         File file3 = new File(HDFC_BLACK_FILE);
 
         // Compare the first two image files
-        HandlePDFTest.compareImages(file1, file2);
+        PDFTest.compareImages(file1, file2);
 
         // Compare the second and third image files
-        HandlePDFTest.compareImages(file2, file3);
+        PDFTest.compareImages(file2, file3);
     }
 
 }
