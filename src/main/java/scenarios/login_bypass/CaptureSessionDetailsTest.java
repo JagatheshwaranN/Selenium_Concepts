@@ -51,7 +51,7 @@ public class CaptureSessionDetailsTest {
     }
 
     @Test(priority = 1)
-    public void loginOnceToCaptureSessionDetails() throws IOException {
+    public void testCaptureSessionDetails() throws IOException {
         // Augment the driver with WebStorage
         webStorage = (WebStorage) new Augmenter().augment(driver);
 

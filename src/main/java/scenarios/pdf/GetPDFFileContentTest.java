@@ -1,14 +1,17 @@
 package scenarios.pdf;
 
 import scenarios.DriverConfiguration;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 
-public class GetPDFFilePageCountTestCase {
+
+public class GetPDFFileContentTest {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
@@ -32,15 +35,25 @@ public class GetPDFFilePageCountTestCase {
     }
 
     @Test(priority = 1)
-    public void getPDFFilePageCount() {
+    public void testGetPDFFileContent() {
         // Navigates the driver to the specified PDF URL
         driver.get(PDF_URL);
+        try {
+            // Create a PDFTextStripper instance to extract text from the PDF document
+            PDFTextStripper pdfTextStripper = new PDFTextStripper();
 
-        // Retrieves the number of pages in the PDF document
-        int pages = HandlePDFTest.getPDFDocument(PDF_URL).getNumberOfPages();
+            // Get the text content of the PDF document using the PDFTextStripper
+            String pdfFileContent = pdfTextStripper.getText(HandlePDFTest.getPDFDocument(PDF_URL));
 
-        // Verifies if the number of pages in the PDF document matches the expected value
-        Assert.assertEquals(pages, 4);
+            // Print the extracted PDF content to the console
+            System.out.println(pdfFileContent);
+
+            // Assert that the extracted content contains the specified text "PDF BOOKMARK SAMPLE"
+            Assert.assertTrue(pdfFileContent.contains("PDF BOOKMARK SAMPLE"));
+        } catch (IOException ex) {
+            // If an IOException occurs, print the stack trace to identify the issue
+            ex.printStackTrace();
+        }
     }
 
 }

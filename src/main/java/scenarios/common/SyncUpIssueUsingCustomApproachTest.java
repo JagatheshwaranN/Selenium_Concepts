@@ -1,4 +1,4 @@
-package scenarios;
+package scenarios.common;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -8,10 +8,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import scenarios.DriverConfiguration;
 
 
-
-public class HandleSyncUpIssueUsingCustomApproachTest {
+public class SyncUpIssueUsingCustomApproachTest {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
@@ -32,7 +32,7 @@ public class HandleSyncUpIssueUsingCustomApproachTest {
     }
 
     @Test(priority = 1)
-    public void handleSyncUpIssueUsingCustomApproach() {
+    public void testSyncUpIssueUsingCustomApproach() {
         // Load the web page from a local file
         driver.get("file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/SiteLoadDelay.html");
 

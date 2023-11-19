@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import java.util.Properties;
 
-public class HandleSendGmailOTPTest {
+public class SendGmailOTPTest {
 
 	// SMTP host for sending emails
     public final String emailHost = "smtp.gmail.com";
@@ -15,7 +15,7 @@ public class HandleSendGmailOTPTest {
     public final int smtpPort = 587;
 
     @Test(priority = 1)
-    public void mockSendOTPEmail() {
+    public void testSendGmailOTP() {
         // Send the OTP email with the provided email parameters
         sendOTP("test001@gmail.com", "abc@xyz", "test004@gmail.com", "Secure Code",
                 "Your secure OTP for login is 110123");

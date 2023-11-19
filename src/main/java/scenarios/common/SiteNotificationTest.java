@@ -1,4 +1,4 @@
-package scenarios;
+package scenarios.common;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import junit.framework.Assert;
 
-public class HandleSiteNotificationTest {
+public class SiteNotificationTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
@@ -59,7 +59,7 @@ public class HandleSiteNotificationTest {
 	}
 
 	@Test(priority = 1)
-	public void disableSiteNotification() {
+	public void testSiteNotification() {
 		// Navigate to the Facebook website by opening the specified URL.
 		driver.get("https://www.facebook.com/");
 

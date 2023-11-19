@@ -1,4 +1,4 @@
-package scenarios;
+package scenarios.common;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -13,8 +13,9 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import scenarios.DriverConfiguration;
 
-public class HandleBrokenLinksTest {
+public class BrokenLinksTest {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
@@ -34,8 +35,8 @@ public class HandleBrokenLinksTest {
         }
     }
 
-    @Test
-    public void findBrokenLinks() throws URISyntaxException {
+    @Test(priority = 1)
+    public void testBrokenLinks() throws URISyntaxException {
         // Navigate to the website "https://bstackdemo.com/"
         driver.get("https://bstackdemo.com/");
 

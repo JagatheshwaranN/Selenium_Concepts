@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 
-public class GetSpecificPagePDFFileContentTestCase {
+public class GetSpecificPagePDFFileContentTest {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
@@ -35,7 +35,7 @@ public class GetSpecificPagePDFFileContentTestCase {
     }
 
     @Test(priority = 1)
-    public void getSpecificPagePDFFileContent() {
+    public void testGetSpecificPagePDFFileContent() {
         // Navigates the driver to the specified PDF URL
         driver.get(PDF_URL);
         try {
@@ -46,7 +46,7 @@ public class GetSpecificPagePDFFileContentTestCase {
             pdfTextStripper.setStartPage(3);
 
             // Get the text content of the PDF document using the PDFTextStripper
-            String pdfFileContent = pdfTextStripper.getText(HandlePDFTest.getPDFDocument(PDF_URL));
+            String pdfFileContent = pdfTextStripper.getText(PDFTest.getPDFDocument(PDF_URL));
 
             // Print the extracted PDF content to the console
             System.out.println(pdfFileContent);

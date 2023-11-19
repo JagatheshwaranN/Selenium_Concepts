@@ -1,4 +1,4 @@
-package scenarios;
+package scenarios.common;
 
 import java.time.Duration;
 
@@ -10,8 +10,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.blibli.oss.qa.util.services.NetworkListener;
+import scenarios.DriverConfiguration;
 
-public class HandleNetworkCallsTest {
+public class NetworkCallsTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
@@ -32,7 +33,7 @@ public class HandleNetworkCallsTest {
 	}
 
 	@Test(priority = 1)
-	public void testCaptureNetworkLogs() {
+	public void testNetworkCalls() {
 		// Start a network listener using the 'startNetworkListener()' method or function
 		NetworkListener networkListener = startNetworkListener();
 

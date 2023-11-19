@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
 
-public class HandleDataFromPropertyFileTest {
+public class DataFromPropertyFileTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
@@ -59,8 +59,8 @@ public class HandleDataFromPropertyFileTest {
 		}
 	}
 
-	@Test
-	public void readDataFromPropFileAndUseInAutomationFLow() {
+	@Test(priority = 1)
+	public void testDataFromPropertyFile() {
 		// Navigate to the NopCommerce website by opening the specified URL.
 		driver.get("https://admin-demo.nopcommerce.com/login");
 

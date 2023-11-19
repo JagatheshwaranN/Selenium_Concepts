@@ -2,14 +2,12 @@ package scenarios.pdf;
 
 import scenarios.DriverConfiguration;
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,9 +20,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.time.Duration;
 
-public class ReadPDFFileFromBrowserTestCase {
+public class GetPDFFileMetaDataTest {
 
-    // Declaration of a private instance variable of type WebDriver
+    // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
 
     // Declaration of a static final Duration constant
@@ -32,21 +30,21 @@ public class ReadPDFFileFromBrowserTestCase {
 
     @BeforeMethod
     public void setUp() {
-        // WebDriver setup using DriverConfiguration class
+        // Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
         driver = DriverConfiguration.browserSetup();
     }
 
     @AfterMethod
     public void tearDown() {
-        // Check for the existence of the WebDriver instance
+        // Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
         if (driver != null) {
-            // Close the browser session
+            // If a WebDriver instance exists, quit/close the browser session.
             driver.quit();
         }
     }
 
     @Test(priority = 1)
-    public void readPDFFileFromBrowser() {
+    public void testGetPDFFileMetaData() {
         // Navigate the WebDriver to a specific URL
         driver.get("https://www.inkit.com/blog/pdf-the-best-digital-document-management");
 
@@ -90,21 +88,31 @@ public class ReadPDFFileFromBrowserTestCase {
             // Load the PDF document
             PDDocument pdDocument = PDDocument.load(bufferedInputStream);
 
-            // Get the number of pages in the PDF
-            int pdfFilePages = pdDocument.getNumberOfPages();
-
-            // Validate the number of pages
-            validatePDFPages(pdfFilePages);
-
-            // Extract the text from the PDF
-            String pdfFileContent = extractTextFromPDF(pdDocument);
-
-            // Print the PDF content
-            System.out.println(pdfFileContent);
-
-            // Validate the content of the PDF
-            validatePDFContent(pdfFileContent);
-
+            // Print the PDF file version
+            System.out.println("PDF File Version          ==> " + pdDocument.getVersion());
+            // Print the print option availability
+            System.out.println("PDF File Print Option     ==> " + pdDocument.getCurrentAccessPermission().canPrint());
+            // Print the read-only status
+            System.out.println("PDF File ReadOnly         ==> " + pdDocument.getCurrentAccessPermission().isReadOnly());
+            // Print the owner permission status
+            System.out.println(
+                    "PDF File Owner Permission ==> " + pdDocument.getCurrentAccessPermission().isOwnerPermission());
+            // Print the author of the PDF
+            System.out.println("PDF File Author           ==> " + pdDocument.getDocumentInformation().getAuthor());
+            // Print the subject of the PDF
+            System.out.println("PDF File Subject          ==> " + pdDocument.getDocumentInformation().getSubject());
+            // Print the title of the PDF
+            System.out.println("PDF File Title            ==> " + pdDocument.getDocumentInformation().getTitle());
+            // Print the creator of the PDF
+            System.out.println("PDF File Creator          ==> " + pdDocument.getDocumentInformation().getCreator());
+            // Print the creation date of the PDF
+            System.out.println(
+                    "PDF File Creator Date     ==> " + pdDocument.getDocumentInformation().getCreationDate());
+            // Print the encryption status of the PDF
+            System.out.println("PDF File Encrypted        ==> " + pdDocument.isEncrypted());
+            // Print the document ID of the PDF
+            System.out.println("PDF File Document Id      ==> " + pdDocument.getDocumentId());
+            
             // Close the PDF document
             pdDocument.close();
         } catch (IOException ex) {
@@ -114,32 +122,9 @@ public class ReadPDFFileFromBrowserTestCase {
         }
     }
 
-    private void validatePDFPages(int pdfFilePages) {
-        // Assertion for the number of pages
-        Assert.assertEquals(pdfFilePages, 43, "PDF file should have 43 pages");
-    }
-
-    private String extractTextFromPDF(PDDocument pdDocument) throws IOException {
-        // Create a PDFTextStripper object
-        PDFTextStripper pdfTextStripper = new PDFTextStripper();
-
-        // Return the extracted text
-        return pdfTextStripper.getText(pdDocument);
-    }
-
-    private void validatePDFContent(String pdfFileContent) {
-        // Assertion for the presence of a specific text
-        Assert.assertTrue(pdfFileContent.contains("PDF Days Europe 2018"), "PDF should contain 'PDF Days Europe 2018'");
-
-        // Assertion for the presence of a specific text
-        Assert.assertTrue(pdfFileContent.contains("Thank you! Any questions?"), "PDF should contain 'Thank you! Any questions?'");
-    }
-
     private void handleIOException(IOException ex) {
         // Print the error message
         System.err.println("An error occurred while processing the PDF file: " + ex.getMessage());
     }
 
 }
-
-

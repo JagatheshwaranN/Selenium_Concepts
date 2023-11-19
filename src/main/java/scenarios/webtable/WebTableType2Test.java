@@ -11,7 +11,7 @@ import scenarios.DriverConfiguration;
 
 import java.util.List;
 
-public class HandleWebTableType2Test {
+public class WebTableType2Test {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
@@ -32,7 +32,7 @@ public class HandleWebTableType2Test {
     }
 
     @Test(priority = 1)
-    public void getTableRowAndCellNumber() {
+    public void testWebTableType2() {
         // Navigate to the specified URL using the WebDriver instance
         driver.get("file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/WebTable.html");
 

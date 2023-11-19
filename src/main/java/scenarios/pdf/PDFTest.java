@@ -18,7 +18,7 @@ import org.apache.pdfbox.pdmodel.graphics.PDXObject;
 import org.apache.pdfbox.pdmodel.graphics.form.PDFormXObject;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
-public class HandlePDFTest {
+public class PDFTest {
 
     /**
      * Retrieves a PDDocument from the provided PDF file URL

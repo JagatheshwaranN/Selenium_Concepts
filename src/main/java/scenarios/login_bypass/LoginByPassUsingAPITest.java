@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
-public class HandleLoginByPassUsingAPITest {
+public class LoginByPassUsingAPITest {
 
 	public WebDriver driver;
 
@@ -24,7 +24,7 @@ public class HandleLoginByPassUsingAPITest {
 	 * Note: This approach is not working as of now.
 	 */
 	@Test(priority = 1)
-	public void loginByPassUsingAPI() {
+	public void testLoginByPassUsingAPI() {
 		driver = DriverConfiguration.browserSetup();
 		String domain = "www.99.co";
 		driver.get("https://www.99.co");

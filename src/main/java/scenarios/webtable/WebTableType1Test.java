@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
-public class HandleWebTableType1Test {
+public class WebTableType1Test {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
@@ -32,7 +32,7 @@ public class HandleWebTableType1Test {
     }
 
     @Test(priority = 1)
-    public void getRowDataFromTable() {
+    public void testWebTableType1() {
         // Navigate to the specified URL using the WebDriver instance
         driver.get("file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/WebTable.html");
 

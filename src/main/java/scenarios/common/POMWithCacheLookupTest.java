@@ -1,4 +1,4 @@
-package scenarios;
+package scenarios.common;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -6,10 +6,10 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import scenarios.DriverConfiguration;
 
 
-
-public class HandlePOMWithCacheLookupTest {
+public class POMWithCacheLookupTest {
 
 	// Declare a Static WebDriver instance to interact with the web browser.
 	static WebDriver driver;
@@ -37,7 +37,7 @@ public class HandlePOMWithCacheLookupTest {
 		driver.get("file:///D://Environment_Collection//Eclipse_Env//Workspace//Selenium_Concepts//src//main//resources//supportFiles//DisabledElement.html");
 
 		// Initialize a Page Object instance for HandlePOMWithCacheLookupTest class using PageFactory.
-		HandlePOMWithCacheLookupTest pageObject = PageFactory.initElements(driver, HandlePOMWithCacheLookupTest.class);
+		POMWithCacheLookupTest pageObject = PageFactory.initElements(driver, POMWithCacheLookupTest.class);
 
 		// Perform actions with and without cache lookup.
 		pageObject.inputWithCache.sendKeys("Selenium");

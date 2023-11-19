@@ -17,7 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Date;
 
-public class HandleLoginByPassUsingSessionDataTest {
+public class LoginByPassUsingSessionDataTest {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
@@ -47,7 +47,7 @@ public class HandleLoginByPassUsingSessionDataTest {
     }
 
     @Test(priority = 1)
-    public void loginByPassUsingSessionData() {
+    public void testLoginByPassUsingSessionData() {
         // Augment the driver with WebStorage
         webStorage = (WebStorage) new Augmenter().augment(driver);
 

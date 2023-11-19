@@ -1,4 +1,4 @@
-package scenarios;
+package scenarios.common;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,9 +9,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import scenarios.DriverConfiguration;
 
 
-public class HandleTooltipTest {
+public class TooltipTest {
 
     // Declare a WebDriver instance to interact with the web browser.
     public WebDriver driver;
@@ -32,7 +33,7 @@ public class HandleTooltipTest {
     }
 
     @Test(priority = 1)
-    public void testHandleTooltip() {
+    public void testTooltip() {
         // Instruct the WebDriver instance (already configured) to navigate to the URL "https://jqueryui.com/tooltip/"
         driver.get("https://jqueryui.com/tooltip/");
 

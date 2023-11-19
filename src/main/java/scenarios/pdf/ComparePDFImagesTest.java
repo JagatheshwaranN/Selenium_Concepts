@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
-public class ComparePDFImagesTestCase {
+public class ComparePDFImagesTest {
 
     // Define the file path for the Devops pdf
     private static final String FILE_PATH = "file:///D:/Environment_Collection/Intellij_Env/Selenium_Concepts/src/main/resources/supportFiles/devops.pdf";
@@ -17,7 +17,7 @@ public class ComparePDFImagesTestCase {
     private static final String HDFC_BLACK_FILE = System.getProperty("user.dir") + "//src//main//resources//supportFiles//images//hdfc_black.png";
 
     @Test(priority = 1)
-    public void verifyTwoImages() {
+    public void testComparePDFImages() {
         // Get the PDDocument object by providing the FILE_PATH
         PDDocument docx = HandlePDFTest.getPDFDocument(FILE_PATH);
 

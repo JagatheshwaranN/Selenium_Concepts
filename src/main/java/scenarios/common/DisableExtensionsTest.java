@@ -1,4 +1,4 @@
-package scenarios;
+package scenarios.common;
 
 
 import org.openqa.selenium.WebDriver;
@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 
 
-public class HandleDisableExtensionsTest {
+public class DisableExtensionsTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
 	public WebDriver driver;
@@ -18,7 +18,7 @@ public class HandleDisableExtensionsTest {
 	public ChromeOptions chromeOptions;
 
 	@Test(priority = 1)
-	public void disableExtension() {
+	public void testDisableExtension() {
 		// Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
 		System.setProperty("webdriver.http.factory", "jdk-http-client");
 

@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
 
-public class HandleDataFromJsonFileTest {
+public class DataFromJsonFileTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
@@ -49,7 +49,7 @@ public class HandleDataFromJsonFileTest {
 	}
 
 	@Test(dataProvider = "loginData")
-	public void readDataFromJsonAndUseInAutomationFLow(Map<String, String> data) {
+	public void testDataFromJsonFile(Map<String, String> data) {
 		// Navigate to the NopCommerce website by opening the specified URL.
 		driver.get("https://admin-demo.nopcommerce.com/login");
 

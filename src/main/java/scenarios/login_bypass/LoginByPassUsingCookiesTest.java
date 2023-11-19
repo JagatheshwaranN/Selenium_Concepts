@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.util.Date;
 
-public class HandleLoginByPassUsingCookiesTest {
+public class LoginByPassUsingCookiesTest {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
@@ -32,7 +32,7 @@ public class HandleLoginByPassUsingCookiesTest {
     }
 
     @Test(priority = 1)
-    public void loginByPassUsingCookies() {
+    public void testLoginByPassUsingCookies() {
         // Open the specified URL in the web browser
         driver.get("https://admin-demo.nopcommerce.com/");
 

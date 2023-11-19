@@ -1,4 +1,4 @@
-package scenarios;
+package scenarios.common;
 
 import java.time.Duration;
 
@@ -13,8 +13,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import scenarios.DriverConfiguration;
 
-public class HandleAjaxCallTest {
+public class AjaxCallTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
@@ -38,7 +39,7 @@ public class HandleAjaxCallTest {
 	}
 
 	@Test(priority = 1)
-	public void testHandleAjaxCall() {
+	public void testAjaxCall() {
 		// Navigate to the specified URL "https://omayo.blogspot.com/" using the WebDriver instance
 		driver.get("https://omayo.blogspot.com/");
 
@@ -105,10 +106,10 @@ public class HandleAjaxCallTest {
 
 	private void until(ExpectedCondition<Boolean> waitCondition) {
 		// Create a WebDriverWait instance 'wait' with a specified timeout using the 'driver' object and a constant 'WAIT_TIMEOUT'
-		WebDriverWait wait = new WebDriverWait(driver, HandleAjaxCallTest.WAIT_TIMEOUT);
+		WebDriverWait wait = new WebDriverWait(driver, AjaxCallTest.WAIT_TIMEOUT);
 
 		// Set the timeout for the 'wait' instance to 'WAIT_TIMEOUT' (this line is redundant as the timeout was already set during creation)
-		wait.withTimeout(HandleAjaxCallTest.WAIT_TIMEOUT);
+		wait.withTimeout(AjaxCallTest.WAIT_TIMEOUT);
 
 		try {
 			// Use the 'wait' instance to wait until a specific condition ('waitCondition') is met

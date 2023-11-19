@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.Properties;
 
-public class HandleReceiveGmailOTPTest {
+public class ReceiveGmailOTPTest {
 
 	// Defines the IMAP host as "imap.gmail.com" for handling Gmail IMAP configuration
 	public final String imapHost = "imap.gmail.com";
@@ -20,7 +20,7 @@ public class HandleReceiveGmailOTPTest {
 	public final int imapPort = 993;
 
 	@Test(priority = 1)
-	public void mockReadOTPEmail() {
+	public void testReceiveGmailOTP() {
 		// Print the OTP retrieved from the specified email parameters
 		System.out.println(retrieveOTP("test004@gmail.com", "abc@xyz", "test001@gmail.com", "Secure Code", "Inbox"));
 	}

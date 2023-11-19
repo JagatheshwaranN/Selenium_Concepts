@@ -1,4 +1,4 @@
-package scenarios;
+package scenarios.common;
 
 import java.util.List;
 
@@ -9,8 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import scenarios.DriverConfiguration;
 
-public class HandleBrokenImagesTest {
+public class BrokenImagesTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
@@ -31,7 +32,7 @@ public class HandleBrokenImagesTest {
 	}
 
 	@Test(priority = 1)
-	public void findBrokenImageApproach1() {
+	public void testBrokenImagesType1() {
 		// Instruct the WebDriver instance (already configured) to navigate to the URL "https://demoqa.com/broken"
 		driver.get("https://demoqa.com/broken");
 
@@ -63,7 +64,7 @@ public class HandleBrokenImagesTest {
 	}
 
 	@Test(priority = 2)
-	public void findBrokenImageApproach2() {
+	public void testBrokenImagesType2() {
 		// Instruct the WebDriver instance (already configured) to navigate to the URL "https://demoqa.com/broken"
 		driver.get("https://demoqa.com/broken");
 
