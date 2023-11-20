@@ -18,14 +18,6 @@ public class _08_Windows {
 	private static WebDriver driver;
 	private static ChromeOptions chromeOptions;
 
-	@Test(priority = 1, enabled = false)
-	private static void getWindowHandle() {
-		browserSetup();
-		driver.get("https://letcode.in/frame");
-		System.out.println(driver.getWindowHandle());
-		waitForSomeTime();
-		driver.close();
-	}
 
 	@Test(priority = 2, enabled = false)
 	private static void switchTabOrWindow() {

@@ -43,7 +43,12 @@
 			<artifactId>selenium-http-jdk-client</artifactId>
 			<version>4.13.0</version>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-remote-driver -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-remote-driver</artifactId>
+			<version>4.15.0</version>
+		</dependency>
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>

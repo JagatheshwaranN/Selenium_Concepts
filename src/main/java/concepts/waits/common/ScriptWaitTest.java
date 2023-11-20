@@ -30,6 +30,7 @@ public class ScriptWaitTest {
 			driver.quit();
 		}
 	}
+
 	@Test(priority = 1)
 	public void testScriptWait() {
 		// Set the script timeout duration
