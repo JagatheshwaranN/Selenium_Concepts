@@ -19,30 +19,6 @@ public class _08_Windows {
 	private static ChromeOptions chromeOptions;
 
 
-	@Test(priority = 2, enabled = false)
-	private static void switchTabOrWindow() {
-		browserSetup();
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		driver.get("https://the-internet.herokuapp.com/windows");
-		String parentWindow = driver.getWindowHandle();
-		System.out.println(parentWindow);
-		assert driver.getWindowHandles().size() == 1;
-		driver.findElement(By.xpath("//a[text()='Click Here']")).click();
-		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-		for (String handle : driver.getWindowHandles()) {
-			if (!parentWindow.contentEquals(handle)) {
-				driver.switchTo().window(handle);
-				System.out.println(handle);
-				break;
-			}
-		}
-		wait.until(ExpectedConditions.titleIs("New Window"));
-		waitForSomeTime();
-		driver.close();
-		driver.switchTo().window(parentWindow);
-		waitForSomeTime();
-		driver.close();
-	}
 
 	@Test(priority = 3, enabled = false)
 	private static void createNewTabOrWindow() {

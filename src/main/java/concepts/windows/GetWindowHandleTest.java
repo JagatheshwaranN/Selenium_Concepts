@@ -28,7 +28,7 @@ public class GetWindowHandleTest {
     }
 
     @Test(priority = 1)
-	public void getWindowHandle() {
+	public void testGetWindowHandle() {
 		// Define the expected title of the webpage
 		String expectedTitle = "Google";
 
