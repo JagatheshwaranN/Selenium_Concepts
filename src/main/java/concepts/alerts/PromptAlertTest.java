@@ -1,4 +1,6 @@
-package concepts.alert;
+package concepts.alerts;
+
+import java.time.Duration;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -11,16 +13,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
-import java.time.Duration;
-
-public class SimpleAlertTest {
+public class PromptAlertTest {
 
 	// Declare a WebDriver instance to interact with the web browser
 	private WebDriver driver;
 
 	// Define a constant duration for the maximum wait time, set to 10 seconds
 	private static final Duration WAIT_TIMEOUT = Duration.ofSeconds(10);
-
 
 	@BeforeMethod
 	public void setUp() {
@@ -38,25 +37,29 @@ public class SimpleAlertTest {
 	}
 
 	@Test(priority = 1)
-	public void testSimpleAlert() {
+	public void testPromptAlert() {
 		// Define the expected result
-		String expectedAlertResult = "You successfully clicked an alert";
+		String expectedAlertResult = "You entered: Selenium";
 
 		// Navigate to the JavaScript alerts page
 		driver.get("https://the-internet.herokuapp.com/javascript_alerts");
 
-		// Click the button to trigger the JS Alert
-		driver.findElement(By.xpath("//button[text()='Click for JS Alert']")).click();
+		// Click the button to trigger the JS Prompt alert
+		driver.findElement(By.xpath("//button[text()='Click for JS Prompt']")).click();
 
 		// Wait for the alert to be present
 		WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT);
-		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+		wait.until(ExpectedConditions.alertIsPresent());
 
-		// Get the alert text and print it to the console (optional)
+		// Handle the prompt alert
+		Alert alert = driver.switchTo().alert();
 		String alertContent = alert.getText();
 		System.out.println("Alert Content: " + alertContent);
 
-		// Accept the alert
+		// Enter text into the prompt
+		alert.sendKeys("Selenium");
+
+		// Accept the prompt alert
 		alert.accept();
 
 		// Wait for the result element to be updated

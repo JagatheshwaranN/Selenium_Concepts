@@ -1,6 +1,4 @@
-package concepts.alert;
-
-import java.time.Duration;
+package concepts.alerts;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -13,13 +11,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
-public class PromptAlertTest {
+import java.time.Duration;
+
+public class ConfirmAlertTest {
 
 	// Declare a WebDriver instance to interact with the web browser
 	private WebDriver driver;
 
 	// Define a constant duration for the maximum wait time, set to 10 seconds
 	private static final Duration WAIT_TIMEOUT = Duration.ofSeconds(10);
+
 
 	@BeforeMethod
 	public void setUp() {
@@ -37,29 +38,43 @@ public class PromptAlertTest {
 	}
 
 	@Test(priority = 1)
-	public void testPromptAlert() {
+	public void testConfirmAlert() {
 		// Define the expected result
-		String expectedAlertResult = "You entered: Selenium";
+		String expectedAlertResult = "You clicked: Ok";
+
+		// Declare alertContent variable
+		String alertContent;
 
 		// Navigate to the JavaScript alerts page
 		driver.get("https://the-internet.herokuapp.com/javascript_alerts");
 
-		// Click the button to trigger the JS Prompt alert
-		driver.findElement(By.xpath("//button[text()='Click for JS Prompt']")).click();
+		// Click the button to trigger the JS Confirm alert
+		driver.findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
 
 		// Wait for the alert to be present
 		WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT);
 		wait.until(ExpectedConditions.alertIsPresent());
 
-		// Handle the prompt alert
+		// Handle the alert
 		Alert alert = driver.switchTo().alert();
-		String alertContent = alert.getText();
-		System.out.println("Alert Content: " + alertContent);
+		alertContent = alert.getText();
+		System.out.println("First Alert Content: " + alertContent);
 
-		// Enter text into the prompt
-		alert.sendKeys("Selenium");
+		// Dismiss (Cancel) the alert
+		alert.dismiss();
 
-		// Accept the prompt alert
+		// Click the button again to trigger the JS Confirm alert
+		driver.findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
+
+		// Wait for the alert to be present
+		wait.until(ExpectedConditions.alertIsPresent());
+
+		// Handle the alert again
+		alert = driver.switchTo().alert();
+		alertContent = alert.getText();
+		System.out.println("Second Alert Content: " + alertContent);
+
+		// Accept (Ok) the alert
 		alert.accept();
 
 		// Wait for the result element to be updated

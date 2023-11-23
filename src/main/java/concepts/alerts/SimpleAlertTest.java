@@ -1,4 +1,4 @@
-package concepts.alert;
+package concepts.alerts;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -13,7 +13,7 @@ import scenarios.DriverConfiguration;
 
 import java.time.Duration;
 
-public class ConfirmAlertTest {
+public class SimpleAlertTest {
 
 	// Declare a WebDriver instance to interact with the web browser
 	private WebDriver driver;
@@ -38,43 +38,25 @@ public class ConfirmAlertTest {
 	}
 
 	@Test(priority = 1)
-	public void testConfirmAlert() {
+	public void testSimpleAlert() {
 		// Define the expected result
-		String expectedAlertResult = "You clicked: Ok";
-
-		// Declare alertContent variable
-		String alertContent;
+		String expectedAlertResult = "You successfully clicked an alert";
 
 		// Navigate to the JavaScript alerts page
 		driver.get("https://the-internet.herokuapp.com/javascript_alerts");
 
-		// Click the button to trigger the JS Confirm alert
-		driver.findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
+		// Click the button to trigger the JS Alert
+		driver.findElement(By.xpath("//button[text()='Click for JS Alert']")).click();
 
 		// Wait for the alert to be present
 		WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT);
-		wait.until(ExpectedConditions.alertIsPresent());
+		Alert alert = wait.until(ExpectedConditions.alertIsPresent());
 
-		// Handle the alert
-		Alert alert = driver.switchTo().alert();
-		alertContent = alert.getText();
-		System.out.println("First Alert Content: " + alertContent);
+		// Get the alert text and print it to the console (optional)
+		String alertContent = alert.getText();
+		System.out.println("Alert Content: " + alertContent);
 
-		// Dismiss (Cancel) the alert
-		alert.dismiss();
-
-		// Click the button again to trigger the JS Confirm alert
-		driver.findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
-
-		// Wait for the alert to be present
-		wait.until(ExpectedConditions.alertIsPresent());
-
-		// Handle the alert again
-		alert = driver.switchTo().alert();
-		alertContent = alert.getText();
-		System.out.println("Second Alert Content: " + alertContent);
-
-		// Accept (Ok) the alert
+		// Accept the alert
 		alert.accept();
 
 		// Wait for the result element to be updated

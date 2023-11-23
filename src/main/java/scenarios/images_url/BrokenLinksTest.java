@@ -1,4 +1,4 @@
-package scenarios.common;
+package scenarios.images_url;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

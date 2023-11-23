@@ -16,7 +16,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WebSiteLoadFastWithoutImagesOnChromeTest {
+public class ChromeWebSiteLoadFastWithoutImagesTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;

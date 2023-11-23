@@ -1,4 +1,4 @@
-package concepts.page_actions;
+package concepts.page;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
