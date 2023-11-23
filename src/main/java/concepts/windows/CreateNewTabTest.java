@@ -36,6 +36,9 @@ public class CreateNewTabTest {
 
 	@Test(priority = 1)
 	public void testCreateNewTab() {
+		// Define the expected title
+		String expectedTitle = "New Window";
+
 		// Access the specified URL
 		driver.get("https://the-internet.herokuapp.com/windows");
 
@@ -57,7 +60,7 @@ public class CreateNewTabTest {
 		WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT);
 
 		// Wait until the title of the new tab becomes "New Window"
-		wait.until(ExpectedConditions.titleIs("New Window"));
+		wait.until(ExpectedConditions.titleIs(expectedTitle));
 
 		// Close the newly opened tab
 		driver.close();

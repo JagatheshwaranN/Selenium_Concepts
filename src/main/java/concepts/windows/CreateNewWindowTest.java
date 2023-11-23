@@ -36,6 +36,9 @@ public class CreateNewWindowTest {
 
 	@Test(priority = 1)
 	public void testCreateNewWindow() {
+		// Define the expected title
+		String expectedTitle = "SignIn";
+
 		// Access the specified URL
 		driver.get("file:///D:/Environment_Collection/Intellij_Env/Selenium_Concepts/src/main/resources/supportFiles/Login.html");
 
@@ -60,7 +63,7 @@ public class CreateNewWindowTest {
 		System.out.println("Child window handle: " + childWindow);
 
 		// Wait until the title of the new tab becomes "SignIn"
-		wait.until(ExpectedConditions.titleIs("SignIn"));
+		wait.until(ExpectedConditions.titleIs(expectedTitle));
 
 		// Close the newly opened tab
 		driver.close();

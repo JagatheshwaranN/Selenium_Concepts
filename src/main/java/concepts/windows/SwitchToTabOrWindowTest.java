@@ -35,6 +35,9 @@ public class SwitchToTabOrWindowTest {
 
 	@Test(priority = 1)
 	public void testSwitchToTabOrWindow() {
+		// Define the expected title
+		String expectedTitle = "New Window";
+
 		// Navigate to the target URL
 		driver.get("https://the-internet.herokuapp.com/windows");
 
@@ -64,7 +67,7 @@ public class SwitchToTabOrWindowTest {
 		}
 
 		// Wait for the title of the new window to be "New Window"
-		wait.until(ExpectedConditions.titleIs("New Window"));
+		wait.until(ExpectedConditions.titleIs(expectedTitle));
 
 		// Close the new window
 		driver.close();
