@@ -1,15 +1,12 @@
-package concepts;
+package concepts.eventlistener;
 
 import java.util.Arrays;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.openqa.selenium.support.events.WebDriverListener;
 
-public class _21_WebDriverEventListener implements WebDriverListener {
+public class WebDriverEventListener implements WebDriverListener {
 	
 	public void beforeGet(WebDriver driver, String url) {
 		System.out.println("Before performing the GET with driver " + driver.toString() + " and the URL is " + url);
@@ -71,21 +68,5 @@ public class _21_WebDriverEventListener implements WebDriverListener {
 		System.out.println("After performing the AfterClose with driver " + driver.toString());
 	}
 
-
-	public static void main(String[] args) {
-		
-		WebDriver original = new ChromeDriver();
-		WebDriverListener listener = new _21_WebDriverEventListener();
-		WebDriver driver = new EventFiringDecorator<WebDriver>(listener).decorate(original);
-		driver.get("https://admin-demo.nopcommerce.com/login");
-		driver.getCurrentUrl();
-		driver.findElement(By.id("Email")).clear();
-		driver.findElement(By.id("Email")).sendKeys("admin@yourstore.com");
-		driver.findElement(By.id("Password")).clear();
-		driver.findElement(By.id("Password")).sendKeys("admin");
-		driver.findElement(By.xpath("//button[text()='Log in']")).click();
-		driver.getTitle();
-		driver.close();
-	}
 }
 
