@@ -1,4 +1,4 @@
-package concepts;
+package concepts.jsexecutor;
 
 import java.util.List;
 
@@ -10,105 +10,34 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import junit.framework.Assert;
+import scenarios.DriverConfiguration;
 
 public class _20_JavaScriptExecutor {
 
+	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
+
+	@BeforeMethod
+	public void setUp() {
+		// Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
+		driver = DriverConfiguration.browserSetup();
+	}
+
+	@AfterMethod
+	public void tearDown() {
+		// Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
+		if (driver != null) {
+			// If a WebDriver instance exists, quit/close the browser session.
+			driver.quit();
+		}
+	}
+
 	private JavascriptExecutor jsExecutor;
-
-	@Test(priority = 1, enabled = true)
-	private void EnableElement() {
-		browserSetup();
-		driver.get(
-				"D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
-		WebElement input = driver.findElement(By.id("myText"));
-		input.sendKeys("Selenium");
-		driver.findElement(By.xpath("//button")).click();
-		waitForSomeTime();
-		String getTextWhenDisable = input.getText();
-		Assert.assertEquals(getTextWhenDisable, "");
-		jsExecutor = (JavascriptExecutor) driver;
-		jsExecutor.executeScript("arguments[0].removeAttribute('disabled');", input);
-		String getTextWhenEnable = input.getAttribute("value");
-		Assert.assertEquals(getTextWhenEnable, "Selenium");
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 2, enabled = true)
-	private void enterText() {
-		var text = "Selenium";
-		browserSetup();
-		driver.get(
-				"D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
-		WebElement input = driver.findElement(By.id("myText"));
-		jsExecutor = (JavascriptExecutor) driver;
-		jsExecutor.executeScript("arguments[0].value='" + text + "';", input);
-		String result = input.getAttribute("value");
-		Assert.assertEquals(result, "Selenium");
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 3, enabled = true)
-	private void clickElement() {
-		browserSetup();
-		driver.get(
-				"D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
-		WebElement input = driver.findElement(By.id("myText"));
-		input.sendKeys("Selenium");
-		WebElement button = driver.findElement(By.xpath("//button"));
-		jsExecutor = (JavascriptExecutor) driver;
-		jsExecutor.executeScript("arguments[0].click()", button);
-		boolean flag = input.getAttribute("disabled") != null;
-		Assert.assertEquals(flag, true);
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 4, enabled = true)
-	private void clearElement() {
-		browserSetup();
-		driver.get(
-				"D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
-		WebElement input = driver.findElement(By.id("myText"));
-		input.sendKeys("Selenium");
-		waitForSomeTime();
-		jsExecutor = (JavascriptExecutor) driver;
-		jsExecutor.executeScript("arguments[0].value='';", input);
-		String getTextWhenEnable = input.getAttribute("value");
-		Assert.assertEquals(getTextWhenEnable, "");
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 5, enabled = true)
-	private void scrollToElementType1() {
-		browserSetup();
-		driver.get("https://www.selenium.dev/");
-		WebElement element = driver.findElement(By.xpath("//h2[@class='selenium text-center']"));
-		jsExecutor = (JavascriptExecutor) driver;
-		jsExecutor.executeScript("window.scrollTo(arguments[0],arguments[1]);", element.getLocation().x,
-				element.getLocation().y);
-		Assert.assertTrue(inViewport(element));
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 6, enabled = true)
-	private void scrollToElementType2() {
-		browserSetup();
-		driver.get("https://www.selenium.dev/");
-		WebElement element = driver.findElement(By.xpath("//h2[@class='selenium text-center']"));
-		jsExecutor = (JavascriptExecutor) driver;
-		jsExecutor.executeScript("arguments[0].scrollIntoView()", element);
-		Assert.assertTrue(inViewport(element));
-		waitForSomeTime();
-		driver.close();
-	}
 
 	@Test(priority = 7, enabled = true)
 	private void scrollPageUp() {
