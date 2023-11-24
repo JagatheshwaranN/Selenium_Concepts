@@ -48,12 +48,23 @@ public class ScrollToElementTest {
     }
 
     public boolean inViewport(WebElement element) {
+        // Define a JavaScript script to check if the element is within the viewport
         String script = """
-				for(var e=arguments[0],f=e.offsetTop,t=e.offsetLeft,o=e.offsetWidth,n=e.offsetHeight;\
-				 e.offsetParent;)f+=(e=e.offsetParent).offsetTop,t+=e.offsetLeft;\
-				return f<window.pageYOffset+window.innerHeight&&t<window.pageXOffset+window.innerWidth&&f+n>\
-				window.pageYOffset&&t+o>window.pageXOffset
-				""";
+        // Calculate the cumulative offset positions of the element and its ancestors
+        for (var e = arguments[0], f = e.offsetTop, t = e.offsetLeft, o = e.offsetWidth, n = e.offsetHeight;
+            e.offsetParent;) {
+            f += (e = e.offsetParent).offsetTop;
+            t += e.offsetLeft;
+        }
+
+        // Check if the element's top and left positions are within the viewport's boundaries
+        return f < window.pageYOffset + window.innerHeight &&
+            t < window.pageXOffset + window.innerWidth &&
+            f + n > window.pageYOffset &&
+            t + o > window.pageXOffset;
+    """;
+
+        // Execute the JavaScript script and return the result (whether the element is in viewport)
         return (boolean) ((JavascriptExecutor) driver).executeScript(script, element);
     }
 

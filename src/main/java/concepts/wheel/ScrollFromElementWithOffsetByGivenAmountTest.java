@@ -5,13 +5,14 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.WheelInput;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
-public class ScrollByGivenAmountTest {
+public class ScrollFromElementWithOffsetByGivenAmountTest {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
@@ -32,25 +33,37 @@ public class ScrollByGivenAmountTest {
     }
 
     @Test(priority = 1)
-    public void testScrollByGivenAmount() {
+    public void testScrollFromElementWithOffsetByGivenAmount() {
+        // Initializing x-offset
+        int xOffSet = 0;
+
+        // Initializing y-offset
+        int yOffSet = -50;
+
         // Initializing x-axis scroll amount to 0
         int xaxis = 0;
 
-        // Open the Selenium website
+        // Initializing y-axis scroll amount to 200 pixels
+        int yaxis = 200;
+
+        // Navigate to the Selenium website
         driver.get("https://www.selenium.dev/");
 
-        // Locate the "Learn More" button
-        WebElement seleniumLearnMoreButton = driver
-                .findElement(By.xpath("//a[contains(@class,'selenium-button selenium-white-cyan')]"));
+        // Find the 'seleniumDonation' element using XPath
+        WebElement seleniumDonation = driver.findElement(By.xpath("//input[@type='image']"));
 
-        // Get the y-coordinate (vertical position) of the "Learn More" button
-        int yaxis = seleniumLearnMoreButton.getRect().y;
+        // Defining the scroll origin based on the seleniumDonation element
+        // Scroll origin is defined with an offset of (0, -50) pixels from the element
+        WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromElement(seleniumDonation, xOffSet, yOffSet);
 
-        // Scroll the page vertically by the specified amount (button's y-coordinate)
-        new Actions(driver).scrollByAmount(xaxis, yaxis).perform();
+        // Scroll the page from the Selenium Donation button by 200 pixels vertically
+        new Actions(driver).scrollFromOrigin(scrollOrigin, xaxis, yaxis).perform();
 
-        // Verify that the "Learn More" button is now visible within the viewport
-        Assert.assertTrue(inViewport(seleniumLearnMoreButton));
+        // Find the 'copyRightContent' element to check if it's in the viewport
+        WebElement copyRightContent = driver.findElement(By.xpath("//small[@class='text-white']"));
+
+        // Assert that the copyright content element is now visible within the viewport
+        Assert.assertTrue(inViewport(copyRightContent));
     }
 
     public boolean inViewport(WebElement element) {

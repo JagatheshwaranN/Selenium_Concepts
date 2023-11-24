@@ -5,13 +5,14 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.WheelInput;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
-public class ScrollByGivenAmountTest {
+public class ScrollFromViewportWithOffsetByGivenAmountTest {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
@@ -32,25 +33,33 @@ public class ScrollByGivenAmountTest {
     }
 
     @Test(priority = 1)
-    public void testScrollByGivenAmount() {
+    public void testScrollFromViewportWithOffsetByGivenAmount() {
+        // Initializing x-offset
+        int xOffSet = 10;
+
+        // Initializing y-offset
+        int yOffSet = 10;
+
         // Initializing x-axis scroll amount to 0
         int xaxis = 0;
 
-        // Open the Selenium website
+        // Initializing y-axis scroll amount to 600 pixels
+        int yaxis = 600;
+
+        // Navigate to the Selenium website
         driver.get("https://www.selenium.dev/");
 
-        // Locate the "Learn More" button
-        WebElement seleniumLearnMoreButton = driver
-                .findElement(By.xpath("//a[contains(@class,'selenium-button selenium-white-cyan')]"));
+        // Define the scroll origin from the viewport with an offset of (10, 10) pixels
+        WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromViewport(xOffSet, yOffSet);
 
-        // Get the y-coordinate (vertical position) of the "Learn More" button
-        int yaxis = seleniumLearnMoreButton.getRect().y;
+        // Perform a scroll action from the defined origin by (0, 600) pixels
+        new Actions(driver).scrollFromOrigin(scrollOrigin, xaxis, yaxis).perform();
 
-        // Scroll the page vertically by the specified amount (button's y-coordinate)
-        new Actions(driver).scrollByAmount(xaxis, yaxis).perform();
+        // Find the 'seleniumSponsors' element using CSS selector
+        WebElement seleniumSponsors = driver.findElement(By.cssSelector(".selenium.text-center"));
 
-        // Verify that the "Learn More" button is now visible within the viewport
-        Assert.assertTrue(inViewport(seleniumLearnMoreButton));
+        // Assert if the 'seleniumSponsors' element is within the viewport after scrolling
+        Assert.assertTrue(inViewport(seleniumSponsors));
     }
 
     public boolean inViewport(WebElement element) {
