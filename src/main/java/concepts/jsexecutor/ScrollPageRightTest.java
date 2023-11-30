@@ -30,25 +30,32 @@ public class ScrollPageRightTest {
 		}
 	}
 
+
 	@Test(priority = 1)
-	public void testScrollPageRight() throws InterruptedException {
-		// Open the Selenium website
+	public void testScrollPageRight() {
+
+		// Load a local HTML file with a horizontal scroll
 		driver.get("D:\\Environment_Collection\\Intellij_Env\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\HorizontalScroll.html");
 
-		// Create a JavascriptExecutor instance
+		// Create a JavaScript Executor instance
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
-		// Execute JavaScript code to scroll the window to the extreme right of the page
-		jsExecutor.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+		/*
+			Another way to achieve page right scrolling
+			===========================================
+			// window.scrollTo({ right: document.body.scrollWidth, behavior: 'auto' });
+		*/
 
-		// Locate the seleniumLogo element, which is the navbar brand element
-		WebElement seleniumLogo = driver.findElement(By.xpath("//div[@class='inner']//section[text()='six']"));
+		// Scroll the window to the extreme right of the page
+		jsExecutor.executeScript("window.scrollTo(document.body.scrollWidth, 0)");
 
-		Thread.sleep(4000);
+		// Locate the desired element, "Item 5", within the horizontal scrolling content
+		WebElement itemSection = driver.findElement(By.xpath("//div[@class='scroll-item'][text()='Item 5']"));
 
-		// Verify that the seleniumLogo element is visible within the viewport
-		Assert.assertTrue(inViewport(seleniumLogo));
+		// Verify that the element is visible within the viewport after scrolling
+		Assert.assertTrue(inViewport(itemSection));
 	}
+
 
 	public boolean inViewport(WebElement element) {
 		// Define a JavaScript script to check if the element is within the viewport

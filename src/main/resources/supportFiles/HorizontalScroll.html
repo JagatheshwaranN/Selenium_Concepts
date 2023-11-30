@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Horizontal Scroll Bar Example</title>
+    <style>
+    /* CSS to style the scrollable content and scrollbar */
+    .scroll-container {
+      width: 100%; /* Width of the container */
+      overflow-x: auto; /* Enable horizontal scrolling */
+      white-space: nowrap; /* Prevent content from wrapping */
+    }
+    .scroll-content {
+      width: 2000px; /* Width of the content inside the container */
+      padding: 20px;
+    }
+    .scroll-item {
+      display: inline-block; /* Display items in a row */
+      width: 300px; /* Width of each item */
+      height: 200px;
+      margin-right: 20px; /* Margin between items */
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body class="scroll-container" >
+    <div class="scroll-content">
+        <!-- Scrollable content -->
+        <div class="scroll-item">Item 1</div>
+        <div class="scroll-item">Item 2</div>
+        <div class="scroll-item">Item 3</div>
+        <div class="scroll-item">Item 4</div>
+        <div class="scroll-item">Item 5</div>
+        <!-- Add more items here -->
+    </div>
+</body>
+</html>

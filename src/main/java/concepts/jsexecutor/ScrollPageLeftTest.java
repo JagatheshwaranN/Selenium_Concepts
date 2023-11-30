@@ -32,22 +32,29 @@ public class ScrollPageLeftTest {
 
 	@Test(priority = 1)
 	public void testScrollPageRight() {
-		// Open the Selenium website
-		driver.get("https://www.selenium.dev/");
+		// Load a local HTML file with a horizontal scroll
+		driver.get("D:\\Environment_Collection\\Intellij_Env\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\HorizontalScroll.html");
 
-		// Create a JavascriptExecutor instance
+		// Create a JavaScript Executor instance
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
-		jsExecutor.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
+		// Scroll the window to the extreme right of the page
+		jsExecutor.executeScript("window.scrollTo(document.body.scrollWidth, 0)");
 
-		jsExecutor.executeScript("window.scrollTo(-document.body.scrollHeight, 0)");
+		/*
+			Another way to achieve page left scrolling
+			==========================================
+			// window.scrollTo({ left: document.body.scrollWidth, behavior: 'auto' });
+		*/
 
+		// Scroll the window to the extreme left of the page
+		jsExecutor.executeScript("window.scrollTo(-document.body.scrollWidth, 0)");
 
-		// Locate the seleniumLogo element, which is the navbar brand element
-		WebElement seleniumLogo = driver.findElement(By.xpath("//a[@class='navbar-brand']"));
+		// Locate the desired element, "Item 1", within the horizontal scrolling content
+		WebElement itemSection = driver.findElement(By.xpath("//div[@class='scroll-item'][text()='Item 1']"));
 
-		// Verify that the seleniumLogo element is visible within the viewport
-		Assert.assertTrue(inViewport(seleniumLogo));
+		// Verify that the element is visible within the viewport after scrolling
+		Assert.assertTrue(inViewport(itemSection));
 	}
 
 	public boolean inViewport(WebElement element) {
