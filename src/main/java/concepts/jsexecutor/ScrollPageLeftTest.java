@@ -31,7 +31,7 @@ public class ScrollPageLeftTest {
 	}
 
 	@Test(priority = 1)
-	public void testScrollPageRight() {
+	public void testScrollPageLeft() {
 		// Load a local HTML file with a horizontal scroll
 		driver.get("D:\\Environment_Collection\\Intellij_Env\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\HorizontalScroll.html");
 
