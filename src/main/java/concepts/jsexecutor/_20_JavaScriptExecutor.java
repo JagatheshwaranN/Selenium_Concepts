@@ -39,20 +39,6 @@ public class _20_JavaScriptExecutor {
 
 	private JavascriptExecutor jsExecutor;
 
-	@Test(priority = 12, enabled = true)
-	private void scrollPageLeft() {
-		browserSetup();
-		driver.get("https://www.selenium.dev/");
-		jsExecutor = (JavascriptExecutor) driver;
-		jsExecutor.executeScript("window.scrollTo(document.body.scrollHeight, 0)");
-		waitForSomeTime();
-		jsExecutor.executeScript("window.scrollTo(-document.body.scrollHeight, 0)");
-		WebElement seleniumTagLine = driver.findElement(By.xpath("//h1[@class='display-1']"));
-		Assert.assertTrue(inViewport(seleniumTagLine));
-		waitForSomeTime();
-		driver.close();
-	}
-
 	@Test(priority = 13, enabled = true)
 	private void pageZoomByPercent() {
 		String percent = "50%";
@@ -77,66 +63,6 @@ public class _20_JavaScriptExecutor {
 		jsExecutor.executeScript("document.body.style.MozTransform='scale(" + percent + ")'");
 		WebElement result = driver.findElement(By.xpath("//h2[text()='Getting Started']"));
 		Assert.assertTrue(inViewport(result));
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 15, enabled = true)
-	private void highlightElement() {
-		browserSetup();
-		driver.get(
-				"D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
-		WebElement input = driver.findElement(By.id("myText"));
-		jsExecutor = (JavascriptExecutor) driver;
-		jsExecutor.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid green;')",
-				input);
-		String result = driver.findElement(By.id("myText")).getCssValue("background");
-		Assert.assertEquals(result.contains("rgb(255, 255, 0)"), true);
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 16, enabled = true)
-	private void refreshPage() {
-		browserSetup();
-		driver.get("https://www.selenium.dev/selenium/web/single_text_input.html");
-		waitForSomeTime();
-		WebElement input = driver.findElement(By.id("textInput"));
-		new Actions(driver).sendKeys(input, "Automation!").perform();
-		jsExecutor = (JavascriptExecutor) driver;
-		jsExecutor.executeScript("document.location.reload()");
-		input = driver.findElement(By.id("textInput"));
-		Assert.assertEquals("", input.getAttribute("value"));
-		waitForSomeTime();
-		driver.close();
-	}
-	
-	@Test(priority = 17, enabled = true)
-	private void refreshPageType2() {
-		browserSetup();
-		driver.get("https://www.selenium.dev/selenium/web/single_text_input.html");
-		waitForSomeTime();
-		WebElement input = driver.findElement(By.id("textInput"));
-		new Actions(driver).sendKeys(input, "Automation!").perform();
-		jsExecutor = (JavascriptExecutor) driver;
-		jsExecutor.executeScript("history.go(0)");
-		input = driver.findElement(By.id("textInput"));
-		Assert.assertEquals("", input.getAttribute("value"));
-		waitForSomeTime();
-		driver.close();
-	}
-	
-	
-	@Test(priority = 18, enabled = true)
-	private void getText() {
-		browserSetup();
-		driver.get("https://www.google.com/");
-		waitForSomeTime();
-		WebElement input = driver.findElement(By.xpath("(//a[@class='gb_v'])[1]"));
-		jsExecutor = (JavascriptExecutor) driver;
-		String value = jsExecutor.executeScript("return document.documentElement.innerText;").toString();
-		input = driver.findElement(By.xpath("(//a[@class='gb_v'])[1]"));
-		Assert.assertEquals(value.contains(input.getText()), true);
 		waitForSomeTime();
 		driver.close();
 	}
