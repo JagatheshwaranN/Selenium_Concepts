@@ -64,4 +64,18 @@ public class DriverConfiguration {
         return driver;
     }
 
+    public static ChromeDriver cdpBrowserSetup() {
+        // Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
+
+        // Initialize a ChromeDriver instance for browser automation.
+        ChromeDriver driver = new ChromeDriver();
+
+        // Maximize the browser window for a better view.
+        driver.manage().window().maximize();
+
+        // Return the initialized WebDriver instance.
+        return driver;
+    }
+
 }
