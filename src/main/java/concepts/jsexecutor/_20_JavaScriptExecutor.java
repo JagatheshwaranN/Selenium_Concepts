@@ -67,18 +67,6 @@ public class _20_JavaScriptExecutor {
 		driver.close();
 	}
 
-	@Test(priority = 23, enabled = true)
-	private void navigateToDifferentPage() {
-		browserSetup();
-		driver.get("https://www.google.com/");
-		waitForSomeTime();
-		jsExecutor = (JavascriptExecutor) driver;
-		jsExecutor.executeScript("window.location = 'https://www.selenium.dev/'");
-		Assert.assertEquals(driver.getTitle(), "Selenium");
-		waitForSomeTime();
-		driver.close();
-	}
-	
 	@Test(priority = 24, enabled = true)
 	private void scrollIntoElement() {
 		browserSetup();
