@@ -61,47 +61,6 @@ public class _22_ChromeDevToolsProtocol {
 		driver.close();
 	}
 
-	@Test(priority = 2, enabled = true)
-	private void overrideDeviceModUsingCDP() {
-		browserSetup();
-		devTools = driver.getDevTools();
-		devTools.createSession();
-		devTools.send(Emulation.setDeviceMetricsOverride(400, 900, 70, true, Optional.empty(), Optional.empty(),
-				Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(),
-				Optional.empty(), Optional.empty()));
-		driver.get("https://google.com/");
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 3, enabled = true)
-	private void emulateGeoLocationUsingCDP() {
-		browserSetup();
-		devTools = driver.getDevTools();
-		devTools.createSession();
-		devTools.send(
-				Emulation.setGeolocationOverride(Optional.of(36.778259), Optional.of(-119.417931), Optional.of(1)));
-		devTools.send(Emulation.setTimezoneOverride("US/Central"));
-		devTools.send(Emulation.setLocaleOverride(Optional.of("en_us")));
-		driver.get("https://my-location.org/");
-		waitForSomeTime();
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 4, enabled = true)
-	private void emulateGeoLocationUsingCDPCommandApproach1() {
-		browserSetup();
-		location = new HashMap<String, Object>();
-		location.put("latitude", 34.052235);
-		location.put("longitude", -118.243683);
-		location.put("accuracy", 1);
-		driver.executeCdpCommand("Emulation.setGeolocationOverride", location);
-		driver.get("https://oldnavy.gap.com/stores");
-		waitForSomeTime();
-		driver.close();
-	}
-
 	@Test(priority = 5, enabled = true)
 	private void emulateGeoLocationUsingCDPCommandApproach2() {
 		browserSetup();

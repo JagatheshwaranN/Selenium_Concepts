@@ -28,7 +28,7 @@ public class GetPerformanceMetricsTest {
 
 	@BeforeMethod
 	public void setUp() {
-		// Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
+		// Set up the WebDriver instance by calling a method named 'cdpBrowserSetup' from the 'DriverConfiguration' class
 		driver = DriverConfiguration.cdpBrowserSetup();
 	}
 
@@ -57,14 +57,14 @@ public class GetPerformanceMetricsTest {
 		devTools.send(Performance.enable(Optional.empty()));
 
 		// Get the list of performance metrics
-		List<Metric> metricList = devTools.send(Performance.getMetrics());
+		List<Metric> metricsList = devTools.send(Performance.getMetrics());
 
 		// Assert that the metrics list is not null and not empty
-		assertNotNull(metricList, "Metrics list should not be null");
-		assertFalse(metricList.isEmpty(), "Metrics list should not be empty");
+		assertNotNull(metricsList, "Metrics list should not be null");
+		assertFalse(metricsList.isEmpty(), "Metrics list should not be empty");
 
 		// Iterate through the metrics list
-		for (Object metric : metricList) {
+		for (Object metric : metricsList) {
 
 			// Check if metric is a LinkedHashMap representing a custom metric
 			if (metric instanceof Map) {
