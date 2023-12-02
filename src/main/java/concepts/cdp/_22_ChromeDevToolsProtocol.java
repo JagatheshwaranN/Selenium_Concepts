@@ -53,6 +53,7 @@ public class _22_ChromeDevToolsProtocol {
 		// Validate subset of metrics
 		List<String> metricsName = metricList.stream().map(m -> m.getName()).collect(Collectors.toUnmodifiableList());
 		devTools.send(Performance.disable());
+
 		List<String> metricsToCheck = List.of("Timestamp", "Documents", "Frames", "JSEventListeners", "LayoutObjects",
 				"MediaKeySessions", "Nodes", "Resources", "DomContentLoaded", "NavigationStart");
 		metricsToCheck.forEach(

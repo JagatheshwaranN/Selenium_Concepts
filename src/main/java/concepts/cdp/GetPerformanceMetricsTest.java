@@ -10,10 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -75,9 +72,6 @@ public class GetPerformanceMetricsTest {
 				// Print metric name and value
 				System.out.println(metricObj.get("name") + " = " + metricObj.get("value"));
 
-				// Disable the Performance domain
-				devTools.send(Performance.disable());
-
 				// Perform assertions based on specific metric names
 				if (metricObj.get("name").equals("DevToolsCommandDuration")) {
 
@@ -90,6 +84,26 @@ public class GetPerformanceMetricsTest {
 				}
 			}
 		}
+
+		// Disable the Performance domain
+		devTools.send(Performance.disable());
+
+		/*
+			Not working - Have to re-work on the logic.
+			===========================================
+			metricsList.stream()
+					.filter(metric -> metric instanceof Map)
+					.forEach(metric -> {
+						LinkedHashMap<?, ?> metricObj = (LinkedHashMap<?, ?>) metric;
+						System.out.println(metricObj.get("name") + " = " + metricObj.get("value"));
+
+						if ("DevToolsCommandDuration".equals(metricObj.get("name"))) {
+							Assert.assertTrue((double) metricObj.get("value") >= 0, "DevToolsCommandDuration value should be positive");
+						} else if ("Frames".equals(metricObj.get("name"))) {
+							Assert.assertEquals((Long) metricObj.get("value"), Long.valueOf(6), "Frames value should be 6");
+						}
+					});
+		*/
 	}
 
 }
