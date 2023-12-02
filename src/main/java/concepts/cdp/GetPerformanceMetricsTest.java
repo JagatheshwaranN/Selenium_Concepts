@@ -75,6 +75,9 @@ public class GetPerformanceMetricsTest {
 				// Print metric name and value
 				System.out.println(metricObj.get("name") + " = " + metricObj.get("value"));
 
+				// Disable the Performance domain
+				devTools.send(Performance.disable());
+
 				// Perform assertions based on specific metric names
 				if (metricObj.get("name").equals("DevToolsCommandDuration")) {
 

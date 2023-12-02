@@ -38,6 +38,13 @@ public class MockGeoLocationByCDPCommandTest {
 		// Store the expected location for comparison
 		String expectedLocation = "Sanger, CA 93657, United States";
 
+		/*
+			Another way of having Map Object to store geolocation information
+			=================================================================
+			Map<String, Object> coordinates = Map.of("latitude", 30.3079823, "longitude",
+			-97.893803, "accuracy", 1);
+		*/
+
 		// Create a HashMap to hold geolocation information
 		HashMap<String, Object> location = new HashMap<>();
 

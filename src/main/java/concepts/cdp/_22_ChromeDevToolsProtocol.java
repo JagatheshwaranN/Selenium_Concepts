@@ -61,49 +61,6 @@ public class _22_ChromeDevToolsProtocol {
 		driver.close();
 	}
 
-	@Test(priority = 5, enabled = true)
-	private void emulateGeoLocationUsingCDPCommandApproach2() {
-		browserSetup();
-		coordinates = Map.of("latitude", 30.3079823, "longitude", -97.893803, "accuracy", 1);
-		driver.executeCdpCommand("Emulation.setGeolocationOverride", coordinates);
-		driver.get("https://oldnavy.gap.com/stores");
-		List<WebElement> addresses = driver.findElements(By.className("address"));
-		Assert.assertTrue(addresses.size() > 0, "No addresses found");
-		Assert.assertTrue(addresses.stream().allMatch(a -> a.getText().contains(", TX ")),
-				"Some addresses listed are not in Texas");
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 6, enabled = true)
-	private void emulateNetworkConnection() {
-		browserSetup();
-		devTools = driver.getDevTools();
-		devTools.createSessionIfThereIsNotOne();
-		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
-		devTools.send(Network.emulateNetworkConditions(false, 200, 2048, 4096, Optional.of(ConnectionType.CELLULAR3G)));
-		driver.get("https://google.com/");
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 7, enabled = true)
-	private void getHttpRequests() {
-		browserSetup();
-		devTools = driver.getDevTools();
-		devTools.createSessionIfThereIsNotOne();
-		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
-		devTools.addListener(Network.requestWillBeSent(), request -> {
-			System.out.println("Request URI 	 : " + request.getRequest().getUrl());
-			System.out.println("Request Method 	 : " + request.getRequest().getMethod());
-			System.out.println("Request Redirect : " + request.getRedirectResponse().isPresent());
-		});
-		driver.get("https://google.com/");
-		devTools.send(Network.disable());
-		waitForSomeTime();
-		driver.close();
-	}
-
 	@Test(priority = 8, enabled = true)
 	private void getConsoleLogs() {
 		browserSetup();
