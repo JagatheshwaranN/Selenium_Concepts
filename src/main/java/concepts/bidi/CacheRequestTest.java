@@ -2,7 +2,6 @@ package concepts.bidi;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v119.fetch.Fetch;
 import org.openqa.selenium.devtools.v119.network.Network;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
