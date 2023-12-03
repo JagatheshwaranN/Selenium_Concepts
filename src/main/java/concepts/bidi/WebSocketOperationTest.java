@@ -127,6 +127,9 @@ public class WebSocketOperationTest {
 
         // Assert the actual value matches the expected value for 'Connection closed'
         Assert.assertEquals(actualValue2, expectedValue2);
+
+        // Disable the network domain
+        devTools.send(Network.disable());
     }
 
 }

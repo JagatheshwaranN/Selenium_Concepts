@@ -71,6 +71,9 @@ public class CacheRequestTest {
         // Navigate again to the selenium website
         driver.get("https://www.selenium.dev/");
 
+        // Disable the network domain
+        devTools.send(Network.disable());
+
         // Get the current title of the web page using the WebDriver
         String actualTitle = driver.getTitle();
 
