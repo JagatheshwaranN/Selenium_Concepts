@@ -1,4 +1,4 @@
-package concepts;
+package concepts.bidi;
 
 import java.io.ByteArrayInputStream;
 import java.net.URI;
@@ -43,45 +43,6 @@ public class _23_Bidirectional_API {
 
 	private WebDriver driver;
 	private ChromeDriver chromeDriver;
-
-	@Test(priority = 1, enabled = false)
-	private void registerBasicAuthentication() {
-		browserSetup();
-		Predicate<URI> uriPredicate = uriObject -> uriObject.getHost().contains("herokuapp.com");
-		((HasAuthentication) driver).register(uriPredicate, UsernameAndPassword.of("admin", "admin"));
-		driver.get("https://the-internet.herokuapp.com/basic_auth");
-		String result = driver.findElement(By.xpath("//div[@class='example']//p")).getText();
-		Assert.assertEquals(result, "Congratulations! You must have the proper credentials.");
-		waitForSomeTime();
-		driver.close();
-	}
-
-	@Test(priority = 2, enabled = false)
-	private void getDomMutation() throws InterruptedException {
-		chromeBrowserSetup();
-		List<DomMutationEvent> mutationList = Collections.synchronizedList(new ArrayList<>());
-		((HasLogEvents) chromeDriver).onLogEvent(domMutation(mutation -> {
-			mutationList.add(mutation);
-		}));
-		chromeDriver.get("https://www.gps-coordinates.net/");
-		WebElement latitude = chromeDriver.findElement(By.id("latitude"));
-		WebElement longitude = chromeDriver.findElement(By.id("longitude"));
-		latitude.clear();
-		longitude.clear();
-		latitude.sendKeys("52.520008");
-		longitude.sendKeys("13.404954");
-		chromeDriver.findElement(By.xpath("(//button[text()='Get Address'])[1]")).click();
-		for (var mutation : mutationList) {
-			var attributeName = Optional.ofNullable(mutation.getAttributeName()).orElse("NAN");
-			var oldValue = Optional.ofNullable(mutation.getOldValue()).orElse("NAN");
-			var currentValue = Optional.ofNullable(mutation.getCurrentValue()).orElse("NAN");
-			var element = Optional.ofNullable(mutation.getElement().toString()).orElse("NAN");
-			System.out.println(String.format("\nAttribute Name: %s\n Old Value: %s\n New Value: %s\n Element: %s\n",
-					attributeName, oldValue, currentValue, element));
-		}
-		waitForSomeTime();
-		chromeDriver.close();
-	}
 
 	@Test(priority = 3, enabled = false)
 	private void handleJSException() {
