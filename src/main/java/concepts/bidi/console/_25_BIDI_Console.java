@@ -1,4 +1,4 @@
-package concepts;
+package concepts.bidi.console;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;

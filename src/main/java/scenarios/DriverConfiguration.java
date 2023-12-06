@@ -2,6 +2,7 @@ package scenarios;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -70,6 +71,26 @@ public class DriverConfiguration {
 
         // Initialize a ChromeDriver instance for browser automation.
         ChromeDriver driver = new ChromeDriver();
+
+        // Maximize the browser window for a better view.
+        driver.manage().window().maximize();
+
+        // Return the initialized WebDriver instance.
+        return driver;
+    }
+
+    public static WebDriver bidiBrowserSetup() {
+        // Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
+
+        // Create an instance of ChromeOptions to customize ChromeDriver settings
+        ChromeOptions chromeOptions = new ChromeOptions();
+
+        // Set the desired capability for ChromeOptions, but 'webSocketUrl' isn't a standard capability
+        chromeOptions.setCapability("webSocketUrl", true);
+
+        // Initialize the ChromeDriver with the customized ChromeOptions
+        WebDriver driver = new ChromeDriver(chromeOptions);
 
         // Maximize the browser window for a better view.
         driver.manage().window().maximize();
