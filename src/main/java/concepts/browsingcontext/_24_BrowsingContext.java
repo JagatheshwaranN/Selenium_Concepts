@@ -1,4 +1,4 @@
-package concepts;
+package concepts.browsingcontext;
 
 import java.util.List;
 
