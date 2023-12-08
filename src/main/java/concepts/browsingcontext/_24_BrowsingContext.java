@@ -18,66 +18,6 @@ public class _24_BrowsingContext {
 	private WebDriver driver;
 	private ChromeOptions chromeOptions;
 
-
-
-	@Test(priority = 4, enabled = false)
-	private void openWindowWithReferenceContext() {
-		browserSetup();
-		waitForSomeTime();
-		BrowsingContext browsingContext = new BrowsingContext(driver, WindowType.WINDOW, driver.getWindowHandle());
-		browsingContext.navigate("https://www.selenium.dev/");
-		Assert.assertNotNull(browsingContext.getId());
-		System.out.println("Browsing Context Id : "+browsingContext.getId());
-		waitForSomeTime();
-		browsingContext.close();
-		waitForSomeTime();
-		driver.close();
-	}
-	
-	@Test(priority = 5, enabled = false)
-	private void openTapWithReferenceContext() {
-		browserSetup();
-		waitForSomeTime();
-		BrowsingContext browsingContext = new BrowsingContext(driver, WindowType.TAB, driver.getWindowHandle());
-		browsingContext.navigate("https://www.selenium.dev/");
-		Assert.assertNotNull(browsingContext.getId());
-		System.out.println("Browsing Context Id : "+browsingContext.getId());
-		waitForSomeTime();
-		browsingContext.close();
-		waitForSomeTime();
-		driver.close();
-	}
-	
-	@Test(priority = 6, enabled = false)
-	private void getNavigationResult() {
-		browserSetup();
-		BrowsingContext browsingContext = new BrowsingContext(driver, WindowType.TAB);
-		NavigationResult result = browsingContext.navigate("https://www.selenium.dev/");
-		System.out.println("Browsing Context Id : "+browsingContext.getId());
-		System.out.println("Navigation Id       : "+result.getNavigationId());
-		System.out.println("Navigation Url      : "+result.getUrl());
-		Assert.assertNotNull(browsingContext.getId());
-		waitForSomeTime();
-		browsingContext.close();
-		waitForSomeTime();
-		driver.close();
-	}
-	
-	@Test(priority = 7, enabled = false)
-	private void navigateToUrlWithReadiness() {
-		browserSetup();
-		BrowsingContext browsingContext = new BrowsingContext(driver, WindowType.TAB);
-		NavigationResult result = browsingContext.navigate("https://www.selenium.dev/", ReadinessState.COMPLETE);
-		System.out.println("Browsing Context Id : "+browsingContext.getId());
-		System.out.println("Navigation Id       : "+result.getNavigationId());
-		System.out.println("Navigation Url      : "+result.getUrl());
-		Assert.assertNotNull(browsingContext.getId());
-		waitForSomeTime();
-		browsingContext.close();
-		waitForSomeTime();
-		driver.close();
-	}
-	
 	@Test(priority = 8, enabled = false)
 	private void getBrowsingContextTree() {
 		browserSetup();
