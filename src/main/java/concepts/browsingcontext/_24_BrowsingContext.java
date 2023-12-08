@@ -18,20 +18,6 @@ public class _24_BrowsingContext {
 	private WebDriver driver;
 	private ChromeOptions chromeOptions;
 
-	@Test(priority = 8, enabled = false)
-	private void getBrowsingContextTree() {
-		browserSetup();
-		String contextId = driver.getWindowHandle();
-		BrowsingContext browsingContext = new BrowsingContext(driver, contextId);
-		browsingContext.navigate("https://www.selenium.dev/", ReadinessState.COMPLETE);
-		System.out.println("Browsing Context Id : "+browsingContext.getId());
-		List<BrowsingContextInfo> contextInfo = browsingContext.getTree();
-		Assert.assertNotNull(browsingContext.getId());
-		Assert.assertEquals(1, contextInfo.size());
-		waitForSomeTime();
-		driver.close();
-	}
-	
 	@Test(priority = 9, enabled = false)
 	private void getBrowsingContextTreeWithChild() {
 		browserSetup();
