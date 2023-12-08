@@ -18,46 +18,8 @@ public class _24_BrowsingContext {
 	private WebDriver driver;
 	private ChromeOptions chromeOptions;
 
-	@Test(priority = 1, enabled = false)
-	private void createBrowsingContextWindow() {
-		//browserSetup();
-		BrowsingContext browsingContext = new BrowsingContext(browserSetup(), WindowType.WINDOW);
-		browsingContext.navigate("https://www.selenium.dev/documentation/webdriver/bidirectional/bidirectional_w3c/browsing_context/");
-		Assert.assertNotNull(browsingContext.getId());
-		System.out.println("Browsing Context Id : "+browsingContext.getId());
-		waitForSomeTime();
-		browsingContext.close();
-		waitForSomeTime();
-		driver.close();
-	}
-	
-	@Test(priority = 2, enabled = false)
-	private void createBrowsingContextTab() {
-		//browserSetup();
-		BrowsingContext browsingContext = new BrowsingContext(browserSetup(), WindowType.TAB);
-		browsingContext.navigate("https://www.selenium.dev/documentation/webdriver/bidirectional/bidirectional_w3c/browsing_context/");
-		Assert.assertNotNull(browsingContext.getId());
-		System.out.println("Browsing Context Id : "+browsingContext.getId());
-		waitForSomeTime();
-		browsingContext.close();
-		waitForSomeTime();
-		driver.close();
-	}
-	
-	@Test(priority = 3, enabled = false)
-	private void createBrowsingContextForGivenHandle() {
-		browserSetup();
-		String id = driver.getWindowHandle();
-		System.out.println(id);
-		waitForSomeTime();
-		BrowsingContext browsingContext = new BrowsingContext(driver, id);
-		browsingContext.navigate("https://www.selenium.dev/");
-		Assert.assertNotNull(browsingContext.getId());
-		System.out.println("Browsing Context Id : "+browsingContext.getId());
-		waitForSomeTime();
-		driver.close();
-	}
-	
+
+
 	@Test(priority = 4, enabled = false)
 	private void openWindowWithReferenceContext() {
 		browserSetup();
