@@ -12,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -78,21 +79,42 @@ public class TextCaptchaTest {
         // Capture the Captcha image as a temporary file
         File captchaImgFile = captcha.getScreenshotAs(OutputType.FILE);
 
+        // Declaring a variable to store the extracted captcha content
+        String captchaContent;
+
         try {
             // Copy the temporary file to the designated path
-            FileHandler.copy(captchaImgFile, new File(FILE_PATH));
+            FileHandler.copy(captchaImgFile, new File(FILE_PATH)); // Copying the captcha image to a specific file path
 
-            // Use Tesseract to perform OCR on the CAPTCHA image
+            // Use Tesseract to perform OCR (Optical Character Recognition) on the CAPTCHA image
+            // Initializing Tesseract OCR engine
             ITesseract image = new Tesseract();
-            String captchaContent = image.doOCR(new File(FILE_PATH));
+
+            // Extracting text from the captcha image
+            captchaContent = image.doOCR(new File(FILE_PATH));
 
             // Print the extracted CAPTCHA text
             System.out.println(captchaContent);
 
         } catch (IOException | TesseractException e) {
-            // Handle exceptions by throwing a RuntimeException
+            // Throws a runtime exception in case of IO or Tesseract exception
             throw new RuntimeException(e);
         }
+
+        // Finding the input field for captcha by its ID using WebDriver
+        WebElement captchaInput = driver.findElement(By.id("captcha"));
+
+        // Entering the extracted captcha content into the input field
+        captchaInput.sendKeys(captchaContent);
+
+        // Retrieving the entered captcha text from the input field
+        String enteredCaptcha = captchaInput.getAttribute("value");
+
+        // Printing the entered captcha text
+        System.out.println(enteredCaptcha);
+
+        // Assertion to check if the entered captcha matches the extracted captcha content
+        Assert.assertEquals(enteredCaptcha, captchaContent);
     }
 
     /*
