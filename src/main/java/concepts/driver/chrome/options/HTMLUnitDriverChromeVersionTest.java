@@ -1,4 +1,4 @@
-package concepts.driver.chrome;
+package concepts.driver.chrome.options;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import junit.framework.Assert;

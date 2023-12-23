@@ -1,6 +1,5 @@
-package concepts.driver.chrome;
+package concepts.driver.chrome.options;
 
-import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,30 +8,23 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-
-public class ProxyTest {
+public class ChromeHeadlessModeTest {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
 
     @BeforeMethod
     public void setUp() {
-        // Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
+        // Set the system property for the WebDriver to use the JDK HTTP client
         System.setProperty("webdriver.http.factory", "jdk-http-client");
 
-        // Declare a ChromeOptions instance to interact with the web browser.
+        // Instantiate ChromeOptions to configure the ChromeDriver
         ChromeOptions chromeOptions = new ChromeOptions();
 
-        // Create a Proxy object
-        Proxy proxy = new Proxy();
+        // Set the Chrome browser to run in headless mode with the specified argument
+        chromeOptions.addArguments("--headless=new");
 
-        // Set the HTTP proxy (replace with your actual proxy address and port)
-        proxy.setHttpProxy("127.0.0.1:8888");
-
-        // Set the proxy capability in ChromeOptions
-        chromeOptions.setCapability("proxy", proxy);
-
-        // Initialize the WebDriver with ChromeOptions
+        // Initialize the ChromeDriver with the configured options
         driver = new ChromeDriver(chromeOptions);
 
         // Maximize the browser window using WebDriver's manage() method
@@ -40,12 +32,12 @@ public class ProxyTest {
     }
 
     @Test(priority = 1)
-    public void testProxy() {
+    public void headlessChromeBrowserLaunch() {
         // Navigate to the Google Home page.
-        driver.get("https://www.selenium.dev/");
+        driver.get("https://www.google.com/");
 
-        // Assert that the page title is "Selenium".
-        Assert.assertEquals(driver.getTitle(), "Selenium");
+        // Assert that the page title is "Google".
+        Assert.assertEquals(driver.getTitle(), "Google");
     }
 
     @AfterMethod
@@ -58,3 +50,4 @@ public class ProxyTest {
     }
 
 }
+

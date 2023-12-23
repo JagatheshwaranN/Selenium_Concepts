@@ -1,4 +1,4 @@
-package concepts.driver.chrome;
+package concepts.driver.chrome.options;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
