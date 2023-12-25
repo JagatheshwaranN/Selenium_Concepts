@@ -13,6 +13,7 @@ public class ChromeServiceTest {
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
 
+    // Declare a ChromeDriverService object to manage the ChromeDriver process
     ChromeDriverService chromeDriverService;
 
     @BeforeMethod
