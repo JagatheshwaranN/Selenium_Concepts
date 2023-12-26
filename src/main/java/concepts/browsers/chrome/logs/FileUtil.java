@@ -5,10 +5,10 @@ import java.io.IOException;
 
 public class FileUtil {
 
-    public static File getTempFile(String prefix, String suffix){
+    public static File getTempFile(String fileName, String fileExtension){
         File logFileLocation = null;
         try{
-            logFileLocation = File.createTempFile(prefix, suffix);
+            logFileLocation = File.createTempFile(fileName, fileExtension);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
