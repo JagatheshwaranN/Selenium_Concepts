@@ -2,54 +2,59 @@ package concepts.browsers.chrome.logs;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.logging.LogEntries;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.logging.Level;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 public class LogFileOutputTest {
 
     // Declare a WebDriver instance to interact with the web browser
     private WebDriver driver;
 
-    // Declare a ChromeOptions object to store browser configuration settings
-    ChromeOptions chromeOptions;
+    // Declare a ChromeDriverService object to manage the ChromeDriver process
+    ChromeDriverService chromeDriverService;
+
+    File logLocation;
 
     @BeforeMethod
     public void setUp() {
         // Set the system property for the WebDriver to use the JDK HTTP client
         System.setProperty("webdriver.http.factory", "jdk-http-client");
 
-        // Create a ChromeOptions instance
-        chromeOptions = new ChromeOptions();
+        logLocation = FileUtil.getTempFile("logsCaptureToFile", ".log");
 
-        LoggingPreferences loggingPreferences = new LoggingPreferences();
-        loggingPreferences.enable(LogType.PERFORMANCE, Level.ALL);
-        chromeOptions.setCapability(ChromeOptions.LOGGING_PREFS, loggingPreferences);
+        chromeDriverService = new ChromeDriverService.Builder().withLogFile(logLocation).build();
 
         // Initialize the ChromeDriver with the configured options
-        driver = new ChromeDriver(chromeOptions);
+        driver = new ChromeDriver(chromeDriverService);
 
         // Maximize the browser window using WebDriver's manage() method
         driver.manage().window().maximize();
     }
 
     @Test(priority = 1)
-    public void testLogPreference() {
+    public void testLogFileOutput() {
         // Navigate to the Google Home page.
         driver.get("https://www.google.com/");
 
         // Assert that the page title is "Google".
         Assert.assertEquals(driver.getTitle(), "Google");
 
-        LogEntries logEntries = driver.manage().logs().get(LogType.PERFORMANCE);
-        Assert.assertFalse(logEntries.getAll().isEmpty());
+        String fileContent;
+
+        try {
+            fileContent = new String(Files.readAllBytes(logLocation.toPath()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Assert.assertTrue(fileContent.contains("Starting ChromeDriver"));
     }
 
     @AfterMethod
@@ -58,6 +63,9 @@ public class LogFileOutputTest {
         if (driver != null) {
             // If a WebDriver instance exists, quit/close the browser session.
             driver.quit();
+
+            // Close the service after WebDriver usage
+            chromeDriverService.stop();
         }
     }
 
