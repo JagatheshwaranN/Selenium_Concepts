@@ -1,8 +1,8 @@
 package concepts.browsers.edge;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -19,14 +19,14 @@ public class ExcludeSwitchesTest {
         // Set the system property for the WebDriver to use the JDK HTTP client
         System.setProperty("webdriver.http.factory", "jdk-http-client");
 
-        // Instantiate ChromeOptions to configure the ChromeDriver
-        ChromeOptions chromeOptions = new ChromeOptions();
+        // Instantiate EdgeOptions to configure the EdgeDriver
+        EdgeOptions edgeOptions = new EdgeOptions();
 
-        // Add the experimental option to launch the Chrome browser by disabling the popup blocking
-        chromeOptions.setExperimentalOption("excludeSwitches", List.of("disable-popup-blocking"));
+        // Add the experimental option to launch the Edge browser by disabling the popup blocking
+        edgeOptions.setExperimentalOption("excludeSwitches", List.of("disable-popup-blocking"));
 
-        // Initialize the ChromeDriver with the configured options
-        driver = new ChromeDriver(chromeOptions);
+        // Initialize the EdgeDriver with the configured options
+        driver = new EdgeDriver(edgeOptions);
 
         // Maximize the browser window for better visibility
         driver.manage().window().maximize();

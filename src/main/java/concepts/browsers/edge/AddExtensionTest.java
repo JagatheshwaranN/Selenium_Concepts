@@ -3,8 +3,8 @@ package concepts.browsers.edge;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -23,8 +23,8 @@ public class AddExtensionTest {
         // Set the system property for the WebDriver to use the JDK HTTP client
         System.setProperty("webdriver.http.factory", "jdk-http-client");
 
-        // Instantiate ChromeOptions to configure the ChromeDriver
-        ChromeOptions chromeOptions = new ChromeOptions();
+        // Instantiate EdgeOptions to configure the EdgeDriver
+        EdgeOptions edgeOptions = new EdgeOptions();
 
         // Create a Path object pointing to the extension file
         Path path = Paths.get("src/main/resources/extension/webextensions-selenium-example.crx");
@@ -32,11 +32,11 @@ public class AddExtensionTest {
         // Convert the Path to a URI and creating a File object from it
         File extensionFilePath = new File(path.toUri());
 
-        // Add the extension file to ChromeOptions
-        chromeOptions.addExtensions(extensionFilePath);
+        // Add the extension file to EdgeOptions
+        edgeOptions.addExtensions(extensionFilePath);
 
-        // Initialize ChromeDriver with ChromeOptions
-        driver = new ChromeDriver(chromeOptions);
+        // Initialize EdgeDriver with EdgeOptions
+        driver = new EdgeDriver(edgeOptions);
 
         // Maximize the browser window
         driver.manage().window().maximize();
