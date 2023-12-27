@@ -29,8 +29,16 @@ public class LogPreferenceTest {
         // Create a ChromeOptions instance
         chromeOptions = new ChromeOptions();
 
+        // Create an instance of LoggingPreferences to configure ChromeDriver logging
         LoggingPreferences loggingPreferences = new LoggingPreferences();
+
+        // Enable logging for the PERFORMANCE category, capturing all levels of messages
+        // This includes detailed performance-related information like network events,
+        // page loading times, etc.
         loggingPreferences.enable(LogType.PERFORMANCE, Level.ALL);
+
+        // Set the logging preferences as a capability for the ChromeOptions object.
+        // This ensures the logging configuration is applied when starting ChromeDriver.
         chromeOptions.setCapability(ChromeOptions.LOGGING_PREFS, loggingPreferences);
 
         // Initialize the ChromeDriver with the configured options
@@ -48,7 +56,10 @@ public class LogPreferenceTest {
         // Assert that the page title is "Google".
         Assert.assertEquals(driver.getTitle(), "Google");
 
+        // Retrieve the performance logs from the WebDriver instance
         LogEntries logEntries = driver.manage().logs().get(LogType.PERFORMANCE);
+
+        // Assert that the retrieved log entries are not empty
         Assert.assertFalse(logEntries.getAll().isEmpty());
     }
 
