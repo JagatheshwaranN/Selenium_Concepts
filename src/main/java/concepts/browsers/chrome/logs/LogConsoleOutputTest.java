@@ -29,15 +29,22 @@ public class LogConsoleOutputTest {
         // Set the system property for the WebDriver to use the JDK HTTP client
         System.setProperty("webdriver.http.factory", "jdk-http-client");
 
+        // Create a temporary log file using FileUtil and assigning it to logLocation
         logLocation = FileUtil.getTempFile("logsCaptureToConsole", ".log");
 
+        // Redirect standard output to the log file
         try {
+            // Create a PrintStream object to write to the log file
             System.setOut(new PrintStream(logLocation));
         } catch (FileNotFoundException e) {
+            // Handle any file not found exceptions by wrapping them in a RuntimeException
             throw new RuntimeException(e);
         }
 
-        chromeDriverService = new ChromeDriverService.Builder().withLogOutput(System.out).build();
+        // Create a ChromeDriverService instance, directing its logs to the standard output (which is now the log file)
+        chromeDriverService = new ChromeDriverService.Builder()
+                .withLogOutput(System.out) // Redirect ChromeDriver logs to the standard output
+                .build();
 
         // Initialize the ChromeDriver with the configured options
         driver = new ChromeDriver(chromeDriverService);
@@ -48,20 +55,29 @@ public class LogConsoleOutputTest {
 
     @Test(priority = 1)
     public void testLogConsoleOutput() {
+        // Declare a string variable to hold the expected warning message
+        String expectedLog = "Starting ChromeDriver";
+
         // Navigate to the Google Home page.
         driver.get("https://www.google.com/");
 
         // Assert that the page title is "Google".
         Assert.assertEquals(driver.getTitle(), "Google");
 
+        // Declare a variable to store the log file content
         String fileContent;
 
+        // Read the entire contents of the log file into the variable
         try {
+            // Use Files.readAllBytes() to read all bytes from the log file's path
             fileContent = new String(Files.readAllBytes(logLocation.toPath()));
         } catch (IOException e) {
+            // Handle potential file reading errors
             throw new RuntimeException(e);
         }
-        Assert.assertTrue(fileContent.contains("Starting ChromeDriver"));
+
+        // Assert that the log file content contains the expected text
+        Assert.assertTrue(fileContent.contains(expectedLog));
     }
 
     @AfterMethod
