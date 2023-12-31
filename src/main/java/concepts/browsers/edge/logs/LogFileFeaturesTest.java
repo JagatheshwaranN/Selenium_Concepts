@@ -1,8 +1,8 @@
 package concepts.browsers.edge.logs;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.chromium.ChromiumDriverLogLevel;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -19,8 +19,8 @@ public class LogFileFeaturesTest {
     // Declare a WebDriver instance to interact with the web browser
     private WebDriver driver;
 
-    // Declare a ChromeDriverService object to manage the ChromeDriver process
-    ChromeDriverService chromeDriverService;
+    // Declare an EdgeDriverService object to manage the EdgeDriver process
+    EdgeDriverService edgeDriverService;
 
     File logLocation;
 
@@ -31,14 +31,14 @@ public class LogFileFeaturesTest {
 
         logLocation = FileUtil.getTempFile("logFileFeatures", ".log");
 
-        System.setProperty(ChromeDriverService.CHROME_DRIVER_LOG_PROPERTY, logLocation.getAbsolutePath());
+        System.setProperty(EdgeDriverService.EDGE_DRIVER_LOG_PROPERTY, logLocation.getAbsolutePath());
 
-        System.setProperty(ChromeDriverService.CHROME_DRIVER_LOG_LEVEL_PROPERTY, ChromiumDriverLogLevel.DEBUG.toString());
+        System.setProperty(EdgeDriverService.EDGE_DRIVER_LOG_LEVEL_PROPERTY, ChromiumDriverLogLevel.DEBUG.toString());
 
-        chromeDriverService = new ChromeDriverService.Builder().withAppendLog(true).withReadableTimestamp(true).build();
+        edgeDriverService = new EdgeDriverService.Builder().withAppendLog(true).withReadableTimestamp(true).build();
 
-        // Initialize the ChromeDriver with the configured options
-        driver = new ChromeDriver(chromeDriverService);
+        // Initialize the EdgeDriver with the configured options
+        driver = new EdgeDriver(edgeDriverService);
 
         // Maximize the browser window using WebDriver's manage() method
         driver.manage().window().maximize();
@@ -71,7 +71,7 @@ public class LogFileFeaturesTest {
             driver.quit();
 
             // Close the service after WebDriver usage
-            chromeDriverService.stop();
+            edgeDriverService.stop();
         }
     }
 

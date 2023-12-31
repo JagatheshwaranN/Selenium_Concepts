@@ -1,8 +1,8 @@
 package concepts.browsers.edge.logs;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeDriverService;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -17,8 +17,8 @@ public class LogFileOutputTest {
     // Declare a WebDriver instance to interact with the web browser
     private WebDriver driver;
 
-    // Declare a ChromeDriverService object to manage the ChromeDriver process
-    ChromeDriverService chromeDriverService;
+    // Declare an EdgeDriverService object to manage the ChromeDriver process
+    EdgeDriverService edgeDriverService;
 
     File logLocation;
 
@@ -29,10 +29,10 @@ public class LogFileOutputTest {
 
         logLocation = FileUtil.getTempFile("logsCaptureToFile", ".log");
 
-        chromeDriverService = new ChromeDriverService.Builder().withLogFile(logLocation).build();
+        edgeDriverService = new EdgeDriverService.Builder().withLogFile(logLocation).build();
 
         // Initialize the ChromeDriver with the configured options
-        driver = new ChromeDriver(chromeDriverService);
+        driver = new EdgeDriver(edgeDriverService);
 
         // Maximize the browser window using WebDriver's manage() method
         driver.manage().window().maximize();
@@ -54,7 +54,7 @@ public class LogFileOutputTest {
             throw new RuntimeException(e);
         }
 
-        Assert.assertTrue(fileContent.contains("Starting ChromeDriver"));
+        Assert.assertTrue(fileContent.contains("Starting Microsoft Edge WebDriver"));
     }
 
     @AfterMethod
@@ -65,7 +65,7 @@ public class LogFileOutputTest {
             driver.quit();
 
             // Close the service after WebDriver usage
-            chromeDriverService.stop();
+            edgeDriverService.stop();
         }
     }
 

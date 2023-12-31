@@ -1,8 +1,8 @@
 package concepts.browsers.edge.logs;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
@@ -18,23 +18,23 @@ public class LogPreferenceTest {
     // Declare a WebDriver instance to interact with the web browser
     private WebDriver driver;
 
-    // Declare a ChromeOptions object to store browser configuration settings
-    ChromeOptions chromeOptions;
+    // Declare an EdgeOptions object to store browser configuration settings
+    EdgeOptions edgeOptions;
 
     @BeforeMethod
     public void setUp() {
         // Set the system property for the WebDriver to use the JDK HTTP client
         System.setProperty("webdriver.http.factory", "jdk-http-client");
 
-        // Create a ChromeOptions instance
-        chromeOptions = new ChromeOptions();
+        // Create an EdgeOptions instance
+        edgeOptions = new EdgeOptions();
 
         LoggingPreferences loggingPreferences = new LoggingPreferences();
         loggingPreferences.enable(LogType.PERFORMANCE, Level.ALL);
-        chromeOptions.setCapability(ChromeOptions.LOGGING_PREFS, loggingPreferences);
+        edgeOptions.setCapability(EdgeOptions.LOGGING_PREFS, loggingPreferences);
 
-        // Initialize the ChromeDriver with the configured options
-        driver = new ChromeDriver(chromeOptions);
+        // Initialize the EdgeDriver with the configured options
+        driver = new EdgeDriver(edgeOptions);
 
         // Maximize the browser window using WebDriver's manage() method
         driver.manage().window().maximize();

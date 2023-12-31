@@ -1,8 +1,8 @@
 package concepts.browsers.edge.logs;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeDriverService;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -19,8 +19,8 @@ public class LogConsoleOutputTest {
     // Declare a WebDriver instance to interact with the web browser
     private WebDriver driver;
 
-    // Declare a ChromeDriverService object to manage the ChromeDriver process
-    ChromeDriverService chromeDriverService;
+    // Declare an EdgeDriverService object to manage the EdgeDriver process
+    EdgeDriverService edgeDriverService;
 
     File logLocation;
 
@@ -37,10 +37,10 @@ public class LogConsoleOutputTest {
             throw new RuntimeException(e);
         }
 
-        chromeDriverService = new ChromeDriverService.Builder().withLogOutput(System.out).build();
+        edgeDriverService = new EdgeDriverService.Builder().withLogOutput(System.out).build();
 
-        // Initialize the ChromeDriver with the configured options
-        driver = new ChromeDriver(chromeDriverService);
+        // Initialize the EdgeDriver with the configured options
+        driver = new EdgeDriver(edgeDriverService);
 
         // Maximize the browser window using WebDriver's manage() method
         driver.manage().window().maximize();
@@ -61,7 +61,8 @@ public class LogConsoleOutputTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Assert.assertTrue(fileContent.contains("Starting ChromeDriver"));
+        System.out.println(fileContent);
+        Assert.assertTrue(fileContent.contains("Starting Microsoft Edge WebDriver"));
     }
 
     @AfterMethod
@@ -72,7 +73,7 @@ public class LogConsoleOutputTest {
             driver.quit();
 
             // Close the service after WebDriver usage
-            chromeDriverService.stop();
+            edgeDriverService.stop();
         }
     }
 
