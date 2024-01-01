@@ -22,6 +22,7 @@ public class LogFileFeaturesTest {
     // Declare a ChromeDriverService object to manage the ChromeDriver process
     ChromeDriverService chromeDriverService;
 
+    // Declare a variable to store the file path for logging purposes
     File logLocation;
 
     @BeforeMethod

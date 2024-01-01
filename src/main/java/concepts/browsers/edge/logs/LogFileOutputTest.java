@@ -20,6 +20,7 @@ public class LogFileOutputTest {
     // Declare an EdgeDriverService object to manage the ChromeDriver process
     EdgeDriverService edgeDriverService;
 
+    // Declare a variable to store the file path for logging purposes
     File logLocation;
 
     @BeforeMethod
@@ -27,11 +28,15 @@ public class LogFileOutputTest {
         // Set the system property for the WebDriver to use the JDK HTTP client
         System.setProperty("webdriver.http.factory", "jdk-http-client");
 
+        // Create a temporary log file using FileUtil and assigning it to logLocation
         logLocation = FileUtil.getTempFile("logsCaptureToFile", ".log");
 
-        edgeDriverService = new EdgeDriverService.Builder().withLogFile(logLocation).build();
+        // Create an EdgeDriverService instance, directing its logs to the specified file
+        edgeDriverService = new EdgeDriverService.Builder()
+                .withLogFile(logLocation) // Specify the log file location
+                .build();
 
-        // Initialize the ChromeDriver with the configured options
+        // Initialize the EdgeDriver with the configured options
         driver = new EdgeDriver(edgeDriverService);
 
         // Maximize the browser window using WebDriver's manage() method
@@ -40,21 +45,29 @@ public class LogFileOutputTest {
 
     @Test(priority = 1)
     public void testLogFileOutput() {
+        // Declare a string variable to hold the expected warning message
+        String expectedLog = "Starting Microsoft Edge WebDriver";
+
         // Navigate to the Google Home page.
         driver.get("https://www.google.com/");
 
         // Assert that the page title is "Google".
         Assert.assertEquals(driver.getTitle(), "Google");
 
+        // Declare a variable to store the log file content
         String fileContent;
 
+        // Read the entire contents of the log file into the variable
         try {
+            // Use Files.readAllBytes() to read all bytes from the log file's path
             fileContent = new String(Files.readAllBytes(logLocation.toPath()));
         } catch (IOException e) {
+            // Handle potential file reading errors
             throw new RuntimeException(e);
         }
 
-        Assert.assertTrue(fileContent.contains("Starting Microsoft Edge WebDriver"));
+        // Assert that the log file content contains the expected text
+        Assert.assertTrue(fileContent.contains(expectedLog));
     }
 
     @AfterMethod
