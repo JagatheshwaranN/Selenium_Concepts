@@ -1,4 +1,4 @@
-package concepts.grid;
+package concepts.grid.sequential;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -13,10 +13,19 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class SeleniumGridDemo {
-
-	public WebDriver driver;
+public class SeleniumGridDemo2 {
+	
+	private WebDriver driver;
+	public static ThreadLocal<WebDriver> driverLocal = new ThreadLocal<WebDriver>();
 	public DesiredCapabilities capabilities = new DesiredCapabilities();
+	
+	public WebDriver getDriver() {
+		return driverLocal.get();
+	}
+
+	public void setDriver(WebDriver driver) {
+		driverLocal.set(driver);
+	}
 
 	@Parameters({ "browser" })
 	@Test

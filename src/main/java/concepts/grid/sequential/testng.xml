@@ -4,7 +4,7 @@
 	<test thread-count="1" name="Chrome Test">
 	<parameter name="browser" value="chrome"/>
 		<classes>
-			<class name="concepts.grid.SeleniumGridDemo2" />
+			<class name="concepts.grid.sequential.SeleniumGridDemo2" />
 		</classes>
 	</test>
 <!-- 	<test thread-count="1" name="Edge Test">
