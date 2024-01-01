@@ -1,17 +1,17 @@
 To start the Selenium Server for Selenium Grid as Standalone
 ============================================================
-java -jar selenium-server-4.15.0.jar standalone
+java -jar selenium-server-4.16.1.jar standalone
 
 To start the Selenium Server for Selenium Grid as Hub & Node
 ============================================================
-java -jar selenium-server-4.15.0.jar hub
-java -jar selenium-server-4.15.0.jar node
+java -jar selenium-server-4.16.1.jar hub
+java -jar selenium-server-4.16.1.jar node
 
 To start the Selenium Server for Selenium Grid as Distributed Environment
 =========================================================================
-java -jar selenium-server-4.15.0.jar event-bus --publish-events tcp://192.168.1.5:4442 --subscribe-events tcp://192.168.1.5:4443 --port 5557
-java -jar selenium-server-4.15.0.jar sessionqueue --port 5559
-java -jar selenium-server-4.15.0.jar sessions --publish-events tcp://192.168.1.5:4442 --subscribe-events tcp://192.168.1.5:4443 --port 5556
-java -jar selenium-server-4.15.0.jar distributor --publish-events tcp://192.168.1.5:4442 --subscribe-events tcp://192.168.1.5:4443 --sessions http://192.168.1.5:5556 --sessionqueue http://192.168.1.5:5559 --port 5553 --bind-bus false
-java -jar selenium-server-4.15.0.jar router --sessions http://192.168.1.5:5556 --distributor http://192.168.1.5:5553 --sessionqueue http://192.168.1.5:5559 --port 4444
-java -jar selenium-server-4.15.0.jar node --publish-events tcp://192.168.1.5:4442 --subscribe-events tcp://192.168.1.5:4443
+java -jar selenium-server-4.16.1.jar event-bus --publish-events tcp://192.168.1.5:4442 --subscribe-events tcp://192.168.1.5:4443 --port 5557
+java -jar selenium-server-4.16.1.jar sessionqueue --port 5559
+java -jar selenium-server-4.16.1.jar sessions --publish-events tcp://192.168.1.5:4442 --subscribe-events tcp://192.168.1.5:4443 --port 5556
+java -jar selenium-server-4.16.1.jar distributor --publish-events tcp://192.168.1.5:4442 --subscribe-events tcp://192.168.1.5:4443 --sessions http://192.168.1.5:5556 --sessionqueue http://192.168.1.5:5559 --port 5553 --bind-bus false
+java -jar selenium-server-4.16.1.jar router --sessions http://192.168.1.5:5556 --distributor http://192.168.1.5:5553 --sessionqueue http://192.168.1.5:5559 --port 4444
+java -jar selenium-server-4.16.1.jar node --publish-events tcp://192.168.1.5:4442 --subscribe-events tcp://192.168.1.5:4443

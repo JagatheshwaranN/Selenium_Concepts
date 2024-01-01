@@ -1,0 +1,93 @@
+Grid Intro
+==========
+
+Why Grid?
+=========
+I need a tool to run the test suite in parallel.
+How can I reduce the time for completion of the test suite.
+
+What is Grid?
+=============
+Allows us to execute test script on different machines at the same time.
+
+Execution is possible on:
+=========================
+1. Different machines with different browsers.
+2. Same browser with different versions.
+
+It saves a lot of time  and effort for execution.
+
+It consists of Hub and multiple Nodes.
+1. Hub works as a central point controlling all the nodes.
+2. Nodes are actual machines on which execution is done.
+
+How Selenium Grid Works
+=======================
+It works based on Hub and Node concept. It is the majorly used approach as well.
+
+                          Hub
+                           |
+----------------------------------------------------------
+|               |                 |             |
+Node1           Node2             Node3         Node4
+Firefox         Edge              Safari        Chrome
+on Ubuntu       on Windows        on Mac        on Android
+
+Hub &  Node
+===========
+Hub
+===
+1. Central point where you load the tests.
+2. Only one hub in a grid.
+3. Launched only on a single machine.
+
+Node
+====
+1. Selenium instances that will executes the tests.
+2. One or More nodes in a grid.
+3. Launched on multiple machines with different platforms and browsers.
+
+Hands-on Pre-requisites
+=======================
+1. Download and keep the Selenium-server-standalone.jar file.
+2. Suggested to place the above jar file at the same location as your CWD.
+
+Things to Remember
+==================
+When you are going for grid setup, please make sure that the firewall setting
+is turned off.
+
+Start a Hub
+===========
+java -jar selenium-server-4.16.1.jar hub
+
+By default, the Hub will run on http://192.168.1.5:"4444" port. To change the
+port,
+java -jar selenium-server-4.16.1.jar hub -port 4441
+
+Netstat -a -> To get the list of ports used.
+
+Start a Node
+============
+java -jar selenium-server-4.16.1.jar node
+
+Running tests using Grid
+========================
+
+
+
+Selenium Server Commands
+========================
+A list of all the commands available. To use one, run 'java -jar selenium.jar
+commandName'.
+
+  completion    Generate shell autocompletion
+  distributor   Adds this server as the distributor in a selenium grid.
+  hub           A grid hub, composed of sessions, distributor, and router.
+  info          Prints information for commands and topics.
+  node          Adds this server as a Node in the Selenium Grid.
+  router        Creates a router to front the selenium grid.
+  sessionqueue  Adds this server as the new session queue in a selenium grid.
+  sessions      Adds this server as the session map in a selenium grid.
+  standalone    The selenium server, running everything in-process.
+
