@@ -1,8 +1,8 @@
-package concepts.grid;
+package concepts.grid.parallel;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
@@ -12,19 +12,19 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.time.Duration;
 
-public class HubAndSingleNodeTest {
+public class HubWithNodeBrowser2Test {
 
     public WebDriver driver;
 
     public DesiredCapabilities capabilities = new DesiredCapabilities();
 
     @Test
-    public void testHubAndSingleNode() {
-        String browser = "chrome";
+    public void testHubWithNodeBrowser2() {
+        String browser = "edge";
         System.setProperty("webdriver.http.factory", "jdk-http-client");
         capabilities.setPlatform(Platform.ANY);
-        capabilities.setBrowserName(browser);
-        ChromeOptions options = new ChromeOptions();
+        capabilities.setBrowserName("MicrosoftEdge");
+        EdgeOptions options = new EdgeOptions();
         options.merge(capabilities);
         try {
             driver = new RemoteWebDriver(URI.create("http://192.168.1.5:4444").toURL(), capabilities);
@@ -35,7 +35,7 @@ public class HubAndSingleNodeTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.get("https://www.google.com/");
+        driver.get("https://selenium.dev/");
         System.out.println("Title of Page " + driver.getTitle() + " from Browser " + browser);
     }
 

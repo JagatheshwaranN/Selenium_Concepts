@@ -73,8 +73,40 @@ java -jar selenium-server-4.16.1.jar node
 
 Running tests using Grid
 ========================
+driver = new RemoteWebDriver(URI.create("http://192.168.1.5:4444").toURL(), capabilities);
 
+To customize the Node
+=====================
+DesiredCapabilities capabilities = new DesiredCapabilities();
+capabilities.setPlatform(Platform.ANY);
+capabilities.setBrowserName(browser);
 
+Running parallel tests using testNG with Grid
+=============================================
+Node with Chrome browser
+========================
+DesiredCapabilities capabilities = new DesiredCapabilities();
+capabilities.setPlatform(Platform.ANY);
+capabilities.setBrowserName("chrome");
+
+Node with Edge browser
+======================
+DesiredCapabilities capabilities = new DesiredCapabilities();
+capabilities.setPlatform(Platform.ANY);
+capabilities.setBrowserName("MicrosoftEdge");
+
+<suite name="Default Suite" parallel="tests">
+    <test thread-count="5" name="Chrome_Google">
+        <classes>
+            <class name="concepts.grid.parallel.HubWithNodeBrowser1Test"/>
+        </classes>
+    </test>
+    <test thread-count="5" name="Edge_Selenium">
+        <classes>
+            <class name="concepts.grid.parallel.HubWithNodeBrowser2Test"/>
+        </classes>
+    </test>
+</suite>
 
 Selenium Server Commands
 ========================

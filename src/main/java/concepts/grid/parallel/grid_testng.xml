@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Default Suite" parallel="tests">
+    <test thread-count="5" name="Chrome_Google">
+        <classes>
+            <class name="concepts.grid.parallel.HubWithNodeBrowser1Test"/>
+        </classes>
+    </test>
+    <test thread-count="5" name="Edge_Selenium">
+        <classes>
+            <class name="concepts.grid.parallel.HubWithNodeBrowser2Test"/>
+        </classes>
+    </test> <!-- Selenium_Concepts -->
+</suite> <!-- Default Suite -->

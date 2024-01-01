@@ -1,4 +1,4 @@
-package concepts.grid;
+package concepts.grid.parallel;
 
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
@@ -12,14 +12,14 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.time.Duration;
 
-public class HubAndSingleNodeTest {
+public class HubWithNodeBrowser1Test {
 
     public WebDriver driver;
 
     public DesiredCapabilities capabilities = new DesiredCapabilities();
 
     @Test
-    public void testHubAndSingleNode() {
+    public void testHubWithNodeBrowser1() {
         String browser = "chrome";
         System.setProperty("webdriver.http.factory", "jdk-http-client");
         capabilities.setPlatform(Platform.ANY);
