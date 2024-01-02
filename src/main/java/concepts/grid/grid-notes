@@ -230,62 +230,62 @@ How to Configure Selenium Grid 4?
 
 Setting grid with secure communication and node registration
 ============================================================
-java -jar selenium-server-<version>.jar info security
+java -jar selenium-server-4.16.1.jar info security
 
 Get configuration help
 ======================
-java -jar selenium-server-<version>.jar info config
+java -jar selenium-server-4.16.1.jar info config
 
 If the tester wishes to use a separate session storage than local storage
-java -jar selenium-server-<version>.jar info sessionmap
+java -jar selenium-server-4.16.1.jar info sessionmap
 
 Export traces
 =============
-java -jar selenium-server-<version>.jar info tracing
+java -jar selenium-server-4.16.1.jar info tracing
 
 Get help to know all the Selenium Grid commands
 ===============================================
-java -jar selenium-server-<version>.jar –config-help
+java -jar selenium-server-4.16.1.jar –config-help
 
 To get help based on a specific component
 =========================================
-java -jar selenium-server-<version>.jar <method> –help
+java -jar selenium-server-4.16.1.jar <method> –help
 
 For standalone use
 ==================
-java -jar selenium-server-<version>.jar standalone –help
+java -jar selenium-server-4.16.1.jar standalone –help
 
 For node session queue
 ======================
-java -jar selenium-server-<version>.jar sessionqueue –help
+java -jar selenium-server-4.16.1.jar sessionqueue –help
 
 For distributor
 ===============
-java -jar selenium-server-<version>.jar distributor –help
+java -jar selenium-server-4.16.1.jar distributor –help
 
 For router
 ==========
-java -jar selenium-server-<version>.jar router –help
+java -jar selenium-server-4.16.1.jar router –help
 
 For node
 ========
-java -jar selenium-server-<version>.jar node –help
+java -jar selenium-server-4.16.1.jar node –help
 
 Setting max sessions as 3 on standalone mode
 ============================================
-java -jar selenium-server-<version>.jar standalone –max-sessions 4 –port 4444
+java -jar selenium-server-4.16.1.jar standalone –max-sessions 4 –port 4444
 
 Setting a session request timeout on Hub and disabling tracing
 ==============================================================
-java -jar selenium-server-<version>.jar hub –session-request-timeout 500 –port 3333 –tracing false
+java -jar selenium-server-4.16.1.jar hub –session-request-timeout 500 –port 3333 –tracing false
 
 Setting session map server URL and server queue server URL
 ==========================================================
-java -jar selenium-server-<version>.jar distributor –sessions http://localhost:5556 –sessionqueue http://localhost:5559
+java -jar selenium-server-4.16.1.jar distributor –sessions http://localhost:5556 –sessionqueue http://localhost:5559
 
 To start the Hub
 ================
-java -jar selenium-server-<version>.jar hub
+java -jar selenium-server-4.16.1.jar hub
 
 By default, the Hub will run on http://192.168.1.5:"4444" port. To change the
 port,
@@ -295,11 +295,38 @@ Netstat -a -> To get the list of ports used.
 
 To start a Node
 ===============
-java -jar selenium-server-<version>.jar node
+java -jar selenium-server-4.16.1.jar node
 
 Start a node with custom capabilities
 =====================================
-java -jar selenium-server-<version>.jar node –detect-drivers false –driver-configuration display-name="Chrome (custom capability true)" max-sessions=1 stereotype='{"browserName":"chrome","gsg:customcap":true}' –port 6161
+java -jar selenium-server-4.16.1.jar node –detect-drivers false –driver-configuration display-name="Chrome (custom capability true)" max-sessions=1 stereotype='{"browserName":"chrome","gsg:customcap":true}' –port 6161
+
+Advantages of using Selenium Grid
+=================================
+Scalability and Speed:
+======================
+Selenium Grid makes testing faster by running tests at the same time on different browsers
+and systems. This means quicker testing and shorter wait times.
+
+Cost-Effective:
+===============
+It saves money by efficiently using resources. You can share browser setups across tests,
+cutting down on hardware and software expenses.
+
+Cross-Browser Testing:
+======================
+It ensures that your website or app works well on various browsers by letting you test
+them all at once.
+
+Better Test Coverage:
+=====================
+Running tests on multiple systems simultaneously helps catch more issues, making your
+tests more reliable.
+
+Real-Time Monitoring:
+=====================
+With VNC support, you can watch tests as they happen, making it easier to fix problems
+and work better as a team.
 
 Drawbacks of using Selenium Grid
 ================================
