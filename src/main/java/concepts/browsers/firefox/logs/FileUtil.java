@@ -7,7 +7,7 @@ import java.nio.file.Files;
 public class FileUtil {
 
     public static File getTempFile(String fileName, String fileExtension){
-        File logFileLocation = null;
+        File logFileLocation;
         try{
             logFileLocation = File.createTempFile(fileName, fileExtension);
         } catch (IOException e) {
@@ -18,7 +18,7 @@ public class FileUtil {
     }
 
     public static File getTempDirectory(String dirName) {
-        File tempDirectoryLocation = null;
+        File tempDirectoryLocation;
         try {
             tempDirectoryLocation = Files.createTempDirectory(dirName).toFile();
         } catch (IOException e) {

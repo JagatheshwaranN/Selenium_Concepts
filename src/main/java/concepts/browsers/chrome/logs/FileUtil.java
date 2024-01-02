@@ -6,7 +6,7 @@ import java.io.IOException;
 public class FileUtil {
 
     public static File getTempFile(String fileName, String fileExtension){
-        File logFileLocation = null;
+        File logFileLocation;
         try{
             logFileLocation = File.createTempFile(fileName, fileExtension);
         } catch (IOException e) {

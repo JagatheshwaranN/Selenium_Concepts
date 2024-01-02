@@ -35,7 +35,7 @@ public class FirefoxProfileLocationTest {
 
         // Build a GeckoDriverService (the driver that controls Firefox)
         // Specify the profile directory to be used for this instance
-        GeckoDriverService firefoxDriverService = new GeckoDriverService.Builder()
+        firefoxDriverService = new GeckoDriverService.Builder()
                 .withProfileRoot(profileDirectory)  // Set the profile directory
                 .build();
 
