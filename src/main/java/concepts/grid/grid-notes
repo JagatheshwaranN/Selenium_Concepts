@@ -1,21 +1,115 @@
 Grid Intro
 ==========
+The concept of Selenium Grid is simple. When one system is used to run Selenium tests,
+they are not as efficient as we require them to be, considering the high complexity and
+size of test cases. To speed things up, we need to connect various other systems that
+can help us execute these test cases quickly and simultaneously. By configuring these
+systems with a one-time setup, the hub can provide instructions on what to execute at
+which system and the nodes can follow that. This is also called the distribution of
+tests and is sometimes also referred to as "distributed testing".
 
 Why Grid?
 =========
-I need a tool to run the test suite in parallel.
-How can I reduce the time for completion of the test suite.
+I need a tool to run the test suite in parallel. - Grid is the tool.
+How can I reduce the time for completion of the test suite. - Yes, you can do this
+with Grid.
 
 What is Grid?
 =============
 Allows us to execute test script on different machines at the same time.
+
+Selenium Grid:
+==============
+Imagine it as a traffic controller for your automated tests. It lets you run those
+tests on multiple computers at the same time, instead of just one. This makes testing
+faster and more efficient.
+
+Selenium Grid4:
+===============
+Think of it as a brand new, upgraded traffic controller. It's still responsible for
+sending your tests to different computers, but it's been totally rebuilt to handle
+today's complex testing needs. Here's what's new:
+
+More flexible:
+==============
+It works with more types of computers and operating systems.
+
+More powerful:
+==============
+It can handle even more tests at once and keep track of them better.
+
+More modern:
+============
+It uses newer technologies to communicate between computers, making everything faster
+and smoother.
+
+The main takeaway is that Selenium Grid4 is a major upgrade that makes running your
+automated tests on multiple computers even easier and more efficient.
+
+Components of Selenium Grid4 – Architecture
+===========================================
+Selenium Grid4 provides its users with software that can deal with high-paced computing
+environments with integrated cloud services and much more. This is made possible through
+the following set of components:
+
+1. Router
+2. Session Map
+3. Distributor
+4. New Session Queue
+5. Node
+6. Event Bus
+
+Imagine Selenium Grid as a busy airport, with different teams working together to get
+passengers (tests) to their destinations (nodes) smoothly:
+
+1. Router:
+==========
+1. Like an air traffic controller, it receives all incoming flight requests (tests)
+   and decides where to send them.
+2. It checks for ongoing flights (existing sessions) and sends those directly to the
+   right gate (node).
+3. For new flights (new tests), it puts them in a waiting line (session queue).
+4. It also makes sure no gates (nodes) get too crowded with flights (tests).
+
+2. Session Map:
+===============
+1. Like a flight schedule board, it keeps track of which flights (sessions) are at which
+   gates (nodes).
+2. The router uses this information to quickly direct ongoing flights to the correct gate.
+
+3. Distributor:
+===============
+1. Like a gate agent, it assigns new flights (tests) to available gates (nodes).
+2. It updates the flight schedule board (session map) with this information.
+3. It also keeps a list of all the airport's gates (nodes) and their capabilities.
+
+4. New Session Queue:
+=====================
+1. Like a waiting area for passengers, it holds new flights (tests) until a gate (node)
+   is ready for them.
+2. It works on a first-come, first-served basis.
+
+5. Event Bus:
+=============
+Like an airport intercom system, it allows different teams to communicate quickly and
+efficiently without making a bunch of phone calls (HTTP requests).
+
+6. Node:
+========
+1. Like an individual gate, it's where the actual flights (tests) take place.
+2. Each gate has its own features (browsers, devices, etc.) for handling specific types
+   of flights (tests).
+3. Nodes follow instructions from the gate agent (distributor) without questioning them.
+
+Together, these components work as a well-oiled machine to get passengers (tests) to their
+destinations (nodes) quickly and efficiently!
 
 Execution is possible on:
 =========================
 1. Different machines with different browsers.
 2. Same browser with different versions.
 
-It saves a lot of time  and effort for execution.
+It saves a lot of time and effort for execution.
 
 It consists of Hub and multiple Nodes.
 1. Hub works as a central point controlling all the nodes.
@@ -27,14 +121,14 @@ It works based on Hub and Node concept. It is the majorly used approach as well.
 
                           Hub
                            |
-----------------------------------------------------------
+-------------------------------------------------
 |               |                 |             |
 Node1           Node2             Node3         Node4
 Firefox         Edge              Safari        Chrome
 on Ubuntu       on Windows        on Mac        on Android
 
-Hub &  Node
-===========
+Hub & Node
+==========
 Hub
 ===
 1. Central point where you load the tests.
@@ -49,8 +143,9 @@ Node
 
 Hands-on Pre-requisites
 =======================
-1. Download and keep the Selenium-server-standalone.jar file.
-2. Suggested to place the above jar file at the same location as your CWD.
+1. Download and keep the selenium-server-4.16.1.jar file.
+2. Suggested to place the above jar file at the same location / inside a folder
+   on your CWD.
 
 Things to Remember
 ==================
@@ -79,7 +174,7 @@ To customize the Node
 =====================
 DesiredCapabilities capabilities = new DesiredCapabilities();
 capabilities.setPlatform(Platform.ANY);
-capabilities.setBrowserName(browser);
+capabilities.setBrowserName("chrome");
 
 Running parallel tests using testNG with Grid
 =============================================
