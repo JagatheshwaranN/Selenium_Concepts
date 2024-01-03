@@ -37,7 +37,7 @@ It consists of Hub and multiple Nodes.
 
 How Selenium Grid3 Works
 ========================
-It works based on Hub and Node concept. It is the majorly used approach as well.
+It works based on Hub and Node concept.
 
                           Hub
                            |
@@ -179,18 +179,18 @@ testing workflow.
 Think of Selenium Grid as your friendly test-running robot army. It's free, flexible,
 speaks your language, thrives in the cloud, speeds things up, and gets along with everyone.
 
-What's different in Selenium Grid 4? Comparison with Selenium Grid 3
-=====================================================================
-The most appreciated feature of Selenium Grid 4 is its army of components dedicated to
+What's different in Selenium Grid4? Comparison with Selenium Grid3
+==================================================================
+The most appreciated feature of Selenium Grid4 is its army of components dedicated to
 doing their fixed separate tasks and expanding the power of the grid. This structure
-was shown in the image above. On the contrary, Selenium Grid 3 worked on just two components:
+was shown in the image above. On the contrary, Selenium Grid3 worked on just two components:
 
 1. Hub
 2. Nodes
 
 Code disassociation
 ===================
-Selenium Grid4 code is written fresh and has no association with Selenium Grid 3 code.
+Selenium Grid4 code is written fresh and has no association with Selenium Grid3 code.
 This removes any complex dependencies that prevent covering the loopholes of the system.
 
 Configuration methods
@@ -207,15 +207,15 @@ This provides flexibility to the tester, which is always a good thing in the sof
 
 Single Jar for everything
 =========================
-Selenium Grid 4 provides a single jar for everything that you may need to set up the Grid
+Selenium Grid4 provides a single jar for everything that you may need to set up the Grid
 on your infrastructure. This includes the required dependencies; therefore, the setup time,
 maintenance, and complexity are reduced drastically.
 
 Apart from these major differentiators, obviously, we get improved performance, more features,
 and a much stronger grid to work on.
 
-How to install Selenium Grid 4?
-===============================
+How to install Selenium Grid4?
+==============================
 1. Download and keep the selenium-server-4.16.1.jar file.
 2. Suggested to place the above jar file at the same location / inside a folder
    on your CWD.
@@ -225,8 +225,8 @@ Things to Remember
 When you are going for grid setup, please make sure that the firewall setting
 is turned off.
 
-How to Configure Selenium Grid 4?
-=================================
+How to Configure Selenium Grid4?
+================================
 
 Setting grid with secure communication and node registration
 ============================================================
@@ -296,6 +296,16 @@ Netstat -a -> To get the list of ports used.
 To start a Node
 ===============
 java -jar selenium-server-4.16.1.jar node
+
+To start a Hub and Node as Localhost
+====================================
+Hub
+===
+java -jar selenium-server-4.16.1.jar hub --port 4444 --host localhost
+
+Node
+====
+java -jar selenium-server-4.16.1.jar node --port 5555 --host localhost --hub http://localhost:4444/grid/register
 
 Start a node with custom capabilities
 =====================================
