@@ -1,5 +1,6 @@
 package concepts.browsers.chrome.logs;
 
+import concepts.browsers.FileUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;

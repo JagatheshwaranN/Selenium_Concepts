@@ -1,5 +1,6 @@
 package concepts.browsers.firefox.logs;
 
+import concepts.browsers.FileUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxDriverService;
@@ -84,6 +85,18 @@ public class LogFileFeaturesTest {
 
         // Assert that the log file content contains at least one timestamp matching the pattern
         Assert.assertTrue(pattern.matcher(fileContent).find());
+
+        // Clear the previously set log properties (EdgeDriver log file and level)
+        clearLogProperties(); // Likely a custom method to reset those properties
+    }
+
+    // Method to clear GeckoDriver-related log properties
+    private void clearLogProperties() {
+        // Unset the system property for the GeckoDriver log file location
+        System.clearProperty(GeckoDriverService.GECKO_DRIVER_LOG_PROPERTY);
+
+        // Unset the system property for the GeckoDriver log level
+        System.clearProperty(GeckoDriverService.GECKO_DRIVER_LOG_LEVEL_PROPERTY);
     }
 
     @AfterMethod

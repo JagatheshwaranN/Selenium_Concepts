@@ -1,6 +1,6 @@
 package concepts.browsers.firefox;
 
-import concepts.browsers.firefox.logs.FileUtil;
+import concepts.browsers.FileUtil;
 import junit.framework.Assert;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;

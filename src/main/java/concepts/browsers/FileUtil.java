@@ -1,7 +1,8 @@
-package concepts.browsers.chrome.logs;
+package concepts.browsers;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class FileUtil {
 
@@ -15,4 +16,17 @@ public class FileUtil {
         logFileLocation.deleteOnExit();
         return logFileLocation;
     }
+
+    public static File getTempDirectory(String dirName) {
+        File tempDirectoryLocation;
+        try {
+            tempDirectoryLocation = Files.createTempDirectory(dirName).toFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        tempDirectoryLocation.deleteOnExit();
+
+        return tempDirectoryLocation;
+    }
+
 }

@@ -20,7 +20,7 @@ public class ArgumentsTest {
         // Instantiate FirefoxOptions to configure the FirefoxDriver
         FirefoxOptions firefoxOptions = new FirefoxOptions();
 
-        // Add the argument to launch the Chrome browser by disabling the default browser check
+        // Add the argument to launch the Firefox browser by disabling the default browser check
         firefoxOptions.addArguments("--no-default-browser-check");
 
         // Initialize the FirefoxDriver with the configured options

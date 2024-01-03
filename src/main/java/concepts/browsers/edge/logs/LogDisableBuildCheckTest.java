@@ -1,5 +1,6 @@
 package concepts.browsers.edge.logs;
 
+import concepts.browsers.FileUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeDriverService;
@@ -80,12 +81,12 @@ public class LogDisableBuildCheckTest {
         clearLogProperties(); // Likely a custom method to reset those properties
     }
 
-    // Method to clear ChromeDriver-related log properties
+    // Method to clear EdgeDriver-related log properties
     private void clearLogProperties() {
-        // Unset the system property for the ChromeDriver log file location
+        // Unset the system property for the EdgeDriver log file location
         System.clearProperty(EdgeDriverService.EDGE_DRIVER_LOG_PROPERTY);
 
-        // Unset the system property for the ChromeDriver log level
+        // Unset the system property for the EdgeDriver log level
         System.clearProperty(EdgeDriverService.EDGE_DRIVER_LOG_LEVEL_PROPERTY);
     }
 
