@@ -1,0 +1,95 @@
+Web Authentication(WebAuthn)
+============================
+1. Browser API for passwordless authentication
+2. Strong authentication using public key cryptography
+3. Specification developed by W3C and FIDO Alliance
+4. Scoped, site specific credentials
+
+Authenticator Types
+===================
+WebAuthn Spec Name          Authenticator       Examples
+==================          =============       ========
+Platform Authentication     Built into the      Windows Hello, FingerPrint Reader,
+                            Computer/Phone      Face ID
+
+Roaming Authenticator       External Security   Yubikey, Titan Security Key
+                            Keys
+
+FIDO Alliance
+=============
+1. Develops technical specifications for non-password based authentication
+2. Certifies technology that meets specs
+
+Terminology
+===========
+Relying Party (RP)
+==================
+Business / Organization / Website
+
+CTAP
+====
+CTAP stands for Client to Authenticator Protocol. It has 2 evolutions.
+
+U2F(=CTAP1) - Universal Second Factor
+
+FIDO2 - WebAuthn + CTAP2
+
+How WebAuthn Works
+==================
+Registration
+============
+Client => User initiates new account registration.
+Server => Server sends data to connect website + user to the credential.
+Client => WebAuthn API prompts user to create a key pair, user chooses authenticator.
+Client => Authenticator generates key pair bound to website + user data. sends public key to the Server.
+Server => Server confirms registration, stores public key.
+
+Registration Security
+=====================
+1. Private key never leaves authenticator.
+2. Biometric data never leaves authenticator.
+3. Only public key and attestation are sent to Server.
+
+What is Attestation
+===================
+Information about the authenticator being used.
+Options: none, indirect, direct, enterprise.
+Not required by default.
+
+Enables:
+1. Allows list of allowed authenticators.
+2. Deny list of known flawed authenticators.
+
+Authentication
+==============
+Client => User initiates login.
+Server => Server initiates challenge.
+Client => Authenticator signs the challenge with private key and sends to the server.
+Server => Server verifies the signature with the public key.
+Server => Login approved or denied.
+
+Advantages
+==========
+1. Pwned Passwords (Passwords exposed in the data breaches)
+2. Phishing resistant (Scoped credentials protect phishing targets)
+3. Speedy (U2F has fastest median authentication time). Compared to SMS, U2F saves a
+   user 18.2 minutes annually.
+
+Obstacles
+=========
+1. Incomplete browser support
+2. Limited authenticator availability
+   a. Roaming authenticators are expensive
+   b. Platform authenticators are not ubiquitous.
+3. Browser and device compatibility.
+4. New technology
+   a. Limited documentation and sample apps
+   b. Nascent library support
+   c. Cryptography can be scary
+5. Factor registration - Onboarding UX impact users success
+6. Factor usability - Fastest authentication doesn't necessarily mean higher usability
+7. Account recovery
+
+
+
+
