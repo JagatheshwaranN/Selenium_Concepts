@@ -1,0 +1,304 @@
+Web Authentication(WebAuthn)
+============================
+1. Browser API for passwordless authentication
+2. Strong authentication using public key cryptography
+3. Specification developed by W3C and FIDO Alliance
+4. Scoped, site specific credentials
+
+Authenticator Types
+===================
+WebAuthn Spec Name          Authenticator       Examples
+==================          =============       ========
+Platform Authentication     Built into the      Windows Hello, FingerPrint Reader,
+                            Computer/Phone      Face ID
+
+Roaming Authenticator       External Security   Yubikey, Titan Security Key
+                            Keys
+
+FIDO Alliance
+=============
+1. Develops technical specifications for non-password based authentication
+2. Certifies technology that meets specs
+
+Terminology
+===========
+Relying Party (RP)
+==================
+Business / Organization / Website
+
+CTAP
+====
+CTAP stands for Client to Authenticator Protocol. It has 2 evolutions.
+
+U2F(=CTAP1) - Universal Second Factor
+
+FIDO2 - WebAuthn + CTAP2
+
+How WebAuthn Works
+==================
+Registration
+============
+Client => User initiates new account registration.
+Server => Server sends data to connect website + user to the credential.
+Client => WebAuthn API prompts user to create a key pair, user chooses authenticator.
+Client => Authenticator generates key pair bound to website + user data. sends public key to the Server.
+Server => Server confirms registration, stores public key.
+
+Registration Security
+=====================
+1. Private key never leaves authenticator.
+2. Biometric data never leaves authenticator.
+3. Only public key and attestation are sent to Server.
+
+What is Attestation
+===================
+Information about the authenticator being used.
+Options: none, indirect, direct, enterprise.
+Not required by default.
+
+Enables:
+1. Allows list of allowed authenticators.
+2. Deny list of known flawed authenticators.
+
+Authentication
+==============
+Client => User initiates login.
+Server => Server initiates challenge.
+Client => Authenticator signs the challenge with private key and sends to the server.
+Server => Server verifies the signature with the public key.
+Server => Login approved or denied.
+
+Advantages
+==========
+1. Pwned Passwords (Passwords exposed in the data breaches)
+2. Phishing resistant (Scoped credentials protect phishing targets)
+3. Speedy (U2F has fastest median authentication time). Compared to SMS, U2F saves a
+   user 18.2 minutes annually.
+
+Obstacles
+=========
+1. Incomplete browser support
+2. Limited authenticator availability
+   a. Roaming authenticators are expensive
+   b. Platform authenticators are not ubiquitous.
+3. Browser and device compatibility.
+4. New technology
+   a. Limited documentation and sample apps
+   b. Nascent library support
+   c. Cryptography can be scary
+5. Factor registration - Onboarding UX impact users success
+6. Factor usability - Fastest authentication doesn't necessarily mean higher usability
+7. Account recovery
+
+=======================================================================================
+
+SAML
+====
+1. SAML stands for (Security Assertion Markup Language).
+2. It is standard commonly used for Single Sign-On (SSO).
+3. Widely adopted.
+4. Prone to exploits if not implemented properly.
+5. Less popular today because of the implementation flaws.
+
+Single Sign-On?
+===============
+Lets say we have user who access multiple applications on cloud. The user could
+attempt to access those applications individually (manually).
+
+Problem with above scenario is, user has to maintain the separate login details
+(username and passwords) and its hard to memorize for more applications. Also,
+multiple user profiles has to be created for those applications.
+
+Example: Youtube, Gmail, and Drive
+
+Oneway to improve the above scenario is, to have centralized identity which serves
+as the centralized point of authentication to handle the authentication to all the
+applications. In this case, the use authenticate to the centralized identity and
+that will provide authentication to the individual applications.
+
+Here, user sign on once to the centralized identity system and given access to all
+the applications.
+
+SAML Terms
+==========
+Identity Provider (IDP)
+=======================
+The entity which is centralized point of identity / source of trust.
+
+Service Provider (SP)
+=====================
+The application that the user is trying to sign in.
+
+SAML Request
+============
+When the Service Provider sends the communication to the Identity Provider, that
+is called as SAML Request.
+
+SAML Response
+=============
+When the Identity Provide response back to the Service Provider, that is called
+as SAML Response.
+
+Assertion
+=========
+The SAML Response sent by IDP has multiple statements about the user and they are
+going to be asserted called as Assertion.
+
+XML Signatures (DSig)
+=====================
+The assertions are signed using the XML Signatures called as DSig.
+
+Assertion Consumer Service
+==========================
+The SAML Response are sent to be processed at the Service Provider to the specific
+endpoint called as Assertion Consumer Service. ACS are responsible for receiving
+the SAML Response from the IDP, verifying the Dsig and validating the entire
+response.
+
+Attributes
+==========
+The SAML Response contains other piece of information related to User such as
+first name, last name and whatever profile information that want to send back
+are called as Attributes.
+
+Relay State
+===========
+Relay State is a way for Identity Provider to remember where a user was before
+authentication. So, if the user is browsing anonymously through Service Provider
+and something excites and triggers to require authentication, then they will be
+redirected to the Identity Provider. At this point, IDP validates the user identity
+and redirect them back to the SP's Assertion Consumer Service. In this case, it
+will be very inconvenient to the user if he/she dropped to home page and they have
+to navigate to the page where they originally browsing.
+
+Here, the Relay State allows the Service Provider to send information about where
+the user was before triggered for authentication. Identity Provider preserves the
+state and sends it back to the Service Provider and the ACS then can determine
+where user need to go after authentication.
+
+SAML Trust
+==========
+It is really the configuration between the Identity Provider and the Service
+Provider. There are some piece of information shared between the IDP and SP
+such as Sign In certificate, Entity Id AKA (Issuer) that comes from IDP.
+Different information is shared between both the parties inorder make trust
+communication.
+
+Metadata
+========
+Metadata is a convenience feature that allows self configuration between IDP
+and SP. What that mean is, instead of manually grabbing the certificate,
+different endpoint URLs and Issuer information, etc from IDP and plugin to
+SP manually or vice versa.
+
+The Metadata allows you to share either a XML configuration files or URLs to the
+XML configuration files. And the IDP and SP can self configure themselves based
+on the information with in the configuration files.
+
+Note:
+=====
+The communication between the IDP and SP can be done in two ways as below.
+
+1. User can communicate with IDP and get the authentication to access the SP.
+   This flow supports IDP init. In this flow, the IDP sends response to SP.
+
+2. User can interact with SP and that can communicate with IDP and get the
+   authentication to access the SP applications. This flow supports SP init.
+   In this flow, SP sends request to IDP and then IDP sends response to SP.
+
+All Service Providers don't support both of the above ways. Few supports
+the Way 1 and the other few supports Way 2. It depends on the Product on
+which SAML is being implemented.
+
+SSO - Provisioning
+==================
+1. Keeps identities in sync (Keeping user profiles in sync from IDP to SP).
+2. IDP is always representing a source or truth and which should always
+   persisting, pushing, or updating the SP in some ways. We have 2 ways
+   as below.
+   1. JIT (Just In Time)
+   2. RT (Real Time)
+
+When IDP sends the response to SP with JIT, and if the user profile is not
+available at SP end, then its responsibility of JIT to create the user profile.
+Also, if the response has user data which is not matching with SP, then its
+responsibility of JIT to update the user profile at SP end.
+
+In real time provisioning, its responsibility of IDP to keep the SP up to date,
+and that is already taken care by IDP. In this case, IDP sends user information
+and either SP can accept it to update the user profile at its end or dismiss and
+keep the user file at SP as it is and the user profile sent by IDP is used only
+for authentication purpose.
+
+Most Common Weak Points
+=======================
+1. Flawed assertion validation
+2. XML Parsers
+3. Insecure libraries
+
+SAML might be complex, but it can be secure if properly implemented.
+
+Limit the XML Parser
+====================
+1. Disable Document Type Definition (DTD) fetching.
+2. Defends against XML External Entities (XXE) attacks.
+3. Disable as much of the Parser as possible.
+
+Use Canonicalized XML
+=====================
+1. Normalizes XML via specified method / algorithm.
+2. protect against inner comment node manipulation.
+
+Validate the Schema
+===================
+1. Defends against XML signature wrapping (XSW) attacks.
+2. Adhere to a specific schema outside of the signature.
+3. Use explicit XPath expressions.
+
+Validate Every Signature
+========================
+1. Every Assertion should be signed.
+2. Every signature should be validated.
+3. Reject partially signed responses.
+
+Limit Accepted Algorithms
+=========================
+Hardcode accepted encryption algorithm.
+
+Use Https
+=========
+1. Limits exploits that rely on capturing the response.
+2. Still vulnerable if passed to the browser
+   Replay
+   Cross Site Scripting (XSS)
+
+Validate Parties
+================
+1. Verify the destination, audience, recipient, and issue match.
+2. Protects against IDP impersonation.
+3. Protects against unauthorized lateral movement.
+
+Enforce Validation Window
+
+Historical Cache
+================
+1. Cache equal to double the valid window.
+2. Record the ID of all requests.
+3. Reject responses with existing ID's.
+4. Limits Replay.
+
+Limit Buffer Size
+=================
+1. Keep buffer size as small as realistically possible
+2. Protects against DDOS
+
+
+
+
+
+
+
+
+
+
+
