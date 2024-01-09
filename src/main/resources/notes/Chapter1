@@ -1,0 +1,98 @@
+Selenium Class
+==============
+
+Chapter#1 – Selenium Introduction
+=================================
+
+Introduction to Selenium, its different components, advantages, and limitations.
+=================================================================================
+
+1.	What is Selenium?
+2.	Components of Selenium Suite
+3.	Advantages of Selenium
+4.	Limitations of Selenium
+5.	What is Selenium WebDriver?
+6.	Conclusion
+
+What is Selenium?
+=================
+Selenium is a free and open-source test automation suite used for automating web-based applications.
+It supports automation across different browsers, platforms, and programming languages.
+
+Using Selenium, we can automate the functional tests and easily integrate them with Maven, Jenkins,
+and other build automation and continuous integration tools.
+
+Components of Selenium Suite
+============================
+Selenium Suite comprises of the following four components
+
+Selenium IDE
+============
+Selenium IDE is a record and playback automation tool using which we can automate the web applications.
+It comes in the form of a Chrome and Firefox browser extension.
+
+Since it works on the record and playback principle, so it is the first-choice automation tool for people
+with no or limited programming language experience.
+
+Selenium RC
+===========
+Selenium Remote Control(RC) is officially deprecated by Selenium. It used to inject the JavaScript code
+in the browser for automation and required an additional server for running the automation scripts.
+
+Apart from this, it had many limitations like – it was slow, it did not had a headless browser like
+HtmlUnitDriver and before executing the test scripts the server was required to be started.
+
+Selenium WebDriver
+==================
+By far the most important component of Selenium Suite. It provides different drivers for different
+browsers and supports multiple programming languages.
+It is purely object-oriented and supports all the major browsers – Chrome, Firefox, IE, Safari, etc.
+and scripting can be done in most of the popular languages – Java, Python, Ruby, etc.
+
+Selenium Grid
+=============
+Selenium Grid is also an important part of the Selenium Suite. It helps in the distributed running of
+Selenium tests in parallel across multiple remote machines.
+It has a hub and multiple nodes. The nodes run the Selenium instances on which the test cases are
+executed. These nodes are connected to a central hub which acts as a server and controls the whole test
+execution.
+
+Advantages of Selenium
+======================
+1.	Let’s now see some of the advantages of Selenium
+2.	Selenium is open source, there is no licensing cost for its usage.
+3.	Scripting can be done in most of the widely used programming languages like Java, C#, Ruby, and Python.
+4.	It provides platform support for all the major operating systems – Windows, Linux, Mac OS, and Solaris.
+5.	It supports most of the popular browsers like Chrome, Firefox, Edge, Internet Explorer, Opera, and
+    Safari.
+6.	The Selenium IDE component of the Selenium suite provides record and playback features using which
+    non-programmers can also write automation scripts.
+7.	Selenium Grid helps in parallel and distributed testing.
+
+Limitations of Selenium
+=======================
+1.	Some of the limitations of Selenium are-
+2.	Selenium does not provide desktop application automation support.
+3.	Web Services – REST or SOAP cannot be automated using Selenium.
+4.	Selenium WebDriver requires programming language requirements for script creation.
+5.	For performing common tasks required in automation like logging, reading-writing to external files, we have to rely on external libraries.
+6.	Let’s check the Selenium WebDriver component in a little more detail now.
+
+What is Selenium WebDriver?
+===========================
+Selenium WebDriver is one of the most widely used tools for automating web applications. It automates
+the browsers by calling their native method directly unlike Selenium RC which injects JavaScript in
+browsers for automation. Hence, WebDriver is much faster than Selenium RC.
+
+Apart from this, Selenium WebDriver can also handle scenarios like alerts, pop-ups, ajax requests,
+keyboard, and mouse actions easily.
+
+Since WebDriver directly calls the methods of different browsers. Hence, we have a separate driver for
+each browser.
+
+Conclusion
+==========
+This completes our tutorial on Introduction to Selenium and its most important component Selenium
+WebDriver. In the next tutorial of this Selenium Tutorial series, we will be studying the installation
+of the Selenium WebDriver component.
+

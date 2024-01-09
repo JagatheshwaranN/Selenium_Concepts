@@ -13,4 +13,6 @@ Selenium Framework OOPS concepts
 Difference B/W BIDI API and CDP
 ===============================
 1. CDP focus on chromium based browsers (Chrome)
-2. BIDI API focus for all browser vendros
+2. BIDI API focus for all browser vendors
+
+https://artoftesting.com/selenium-tutorial#Selenium_Tutorial_for_Beginners
