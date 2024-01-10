@@ -1,0 +1,113 @@
+Chapter#1 –Selenium Introduction
+Introduction to Selenium, its different components, advantages, and limitations.
+
+Chapter#2 –Selenium WebDriver Architecture Explained
+A detailed explanation of the Selenium WebDriver architecture and its different components.
+
+Chapter#3 –Selenium WebDriver Setup
+Java, Eclipse, and WebDriver setup with a sample script for validation.
+
+Chapter#4 –Launching Browsers in Selenium
+Commands and sample scripts to launch different browsers.
+
+Chapter#5 –Finding web elements in Selenium
+Locate web elements in Selenium using Firebug or Chrome Developer tool.
+
+Chapter#6 –Selenium WebDriver Basic Commands
+Some of the most commonly used WebDriver commands and their usage.
+
+Chapter#7 –Waits in Selenium
+Learn about waits in Selenium for synchronizing the different user actions.
+
+Chapter#8 –CSS Locators[Must Read]
+Learn how to locate elements using their CSS (Cascading Style Sheets)
+
+Chapter#9 –XPath Locators[Must Read]
+Learn how to locate elements using XPath (XML path)
+
+Chapter#10 –Handling Dropdowns in Selenium
+Learn how to interact with dropdown elements.
+
+Chapter#11 –Right Click in Selenium
+Learn how to simulate mouse right-click action.
+
+Chapter#12 –Double Click in Selenium
+Learn how to simulate mouse double-click action.
+
+Chapter#13 –Mouse hover in Selenium
+Learn how to simulate mouse hover action.
+
+Chapter#14 –Drag and Drop in Selenium
+Drag and Drop web elements using Actions class in Selenium.
+
+Chapter#15 –Handling Alerts in Selenium
+Accept – Dismiss alerts or pop-ups in Selenium.
+
+Chapter#16 –Press ENTER, Function and other non-text keys
+Simulate keyboard keypress events for non-text keys like Enter, Ctrl, Alt, etc.
+
+Chapter#17 –Scroll a Webpage in Selenium
+Learn how to scroll up and down to a coordinate or specific element in Selenium.
+
+Chapter#18 –Refresh a webpage in Selenium
+Learn all the ways to refresh a web page in Selenium [5 different ways]
+
+Chapter#19 –Maximize and minimize the Browser
+Selenium commands to maximize and minimize the browser window.
+
+Chapter#20 –Resize the browser window
+Learn the resizing of the browser window in Selenium WebDriver.
+
+Chapter#21 –Navigate Back and Forward in the Browser history
+Navigate back and forward using driver.navigate() command.
+
+Chapter#22 –Keyboard Interactions in Selenium
+Learn about KeyDown, KeyUp, and sendKeys commands.
+
+Chapter#23 –Mouse Interactions in Selenium
+Learn about different mouse interaction commands along with code snippets.
+
+Chapter#24 –Executing JavaScript Code in Selenium
+Learn how to execute Javascript code in Selenium along with a code snippet.
+
+Chapter#25 –TestNG Introduction
+What is TestNG? What are its different features?
+
+Chapter#26 –Selenium WebDriver with TestNG Sample Script
+Creating a basic test in Selenium with TestNG.
+
+Chapter#27 –TestNG Annotations
+Annotations are basically the tags using which TestNG provides different features.
+
+Chapter#28 –Data-Driven Testing in TestNG
+Framework in which the test data drives the automation tests.
+
+Chapter#29 –Running Tests in Parallel using TestNG
+Reduces the overall test execution time.
+
+Chapter#30 –Multi-browser testing using TestNG
+Sample script to run tests with different browsers.
+
+Chapter#31 –Rerun failed tests
+TestNG configuration and sample script to retry the failed tests.
+
+Chapter#32 –Set Test priority in TestNG
+Prioritizing the test cases or setting the order of test case execution.
+
+Chapter#33 –Dependency in TestNG
+Makes execution of one test case dependent on another.
+
+Chapter#34 –Soft Assertion in TestNG
+To continue code script execution even after assertion statement failure.
+
+Chapter#35 –Timeouts in TestNG
+Used in scenarios that need to be failed if not completed in a defined time.
+
+Chapter#36 –Page Object Model
+An automation design pattern that helps in creating maintainable test suites.
+
+Chapter#37 –Page Factory
+One of the implementations of the Page Object Model(POM) provided by Selenium.
+
+Chapter#38 – Complete Selenium with Java Framework
+End-to-end Selenium with Java Hybrid framework with sample test script and Github link.
