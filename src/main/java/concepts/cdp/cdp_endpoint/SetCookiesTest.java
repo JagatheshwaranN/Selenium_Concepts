@@ -23,7 +23,7 @@ public class SetCookiesTest {
     }
 
     @Test
-    public void setCookies() {
+    public void testSetCookies() {
         // Define the expected value for the cookie
         String expectedValue = "automation";
 
