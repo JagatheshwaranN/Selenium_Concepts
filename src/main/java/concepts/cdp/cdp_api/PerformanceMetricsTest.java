@@ -1,9 +1,9 @@
-package concepts.cdp;
+package concepts.cdp.cdp_api;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v119.performance.Performance;
-import org.openqa.selenium.devtools.v119.performance.model.Metric;
+import org.openqa.selenium.devtools.v120.performance.Performance;
+import org.openqa.selenium.devtools.v120.performance.model.Metric;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -18,7 +18,7 @@ import static org.testng.Assert.assertNotNull;
 /**
  * @resource <a href="https://applitools.com/blog/selenium-chrome-devtools-protocol-cdp-how-does-it-work/#:~:text=We%20can%20simulate%20things%20like,done%20from%20our%20automated%20tests">...</a>!
  */
-public class GetPerformanceMetricsTest {
+public class PerformanceMetricsTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
 	private ChromeDriver driver;
@@ -29,18 +29,9 @@ public class GetPerformanceMetricsTest {
 		driver = DriverConfiguration.cdpBrowserSetup();
 	}
 
-	@AfterMethod
-	public void tearDown() {
-		// Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
-		if (driver != null) {
-			// If a WebDriver instance exists, quit/close the browser session.
-			driver.quit();
-		}
-	}
-
 	@SuppressWarnings("unchecked")
-	@Test(priority = 1)
-	public void testGetPerformanceMetrics() {
+	@Test
+	public void testPerformanceMetrics() {
 		// Navigate to the Selenium website
 		driver.get("https://selenium.dev/");
 
@@ -104,6 +95,15 @@ public class GetPerformanceMetricsTest {
 						}
 					});
 		*/
+	}
+
+	@AfterMethod
+	public void tearDown() {
+		// Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
+		if (driver != null) {
+			// If a WebDriver instance exists, quit/close the browser session.
+			driver.quit();
+		}
 	}
 
 }

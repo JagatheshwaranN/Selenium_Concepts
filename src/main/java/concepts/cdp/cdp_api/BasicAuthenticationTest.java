@@ -1,17 +1,18 @@
-package concepts.cdp;
+package concepts.cdp.cdp_api;
 
+import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v119.network.Network;
-import org.openqa.selenium.devtools.v119.network.model.Headers;
+import org.openqa.selenium.devtools.v120.network.Network;
+import org.openqa.selenium.devtools.v120.network.model.Headers;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
-import java.util.HashMap;
+import java.util.Base64;
 import java.util.Map;
 import java.util.Optional;
 
@@ -29,16 +30,7 @@ public class BasicAuthenticationTest {
 		driver = DriverConfiguration.cdpBrowserSetup();
 	}
 
-	@AfterMethod
-	public void tearDown() {
-		// Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
-		if (driver != null) {
-			// If a WebDriver instance exists, quit/close the browser session.
-			driver.quit();
-		}
-	}
-
-	@Test(priority = 1)
+	@Test
 	public void testBasicAuthentication() {
 		// Define the expected success message for authentication
 		String expectedMessage = "Congratulations! You must have the proper credentials.";
@@ -50,26 +42,37 @@ public class BasicAuthenticationTest {
 		devTools.createSessionIfThereIsNotOne();
 
 		// Enable network monitoring to modify HTTP headers
-		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+		devTools.send(Network.enable(Optional.of(10000), Optional.of(10000), Optional.of(10000)));
 
-		// Create a map to hold custom headers (in this case, 'Authorization' header for basic authentication)
-		Map<String, Object> header = new HashMap<>();
-		header.put("Authorization", "Basic YWRtaW46YWRtaW4="); // 'admin:admin' credentials encoded in Base64
+		// Encode the username and password for Basic Authentication
+		String encodedAuthentication = Base64.getEncoder().encodeToString("admin:admin".getBytes());
 
-		// Set the extra HTTP headers for network requests to include the basic authentication header
-		devTools.send(Network.setExtraHTTPHeaders(new Headers(header)));
+		// Create headers with Basic Authentication information
+		Map<String, Object> headers = ImmutableMap.of("Authorization", "Basic " + encodedAuthentication);
 
-		// Navigate to the target URL that requires basic authentication
+		// Set extra HTTP headers including Basic Authentication headers
+		devTools.send(Network.setExtraHTTPHeaders(new Headers(headers)));
+
+		// Navigate to a URL that requires Basic Authentication
 		driver.get("https://the-internet.herokuapp.com/basic_auth");
 
-		// Extract the page content from the element with the specified XPath selector and store it actual message
-		String actualMessage = driver.findElement(By.xpath("//div[@class='example']//p")).getText();
+		// Retrieve the actual message displayed on the page
+		String actualMessage = driver.findElement(By.tagName("p")).getText();
+
+		// Assert that the actual message matches the expected message
+		Assert.assertEquals(actualMessage, expectedMessage);
 
 		// Disable network monitoring after test execution
 		devTools.send(Network.disable());
+	}
 
-		// Verify that the actual message content matches the expected message
-		Assert.assertEquals(actualMessage, expectedMessage);
+	@AfterMethod
+	public void tearDown() {
+		// Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
+		if (driver != null) {
+			// If a WebDriver instance exists, quit/close the browser session.
+			driver.quit();
+		}
 	}
 
 }
