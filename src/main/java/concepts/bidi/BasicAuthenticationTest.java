@@ -13,7 +13,7 @@ import scenarios.DriverConfiguration;
 import java.net.URI;
 import java.util.function.Predicate;
 
-public class R_BasicAuthenticationTest {
+public class BasicAuthenticationTest {
 
     // Declare a WebDriver instance to interact with the web browser.
     private ChromeDriver driver;

@@ -1,4 +1,4 @@
-package concepts.cdp;
+package concepts.cdp.old;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
