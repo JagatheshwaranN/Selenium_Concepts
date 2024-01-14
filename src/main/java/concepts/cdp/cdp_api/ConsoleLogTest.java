@@ -65,6 +65,9 @@ public class ConsoleLogTest {
 
         // Assert that the captured log matches the expected message
         Assert.assertEquals(logs.get(0), expectedLog);
+
+        // Disable Runtime domain after test execution
+        devTools.send(Runtime.disable());
     }
 
     @AfterMethod

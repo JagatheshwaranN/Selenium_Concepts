@@ -16,3 +16,7 @@ Difference B/W BIDI API and CDP
 2. BIDI API focus for all browser vendors
 
 https://artoftesting.com/selenium-tutorial#Selenium_Tutorial_for_Beginners
+
+Quote from Simon Stewart ( Developer of WebDriver API)
+======================================================
+If you have WebDriver API in your test methods, You're doing it Wrong.

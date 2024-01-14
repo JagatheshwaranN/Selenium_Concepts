@@ -59,6 +59,9 @@ public class JavaScriptErrorLogTest {
 
         // Assert that the captured errors contain the expected message
         Assert.assertTrue(errors.get(0).getMessage().contains("Error: Not working"));
+
+        // Disable Runtime domain after test execution
+        devTools.send(Runtime.disable());
     }
 
     @AfterMethod
