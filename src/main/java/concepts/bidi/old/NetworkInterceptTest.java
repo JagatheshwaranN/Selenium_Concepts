@@ -1,4 +1,4 @@
-package concepts.bidi;
+package concepts.bidi.old;
 
 import com.google.common.net.MediaType;
 import org.openqa.selenium.chrome.ChromeDriver;

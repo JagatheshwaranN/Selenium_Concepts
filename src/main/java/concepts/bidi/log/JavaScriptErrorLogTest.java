@@ -1,10 +1,10 @@
-package concepts.bidi.console;
+package concepts.bidi.log;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.bidi.LogInspector;
 import org.openqa.selenium.bidi.log.JavascriptLogEntry;
-import org.openqa.selenium.bidi.log.StackTrace;
+import org.openqa.selenium.bidi.log.LogLevel;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-public class JavaScriptStackTraceLogTest {
+public class JavaScriptErrorLogTest {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
@@ -40,9 +40,9 @@ public class JavaScriptStackTraceLogTest {
     }
 
     @Test(priority = 1)
-    public void testJavaScriptStackTraceLog() throws InterruptedException, ExecutionException, TimeoutException {
-        // Define the expected number of frames in the JavaScript stack trace
-        int expectedValue = 3;
+    public void testJavaScriptErrorLog() throws InterruptedException, ExecutionException, TimeoutException {
+        // Define the expected log entry text
+        String expectedValue = "Error: Not working";
 
         // Creates a LogInspector object to monitor JavaScript logs
         try (LogInspector logInspector = new LogInspector(driver)) {
@@ -50,28 +50,28 @@ public class JavaScriptStackTraceLogTest {
             // Create a CompletableFuture object to wait and handle asynchronous JavaScript log entries
             CompletableFuture<JavascriptLogEntry> future = new CompletableFuture<>();
 
-            // Register a callback for when a JavaScript exception log entry is found
+            // Register a callback function to be invoked whenever a JavaScript exception entry is added
             logInspector.onJavaScriptException(future::complete);
 
             // Navigate to the target URL
             driver.get("https://www.selenium.dev/selenium/web/bidi/logEntryAdded.html");
 
-            // Locate and click the button with the ID 'logWithStacktrace', that triggers a JavaScript log entry with a stack trace
-            driver.findElement(By.xpath("//button[@id='logWithStacktrace']")).click();
+            // Locate and click the button with the ID 'jsException', that triggers a JavaScript log entry
+            driver.findElement(By.xpath("//button[@id='jsException']")).click();
 
-            // Get the JavaScript exception log entry asynchronously within a timeout period
+            // Get the JavaScript log entry asynchronously within a timeout period
             JavascriptLogEntry logEntry = future.get(WAIT_TIMEOUT, TimeUnit.SECONDS);
 
-            // Retrieve the stack trace from the log entry
-            StackTrace stackTrace = logEntry.getStackTrace();
+            // Extract the actual log entry text
+            String actualValue = logEntry.getText();
 
-            // Get the actual number of frames in the stack trace
-            int actualValue = stackTrace.getCallFrames().size();
+            // Verify the log entry type is "javascript"
+            Assert.assertEquals(logEntry.getType(), "javascript");
 
-            // Verify that the stack trace is not null
-            Assert.assertNotNull(stackTrace);
+            // Verify the log entry level is "ERROR"
+            Assert.assertEquals(logEntry.getLevel(), LogLevel.ERROR);
 
-            // Assert that the captured actual stack trace frame size matches the expected value
+            // Verify that the actual log entry text matches the expected value
             Assert.assertEquals(actualValue, expectedValue);
         }
     }

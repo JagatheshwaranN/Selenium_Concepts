@@ -10,11 +10,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
-import java.net.URI;
 import java.time.Duration;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 import static org.openqa.selenium.devtools.events.CdpEventTypes.domMutation;
 

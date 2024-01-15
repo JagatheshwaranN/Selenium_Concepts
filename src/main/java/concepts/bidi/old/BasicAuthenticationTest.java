@@ -1,4 +1,4 @@
-package concepts.bidi;
+package concepts.bidi.old;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.HasAuthentication;

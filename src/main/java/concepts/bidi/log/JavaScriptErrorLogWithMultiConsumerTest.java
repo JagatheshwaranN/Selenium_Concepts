@@ -1,4 +1,4 @@
-package concepts.bidi.console;
+package concepts.bidi.log;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
