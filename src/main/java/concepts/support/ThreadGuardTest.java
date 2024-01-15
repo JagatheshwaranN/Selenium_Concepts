@@ -1,4 +1,4 @@
-package concepts.others;
+package concepts.support;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
