@@ -73,7 +73,17 @@ public class SwitchToTabOrWindowTest {
 		driver.close();
 
 		// Switch back to the parent window
-		driver.switchTo().window(parentWindow);
+		// driver.switchTo().window(parentWindow);
+
+		// This behavior may vary depending on the Selenium version and browser driver.
+		// It's generally a good practice to verify the behavior with the specific Selenium and
+		// browser versions you are using.
+		// If it works in your environment, it can be a convenient way to switch back to the parent window.
+		// Switching to the parent window by passing an empty string as the window handle
+		driver.switchTo().window("");
+
+		boolean status = driver.findElement(By.xpath("//div[@class='example']//h3")).isDisplayed();
+		System.out.println(status);
 	}
 
 }

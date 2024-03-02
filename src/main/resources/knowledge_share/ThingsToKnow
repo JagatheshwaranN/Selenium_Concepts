@@ -1,0 +1,22 @@
+Selenium Framework OOPS concepts
+==================================
+1. Interface - WebDriver, WebElement, WebElements, JavaScriptExecutor and Alert.
+2. Polymorphism - Method overloading - WebDriverWait | Method overriding - Instantiation of Driver based
+   on runtime browser driver implementation class.
+3. Encapsulation - In POM framework, we used to declare the locators in page level as private members and 
+   access the same using the getter and setter.
+4. Abstraction - In POM framework, we used to declare the locators as Private and its implementation is not
+   viewed by the test class.
+5. Inheritance - When we want to reuse the methods of class 1 in class 2 then it will be done with extends 
+   keyword.
+
+Difference B/W BIDI API and CDP
+===============================
+1. CDP focus on chromium based browsers (Chrome)
+2. BIDI API focus for all browser vendors
+
+https://artoftesting.com/selenium-tutorial#Selenium_Tutorial_for_Beginners
+
+Quote from Simon Stewart ( Developer of WebDriver API)
+======================================================
+If you have WebDriver API in your test methods, You're doing it Wrong.
