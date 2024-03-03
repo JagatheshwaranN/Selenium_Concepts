@@ -1,0 +1,15 @@
+Alert
+=====
+1. NoAlertPresentException
+2. UnhandledAlertException
+3. UnexpectedAlertPresentException
+4. NoAlertOpenError
+5. UnhandledPromptException
+
+Windows
+=======
+6. NoSuchWindowException
+
+Frames
+======
+7. NoSuchFrameException
