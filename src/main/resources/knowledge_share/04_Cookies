@@ -206,6 +206,75 @@ Cookie cookie = new Cookie.Builder("cookieName", "cookieValue")
     .isHttpOnly(true)
     .build();
 
+31. What is samesite in Cookies?
+Answer:
+The SameSite attribute in cookies is a security feature that aims to mitigate the risk of
+cross-site request forgery (CSRF) attacks. It defines when a cookie should be sent with a
+cross-origin request. The attribute can have three values:
+
+Strict:
+If a cookie has the SameSite=Strict attribute, it will only be sent in a first-party context.
+This means the cookie will only be sent if the request originates from the same site that set
+the cookie. It prevents the cookie from being sent in cross-site requests, even when the request
+is initiated by a resource on the same site (e.g., a link or an iframe).
+Set-Cookie: CookieName=CookieValue; SameSite=Strict;
+
+Lax:
+If a cookie has the SameSite=Lax attribute, it is a bit more permissive than Strict. The cookie
+will not be sent with cross-site top-level navigation's, but it will be sent when the request is
+initiated by a top-level navigation on the same site (e.g., clicking on a link). This is the
+default behavior if the SameSite attribute is not specified.
+Set-Cookie: CookieName=CookieValue; SameSite=Lax;
+
+None:
+If a cookie has the SameSite=None attribute, it will be sent with both first-party and cross-site
+requests. This is often used when the cookie is intended for use by third-party sites or services
+embedded in your site (e.g., cross-origin authentication).
+Set-Cookie: CookieName=CookieValue; SameSite=None; Secure;
+
+Note: When using SameSite=None, it's recommended to include the Secure attribute as well, which
+ensures the cookie is only sent over HTTPS connections. The SameSite attribute helps enhance web
+security by preventing certain types of CSRF attacks that exploit the automatic inclusion of
+cookies in cross-origin requests. It gives web developers more control over how cookies are sent
+with different types of requests, reducing the risk of unauthorized access to user data.
+
+32. Question: What is the purpose of the SameSite attribute in cookies?
+Answer: The SameSite attribute in cookies is a security feature that controls when cookies should
+be sent with cross-origin requests. It helps mitigate the risk of cross-site request forgery (CSRF)
+attacks by specifying whether cookies should be sent in first-party contexts only, in lax scenarios,
+or with all requests.
+
+33. Question: Explain the three possible values for the SameSite attribute and their implications.
+Answer:
+SameSite=Strict: Cookies are only sent in a first-party context, preventing them from being sent
+in cross-site requests.
+SameSite=Lax: Cookies are not sent with cross-site top-level navigation's but are sent when the
+request is initiated by a top-level navigation on the same site.
+SameSite=None: Cookies are sent with both first-party and cross-site requests. This is often used
+for third-party cookies.
+
+34. Question: Why is the SameSite attribute important for web security?
+Answer: The SameSite attribute helps prevent certain types of cross-site request forgery (CSRF)
+attacks by controlling when cookies are sent with cross-origin requests. It allows web developers
+to define the scope of cookie usage and reduces the risk of unauthorized access to user data.
+
+35. Question: In what situations might you choose to use SameSite=None for a cookie?
+Answer: SameSite=None is often used when cookies are intended for third-party use, such as
+authentication mechanisms provided by external services embedded in the site. It allows these
+cookies to be sent with cross-origin requests while enhancing security by requiring a secure
+(HTTPS) connection.
+
+36. Question: What is the default behavior of the SameSite attribute if it is not explicitly
+set for a cookie?
+Answer: The default behavior is SameSite=Lax, which means cookies are not sent with cross-site
+top-level navigation's but are sent when the request is initiated by a top-level navigation on the
+same site.
+
+37. Question: What considerations should be taken into account when using SameSite=None?
+Answer: When using SameSite=None, it is recommended to include the Secure attribute as well,
+ensuring that the cookie is only sent over secure (HTTPS) connections. This combination is
+necessary to maintain the security benefits of the SameSite=None attribute.
+
 ==============================================================================================================
 Exceptions
 ==============================================================================================================
