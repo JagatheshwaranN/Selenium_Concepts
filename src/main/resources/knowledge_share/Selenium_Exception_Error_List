@@ -13,3 +13,11 @@ Windows
 Frames
 ======
 7. NoSuchFrameException
+
+Cookies
+=======
+8. InvalidCookieDomainException
+9. InvalidCookiePathException
+10. NoSuchCookieException
+11. UnableToSetCookieException
+12. CookieNotPresentException
