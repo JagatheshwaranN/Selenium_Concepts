@@ -21,3 +21,9 @@ Cookies
 10. NoSuchCookieException
 11. UnableToSetCookieException
 12. CookieNotPresentException
+
+Dropdown
+========
+13. ElementNotSelectableException
+14. UnexpectedTagNameException
+15. NoSuchAttributeException
