@@ -175,4 +175,20 @@ and modifiers (like Shift or Ctrl), KeyboardInput might be suitable.
 2. Simulating complex key combinations: It allows for sending specific key combinations that might be
 challenging with the send_keys method.
 
+==============================================================================================================
+Exceptions
+==============================================================================================================
 
+MoveTargetOutOfBoundsException:
+1. What could be the possible reasons for an MoveTargetOutOfBoundsException when using the Actions class?
+Answer: This exception occurs when attempting to perform an action (e.g., mouse hover, click) on an element
+that is not within the viewport or not accessible.
+Cause: The target element is outside the visible area of the browser, and the driver needs to scroll to the
+element or ensure it is within the viewport before performing the action.
+
+InvalidCoordinatesException:
+2. What could be the possible reasons for an InvalidCoordinatesException when using the Actions class?
+Answer: This exception occurs when attempting to move to an element or perform a mouse action at specific
+coordinates that are not valid.
+Cause: The specified coordinates may be outside the bounds of the browser window or not valid for the given
+element.
