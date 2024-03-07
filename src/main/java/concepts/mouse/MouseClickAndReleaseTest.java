@@ -39,6 +39,7 @@ public class MouseClickAndReleaseTest {
 		// Perform a click action on the input element using Actions class
 		new Actions(driver)
 				.click(driver.findElement(By.xpath("//input[@id='clickable']")))
+				.release(driver.findElement(By.xpath("//input[@id='clickable']")))
 				.perform();
 
 		// Retrieve the text of the element to verify the resulting message
