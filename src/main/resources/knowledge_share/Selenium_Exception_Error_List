@@ -27,3 +27,8 @@ Dropdown
 13. ElementNotSelectableException
 14. UnexpectedTagNameException
 15. NoSuchAttributeException
+
+Mouse
+=====
+16. MoveTargetOutOfBoundsException
+17. InvalidCoordinatesException

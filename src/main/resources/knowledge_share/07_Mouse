@@ -4,6 +4,7 @@ Mouse Questions
 ==============================================================================================================
 General
 ==============================================================================================================
+
 1. What is the Actions class in Selenium?
 Answer: The Actions class in Selenium is used to perform complex user interactions, such as mouse
 and keyboard actions. It provides methods to simulate various input devices' actions, enabling the
