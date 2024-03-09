@@ -32,3 +32,11 @@ Mouse
 =====
 16. MoveTargetOutOfBoundsException
 17. InvalidCoordinatesException
+
+Wait
+====
+18. TimeoutException
+19. NoSuchElementException
+20. StaleElementReferenceException
+21. ElementNotVisibleException
+22. ElementNotInteractableException
