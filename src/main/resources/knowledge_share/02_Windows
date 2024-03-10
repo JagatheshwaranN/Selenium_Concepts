@@ -403,6 +403,15 @@ Answer: If you set the window size to dimensions larger than the screen resoluti
 window may extend beyond the visible screen area. The behavior depends on the browser and the
 operating system.
 
+61. How will you maximize and minimize browser window?
+Answer:
+driver.manage().window().maximize(); - It is used to maximize the browser window.
+driver.manage().window().minimize(); - It is used to minimize the browser window.
+
+62. How will launch browser in fullscreen mode?
+Answer: driver.manage().window().fullscreen(); - It is used to launch the browser
+in fullscreen.
+
 ==============================================================================================================
 Exceptions
 ==============================================================================================================
