@@ -286,6 +286,7 @@ Exceptions
 ==============================================================================================================
 
 1. NoAlertPresentException
+==========================
 Question: What does the NoAlertPresentException indicate in Selenium, and how would you handle it?
 Answer: The NoAlertPresentException is thrown when attempting to switch to or interact with an alert that
 is not present on the page. To handle it, use a try-catch block and handle the exception gracefully.
@@ -299,6 +300,7 @@ try {
 }
 
 2. UnhandledAlertException
+==========================
 Question: Explain the UnhandledAlertException in Selenium and when it might be thrown during test execution.
 Answer: The UnhandledAlertException is thrown when there is an unhandled alert present on the page. This
 exception occurs if an alert is not explicitly handled using methods like accept(), dismiss(), or sendKeys().
@@ -311,6 +313,7 @@ try {
 }
 
 3. UnexpectedAlertPresentException
+==================================
 Question: When does the UnexpectedAlertPresentException occur, and how can you address it in Selenium?
 Answer: The UnexpectedAlertPresentException is thrown when an unexpected alert is present on the page,
 and the WebDriver is not able to handle it. To address this, handle the unexpected alert using methods
@@ -323,6 +326,7 @@ try {
 }
 
 4. NoAlertOpenError
+===================
 Question: What does the NoAlertOpenError exception indicate, and how can you handle it in Selenium?
 Answer: The NoAlertOpenError is thrown when attempting to interact with an alert, but no alert is currently
 open. Handle it by checking for the presence of an alert using ExpectedConditions.alertIsPresent() before
@@ -338,6 +342,7 @@ try {
 }
 
 5. UnhandledPromptException
+===========================
 Question: Explain the UnhandledPromptException and when it might be thrown during Selenium test execution.
 Answer: The UnhandledPromptException is thrown when there is an unhandled prompt present on the page, such
 as an unexpected JavaScript prompt() function. Handle it by accepting, dismissing, or providing input to
