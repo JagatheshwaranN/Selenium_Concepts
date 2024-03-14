@@ -108,6 +108,49 @@ Yes, you can automate file uploads within modal or popup windows by first locati
 with the modal or popup element to make it visible, and then locating the file upload element within
 it to perform the upload operation.
 
+21. How do you handle file downloads in Selenium WebDriver?
+File downloads in Selenium WebDriver can be handled using browser-specific settings or by using
+third-party libraries. For Chrome, you can set the desired download location using ChromeOptions,
+and for Firefox, you can use FirefoxProfile. Alternatively, you can use third-party libraries like
+AutoIt or Robot class in Java to handle file downloads.
+
+22. Can you explain how to set the download directory for file downloads in Chrome using Selenium
+WebDriver?
+Sure! You can set the download directory for Chrome using ChromeOptions in Selenium WebDriver.
+Here's a sample code snippet in Java:
+
+ChromeOptions options = new ChromeOptions();
+String downloadPath = "path/to/download/directory";
+HashMap<String, Object> chromePrefs = new HashMap<>();
+chromePrefs.put("download.default_directory", downloadPath);
+options.setExperimentalOption("prefs", chromePrefs);
+WebDriver driver = new ChromeDriver(options);
+
+23. How do you verify that a file has been downloaded successfully in Selenium WebDriver?
+You can verify the presence of the downloaded file in the specified download directory using Java
+File class or by using WebDriver's capabilities to interact with the file system. Here's a sample
+code snippet to verify the presence of a file:
+
+String fileName = "example.txt";
+String downloadPath = "path/to/download/directory";
+File file = new File(downloadPath + fileName);
+if (file.exists()) {
+    System.out.println("File downloaded successfully!");
+} else {
+    System.out.println("File download failed!");
+}
+
+24. How do you handle file download pop-ups or dialogs in Selenium WebDriver?
+File download pop-ups can be handled using browser-specific options or by using third-party libraries.
+For Chrome, you can set the download directory and disable the download prompt using ChromeOptions.
+For Firefox, you can configure the behavior using FirefoxProfile. Additionally, you can use browser
+profiles to handle the download prompt.
+
+25. Can Selenium WebDriver handle file downloads in headless mode?
+Yes, Selenium WebDriver can handle file downloads in headless mode. You can set the download directory
+and configure the browser options accordingly, similar to handling file downloads in regular mode.
+However, keep in mind that some browser-specific behaviors may differ in headless mode.
+
 ==============================================================================================================
 Exceptions
 ==============================================================================================================
