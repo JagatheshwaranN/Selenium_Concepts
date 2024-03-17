@@ -103,6 +103,46 @@ public class XPathLocatorsTest {
         Assert.assertTrue(driver
                 .findElement(By.xpath("//form[@data-testid='royal_login_form']//descendant::input[@name='email']"))
                 .isDisplayed());
+
+        // xpath=//tag[@attribute=value]//ancestor-or-self::tag
+        // Selects all ancestors of the current node and the current node itself.
+        Assert.assertTrue(driver.findElement(By.xpath("//button[@name='login']//ancestor-or-self::form")).isDisplayed());
+
+        // xpath=//tag[@attribute=value]//descendant::tag[@attribute=value]
+        // Selects the context node itself and all its descendants.
+        Assert.assertTrue(driver
+                .findElement(By.xpath("//form[@data-testid='royal_login_form']//descendant-or-self::input[@name='email']"))
+                .isDisplayed());
+
+    }
+
+    @Test(priority = 1)
+    public void testXPathFunctions() {
+        // Navigate to the Local HTML file
+        driver.get("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
+
+        // Assert that the last <li> element in the <ul> with id 'unorderedList' is displayed
+        Assert.assertTrue(
+                // Using XPath to locate the last <li> element within the <ul> by combining the 'last()' function,
+                // This function returns the index of the last matching node in the current node list
+                // The expression selects the last <li> element within the <ul> regardless of its position
+                driver.findElement(By.xpath("//ul[@id='unorderedList']//li[last()]"))
+                        // Checking if the element is displayed
+                        .isDisplayed()
+        );
+
+        // Assert that the first <li> element in the <ul> with id 'unorderedList' is displayed
+        Assert.assertTrue(
+                // Using XPath to locate the first <li> element within the <ul> by combining the 'position()' function,
+                // This function returns the position of the current node within its parent node,
+                // Here, 'position()=1' selects the first <li> element within the <ul>
+                driver.findElement(By.xpath("//ul[@id='unorderedList']//li[position()=1]"))
+                        // Checking if the element is displayed
+                        .isDisplayed()
+        );
+
+        // Reference
+        // https://developer.mozilla.org/en-US/docs/Web/XPath/Functions
     }
 
 }
