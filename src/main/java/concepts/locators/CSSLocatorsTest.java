@@ -72,6 +72,30 @@ public class CSSLocatorsTest {
         // Selects the second `li`element that is a child of the `ul`element that is a child
         // of the `div`element with the ID `pageFooter`.
         Assert.assertTrue(driver.findElement(By.cssSelector("div[id='pageFooter'] > ul > li:nth-of-type(2)")).isDisplayed());
+
+        // Navigate to the local HTML file
+        driver.navigate().to("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
+
+        // ~: Descendant combinator (e.g., div ~ p selects any paragraph that is a descendant of the div element)
+        // css=sibling1 ~ sibling2
+        Assert.assertTrue(driver.findElement(By.cssSelector("a[id='google'] ~ a[id='playwright']")).isDisplayed());
+
+        // +: Adjacent sibling combinator (e.g., h2 + p selects the paragraph following an h2 heading)
+        // css=sibling1 + adjacent sibling
+        Assert.assertTrue(driver.findElement(By.cssSelector("h1 + ul[id='unorderedList']")).isDisplayed());
+
+        //css=:first-child: Selects the first child element of its parent.
+        Assert.assertTrue(driver.findElement(By.cssSelector("ul[id='unorderedList'] > li:first-child")).isDisplayed());
+
+        //css=:last-child: Selects the last child element of its parent.
+        Assert.assertTrue(driver.findElement(By.cssSelector("ul[id='unorderedList'] > li:last-child")).isDisplayed());
+
+        //css=:nth-child(n): Selects the nth child element of its parent (e.g., :nth-child(2) selects the second child).
+        Assert.assertTrue(driver.findElement(By.cssSelector("ul[id='unorderedList'] > li:nth-child(2)")).isDisplayed());
+
+        // Some pseudo-classes like :not allow you to exclude elements from your selection based on another selector.
+        // css=li:nth-child(3):not(ol > li:nth-child(3))
+        Assert.assertTrue(driver.findElement(By.cssSelector("li:nth-child(3):not(ol > li:nth-child(3))")).isDisplayed());
     }
 
 }
