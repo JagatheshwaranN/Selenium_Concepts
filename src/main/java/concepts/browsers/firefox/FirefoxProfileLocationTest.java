@@ -38,7 +38,6 @@ public class FirefoxProfileLocationTest {
         firefoxDriverService = new GeckoDriverService.Builder()
                 .withProfileRoot(profileDirectory)  // Set the profile directory
                 .build();
-
     }
 
     @Test(priority = 1)
