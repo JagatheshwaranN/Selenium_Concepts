@@ -1,0 +1,88 @@
+package scenarios.slider;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import scenarios.DriverConfiguration;
+
+import java.time.Duration;
+
+public class SliderByClickAndHoldTest {
+
+    // Declare a WebDriver instance to interact with the web browser.
+    private WebDriver driver;
+
+    @BeforeMethod
+    public void setUp() {
+        // Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
+        driver = DriverConfiguration.browserSetup();
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        // Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
+        if (driver != null) {
+            // If a WebDriver instance exists, quit/close the browser session.
+            driver.quit();
+        }
+    }
+
+    @Test
+    public void testSlider() {
+        // Open the EMI calculator webpage
+        driver.get("https://emicalculator.net/");
+
+        // Locate the slider elements
+        WebElement sliderTotalLength = driver.findElement(By.xpath("//div[@id='loanamountslider']"));
+        WebElement sliderMinLength = driver.findElement(By.xpath("(//div[@class='ui-slider-range ui-corner-all ui-widget-header ui-slider-range-min'])[1]"));
+        WebElement slider = driver.findElement(By.xpath("//div[@id='loanamountslider']//span[contains(@class,'ui-slider')]"));
+
+        // Get the width of the slider at the minimum position
+        int startXAxis = sliderMinLength.getSize().getWidth();
+        int endXAxis = sliderTotalLength.getSize().getWidth();
+
+        // Create an Actions object for performing slider interactions
+        Actions actions = new Actions(driver);
+
+        // Move the slider all the way to the left in one go (assuming this is possible)
+        actions.dragAndDropBy(slider, -startXAxis, 0).perform();
+
+        // Define a small increment value for each drag (controls movement granularity)
+        int increment = 2;
+
+        // Loop through positions from startXAxis (with increment) to endXAxis
+        for (int i = startXAxis + increment; i <= endXAxis; i += increment) {
+            // Click and hold on the slider handle (assuming it requires holding to move)
+            actions.clickAndHold(slider);
+
+            // Move the slider by 'increment' pixels to the right relative to its current position
+            actions.moveByOffset(increment, 0).perform();
+
+            // Wait for the loan amount element to update after the drag
+            new WebDriverWait(driver, Duration.ofMillis(10)).until(ExpectedConditions.presenceOfElementLocated(By.id("loanamount")));
+
+            // Get the current loan amount text displayed on the webpage
+            String loanAmount = driver.findElement(By.id("loanamount")).getAttribute("value");
+
+            // Parse the loan amount string to an integer (removing commas)
+            int currentLoanAmount = Integer.parseInt(loanAmount.replaceAll(",", ""));
+
+            // Print the current loan amount
+            System.out.println(loanAmount);
+
+            // Break the loop if the loan amount reaches or exceeds the maximum value (5000000 in this example)
+            if (currentLoanAmount >= 5000000) {
+                // Release the click (assuming clickAndHold was used for dragging)
+                actions.release(slider).perform();
+                break;
+            }
+        }
+    }
+
+}
