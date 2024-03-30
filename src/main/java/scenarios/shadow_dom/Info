@@ -1,0 +1,47 @@
+Shadow DOM
+==========
+The Shadow DOM (Document Object Model) is a feature of web browsers that allows developers
+to encapsulate the structure and styles of a component, keeping them separate from the rest
+of the document.
+
+Imagine you have a web page with different sections and elements. Each element, such as
+buttons, input fields, or custom components, has its own set of HTML, CSS, and JavaScript
+code. Now, if you want to create a component that behaves like a button but has a unique
+style and functionality, you can use the Shadow DOM.
+
+Here's a simple analogy: think of a house. The main document is like the outside of the house,
+where you see the walls, windows, and doors. Inside the house, you have rooms. Each room is
+like a Shadow DOM. It's a space where you can put furniture, paint the walls differently, and
+customize the decor without affecting the rest of the house.
+
+In web development, the Shadow DOM works similarly. It allows you to create components with
+their own HTML structure, CSS styles, and JavaScript behavior, all contained within a boundary,
+so they don't interfere with other elements on the page. This way, you can build modular,
+reusable components that are easier to manage and maintain.
+
+Shadow Host: The Shadow Host is an element in the main document to which the Shadow DOM is
+attached. It serves as the entry point or container for the Shadow DOM subtree. The Shadow
+Host can contain regular DOM elements as well as Shadow DOM elements.
+
+Shadow Tree: The Shadow Tree is the internal structure created by the Shadow DOM. It consists
+of the elements, styles, and behavior encapsulated within the Shadow DOM. This Shadow Tree is
+separate from the main document's DOM tree, providing encapsulation and isolation.
+
+Shadow Root: The Shadow Root is the root node of the Shadow Tree. It serves as the starting
+point for the internal structure of the Shadow DOM. The Shadow Root is attached to the Shadow
+Host element, forming a boundary between the main document and the encapsulated content of
+the Shadow DOM.
+
+Boundary: The Boundary refers to the separation between the main document's DOM tree and the
+Shadow Tree created by the Shadow DOM. This boundary ensures that the encapsulated content
+within the Shadow DOM remains isolated from the rest of the document, preventing styles and
+behavior from leaking out and affecting other elements.
+
+In summary,
+Shadow HOST: The regular DOM node that the Shadow DOM is attached to.
+Shadow TREE: The DOM tree inside the Shadow DOM.
+Shadow BOUNDARY: The place where the Shadow DOM ends, and the regular DOM begins.
+Shadow ROOT: The root node of the Shadow tree.
+
+
+
