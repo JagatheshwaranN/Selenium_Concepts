@@ -1,6 +1,5 @@
 package scenarios.shadow_dom;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
-public class ShadowDomTest {
+public class OpenShadowDomTest {
 
 
     // Declare a WebDriver instance to interact with the web browser.
@@ -31,10 +30,18 @@ public class ShadowDomTest {
     }
 
     @Test
-    public void testShadowDom() {
+    public void testOpenShadowDom() {
+        // Navigate to the URL where the shadow DOM elements are present
         driver.get("https://www.alodokter.com/");
+
+        // Initialize JavaScriptExecutor to execute JavaScript code
         JavascriptExecutor javascriptExecutor =  (JavascriptExecutor)driver;
+
+        // Use JavaScript to find the shadow DOM element with ID "searchinput" inside the shadow DOM with ID "top-navbar-view"
         WebElement input = (WebElement) javascriptExecutor.executeScript("return document.querySelector('#top-navbar-view').shadowRoot.querySelector('#searchinput')");
+
+        // Use JavaScript to set the value of the input element to "Fever"
         javascriptExecutor.executeScript("arguments[0].setAttribute('value', 'Fever')", input);
     }
+
 }
