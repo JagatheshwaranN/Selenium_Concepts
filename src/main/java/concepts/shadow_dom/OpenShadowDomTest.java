@@ -1,6 +1,5 @@
-package scenarios.shadow_dom;
+package concepts.shadow_dom;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
-public class ShadowDomInsideFrameTest {
+public class OpenShadowDomTest {
 
 
     // Declare a WebDriver instance to interact with the web browser.
@@ -31,24 +30,18 @@ public class ShadowDomInsideFrameTest {
     }
 
     @Test
-    public void testShadowDomInsideFrame() {
-        // Navigate to the URL containing a shadow DOM inside an iframe
-        driver.get("https://selectorshub.com/shadow-dom-in-iframe/");
-
-        // Find the iframe element
-        WebElement frameElement = driver.findElement(By.id("pact"));
-
-        // Switch to the iframe
-        driver.switchTo().frame(frameElement);
+    public void testOpenShadowDom() {
+        // Navigate to the URL where the shadow DOM elements are present
+        driver.get("https://www.alodokter.com/");
 
         // Initialize JavaScriptExecutor to execute JavaScript code
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+        JavascriptExecutor javascriptExecutor =  (JavascriptExecutor)driver;
 
-        // Use JavaScript to find the shadow DOM element with ID "tea" inside the shadow DOM with ID "snacktime"
-        WebElement input = (WebElement) javascriptExecutor.executeScript("return document.querySelector('#snacktime').shadowRoot.querySelector('#tea')");
+        // Use JavaScript to find the shadow DOM element with ID "searchinput" inside the shadow DOM with ID "top-navbar-view"
+        WebElement input = (WebElement) javascriptExecutor.executeScript("return document.querySelector('#top-navbar-view').shadowRoot.querySelector('#searchinput')");
 
-        // Use JavaScript to set the value of the input element to "I love Tea"
-        javascriptExecutor.executeScript("arguments[0].setAttribute('value', 'I love Tea')", input);
+        // Use JavaScript to set the value of the input element to "Fever"
+        javascriptExecutor.executeScript("arguments[0].setAttribute('value', 'Fever')", input);
     }
 
 }

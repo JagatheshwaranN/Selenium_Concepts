@@ -1,4 +1,4 @@
-package scenarios.shadow_dom;
+package concepts.shadow_dom;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
