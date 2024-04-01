@@ -10,7 +10,7 @@ import scenarios.DriverConfiguration;
 
 import java.time.Duration;
 
-public class DatePickerType2Test {
+public class DatePickerSingleDateDisplayTest {
 
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
