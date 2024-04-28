@@ -158,3 +158,18 @@ method with a strict file detector implementation.
 3. What are the implications of strict file interactability on test execution?
 Enabling strict file interactability may restrict the ability to interact with file input elements,
 requiring additional configurations or workarounds to handle file uploads in Selenium tests.
+
+What are the components of Selenium WebDriver?
+
+The components of Selenium WebDriver include:
+=============================================
+Client Libraries: These are language-specific libraries that allow you to interact with Selenium
+WebDriver. For example, if you're using Java, you would use the Java client library; if you're
+using Python, you would use the Python client library.
+
+WebDriver API: This is the interface that defines methods for interacting with web browsers. It
+includes methods like findElement(), findElements(), navigate(), etc.
+
+Browser Drivers: These are executable files that establish a connection between your Selenium
+scripts and the web browser. For example, ChromeDriver for Google Chrome, GeckoDriver for Mozilla
+Firefox, etc.
