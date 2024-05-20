@@ -300,19 +300,3 @@ Question: Explain org.openqa.selenium.UnableToSetCookieException and in what sce
 Answer: UnableToSetCookieException occurs when WebDriver is unable to set a cookie for various reasons.
 This could be due to invalid cookie attributes, issues with the browser's capabilities, or other
 unexpected factors preventing the successful setting of the cookie.
-
-4. org.openqa.selenium.CookieNotPresentException:
-=================================================
-Question: What does org.openqa.selenium.CookieNotPresentException signify, and when might it be thrown?
-Answer: CookieNotPresentException is specific to the getCookieNamed method of the WebDriver.Options
-interface. It is thrown when attempting to retrieve a cookie by name, and the specified cookie does
-not exist. This exception indicates that the requested cookie is not present in the current browser
-session.
-
-5. org.openqa.selenium.InvalidCookiePathException:
-==================================================
-Question: Explain the circumstances under which org.openqa.selenium.InvalidCookiePathException might
-be thrown?
-Answer: InvalidCookiePathException is thrown when attempting to add a cookie with an invalid path
-attribute. The path specified for the cookie should be a valid path within the domain. If the path
-is incorrect or not applicable, this exception may occur.

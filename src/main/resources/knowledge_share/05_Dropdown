@@ -134,27 +134,10 @@ WebElement desiredOption = driver.findElement(By.xpath("//div[@class='dropdown-o
 ==============================================================================================================
 Exceptions
 ==============================================================================================================
-
-ElementNotSelectableException:
-1. Can you explain how to handle a ElementNotSelectableException when selecting an option from a dropdown?
-Raised when trying to select an option from a dropdown that is not selectable, such as an option within a
-disabled dropdown.
-ElementNotSelectableException: Element is not selectable
-A: This exception occurs when trying to select an option that is not selectable. You may need to check
-if the dropdown is enabled and the option is not disabled before attempting the selection.
-
 UnexpectedTagNameException:
-2. What could be the possible reasons for an UnexpectedTagNameException when using the Select class on
+1. What could be the possible reasons for an UnexpectedTagNameException when using the Select class on
 a dropdown?
 Raised when attempting to create a Select object with an element that is not a <select> HTML tag.
 UnexpectedTagNameException: Element should have been "select" but was "div"
 A: This exception occurs when the provided WebElement is not a <select> tag. Ensure that you are using
 the Select class with a proper <select> element.
-
-NoSuchAttributeException:
-3. How would you handle a NoSuchAttributeException when attempting to select an option by attribute value?
-Can occur when trying to select an option by attribute value, and the specified attribute is not found.
-NoSuchAttributeException: no such attribute: 'value' in ...
-A: Ensure that the attribute you are trying to access exists for the particular dropdown option. You can
-handle this exception by checking for the attribute's presence before interacting with it.
-
