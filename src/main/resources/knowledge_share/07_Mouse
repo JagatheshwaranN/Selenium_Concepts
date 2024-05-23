@@ -7,7 +7,7 @@ General
 
 1. What is the Actions class in Selenium?
 Answer: The Actions class in Selenium is used to perform complex user interactions, such as mouse
-and keyboard actions. It provides methods to simulate various input devices' actions, enabling the
+and keyboard actions. It provides methods to simulate various input device's actions, enabling the
 automation of more sophisticated user interactions.
 
 2. Explain the importance of the Actions class in Selenium testing.
@@ -83,7 +83,7 @@ standard Selenium drag-and-drop methods might not work.
 13. How can you simulate holding down the mouse button, moving to an element, and then releasing the
 mouse button in Selenium?
 Answer: The clickAndHold(), moveToElement(), and release() methods of the Actions class can be combined
-to achieve this.
+to achieve this. It is also used to achieve drag and drop.
 Here's an example:
 Actions actions = new Actions(driver);
 actions.clickAndHold(sourceElement).moveToElement(targetElement).release().build().perform();

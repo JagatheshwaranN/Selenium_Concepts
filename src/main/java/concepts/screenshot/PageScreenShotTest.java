@@ -42,7 +42,7 @@ public class PageScreenShotTest {
 			Files.write(Paths.get("./screenshot.png"), screenshotBytes);
 		*/
         // Navigate to the specified URL using the WebDriver instance
-        driver.get("http://www.example.com");
+        driver.get("https://www.selenium.dev/");
 
         // Capture a screenshot of the current page and store it as a File
         File pageScreenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
