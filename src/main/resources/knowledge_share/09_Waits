@@ -31,7 +31,7 @@ condition to be met and is more granular, allowing customization of conditions f
 Answer: Explicit Wait is used by creating an instance of WebDriverWait and applying it to a specific
 WebDriver instance.
 Here's an example in Java:
-WebDriverWait wait = new WebDriverWait(driver, 10); // 10 seconds timeout
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // 10 seconds timeout
 WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("example")));
 
 5. What is the difference between Thread.sleep() and Implicit Wait?
@@ -47,7 +47,7 @@ Answer: ExpectedConditions is a class in Selenium used with WebDriverWait to def
 conditions for waiting. It provides various conditions such as visibility of an element, presence
 of an element, click-ability, etc.
 For example:
-WebDriverWait wait = new WebDriverWait(driver, 10);
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("example")));
 
 7. When to use Implicit Wait and Explicit Waits?
@@ -71,7 +71,7 @@ Common scenario to use Explicit Wait as below,
 3. Dynamic Elements
 4. Animations
 5. Custom Conditions
-WebDriverWait wait = new WebDriverWait(driver, 10);
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("example")));
 
 Common scenario to use Fluent Wait as below,
@@ -132,7 +132,7 @@ dynamic and depends on when the specified condition is satisfied.
 
 For example (in Java):
 WebDriver driver = new ChromeDriver();
-WebDriverWait wait = new WebDriverWait(driver, 10);
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 // Assuming the condition for the element is met within 5 seconds
 WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("example")));
 // Continue with further actions on the element
@@ -145,7 +145,7 @@ waited for the defined time but the condition was not fulfilled.
 
 For example (in Java):
 WebDriver driver = new ChromeDriver();
-WebDriverWait wait = new WebDriverWait(driver, 10);
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)));
 try {
     // Assuming the condition for the element is not met within 10 seconds
     WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("example")));
@@ -242,7 +242,7 @@ wait for the presence of specific elements or conditions that indicate the compl
 requests.
 
 For example:
-WebDriverWait wait = new WebDriverWait(driver, 20);
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 // Wait for the presence of an element indicating the completion of Ajax requests
 wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ajaxCompleteIndicator")));
 
@@ -276,7 +276,7 @@ This condition ensures that the script waits for the page to be fully loaded, in
 images.
 
 Here's an example:
-WebDriverWait wait = new WebDriverWait(driver, 20);
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 // Wait for all images to be loaded
 wait.until(driver -> ((JavascriptExecutor) driver)
     .executeScript("return document.readyState").equals("complete"));
@@ -288,7 +288,7 @@ clickable.
 This condition ensures that the script waits for the button to be both present in the DOM and clickable.
 
 Here's an example:
-WebDriverWait wait = new WebDriverWait(driver, 20);
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 // Wait for the button to be clickable
 WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.id("example")));
 // Proceed with clicking the button
@@ -304,7 +304,7 @@ the try-catch block.
 
 Here's an example in Java:
 WebDriver driver = new ChromeDriver();
-driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS); // Set a global timeout
+driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30)); // Set a global timeout
 try {
     // Execute your test steps
     // ...
