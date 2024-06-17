@@ -3,7 +3,7 @@ package concepts.cdp.old;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v119.emulation.Emulation;
+import org.openqa.selenium.devtools.v125.emulation.Emulation;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

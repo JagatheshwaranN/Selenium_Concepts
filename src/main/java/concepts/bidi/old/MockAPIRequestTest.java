@@ -3,7 +3,7 @@ package concepts.bidi.old;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v119.fetch.Fetch;
+import org.openqa.selenium.devtools.v125.fetch.Fetch;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

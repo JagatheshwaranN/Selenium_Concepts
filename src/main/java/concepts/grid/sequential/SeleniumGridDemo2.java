@@ -32,23 +32,32 @@ public class SeleniumGridDemo2 {
 	public void launchBrowser(String browser) throws MalformedURLException, InterruptedException {
 
 		if (browser.equalsIgnoreCase("chrome")) {
+			System.setProperty("webdriver.http.factory", "jdk-http-client");
 			capabilities.setPlatform(Platform.ANY);
 			capabilities.setBrowserName(browser);
 			ChromeOptions options = new ChromeOptions();
+			// Selenium 4.21.0 version bug - Unable to launch session with Grid without below parameter
+			options.setEnableDownloads(true);
 			options.merge(capabilities);
 		} else if (browser.equalsIgnoreCase("firefox")) {
+			System.setProperty("webdriver.http.factory", "jdk-http-client");
 			capabilities.setPlatform(Platform.ANY);
 			capabilities.setBrowserName(browser);
 			FirefoxOptions options = new FirefoxOptions();
+			// Selenium 4.21.0 version bug - Unable to launch session with Grid without below parameter
+			options.setEnableDownloads(true);
 			options.merge(capabilities);
 		} else if (browser.equalsIgnoreCase("edge")) {
+			System.setProperty("webdriver.http.factory", "jdk-http-client");
 			capabilities.setPlatform(Platform.ANY);
 			capabilities.setBrowserName("MicrosoftEdge");
 			EdgeOptions options = new EdgeOptions();
+			// Selenium 4.21.0 version bug - Unable to launch session with Grid without below parameter
+			options.setEnableDownloads(true);
 			options.merge(capabilities);
 		}
 
-		driver = new RemoteWebDriver(new URL("http://192.168.1.10:4444/"), capabilities);
+		driver = new RemoteWebDriver(new URL("http://localhost:4444/"), capabilities);
 		driver.get("https://www.google.com/");
 		System.out.println("Title of Page " + driver.getTitle() + " from Browser " + browser);
 		Thread.sleep(10000);

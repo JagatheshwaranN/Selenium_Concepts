@@ -2,7 +2,7 @@ package concepts.cdp.old;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v119.emulation.Emulation;
+import org.openqa.selenium.devtools.v125.emulation.Emulation;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -49,7 +49,7 @@ public class OverrideDeviceModTest {
 				true, // Whether to emulate a mobile device (true/false)
 				Optional.empty(), Optional.empty(), Optional.empty(), // Other parameters like mobile user agent
 				Optional.empty(), Optional.empty(), Optional.empty(), // More optional parameters
-				Optional.empty(), Optional.empty(), Optional.empty() // Additional optional parameters
+				Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty()// Additional optional parameters
 		));
 
 		// Load the Google homepage after setting the device metrics override

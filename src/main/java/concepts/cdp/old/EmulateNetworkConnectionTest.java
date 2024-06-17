@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v119.network.Network;
-import org.openqa.selenium.devtools.v119.network.model.ConnectionType;
+import org.openqa.selenium.devtools.v125.network.Network;
+import org.openqa.selenium.devtools.v125.network.model.ConnectionType;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -52,7 +52,7 @@ public class EmulateNetworkConnectionTest {
 		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
 
 		// Emulate network conditions (Offline: false, Latency: 100 ms, Download: 6144 Kbps, Upload: 4096 Kbps, Connection Type: 4G)
-		devTools.send(Network.emulateNetworkConditions(false, 100, 6144, 4096, Optional.of(ConnectionType.CELLULAR4G)));
+		devTools.send(Network.emulateNetworkConditions(false, 100, 6144, 4096, Optional.of(ConnectionType.CELLULAR4G), Optional.empty(),Optional.empty(), Optional.empty()));
 
 		// Record the start time before navigating to the website
 		long startTime = System.currentTimeMillis();
