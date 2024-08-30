@@ -2,7 +2,7 @@ package concepts.bidi.log;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.bidi.LogInspector;
+import org.openqa.selenium.bidi.module.LogInspector;
 import org.openqa.selenium.bidi.log.JavascriptLogEntry;
 import org.openqa.selenium.bidi.log.LogLevel;
 import org.testng.Assert;

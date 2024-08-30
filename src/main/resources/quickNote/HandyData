@@ -1,0 +1,45 @@
+=======================================================================
+Selenium
+=======================================================================
+1. Alert
+==========
+Alert is an interface. It is used to handle the alert / popup.
+3 types - Simple, Confirm, and Prompt.
+
+Usage
+=====
+Alert alert = driver.switchTo().alert();
+
+Methods
+=======
+alert.accept();
+alert.dismiss();
+alert.getText();
+alert.sendKeys();
+=======================================================================
+2. Dropdown
+===========
+Select Class which implements ISelect Interface and WrapElement Interface.
+It is used to handle the dropdown.
+2 types - Single, and Multiple.
+
+Usage
+=====
+Select selectObj = new Select(WebElement);
+
+Methods
+=======
+selectObject.selectByIndex();
+selectObject.selectByValue();
+selectObject.selectByVisibleText();
+selectObject.deselectByIndex();
+selectObject.deselectByValue();
+selectObject.deselectByVisibleText();
+selectObject.isMultiple();
+selectObject.deselectAll(); - Works ONLY with MultiSelect Dropdown.
+selectObject.getOptions();
+selectObject.getAllSelectedOptions();
+selectObject.getFirstSelectedOption();
+=======================================================================
+
+
