@@ -2,11 +2,15 @@ package concepts.frames;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
+
+import java.time.Duration;
 
 public class MoveOutOfFrameTest {
 
@@ -37,10 +41,11 @@ public class MoveOutOfFrameTest {
 		driver.get("https://demo.automationtesting.in/Frames.html");
 
 		// Check if the frame with the ID "singleframe" exists before switching to it.
-		if (driver.findElements(By.id("singleframe")).size() > 0) {
+		if (!driver.findElements(By.id("singleframe")).isEmpty()) {
 
 			// Switch to the frame by ID.
-			driver.switchTo().frame("singleframe");
+			//driver.switchTo().frame("singleframe");
+			new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("singleframe")));
 
 			// Send text to an input element inside the frame.
 			driver.findElement(By.tagName("input")).sendKeys("John");

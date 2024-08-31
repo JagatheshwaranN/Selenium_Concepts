@@ -37,7 +37,7 @@ public class SwitchToFrameByIndexTest {
 		driver.get("https://demo.automationtesting.in/Frames.html");
 
 		// Check if the frame with the ID "singleframe" exists before switching to it.
-		if (driver.findElements(By.id("singleframe")).size() > 0) {
+		if (!driver.findElements(By.id("singleframe")).isEmpty()) {
 
 			// Switch to the frame by Index.
 			driver.switchTo().frame(1);

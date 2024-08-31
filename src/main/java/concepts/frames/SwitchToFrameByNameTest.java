@@ -37,7 +37,7 @@ public class SwitchToFrameByNameTest {
         driver.get("https://demo.automationtesting.in/Frames.html");
 
         // Check if the frame with the Name "SingleFrame" exists before switching to it.
-        if (driver.findElements(By.name("SingleFrame")).size() > 0) {
+        if (!driver.findElements(By.name("SingleFrame")).isEmpty()) {
 
             // Switch to the frame by Name.
             driver.switchTo().frame("SingleFrame");

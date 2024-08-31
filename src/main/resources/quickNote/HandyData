@@ -16,6 +16,12 @@ alert.accept();
 alert.dismiss();
 alert.getText();
 alert.sendKeys();
+wait.until(ExpectedConditions.alertIsPresent()); - Wait and switch to Alert.
+
+Exception
+=========
+1. NoAlertPresentException
+2. UnhandledAlertException
 =======================================================================
 2. Dropdown
 ===========
@@ -40,6 +46,55 @@ selectObject.deselectAll(); - Works ONLY with MultiSelect Dropdown.
 selectObject.getOptions();
 selectObject.getAllSelectedOptions();
 selectObject.getFirstSelectedOption();
+selectObject.getOptions().get(index) - To get specific option text
+
+Exception
+=========
+1. UnexpectedTagNameException
+
+NOTES:
+1. deselectBy* Methods works ONLY with MultiSelect Dropdown.
+2. Single Dropdown doesn't support deselectBy* methods.
+3. selectByIndex() - Index may start from 0 or 1 based on implementation.
 =======================================================================
+3. Frame
+========
+RemoteWebDriver.RemoteTargetLocator class which implements WebDriver.TargetLocator Interface.
+It is used to handle the Frame.
 
+Usage
+=====
+driver.switchTo().frame();
 
+Methods
+=======
+driver.switchTo().frame(Index);
+driver.switchTo().frame(IdOrName);
+driver.switchTo().frame(WebElement);
+driver.switchTo().ParentFrame(); - To switch from Child Frame to Parent Frame.
+driver.switchTo().defaultContent(); - To switch From Frame to Normal Window.
+wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(ByLocator)); - Wait and switch to Frame.
+
+Exception
+=========
+1. NoSuchFrameException
+
+NOTES:
+1. Frame index starts with 0.
+=======================================================================
+4. Navigation
+=============
+RemoteWebDriver.RemoteNavigation class which implements WebDriver.Navigation Interface.
+It is used to handle the navigation related actions.
+
+Usage
+=====
+driver.navigate()
+
+Methods
+=======
+to()
+back()
+forward()
+refresh()
+=======================================================================
