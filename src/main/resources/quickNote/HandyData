@@ -60,7 +60,7 @@ NOTES:
 3. Frame
 ========
 RemoteWebDriver.RemoteTargetLocator class which implements WebDriver.TargetLocator Interface.
-It is used to handle the Frame.
+It has methods to handle the Frame.
 
 Usage
 =====
@@ -97,4 +97,57 @@ to()
 back()
 forward()
 refresh()
+=======================================================================
+5. Window
+=========
+RemoteWebDriver.RemoteTargetLocator class which implements WebDriver.TargetLocator Interface.
+It has methods to handle the Window.
+
+Usage
+=====
+driver.switchTo().window();
+driver.switchTo().newWindow();
+
+Methods
+=======
+window(handle);
+newWindow(WindowType.WINDOW/TAB);
+
+RemoteWindow class which implements WebDriver.Window Interface.
+It is used to handle the Window view and size related operations.
+
+Usage
+=====
+driver.manage().window()
+
+methods
+=======
+maximize()
+minimize()
+fullscreen()
+setPosition(Point(X Axis, Y Axis))
+getPosition()
+setSize(Dimension(Width, Height))
+getSize()
+
+Related Information
+===================
+Point and Dimension are classes, which is used to handle the window
+position and window size.
+
+Usage
+=====
+driver.manage().window().setPosition(Point)
+driver.manage().window().setSize(Dimension)
+
+Methods
+=======
+getX() => getPosition().getX();
+getY() => getPosition().getY();
+getWidth() => getSize().getWidth();
+getHeight() => getSize().getHeight();
+
+Exception
+=========
+1. NoSuchWindowException
 =======================================================================
