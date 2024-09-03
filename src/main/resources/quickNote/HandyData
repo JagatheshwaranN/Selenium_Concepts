@@ -151,3 +151,33 @@ Exception
 =========
 1. NoSuchWindowException
 =======================================================================
+6. Cookies
+==========
+A cookie is a small piece of information that will be stored on the Client machine.
+It contains data such as session data, user preferences and tracking information.
+
+RemoteWebDriverOptions class implements WebDriver.Options interface and which
+has methods to handle the cookie and its related operations.
+
+Cookie is a class which the attribute details to create the cookie.
+
+Usage
+=====
+driver.manage().addCookie(CookieObject);
+Cookie cookie = new Cookie(Name, Value);
+
+Methods
+=======
+addCookie(cookieObject);
+getCookieNamed(cookieName);
+getCookies();
+deleteCookieNamed(cookieName);
+deleteCookie(cookieObject);
+deleteAllCookies();
+
+Exception
+=========
+1. InvalidCookieDomainException
+2. NoSuchCookieException
+3. UnableToSetCookieException
+=======================================================================

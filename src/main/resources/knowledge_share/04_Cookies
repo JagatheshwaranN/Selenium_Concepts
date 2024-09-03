@@ -35,7 +35,8 @@ driver.manage().deleteAllCookies();
 
 7. Explain the purpose of the Cookie class in Selenium.
 Answer: The Cookie class in Selenium is used to represent a browser cookie. It has methods to get
-and set various attributes of a cookie, such as name, value, domain, path, expiry, etc.
+and set various attributes of a cookie, such as name, value, domain, path, expiry, isSecure, isHttpOnly
+and sameSite.
 
 8. How can you get the value of a specific cookie in Selenium WebDriver?
 Answer: You can use the getCookieNamed method to retrieve the value of a specific cookie:
