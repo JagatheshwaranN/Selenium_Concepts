@@ -181,3 +181,38 @@ Exception
 2. NoSuchCookieException
 3. UnableToSetCookieException
 =======================================================================
+7. Element
+==========
+RemoteWebElement class which implements WebElement Interface along with some
+other interfaces. It is used to handle the element related actions such as
+click, clear and enter, etc.
+
+Usage
+=====
+driver.findElement(ByLocator);
+WebElement element = driver.findElement(ByLocator);
+
+Methods
+=======
+clear();
+click();
+sendKeys();
+isEnabled();
+isDisplayed();
+isSelected();
+getText();
+getAttribute(attributeName);
+getCssValue(propertyName);
+findElement(locator);
+findElements(locator);
+getShadowRoot();
+getTagName();
+getAriaRole();
+getAccessibleName();
+getDomProperty(propertyName);
+getDomAttribute(propertyName);
+
+Exception
+=========
+1. NoSuchElementException
+=======================================================================
