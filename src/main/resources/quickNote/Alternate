@@ -1,0 +1,20 @@
+=======================================================================
+Click
+=====
+element.click();
+Actions(driver).click();
+JsExecutor.executeScript("arguments[0].click()", element);
+=======================================================================
+Enter Value
+===========
+element.sendKeys(value);
+Actions(driver).sendKeys(element, value);
+JsExecutor.executeScript("arguments[0].value='+data+'", element);
+=======================================================================
+Back Click
+==========
+driver.navigate().back();
+Using PointerInput, Sequence and RemoteWebDriver classes we can achieve
+the backward click.
+=======================================================================
+

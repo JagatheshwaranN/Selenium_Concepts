@@ -12,10 +12,10 @@ Alert alert = driver.switchTo().alert();
 
 Methods
 =======
-alert.accept();
-alert.dismiss();
-alert.getText();
-alert.sendKeys();
+accept();
+dismiss();
+getText();
+sendKeys();
 wait.until(ExpectedConditions.alertIsPresent()); - Wait and switch to Alert.
 
 Exception
@@ -35,18 +35,18 @@ Select selectObj = new Select(WebElement);
 
 Methods
 =======
-selectObject.selectByIndex();
-selectObject.selectByValue();
-selectObject.selectByVisibleText();
-selectObject.deselectByIndex();
-selectObject.deselectByValue();
-selectObject.deselectByVisibleText();
-selectObject.isMultiple();
-selectObject.deselectAll(); - Works ONLY with MultiSelect Dropdown.
-selectObject.getOptions();
-selectObject.getAllSelectedOptions();
-selectObject.getFirstSelectedOption();
-selectObject.getOptions().get(index) - To get specific option text
+selectByIndex();
+selectByValue();
+selectByVisibleText();
+deselectByIndex();
+deselectByValue();
+deselectByVisibleText();
+isMultiple();
+deselectAll(); - Works ONLY with MultiSelect Dropdown.
+getOptions();
+getAllSelectedOptions();
+getFirstSelectedOption();
+getOptions().get(index) - To get specific option text
 
 Exception
 =========
@@ -68,11 +68,11 @@ driver.switchTo().frame();
 
 Methods
 =======
-driver.switchTo().frame(Index);
-driver.switchTo().frame(IdOrName);
-driver.switchTo().frame(WebElement);
-driver.switchTo().ParentFrame(); - To switch from Child Frame to Parent Frame.
-driver.switchTo().defaultContent(); - To switch From Frame to Normal Window.
+frame(Index);
+frame(IdOrName);
+frame(WebElement);
+ParentFrame(); - To switch from Child Frame to Parent Frame.
+defaultContent(); - To switch From Frame to Normal Window.
 wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(ByLocator)); - Wait and switch to Frame.
 
 Exception
@@ -93,10 +93,10 @@ driver.navigate()
 
 Methods
 =======
-to()
-back()
-forward()
-refresh()
+to();
+back();
+forward();
+refresh();
 =======================================================================
 5. Window
 =========
@@ -122,13 +122,13 @@ driver.manage().window()
 
 methods
 =======
-maximize()
-minimize()
-fullscreen()
-setPosition(Point(X Axis, Y Axis))
-getPosition()
-setSize(Dimension(Width, Height))
-getSize()
+maximize();
+minimize();
+fullscreen();
+setPosition(Point(X Axis, Y Axis));
+getPosition();
+setSize(Dimension(Width, Height));
+getSize();
 
 Related Information
 ===================
@@ -215,4 +215,63 @@ getDomAttribute(propertyName);
 Exception
 =========
 1. NoSuchElementException
+=======================================================================
+8. Mouse Actions
+================
+Actions class is used to handle the mouse related and keyboard related
+operations.
+
+Usage
+=====
+Actions actionObject = new Actions(driver);
+
+Methods
+=======
+click();
+clickAndHold();
+release();
+sendKeys(element, value);
+contextClick();
+doubleClick();
+moveToElement();
+scrollToElement();
+dragAndDrop(element1, element2);
+dragAndDropBy(source, x offset, y offset);
+pause(Duration);
+((RemoteWebDriver)driver).resetInputState();
+keyDown(Key);
+keyUp(Key);
+
+x offset - droppable.getX() - draggable.getX();
+y offset - droppable.getY() - draggable.getY();
+
+PointerInput
+============
+PointerInput class is used to simulate various pointer interactions on a web page.
+
+Usage
+=====
+PointerInput mouse = new PointerInput(Mouse, "Default Mouse");
+
+Methods
+=======
+createPointerDown();
+createPointerUp();
+
+Sequence
+========
+Sequence class is used to simulate a chain of actions.
+
+Usage
+=====
+Sequence sequence = new Sequence(InputSource, Length);
+
+Methods
+=======
+addAction();
+
+Exception
+=========
+1. MoveTargetOutOfBoundsException
+2. InvalidCoordinatesException
 =======================================================================

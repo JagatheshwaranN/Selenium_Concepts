@@ -166,7 +166,7 @@ PointerInput can offer more precise control over touch simulations.
 and origins, PointerInput can be a valuable tool.
 
 21. What is KeyboardInput Class?
-Answer: the KeyboardInput class is now considered official. It allows for simulating keyboard interactions
+Answer: The KeyboardInput class is now considered official. It allows for simulating keyboard interactions
 on web pages.
 
 22. Why and when to use KeyboardInput?
