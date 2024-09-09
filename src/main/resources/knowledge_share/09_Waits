@@ -363,6 +363,12 @@ longer attached to the DOM.
 Example Scenario: If you locate an element, navigate to another page, and then attempt to interact with
 the previously located element, a StaleElementReferenceException occurs.
 
+Example
+=======
+Imagine you're trying to give a friend a gift. You know where their house is, but by the
+time you get there, they've moved. That's basically what a StaleElementReferenceException
+is in Selenium.
+
 4. ElementNotVisibleException:
 ==============================
 Description: This exception is thrown when trying to interact with an element that is present in the
@@ -370,9 +376,20 @@ DOM but not currently visible on the web page.
 Example Scenario: If you attempt to click on an element that is hidden or covered by another element,
 an ElementNotVisibleException is raised.
 
+Example
+=======
+Imagine you're trying to find a book on a shelf. The book is there, but it's behind another
+book, so you can't see it. That's basically what an ElementNotVisibleException is in Selenium.
+
 5. ElementNotInteractableException:
 ===================================
 Description: This exception is thrown when trying to interact with an element that cannot be interacted
 with using the specified action, such as clicking on a non-clickable element.
 Example Scenario: If you try to click on a non-clickable element, an ElementNotInteractableException is
 triggered.
+
+Example
+=======
+Imagine you're trying to open a locked door. The door is there, and it's visible, but
+it's locked. You can't interact with it until you unlock it. That's basically what an
+ElementNotInteractableException is in Selenium.

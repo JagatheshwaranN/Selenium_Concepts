@@ -275,3 +275,50 @@ Exception
 1. MoveTargetOutOfBoundsException
 2. InvalidCoordinatesException
 =======================================================================
+9. Waits
+========
+RemoteTimeouts class which implements Timeouts Interface is used to handle
+the ImplicitWait, PageLoadTimeout and ScriptTimeout.
+
+Usage
+=====
+driver.manage().timeouts();
+
+Methods
+=======
+implicitlyWait(duration);
+pageLoadTimeout(duration);
+scriptTimeout(duration);
+
+WebDriverWait
+=============
+WebDriverWait class is used to handle the Explicit[WebDriverWait].
+
+Usage
+=====
+WebDriverWait wait = new WebDriverWait(driver, duration);
+
+Methods
+=======
+until(expectedConditions);
+
+FluentWait
+==========
+FluentWait class is used to handle the Explicit[FluentWait].
+
+Usage
+=====
+Wait<WebDriverWait> wait = new FluentWait<>(driver, duration)
+.withTimeout(duration)
+.pollingEvery(duration)
+.ignoring(exception) /.ignoringAll(exception);
+
+Methods
+=======
+until(expectedConditions);
+
+ExpectedConditions
+==================
+ExpectedConditions class used with ExplicitWait to check for the
+conditions.
+=======================================================================

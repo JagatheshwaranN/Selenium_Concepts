@@ -37,7 +37,7 @@ public class ExplicitWaitType1Test {
 	}
 
 	/**
-	 * More Options available under ExpectedCondition Class
+	 * More Options available under ExpectedConditions Class
 	 * <a href="https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/support/ui/ExpectedConditions.html"/>
 	 */
 	@Test(priority = 1)
