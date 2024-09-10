@@ -322,3 +322,75 @@ ExpectedConditions
 ExpectedConditions class used with ExplicitWait to check for the
 conditions.
 =======================================================================
+10. Screenshot
+==============
+RemoteWebDriver class implements TakeScreenshot interface, has a method
+getScreenshotAs() to handle the screenshot functionality.
+
+Usage
+=====
+TakeScreenshot takeScreen = (TakeScreenshot) driver;
+
+Methods
+=======
+getScreenshotAs();
+
+Example
+=======
+TakeScreenshot takeScreen = (TakeScreenshot) driver;
+File src = takeScreen.getScreenshotAs(OutputType.FILE);
+FileUtils.copy(src, new File("/image.png");
+Files.copy(src, new File("/image.png");
+
+driver.findElement(ByLocator).getScreenshotAs(OutputType.FILE);
+FileUtils.copy(src, new File("/image.png");
+Files.copy(src, new File("/image.png");
+
+Note:
+=====
+Screenshot can be taken in 3 formats as below.
+1. File
+2. Byte
+3. Base64
+
+Screenshot can be taken for page level and element level.
+=======================================================================
+11. Print
+=========
+PrintOptions class, PDF class and PrintsPage Interface are used to print
+the page.
+
+Usage
+=====
+PrintOptions prints = new PrintOptions();
+
+Methods
+=======
+print();
+getContent();
+
+Example
+=======
+PrintOptions prints = new PrintOptions();
+PDF pdf = ((PrintsPage) driver).print(prints);
+String content = pdf.getContent();
+Files.write(OutputTypes.BYTES.convertFromBase64Png(content), new File("./print.pdf"));
+=======================================================================
+12. Page
+========
+RemoteWebDriver class implements WebDriver interface which is used to
+handle the page related actions.
+
+Usage
+=====
+driver.getTitle();
+driver.getCurrentUrl();
+driver.getPageSource();
+
+Methods
+=======
+getTitle();
+getCurrentUrl();
+getPageSource();
+=======================================================================
+
