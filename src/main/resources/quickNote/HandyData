@@ -393,4 +393,33 @@ getTitle();
 getCurrentUrl();
 getPageSource();
 =======================================================================
+13. Wheel
+=========
+WheelInput and ScrollOrigin classes are used to handle the page scrolling related
+operations.
 
+Usage
+=====
+WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin;
+
+Methods
+=======
+fromElement(WebElement);
+fromElement(WebElement, X-offset, Y-offset);
+fromViewPort(x-offset, y-offset);
+scrollToElement(WebElement);
+scrollByAmount(X-axis, Y-axis);
+
+Support class
+=============
+Actions actions = new Actions(driver);
+
+Method
+======
+scrollFromOrigin(scrollOrigin, X-axis, Y-axis);
+
+Example
+=======
+WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromElement(WebElement);
+new Actions(driver).scrollFromOrigin(scrollOrigin, X-axis, Y-axis);
+=======================================================================
