@@ -445,3 +445,37 @@ Keys Enum method
 ================
 chord(Keys);
 =======================================================================
+15. File
+========
+File upload and download are less common scenarios in automation.
+
+Usage
+=====
+File Upload - element.sendKeys(FilePath);
+
+Methods
+=======
+element.sendKeys(FilePathToUpload);
+
+Note:
+=====
+1. Input tag type should be of file then ONLY the above sendKeys() method will
+work.
+2. Another options for file upload is with 3rd party tools AutoIT and Robot
+class.
+
+For downloading the file, we can customize the file download path with
+ChromeOptions.
+
+HashMap<String, Object> preferences = new HashMap<>();
+preferences.set("profile.default_content_setting.popups", 0);
+preferences.set("download.default_directory", System.getProperty("user.dir"));
+ChromeOptions chromeOptions = new ChromeOptions();
+chromeOptions.setExperiementalOption("prefs", preference);
+new ChromeDriver(chromeOptions);
+
+Note:
+=====
+1. After the file is downloaded, you can verify it using the Java Files class.
+2. Another options for file download is with 3rd party widget tool.
+=======================================================================
