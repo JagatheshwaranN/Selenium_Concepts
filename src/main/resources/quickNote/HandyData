@@ -423,3 +423,25 @@ Example
 WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromElement(WebElement);
 new Actions(driver).scrollFromOrigin(scrollOrigin, X-axis, Y-axis);
 =======================================================================
+14. Keyboard
+============
+Actions class is used to handle the Keyboard actions.
+Keys Enum is used to provide the Keys needed for keyboard action.
+
+Usage
+=====
+Actions actions = new Actions(driver);
+Keys.chord(Keys);
+
+Methods
+=======
+keyDown(Keys);
+keyUp(Keys);
+sendKeys(Keys);
+sendKeys(chord);
+sendKeys(Element, Keys);
+
+Keys Enum method
+================
+chord(Keys);
+=======================================================================

@@ -17,4 +17,9 @@ driver.navigate().back();
 Using PointerInput, Sequence and RemoteWebDriver classes we can achieve
 the backward click.
 =======================================================================
-
+Clear
+=====
+element.clear();
+element.sendKeys(Keys.CONTROL+"a");
+element.sendKeys(Keys.DELETE);
+=======================================================================
