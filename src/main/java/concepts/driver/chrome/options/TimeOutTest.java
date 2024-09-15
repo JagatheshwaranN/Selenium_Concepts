@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
+@SuppressWarnings("All")
 public class TimeOutTest {
 
     // Declare a WebDriver instance to interact with the web browser.

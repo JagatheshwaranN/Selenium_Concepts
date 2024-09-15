@@ -479,3 +479,77 @@ Note:
 1. After the file is downloaded, you can verify it using the Java Files class.
 2. Another options for file download is with 3rd party widget tool.
 =======================================================================
+16. Driver
+==========
+ChromeOptions class which extends ChromiumOptions are responsible to handle
+chrome driver related operations.
+EdgeOptions class which extends ChromiumOptions are responsible to handle
+edge driver related operations.
+FirefoxOptions class are responsible to handle firefox driver related operations.
+
+Usage
+=====
+ChromeOptions options = new ChromeOptions();
+EdgeOptions options = new EdgeOptions();
+FirefoxOptions options = new FirefoxOptions();
+
+To get the BrowserVersion we have to use the capability. The Capability is an
+interface. RemoteWebDriver class provides the method to get the capability.
+
+Usage
+=====
+Capabilities cap = ((RemoteWebDriver)driver).getCapabilities();
+
+Proxy
+=====
+Proxy is used to run the test on the proxy server.
+
+Usage
+=====
+Proxy proxy = new Proxy();
+
+Methods
+=======
+It has many methods. Let see fee important methods.
+getBrowserName();
+getBrowserVersion();
+AddArguments(String);
+setExperimentalOption(String, Object);
+setCapability(Capability, boolean);
+setPageLoadStrategy(PageLoadStrategy Enum);
+setAcceptInsecureCerts(boolean);
+setStrictFileInteractability(boolean);
+setPageLoadTimeout(Duration);
+setImplicitWaitTimeout(Duration);
+setScriptTimeout(Duration);
+setBinary(File);
+
+Proxy Methods
+=============
+setHttpProxy("IP:Port");
+
+ChromeDriverService is a class which is used to start the ChromeDriver
+with customization.
+
+Usage
+=====
+ChromeDriverService service = new ChromeDriverService.Builder().build();
+
+Methods
+=======
+usingDriverExecutable(File);
+usingPort(int);
+
+Examples
+========
+chromeOptions.addArguments("--headless=new");
+chromeOptions.addArguments("incognito");
+chromeOptions.addArguments("start-maximized");
+
+edgeOptions.addArguments("--headless=new");
+edgeOptions.addArguments("-inprivate");
+edgeOptions.addArguments("start-maximized");
+
+firefoxOptions.addArguments("--headless");
+firefoxOptions.addArguments("--private");
+=======================================================================
