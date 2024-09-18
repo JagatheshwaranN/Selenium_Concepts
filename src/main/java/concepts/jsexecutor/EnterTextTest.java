@@ -47,7 +47,7 @@ public class EnterTextTest {
 		// Execute JavaScript code to set the input field's value to the expected text
 		jsExecutor.executeScript("arguments[0].value='" + expectedValue + "';", input);
 
-		// Get the actual value entered in the input field
+		// Get the actual value entered from the input field
 		String actualValue = input.getAttribute("value");
 
 		// Assert whether the actual value matches the expected value

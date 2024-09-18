@@ -553,3 +553,58 @@ edgeOptions.addArguments("start-maximized");
 firefoxOptions.addArguments("--headless");
 firefoxOptions.addArguments("--private");
 =======================================================================
+17. JavaScriptExecutor
+======================
+RemoteWebDriver class provides implementation for the methods of
+JavaScriptExecutor interface.
+JavascriptExecutor is an interface provided by Selenium WebDriver to execute
+JavaScript code within the context of the currently selected frame or window.
+
+Usage
+=====
+JavascriptExecutor js = (JavascriptExecutor) driver;
+
+Methods
+=======
+executeScript(Script, Arguments);
+executeAsyncScript(Script, Arguments);
+
+Note:
+=====
+1. DOM manipulation techniques.
+2. To interact with dynamic web elements.
+3. To handle AJAX calls.
+4. To simulate user interactions like scrolling or dragging.
+5. To execute JavaScript code to validate or manipulate the DOM.
+
+Examples
+========
+jsExecutor.executeScript("arguments[0].value='';", input);
+jsExecutor.executeScript("arguments[0].click()", button);
+jsExecutor.executeScript("arguments[0].removeAttribute('disabled');", input);
+jsExecutor.executeScript("arguments[0].value='" + expectedValue + "';", input);
+jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+jsExecutor.executeScript("document.getElementById('home-page-tabs').scrollIntoView(true);");
+jsExecutor.executeScript("return document.getElementsByTagName('img');");
+jsExecutor.executeScript("return document.querySelectorAll('img');");
+jsExecutor.executeScript("return document.getElementById('APjFqb');");
+jsExecutor.executeScript("return document.querySelector(\"[name='q']\")")
+jsExecutor.executeScript("return document.documentElement.innerText;").toString();
+jsExecutor.executeScript("return document.title").toString();
+jsExecutor.executeScript("return window.innerHeight;");
+jsExecutor.executeScript("return window.innerWidth;");
+jsExecutor.executeScript("arguments[0].setAttribute('style', 'background: yellow;
+border: 2px solid green;')", input);
+jsExecutor.executeScript("window.location = 'https://www.selenium.dev/'");
+jsExecutor.executeScript("document.location.reload()");
+jsExecutor.executeScript("history.go(0)");
+jsExecutor.executeScript("window.scrollBy(0, " + pixel + ")");
+jsExecutor.executeScript("window.scrollBy(0, -" + pixel + ")");
+jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+jsExecutor.executeScript("window.scrollTo(0, -document.body.scrollHeight)");
+jsExecutor.executeScript("window.scrollTo(-document.body.scrollWidth, 0)");
+jsExecutor.executeScript("window.scrollTo(document.body.scrollWidth, 0)");
+jsExecutor.executeScript("window.scrollTo(arguments[0],arguments[1]);",
+element.getLocation().x,element.getLocation().y);
+jsExecutor.executeScript("arguments[0].scrollIntoView(true)", element);
+=======================================================================

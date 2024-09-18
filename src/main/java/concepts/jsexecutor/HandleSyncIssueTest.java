@@ -4,16 +4,12 @@ import org.apache.poi.util.NotImplemented;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
-import java.time.Duration;
-
-
+@SuppressWarnings("All")
 public class HandleSyncIssueTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
