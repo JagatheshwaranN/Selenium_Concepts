@@ -22,4 +22,6 @@ Clear
 element.clear();
 element.sendKeys(Keys.CONTROL+"a");
 element.sendKeys(Keys.DELETE);
+js.executeScript("arguments[0].clear()", element);
+js.executeScript("arguments[0].value=''", element);
 =======================================================================

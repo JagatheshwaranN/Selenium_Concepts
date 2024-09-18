@@ -607,4 +607,5 @@ jsExecutor.executeScript("window.scrollTo(document.body.scrollWidth, 0)");
 jsExecutor.executeScript("window.scrollTo(arguments[0],arguments[1]);",
 element.getLocation().x,element.getLocation().y);
 jsExecutor.executeScript("arguments[0].scrollIntoView(true)", element);
+jsExecutor.executeScript("document.body.style.zoom='" + percent + "'");
 =======================================================================
