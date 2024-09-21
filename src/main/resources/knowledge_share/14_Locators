@@ -200,4 +200,3 @@ spatial relationship?
 If no matching element is found in the specified spatial relationship, relative locators will
 throw a NoSuchElementException. It's essential to ensure that the reference element and the
 target element have the expected spatial relationship for successful element location.
-

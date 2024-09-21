@@ -609,3 +609,63 @@ element.getLocation().x,element.getLocation().y);
 jsExecutor.executeScript("arguments[0].scrollIntoView(true)", element);
 jsExecutor.executeScript("document.body.style.zoom='" + percent + "'");
 =======================================================================
+18. Locators
+============
+Locators in Selenium WebDriver are unique identifiers that help the
+automation framework pinpoint specific web elements on a web page.
+
+Types
+=====
+1. Traditional Locators (8)
+2. Relative Locators (5)
+
+Traditional Locators
+====================
+Id, ClassName, Name, TagName, LinkText, PartialLinkTest, CSS and Xpath.
+
+Relative Locators
+=================
+1. below
+2. above
+3. toLeftOf
+4. toRightOf
+5. near
+
+Usage
+=====
+driver.findElement(with(By.tagName()).above(By.id())).getAttribute();
+
+XPath Locator Functions
+=======================
+1. contains
+2. starts-with
+3. text()
+4. following
+5. ancestor
+6. child
+7. preceding
+8. following-sibling
+9. parent
+10. self
+11. descendant
+12. ancestor-or-self
+13. descendant-or-self
+
+CSS Locator Functions
+=====================
+1. css=tag#id
+2. css=tag.class[attribute=value]
+3. css=tag[attribute=value]
+4. css=tag.class
+5. css=tag[attribute^=value]
+6. css=tag[attribute$=value]
+7. css=tag[attribute*=value]
+8. css=parentTag > childTag[attribute=value]
+9. css=parentTag > childTag > subChildTag:nth-of-type(index)
+10. ~: Descendant combinator
+11. +: Adjacent sibling combinator
+12. css=:first-child
+13. css=:last-child
+14. css=:nth-child(n)
+15. css=li:nth-child(n):not(ol > li:nth-child(n))
+=======================================================================

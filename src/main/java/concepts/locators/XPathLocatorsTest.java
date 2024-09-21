@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+@SuppressWarnings("All")
 public class XPathLocatorsTest {
 
     // Declare a WebDriver instance to interact with the web browser.
@@ -108,7 +109,7 @@ public class XPathLocatorsTest {
         // Selects all ancestors of the current node and the current node itself.
         Assert.assertTrue(driver.findElement(By.xpath("//button[@name='login']//ancestor-or-self::form")).isDisplayed());
 
-        // xpath=//tag[@attribute=value]//descendant::tag[@attribute=value]
+        // xpath=//tag[@attribute=value]//descendant-or-self::tag[@attribute=value]
         // Selects the context node itself and all its descendants.
         Assert.assertTrue(driver
                 .findElement(By.xpath("//form[@data-testid='royal_login_form']//descendant-or-self::input[@name='email']"))
