@@ -669,3 +669,35 @@ CSS Locator Functions
 14. css=:nth-child(n)
 15. css=li:nth-child(n):not(ol > li:nth-child(n))
 =======================================================================
+19. Shadow DOM
+==============
+The Shadow DOM (Document Object Model) is a feature of web browsers that
+allows developers to encapsulate the structure and styles of a component,
+keeping them separate from the rest of the document.
+
+Types
+=====
+1. Open ShadowDOM
+2. Closed ShadowDOM
+
+Components
+==========
+Shadow HOST: The regular DOM node that the Shadow DOM is attached to.
+Shadow TREE: The DOM tree inside the Shadow DOM.
+Shadow BOUNDARY: The place where the Shadow DOM ends, and the regular DOM begins.
+Shadow ROOT: The root node of the Shadow tree.
+
+RemoteWebElement class has method getShadowRoot() which is used to interact
+with ShadowDOM elements.
+
+Usage
+=====
+WebElement DOMElement = driver.findElement(By.cssSelector("locator"));
+SearchContext shadowRoot = DOMElement.getShadowRoot();
+shadowRoot.findElement(By.cssSelector("locator")).sendKeys("ShadowDOM");
+
+Note:
+=====
+1. ShadowDOM can be handled by Selenium getShadowRoot() method.
+2. ShadowDOM can also be handled by JavaScriptExecutor.
+=======================================================================
