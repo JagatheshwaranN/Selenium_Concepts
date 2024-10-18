@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.manager.SeleniumManagerOutput;
 import org.openqa.selenium.remote.service.DriverFinder;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -62,10 +61,10 @@ public class StartBrowserFromSpecifiedLocationTest {
         edgeOptions.setBrowserVersion("stable");
 
         // Get the browser path using DriverFinder utility method
-        SeleniumManagerOutput.Result location = DriverFinder.getPath(EdgeDriverService.createDefaultService(), edgeOptions);
+        DriverFinder driverFinder = new DriverFinder(EdgeDriverService.createDefaultService(), edgeOptions);
 
         // Extract and return the browser path from the result
-        return new File(location.getBrowserPath());
+        return new File(driverFinder.getBrowserPath());
     }
 
 }

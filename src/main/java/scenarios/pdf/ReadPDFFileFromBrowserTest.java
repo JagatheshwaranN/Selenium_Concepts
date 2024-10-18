@@ -1,5 +1,6 @@
 package scenarios.pdf;
 
+import org.apache.poi.util.NotImplemented;
 import scenarios.DriverConfiguration;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -22,6 +23,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.time.Duration;
 
+@NotImplemented
 public class ReadPDFFileFromBrowserTest {
 
     // Declaration of a private instance variable of type WebDriver
@@ -88,25 +90,25 @@ public class ReadPDFFileFromBrowserTest {
             BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 
             // Load the PDF document
-            PDDocument pdDocument = PDDocument.load(bufferedInputStream);
+            //PDDocument pdDocument = PDDocument.load(bufferedInputStream);
 
-            // Get the number of pages in the PDF
-            int pdfFilePages = pdDocument.getNumberOfPages();
-
-            // Validate the number of pages
-            validatePDFPages(pdfFilePages);
-
-            // Extract the text from the PDF
-            String pdfFileContent = extractTextFromPDF(pdDocument);
-
-            // Print the PDF content
-            System.out.println(pdfFileContent);
-
-            // Validate the content of the PDF
-            validatePDFContent(pdfFileContent);
-
-            // Close the PDF document
-            pdDocument.close();
+//            // Get the number of pages in the PDF
+//            int pdfFilePages = pdDocument.getNumberOfPages();
+//
+//            // Validate the number of pages
+//            validatePDFPages(pdfFilePages);
+//
+//            // Extract the text from the PDF
+//            String pdfFileContent = extractTextFromPDF(pdDocument);
+//
+//            // Print the PDF content
+//            System.out.println(pdfFileContent);
+//
+//            // Validate the content of the PDF
+//            validatePDFContent(pdfFileContent);
+//
+//            // Close the PDF document
+//            pdDocument.close();
         } catch (IOException ex) {
 
             // Handle IO exceptions

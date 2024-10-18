@@ -83,11 +83,11 @@ public class ChromeServiceDriverLocationTest {
         chromeOptions.setBrowserVersion("stable");
 
         // Get the driver and browser paths using DriverFinder utility method
-        SeleniumManagerOutput.Result location = DriverFinder.getPath(ChromeDriverService.createDefaultService(), chromeOptions);
+        DriverFinder driverFinder = new DriverFinder(ChromeDriverService.createDefaultService(), chromeOptions);
 
         // Extract the driver and browser paths from the result
-        driverPath = new File(location.getDriverPath()); // Assuming driverPath is a File object
-        browserPath = new File(location.getBrowserPath()); // Assuming browserPath is a File object
+        driverPath = new File(driverFinder.getDriverPath()); // Assuming driverPath is a File object
+        browserPath = new File(driverFinder.getBrowserPath()); // Assuming browserPath is a File object
     }
 
 }

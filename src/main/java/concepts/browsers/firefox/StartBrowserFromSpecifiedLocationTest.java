@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
-import org.openqa.selenium.manager.SeleniumManagerOutput;
 import org.openqa.selenium.remote.service.DriverFinder;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -62,10 +61,10 @@ public class StartBrowserFromSpecifiedLocationTest {
         firefoxOptions.setBrowserVersion("stable");
 
         // Get the browser path using DriverFinder utility method
-        SeleniumManagerOutput.Result location = DriverFinder.getPath(GeckoDriverService.createDefaultService(), firefoxOptions);
+        DriverFinder driverFinder = new DriverFinder(GeckoDriverService.createDefaultService(), firefoxOptions);
 
         // Extract and return the browser path from the result
-        return Path.of(location.getBrowserPath());
+        return Path.of(driverFinder.getBrowserPath());
     }
 
 }

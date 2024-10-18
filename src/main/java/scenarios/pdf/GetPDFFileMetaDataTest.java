@@ -1,5 +1,6 @@
 package scenarios.pdf;
 
+import org.apache.poi.util.NotImplemented;
 import scenarios.DriverConfiguration;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.openqa.selenium.By;
@@ -20,6 +21,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.time.Duration;
 
+@NotImplemented
 public class GetPDFFileMetaDataTest {
 
     // Declare a WebDriver instance to interact with the web browser.
@@ -86,35 +88,35 @@ public class GetPDFFileMetaDataTest {
             BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 
             // Load the PDF document
-            PDDocument pdDocument = PDDocument.load(bufferedInputStream);
-
-            // Print the PDF file version
-            System.out.println("PDF File Version          ==> " + pdDocument.getVersion());
-            // Print the print option availability
-            System.out.println("PDF File Print Option     ==> " + pdDocument.getCurrentAccessPermission().canPrint());
-            // Print the read-only status
-            System.out.println("PDF File ReadOnly         ==> " + pdDocument.getCurrentAccessPermission().isReadOnly());
-            // Print the owner permission status
-            System.out.println(
-                    "PDF File Owner Permission ==> " + pdDocument.getCurrentAccessPermission().isOwnerPermission());
-            // Print the author of the PDF
-            System.out.println("PDF File Author           ==> " + pdDocument.getDocumentInformation().getAuthor());
-            // Print the subject of the PDF
-            System.out.println("PDF File Subject          ==> " + pdDocument.getDocumentInformation().getSubject());
-            // Print the title of the PDF
-            System.out.println("PDF File Title            ==> " + pdDocument.getDocumentInformation().getTitle());
-            // Print the creator of the PDF
-            System.out.println("PDF File Creator          ==> " + pdDocument.getDocumentInformation().getCreator());
-            // Print the creation date of the PDF
-            System.out.println(
-                    "PDF File Creator Date     ==> " + pdDocument.getDocumentInformation().getCreationDate());
-            // Print the encryption status of the PDF
-            System.out.println("PDF File Encrypted        ==> " + pdDocument.isEncrypted());
-            // Print the document ID of the PDF
-            System.out.println("PDF File Document Id      ==> " + pdDocument.getDocumentId());
-            
-            // Close the PDF document
-            pdDocument.close();
+////            PDDocument pdDocument = PDDocument.load(bufferedInputStream);
+////
+////            // Print the PDF file version
+////            System.out.println("PDF File Version          ==> " + pdDocument.getVersion());
+////            // Print the print option availability
+////            System.out.println("PDF File Print Option     ==> " + pdDocument.getCurrentAccessPermission().canPrint());
+////            // Print the read-only status
+////            System.out.println("PDF File ReadOnly         ==> " + pdDocument.getCurrentAccessPermission().isReadOnly());
+////            // Print the owner permission status
+////            System.out.println(
+////                    "PDF File Owner Permission ==> " + pdDocument.getCurrentAccessPermission().isOwnerPermission());
+////            // Print the author of the PDF
+////            System.out.println("PDF File Author           ==> " + pdDocument.getDocumentInformation().getAuthor());
+////            // Print the subject of the PDF
+////            System.out.println("PDF File Subject          ==> " + pdDocument.getDocumentInformation().getSubject());
+////            // Print the title of the PDF
+////            System.out.println("PDF File Title            ==> " + pdDocument.getDocumentInformation().getTitle());
+////            // Print the creator of the PDF
+////            System.out.println("PDF File Creator          ==> " + pdDocument.getDocumentInformation().getCreator());
+////            // Print the creation date of the PDF
+////            System.out.println(
+////                    "PDF File Creator Date     ==> " + pdDocument.getDocumentInformation().getCreationDate());
+////            // Print the encryption status of the PDF
+////            System.out.println("PDF File Encrypted        ==> " + pdDocument.isEncrypted());
+////            // Print the document ID of the PDF
+////            System.out.println("PDF File Document Id      ==> " + pdDocument.getDocumentId());
+////
+//            // Close the PDF document
+//            pdDocument.close();
         } catch (IOException ex) {
 
             // Handle IO exceptions

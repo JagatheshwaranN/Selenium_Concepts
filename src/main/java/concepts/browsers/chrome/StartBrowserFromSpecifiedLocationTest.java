@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.manager.SeleniumManagerOutput;
 import org.openqa.selenium.remote.service.DriverFinder;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -62,10 +61,10 @@ public class StartBrowserFromSpecifiedLocationTest {
         chromeOptions.setBrowserVersion("stable");
 
         // Get the browser path using DriverFinder utility method
-        SeleniumManagerOutput.Result location = DriverFinder.getPath(ChromeDriverService.createDefaultService(), chromeOptions);
+        DriverFinder driverFinder = new DriverFinder(ChromeDriverService.createDefaultService(), chromeOptions);
 
         // Extract and return the browser path from the result
-        return new File(location.getBrowserPath());
+        return new File(driverFinder.getBrowserPath());
     }
 
 }
