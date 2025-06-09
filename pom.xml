@@ -12,7 +12,7 @@
 		<jdk.level>22</jdk.level>
 		<maven.compiler.source>22</maven.compiler.source>
 		<maven.compiler.target>22</maven.compiler.target>
-		<selenium.version>4.25.0</selenium.version>
+		<selenium.version>4.33.0</selenium.version>
 		<testng.version>7.10.2</testng.version>
 		<selenium.har.version>1.0.2</selenium.har.version>
 		<rest.version>5.5.0</rest.version>
