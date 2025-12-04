@@ -2,8 +2,8 @@ package concepts.cdp.cdp_api;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v129.performance.Performance;
-import org.openqa.selenium.devtools.v129.performance.model.Metric;
+import org.openqa.selenium.devtools.v142.performance.Performance;
+import org.openqa.selenium.devtools.v142.performance.model.Metric;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

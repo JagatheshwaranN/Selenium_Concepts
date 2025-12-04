@@ -2,7 +2,7 @@ package concepts.cdp.old;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v129.network.Network;
+import org.openqa.selenium.devtools.v142.network.Network;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -47,7 +47,7 @@ public class GetHttpRequestTest {
 		devTools.createSessionIfThereIsNotOne();
 
 		// Enable network conditions monitoring
-		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+		devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty()));
 
 		// Create a counter to track the number of requests
 		AtomicInteger requestCounter = new AtomicInteger(0); // Counter to track requests

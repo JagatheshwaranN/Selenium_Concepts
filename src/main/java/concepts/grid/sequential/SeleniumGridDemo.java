@@ -1,6 +1,7 @@
 package concepts.grid.sequential;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 
 import org.openqa.selenium.Platform;
@@ -39,7 +40,7 @@ public class SeleniumGridDemo {
 			options.merge(capabilities);
 		}
 
-		driver = new RemoteWebDriver(new URL("http://192.168.1.10:4444/"), capabilities);
+        driver = new RemoteWebDriver((URI.create("http://localhost:4444").toURL()), capabilities);
 		driver.get("https://www.google.com/");
 		System.out.println("Title of Page " + driver.getTitle() + " from Browser " + browser);
 		Thread.sleep(10000);

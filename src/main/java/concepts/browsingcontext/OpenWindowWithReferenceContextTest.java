@@ -33,7 +33,7 @@ public class OpenWindowWithReferenceContextTest {
     public void testOpenWindowWithReferenceContext() {
         // Create a new browsing context using the WebDriver, specifying the window type as "WINDOW",
         // and providing the window handle ID of the current window or tab managed by the WebDriver
-        BrowsingContext browsingContext = new BrowsingContext(driver, WindowType.WINDOW, driver.getWindowHandle());
+        BrowsingContext browsingContext = new BrowsingContext(driver, WindowType.WINDOW);
 
 
         // Navigate to the target URL using the created browsing context

@@ -3,7 +3,7 @@ package concepts.cdp.cdp_api;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v129.runtime.Runtime;
+import org.openqa.selenium.devtools.v142.runtime.Runtime;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;

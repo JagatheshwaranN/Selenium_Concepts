@@ -2,7 +2,7 @@ package concepts.bidi.old;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v129.network.Network;
+import org.openqa.selenium.devtools.v142.network.Network;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -47,7 +47,7 @@ public class EventSourceMessageTest {
         devTools.createSessionIfThereIsNotOne();
 
         // Enable the Network domain in DevTools
-        devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+        devTools.send(Network.enable(Optional.empty(), Optional.empty(),Optional.empty(),Optional.empty(), Optional.empty()));
 
         // Add a listener for the eventSourceMessageReceived event in the Network domain
         devTools.addListener(Network.eventSourceMessageReceived(), message -> {

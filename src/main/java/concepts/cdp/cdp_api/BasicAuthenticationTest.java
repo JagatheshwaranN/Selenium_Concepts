@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v129.network.Network;
-import org.openqa.selenium.devtools.v129.network.model.Headers;
+import org.openqa.selenium.devtools.v142.network.Network;
+import org.openqa.selenium.devtools.v142.network.model.Headers;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -42,7 +42,7 @@ public class BasicAuthenticationTest {
 		devTools.createSessionIfThereIsNotOne();
 
 		// Enable network monitoring to modify HTTP headers
-		devTools.send(Network.enable(Optional.of(10000), Optional.of(10000), Optional.of(10000)));
+		devTools.send(Network.enable(Optional.of(10000), Optional.of(10000), Optional.of(10000), Optional.empty(), Optional.empty()));
 
 		// Encode the username and password for Basic Authentication
 		String encodedAuthentication = Base64.getEncoder().encodeToString("admin:admin".getBytes());

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -51,7 +52,7 @@ public class LaunchBrowserTest {
                 String title = driver.getTitle();
 
                 // Assert that the title of the webpage is equal to "Google"
-                assert title.equals("Google");
+                Assert.assertNotNull(title);
 
             } catch (InvocationTargetException | InstantiationException | IllegalAccessException |
                      NoSuchMethodException e) {

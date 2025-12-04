@@ -6,8 +6,6 @@ import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.html5.WebStorage;
-import org.openqa.selenium.remote.Augmenter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -19,160 +17,114 @@ import java.util.Date;
 
 public class LoginByPassUsingSessionDataTest {
 
-    // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
+    private StorageUtil storage;
 
-    // Declare a WebStorage instance to interact with the web browser session data.
-    private WebStorage webStorage;
-
-    // File name for the JSON file
     private static final String FILE_NAME = "nopcommerce";
-
-    // Path for the JSON file
-    private static final String JSON_FILE_PATH = System.getProperty("user.dir") + "/src/main/java/com/qa/selenium/scenarios/login_bypass/" + FILE_NAME + ".json";
+    private static final String JSON_FILE_PATH =
+            System.getProperty("user.dir")
+                    + "/src/main/java/com/qa/selenium/scenarios/login_bypass/"
+                    + FILE_NAME + ".json";
 
     @BeforeMethod
     public void setUp() {
-        // Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
         driver = DriverConfiguration.browserSetup();
     }
 
     @AfterMethod
     public void tearDown() {
-        // Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
-        if (driver != null) {
-            // If a WebDriver instance exists, quit/close the browser session.
-            driver.quit();
-        }
+        if (driver != null) driver.quit();
     }
 
-    @Test(priority = 1)
+    @Test
     public void testLoginByPassUsingSessionData() {
-        // Augment the driver with WebStorage
-        webStorage = (WebStorage) new Augmenter().augment(driver);
 
-        // Navigate to the login page
+        storage = new StorageUtil(driver);
+
+        // 1️⃣ Load login page
         driver.get("https://admin-demo.nopcommerce.com/");
 
-        // Use the previous session details for login
-        usePreviousLoggedInSessionDetails();
+        // 2️⃣ Read saved JSON
+        JSONObject json = parseJSONFile();
+        JSONObject sessionData = json.getJSONObject("session_data");
 
-        // Navigate to the admin page
+        // 3️⃣ Apply session data
+        applySessionDetails(sessionData);
+
+        // 4️⃣ Refresh after restore
+        driver.navigate().refresh();
+
+        // 5️⃣ Validate
         driver.navigate().to("https://admin-demo.nopcommerce.com/admin/");
-
-        // Wait for some time before performing the next action
-        waitForSomeTime();
-
-        // Check if the 'Dashboard' heading is displayed
         driver.findElement(By.xpath("//h1[contains(text(),'Dashboard')]")).isDisplayed();
     }
 
-    private void usePreviousLoggedInSessionDetails() {
-        // Clear all cookies from the driver's cookie storage
-        driver.manage().getCookies().clear();
+    private void applySessionDetails(JSONObject sessionData) {
 
-        // Initialize a JSONObject
-        JSONObject jsonObject;
+        // Clear everything first
+        driver.manage().deleteAllCookies();
+        storage.clearLocalStorage();
+        storage.clearSessionStorage();
 
-        // Parse the JSON file using the provided file path
-        jsonObject = parseJSONFile();
-
-        // Extract the "session_data" JSONObject from the main JSONObject
-        JSONObject sessionData = jsonObject.getJSONObject("session_data");
-
-        // Apply cookies to the current session using the session data
-        applyCookiesToCurrentSession(sessionData);
-
-        // Apply local storage using the session data
+        // Apply data back
+        applyCookies(sessionData);
         applyLocalStorage(sessionData);
-
-        // Apply session storage using the session data
         applySessionStorage(sessionData);
 
-        // Wait for some time before continuing
-        waitForSomeTime();
-
-        // Refresh the driver's current page
-        driver.navigate().refresh();
+        waitFor(1000);
     }
 
     private JSONObject parseJSONFile() {
-        // Initialize content as null
-        String content = null;
-
         try {
-            // Read the content of the JSON file
-            content = new String(Files.readAllBytes(Paths.get(JSON_FILE_PATH)));
-        } catch (IOException ex) {
-            // Print the stack trace in case of an exception
-            ex.printStackTrace();
+            String content = new String(Files.readAllBytes(Paths.get(JSON_FILE_PATH)));
+            return new JSONObject(content);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read JSON file", e);
         }
-
-        // Assert that the content is not null
-        assert content != null;
-
-        // Return the JSON object created from the content
-        return new JSONObject(content);
     }
 
-    public void applyCookiesToCurrentSession(JSONObject jsonObject) {
-        // Retrieve the JSON array of cookies from the input JSON object
-        JSONArray cookiesArray = jsonObject.getJSONArray("cookies");
+    private void applyCookies(JSONObject sessionData) {
+        JSONArray cookiesArray = sessionData.getJSONArray("cookies");
 
-        // Iterate through each JSON object within the cookies array
         for (int i = 0; i < cookiesArray.length(); i++) {
+            JSONObject c = cookiesArray.getJSONObject(i);
 
-            // Get the individual cookie JSONObject at the current index
-            JSONObject cookies = cookiesArray.getJSONObject(i);
-
-            // Build a Cookie object using the information extracted from the JSON
-            Cookie cookie = new Cookie.Builder(cookies.get("name").toString(), cookies.get("value").toString())
-                    .path(cookies.get("path").toString())
-                    .domain(cookies.get("domain").toString())
-                    .expiresOn(!cookies.has("expiry") ? null : new Date(new Date().getTime() + 3600 * 1000))
-                    .isSecure((Boolean) cookies.get("isSecure"))
-                    .isHttpOnly((Boolean) cookies.get("isHttpOnly"))
+            Cookie cookie = new Cookie.Builder(c.getString("name"), c.getString("value"))
+                    .domain(c.getString("domain"))
+                    .path(c.getString("path"))
+                    .isHttpOnly(c.getBoolean("isHttpOnly"))
+                    .isSecure(c.getBoolean("isSecure"))
+                    .expiresOn(
+                            c.has("expiry")
+                                    ? new Date(c.getLong("expiry") * 1000)
+                                    : null
+                    )
                     .build();
 
-            // Add the created Cookie to the current session in the WebDriver
             driver.manage().addCookie(cookie);
         }
     }
 
     private void applyLocalStorage(JSONObject sessionData) {
-        // Retrieve the JSONObject for the local storage data from the sessionData object
-        JSONObject localStorageObject = sessionData.getJSONObject("local_storage");
+        JSONObject ls = sessionData.getJSONObject("local_storage");
 
-        // Iterate through each key in the localStorageObject
-        localStorageObject.keySet().forEach(localStorage -> {
-
-            // Set the local storage key-value pair for each key in the webStorage
-            webStorage.getLocalStorage().setItem(localStorage, localStorageObject.get(localStorage).toString());
-        });
-
-    }
-
-    private void applySessionStorage(JSONObject sessionData) {
-        // Retrieve the JSONObject for the session storage data from the sessionData object
-        JSONObject sessionStorageObject = sessionData.getJSONObject("session_storage");
-
-        // Iterate through each key in the sessionStorageObject
-        sessionStorageObject.keySet().forEach(sessionStorage -> {
-
-            // Set the session storage key-value pair for each key in the webStorage
-            webStorage.getSessionStorage().setItem(sessionStorage, sessionStorageObject.get(sessionStorage).toString());
-        });
-
-    }
-
-    private void waitForSomeTime() {
-        // Sleep the thread for 3 milliseconds
-        try {
-            Thread.sleep(3);
-        } catch (InterruptedException ex) {
-            // Print the stack trace if an InterruptedException occurs
-            ex.printStackTrace();
+        for (String key : ls.keySet()) {
+            storage.setLocalStorageItem(key, ls.get(key).toString());
         }
     }
 
+    private void applySessionStorage(JSONObject sessionData) {
+        JSONObject ss = sessionData.getJSONObject("session_storage");
+
+        for (String key : ss.keySet()) {
+            storage.setSessionStorageItem(key, ss.get(key).toString());
+        }
+    }
+
+    private void waitFor(long ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (Exception ignored) {
+        }
+    }
 }

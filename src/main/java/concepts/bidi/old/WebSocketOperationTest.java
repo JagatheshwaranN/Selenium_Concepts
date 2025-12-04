@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v129.network.Network;
-import org.openqa.selenium.devtools.v129.network.model.Initiator;
+import org.openqa.selenium.devtools.v142.network.Network;
+import org.openqa.selenium.devtools.v142.network.model.Initiator;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -64,7 +64,7 @@ public class WebSocketOperationTest {
         devTools.createSessionIfThereIsNotOne();
 
         // Enable the Network domain for capturing network events (including websockets)
-        devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+        devTools.send(Network.enable(Optional.empty(),Optional.empty(),Optional.empty(), Optional.empty(), Optional.empty()));
 
         // Listen for websocket creation events, printing details like URL, request ID, and initiator line number
         devTools.addListener(Network.webSocketCreated(), socket -> {

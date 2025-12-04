@@ -2,7 +2,7 @@ package concepts.bidi.old;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v129.network.Network;
+import org.openqa.selenium.devtools.v142.network.Network;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -43,7 +43,7 @@ public class CacheRequestTest {
         devTools.createSessionIfThereIsNotOne();
 
         // Enable the Network domain to handle network-related functionalities
-        devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+        devTools.send(Network.enable(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty()));
 
         // Disable browser cache for subsequent requests
         devTools.send(Network.setCacheDisabled(true));
