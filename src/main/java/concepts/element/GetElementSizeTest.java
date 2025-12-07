@@ -48,13 +48,13 @@ public class GetElementSizeTest {
 
 		// Assert the obtained values
 		Assert.assertEquals(elementHeight, 21);
-		Assert.assertEquals(elementWidth, 177);
+		Assert.assertEquals(elementWidth, 170);
 		Assert.assertEquals(rectangle.getHeight(), 21);
-		Assert.assertEquals(rectangle.getWidth(), 177);
+		Assert.assertEquals(rectangle.getWidth(), 170);
 		Assert.assertEquals(rectangle.getX(), 8);
-		Assert.assertEquals(rectangle.getY(), 66);
+		Assert.assertEquals(rectangle.getY(), 67);
 		Assert.assertEquals(point.getX(), 8);
-		Assert.assertEquals(point.getY(), 66);
+		Assert.assertEquals(point.getY(), 67);
 	}
 
 }

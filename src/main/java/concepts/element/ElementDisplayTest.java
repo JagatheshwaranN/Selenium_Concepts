@@ -47,6 +47,7 @@ public class ElementDisplayTest {
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='no_type']")));
 
         // Check if the input element is displayed
+        Assert.assertNotNull(input);
         Assert.assertTrue(input.isDisplayed());
     }
 

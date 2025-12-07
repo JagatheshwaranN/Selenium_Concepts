@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+<test thread-count="5" name="Dropdown">
+    <classes>
+        <class name="concepts.dropdown.CustomDropDownSelectTest"/>
+        <class name="concepts.dropdown.DeselectMultipleOptionTest"/>
+        <class name="concepts.dropdown.GetDropDownOptionsTest"/>
+        <class name="concepts.dropdown.GetFirstSelectedDropDownOptionsTest"/>
+        <class name="concepts.dropdown.GetSelectedDropDownOptionsTest"/>
+        <class name="concepts.dropdown.SelectByIndexTest"/>
+        <class name="concepts.dropdown.SelectByValueTest"/>
+        <class name="concepts.dropdown.SelectByVisibleTextTest"/>
+        <class name="concepts.dropdown.SelectDisabledOptionTest"/>
+        <class name="concepts.dropdown.SelectMultipleOptionTest"/>
+    </classes>
+</test>
+</suite>

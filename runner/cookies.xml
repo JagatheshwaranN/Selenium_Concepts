@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+<test thread-count="5" name="Cookies">
+    <classes>
+        <class name="concepts.cookies.AddCookieTest"/>
+        <class name="concepts.cookies.DeleteCookiesTest"/>
+        <class name="concepts.cookies.DeleteCookieTest"/>
+        <class name="concepts.cookies.CookiesSameSiteTest"/>
+        <class name="concepts.cookies.GetCookiesTest"/>
+        <class name="concepts.cookies.GetCookieTest"/>
+    </classes>
+</test>
+</suite>

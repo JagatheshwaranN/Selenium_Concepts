@@ -9,6 +9,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.io.File;
+
 
 public class SelectDisabledOptionTest {
 
@@ -35,8 +37,11 @@ public class SelectDisabledOptionTest {
 		// Define the expected error message
 		String expectedMessage = "You may not select a disabled option";
 
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/DisabledSelect.html";
+
 		// Navigate to the specified URL
-		driver.get("file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/disabledSelect.html");
+		driver.get(new File(filePath).toURI().toString());
 
 		// Locate the select dropdown element
 		Select selectObject = new Select(driver.findElement(By.name("single_disabled")));

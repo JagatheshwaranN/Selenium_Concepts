@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+    <test thread-count="5" name="Element">
+        <classes>
+            <class name="concepts.element.ClearElementTest"/>
+            <class name="concepts.element.ClickElementTest"/>
+            <class name="concepts.element.ElementDisplayTest"/>
+            <class name="concepts.element.ElementEnabledTest"/>
+            <class name="concepts.element.ElementSelectedTest"/>
+            <class name="concepts.element.GetElementAttributeTest"/>
+            <class name="concepts.element.GetElementCSSPropertyTest"/>
+            <class name="concepts.element.GetElementSizeTest"/>
+            <class name="concepts.element.GetElementTagNameTest"/>
+            <class name="concepts.element.GetElementTextTest"/>
+            <class name="concepts.element.TypeIntoElementTest"/>
+        </classes>
+    </test>
+</suite>

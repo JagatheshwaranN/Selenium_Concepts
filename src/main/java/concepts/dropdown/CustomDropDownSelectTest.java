@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.io.File;
 import java.util.List;
 
 public class CustomDropDownSelectTest {
@@ -38,10 +39,10 @@ public class CustomDropDownSelectTest {
 		String expectedSelectedOption = "Google Chrome";
 
 		// URL of the HTML file
-		String filePath = "file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/Dropdown.html";
+		String filePath = "src/main/resources/supportFiles/Dropdown.html";
 
 		// Open the webpage
-		driver.get(filePath);
+		driver.get(new File(filePath).toURI().toString());
 
 		// Find the custom dropdown element
 		WebElement dropDown = driver.findElement(By.cssSelector("div.select-selected"));

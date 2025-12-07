@@ -9,6 +9,7 @@ import org.openqa.selenium.support.events.WebDriverListener;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
 
@@ -20,17 +21,17 @@ public class WebDriverEventListenerTest extends WebDriverEventListener {
 	// Defining a constant Duration for timeout, set to 5 seconds
 	private static final Duration WAIT_TIMEOUT = Duration.ofSeconds(5);
 
-
-	public static void main(String[] args) {
+    @Test
+	public static void eventLogTest() {
 		// Define the expected title for verification
-		String expectedTitle = "Dashboard / nopCommerce administration";
+		String expectedTitle = "Logged In Successfully | Practice Test Automation";
 
 		try {
-			// Setting the system property to use the JDK HTTP client
-			System.setProperty("webdriver.http.factory", "jdk-http-client");
-
 			// Initializing ChromeDriver instance
 			driver = new ChromeDriver();
+
+            // Maximize the browser window
+            driver.manage().window().maximize();
 
 			// Creating a WebDriverEventListenerTest instance to listen to WebDriver events
 			WebDriverListener listener = new WebDriverEventListenerTest();
@@ -39,7 +40,7 @@ public class WebDriverEventListenerTest extends WebDriverEventListener {
 			driver = new EventFiringDecorator<>(listener).decorate(driver);
 
 			// Navigating to the login page
-			driver.get("https://admin-demo.nopcommerce.com/login");
+			driver.get("https://practicetestautomation.com/practice-test-login/");
 
 			// Logging in
 			login();
@@ -52,7 +53,7 @@ public class WebDriverEventListenerTest extends WebDriverEventListener {
 
 		} catch (Exception e) {
 			// Print stack trace in case of exceptions
-			e.printStackTrace();
+			e.getStackTrace();
 		} finally {
 			// Closing WebDriver to end the session
 			if (driver != null) {
@@ -62,21 +63,21 @@ public class WebDriverEventListenerTest extends WebDriverEventListener {
 	}
 
 	private static void login() {
-		// Find the email, password fields, and login button
-		WebElement emailField = driver.findElement(By.id("Email"));
-		WebElement passwordField = driver.findElement(By.id("Password"));
-		WebElement loginButton = driver.findElement(By.xpath("//button[text()='Log in']"));
+		// Find the username, password fields, and login button
+		WebElement emailField = driver.findElement(By.id("username"));
+		WebElement passwordField = driver.findElement(By.id("password"));
+		WebElement loginButton = driver.findElement(By.id("submit"));
 
-		// Clear the email and password fields, then enter credentials and click login
+		// Clear the username and password fields, then enter credentials and click login
 		emailField.clear();
-		emailField.sendKeys("admin@yourstore.com");
+		emailField.sendKeys("student");
 		passwordField.clear();
-		passwordField.sendKeys("admin");
+		passwordField.sendKeys("Password123");
 		loginButton.click();
 
 		// Set up WebDriverWait for waiting up to WAIT_TIMEOUT for the title to contain "Dashboard"
 		WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT);
-		wait.until(ExpectedConditions.titleContains("Dashboard"));
+		wait.until(ExpectedConditions.titleContains("Logged In Successfully"));
 	}
 
 }

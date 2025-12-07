@@ -47,6 +47,7 @@ public class ElementSelectedTest {
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='checkbox_input']")));
 
         // Check if the input element is selected
+        Assert.assertNotNull(input);
         Assert.assertTrue(input.isSelected());
     }
 

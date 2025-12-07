@@ -1,4 +1,4 @@
-package concepts.launch;
+package concepts._launch;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -36,9 +36,6 @@ public class LaunchBrowserTest {
 			WebDriver driver = null;
 
 			try {
-                // Set the HTTP factory system property
-                System.setProperty("webdriver.http.factory", "jdk-http-client");
-
                 // Instantiate the WebDriver instance for the specified browser
                 driver = driverClass.getDeclaredConstructor().newInstance();
 

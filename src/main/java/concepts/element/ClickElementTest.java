@@ -29,22 +29,26 @@ public class ClickElementTest {
 		}
 	}
 
-	@Test(priority = 1)
-	public void testClickElement() {
-		// Define the expected title
-		String expectedTitle = "Dashboard / nopCommerce administration";
+    @Test(priority = 1)
+    public void testClickElement() {
 
-		// Navigate to the login page
-		driver.get("https://admin-demo.nopcommerce.com/login");
+        // Define the expected message
+        String expectedMessage = "focused";
 
-		// Find the login button field using a CSS selector
-		WebElement login = driver.findElement(By.xpath("//button[@class='button-1 login-button']"));
+        // Navigate to the Selenium mouse interaction test page
+        driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");
 
-		// Click on the login button field
-		login.click();
+        // Locate the clickable element using its ID
+        WebElement login = driver.findElement(By.id("clickable"));
 
-		// Assert that the actual title matches the expected title
-		Assert.assertEquals(driver.getTitle(), expectedTitle);
-	}
+        // Perform a click action on the located element
+        login.click();
+
+        // Locate the element that displays the click status message
+        WebElement actualMessage = driver.findElement(By.id("click-status"));
+
+        // Assert that the displayed message matches the expected message
+        Assert.assertEquals(actualMessage.getText(), expectedMessage);
+    }
 
 }

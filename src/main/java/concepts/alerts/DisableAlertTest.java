@@ -57,7 +57,8 @@ public class DisableAlertTest {
 			Alert alert = wait.until(ExpectedConditions.alertIsPresent());
 
 			// Get the alert text and print it to the console (optional)
-			String alertContent = alert.getText();
+            Assert.assertNotNull(alert);
+            String alertContent = alert.getText();
 			System.out.println("Alert Content: " + alertContent);
 
 			// Accept the alert
