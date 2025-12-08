@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+    <test thread-count="5" name="Files-Chrome">
+        <classes>
+            <class name="concepts.file.chrome.FileDownloadTest"/>
+            <class name="concepts.file.chrome.FileUploadTest"/>
+            <class name="concepts.file.chrome.FileUploadUsingToolKitTest"/>
+            <class name="concepts.file.chrome.MultipleFileUploadTest"/>
+            <class name="concepts.file.chrome.WaitForFileDownloadTest"/>
+        </classes>
+    </test>
+    <test thread-count="5" name="Files-Edge">
+        <classes>
+            <class name="concepts.file.edge.FileDownloadTest"/>
+            <class name="concepts.file.edge.FileUploadTest"/>
+            <class name="concepts.file.edge.FileUploadUsingToolKitTest"/>
+            <class name="concepts.file.edge.WaitForFileDownloadTest"/>
+        </classes>
+    </test>
+    <test thread-count="5" name="Files-Firefox">
+        <classes>
+            <class name="concepts.file.firefox.FileDownloadTest"/>
+            <class name="concepts.file.firefox.FileUploadTest"/>
+            <class name="concepts.file.firefox.FileUploadUsingToolKitTest"/>
+        </classes>
+    </test>
+</suite>

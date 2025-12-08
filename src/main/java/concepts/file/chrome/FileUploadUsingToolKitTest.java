@@ -14,6 +14,7 @@ import scenarios.DriverConfiguration;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.time.Duration;
 
 public class FileUploadUsingToolKitTest {
@@ -44,10 +45,10 @@ public class FileUploadUsingToolKitTest {
 		// Navigate to the page where file upload functionality exists
 		driver.get("https://www.plupload.com/examples/");
 
-		// Define the file path of the file to be uploaded
-		String filePath = "D:\\Environment_Collection\\Intellij_Env\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\demo.png";
+        // Create a File object pointing to the file you want to upload
+        File uploadFile = new File("src/main/resources/supportFiles/selenium.png");
 
-		// Locate and click the upload button or element
+        // Locate and click the upload button or element
 		WebElement uploadElement = driver.findElement(By.xpath("//span[text()='Add Files']"));
 		uploadElement.click();
 
@@ -60,14 +61,15 @@ public class FileUploadUsingToolKitTest {
 		}
 
 		// Perform the file upload action using the defined file path
-		handleFileUpload(filePath);
+		handleFileUpload(uploadFile.getAbsolutePath());
 
 		// Wait for the uploaded file element to be visible on the page
 		WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT);
 		WebElement uploadedFile = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".plupload_file.ui-state-default.plupload_delete")));
 
 		// Assert if the uploaded file element is displayed, indicating a successful upload
-		Assert.assertTrue(uploadedFile.isDisplayed(), "File upload success message is displayed.");
+        Assert.assertNotNull(uploadedFile);
+        Assert.assertTrue(uploadedFile.isDisplayed(), "File upload success message is displayed.");
 	}
 
 	private void handleFileUpload(String filePath) {
@@ -100,7 +102,7 @@ public class FileUploadUsingToolKitTest {
 			robot.keyRelease(KeyEvent.VK_ENTER);
 		} catch (AWTException e) {
 			// Printing the stack trace in case of an AWTException
-			e.printStackTrace();
+			e.getStackTrace();
 		}
 	}
 

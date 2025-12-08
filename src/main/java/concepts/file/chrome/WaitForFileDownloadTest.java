@@ -26,9 +26,6 @@ public class WaitForFileDownloadTest {
 
     @BeforeMethod
     public void setup() {
-        // Set the system property to use the JDK HTTP client for WebDriver
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Set preferences for Chrome WebDriver
         HashMap<String, Object> preferences = new HashMap<>();
 
@@ -64,7 +61,7 @@ public class WaitForFileDownloadTest {
     @Test
     public void testWaitForFileDownload() {
         // Open the URL where the file is located for download
-        driver.get("https://get.jenkins.io/windows-stable/2.440.2/jenkins.msi");
+        driver.get("https://get.jenkins.io/windows-stable/2.528.2/jenkins.msi");
 
         // Define the path where the downloaded file is expected to be saved
         File file = new File(System.getProperty("user.dir"), "jenkins.msi");

@@ -14,6 +14,7 @@ import scenarios.DriverConfiguration;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.time.Duration;
 
 public class FileUploadUsingToolKitTest {
@@ -39,70 +40,70 @@ public class FileUploadUsingToolKitTest {
 		}
 	}
 
-	// Not Working
-	@Test(priority = 1)
-	public void testFileUploadUsingToolKit() {
-		// Navigate to the page where file upload functionality exists
-		driver.get("https://www.plupload.com/examples/");
+    @Test(priority = 1)
+    public void testFileUploadUsingToolKit() {
+        // Navigate to the page where file upload functionality exists
+        driver.get("https://www.plupload.com/examples/");
 
-		// Define the file path of the file to be uploaded
-		String filePath = "D:\\Environment_Collection\\Intellij_Env\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\demo.png";
+        // Create a File object pointing to the file you want to upload
+        File uploadFile = new File("src/main/resources/supportFiles/selenium.png");
 
-		// Locate and click the upload button or element
-		WebElement uploadElement = driver.findElement(By.xpath("//span[text()='Add Files']"));
-		uploadElement.click();
+        // Locate and click the upload button or element
+        WebElement uploadElement = driver.findElement(By.xpath("//span[text()='Add Files']"));
+        uploadElement.click();
 
-		try {
-			// Introduce a delay to handle any asynchronous behavior after the click
-			Thread.sleep(WAIT_TIMEOUT);
-		} catch (InterruptedException e) {
-			// If interrupted, throw a runtime exception
-			throw new RuntimeException(e);
-		}
+        try {
+            // Introduce a delay to handle any asynchronous behavior after the click
+            Thread.sleep(WAIT_TIMEOUT);
+        } catch (InterruptedException e) {
+            // If interrupted, throw a runtime exception
+            throw new RuntimeException(e);
+        }
 
-		// Perform the file upload action using the defined file path
-		handleFileUpload(filePath);
+        // Perform the file upload action using the defined file path
+        handleFileUpload(uploadFile.getAbsolutePath());
 
-		// Wait for the uploaded file element to be visible on the page
-		WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT);
-		WebElement uploadedFile = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".plupload_file.ui-state-default.plupload_delete")));
+        // Wait for the uploaded file element to be visible on the page
+        WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT);
+        WebElement uploadedFile = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".plupload_file.ui-state-default.plupload_delete")));
 
-		// Assert if the uploaded file element is displayed, indicating a successful upload
-		Assert.assertTrue(uploadedFile.isDisplayed(), "File upload success message is displayed.");
-	}
+        // Assert if the uploaded file element is displayed, indicating a successful upload
+        Assert.assertNotNull(uploadedFile);
+        Assert.assertTrue(uploadedFile.isDisplayed(), "File upload success message is displayed.");
+    }
 
-	private void handleFileUpload(String filePath) {
-		try {
-			// Creating a new Robot instance
-			Robot robot = new Robot();
+    private void handleFileUpload(String filePath) {
+        try {
+            // Creating a new Robot instance
+            Robot robot = new Robot();
 
-			// Creating a string selection from the file path
-			StringSelection stringSelection = new StringSelection(filePath);
+            // Creating a string selection from the file path
+            StringSelection stringSelection = new StringSelection(filePath);
 
-			// Setting clipboard content to the string selection
-			Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+            // Setting clipboard content to the string selection
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
 
-			// Simulating key press for a control key
-			robot.keyPress(KeyEvent.VK_CONTROL);
+            // Simulating key press for a control key
+            robot.keyPress(KeyEvent.VK_CONTROL);
 
-			// Simulating key press for a V key
-			robot.keyPress(KeyEvent.VK_V);
+            // Simulating key press for a V key
+            robot.keyPress(KeyEvent.VK_V);
 
-			// Simulating key release for a V key
-			robot.keyRelease(KeyEvent.VK_V);
+            // Simulating key release for a V key
+            robot.keyRelease(KeyEvent.VK_V);
 
-			// Simulating key release for a control key
-			robot.keyRelease(KeyEvent.VK_CONTROL);
+            // Simulating key release for a control key
+            robot.keyRelease(KeyEvent.VK_CONTROL);
 
-			// Simulating key press for an enter key
-			robot.keyPress(KeyEvent.VK_ENTER);
+            // Simulating key press for an enter key
+            robot.keyPress(KeyEvent.VK_ENTER);
 
-			// Simulating key release for an enter key
-			robot.keyRelease(KeyEvent.VK_ENTER);
-		} catch (AWTException e) {
-			// Printing the stack trace in case of an AWTException
-			e.printStackTrace();
-		}
-	}
+            // Simulating key release for an enter key
+            robot.keyRelease(KeyEvent.VK_ENTER);
+        } catch (AWTException e) {
+            // Printing the stack trace in case of an AWTException
+            e.getStackTrace();
+        }
+    }
 
 }

@@ -26,14 +26,31 @@ public class FileDownloadTest {
 
     @BeforeMethod
     public void setUp() {
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
+        // Create a new FirefoxProfile instance to set custom browser preferences
         FirefoxProfile firefoxProfile = new FirefoxProfile();
+
+        // Create FirefoxOptions to configure browser behavior using the custom profile
         FirefoxOptions firefoxOptions = new FirefoxOptions();
+
+        // Set preference: Use a custom download directory instead of the default one
         firefoxProfile.setPreference("browser.download.folderList", 2);
-        firefoxProfile.setPreference("browser.download.dir",System.getProperty("user.dir"));
-        firefoxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk","text/csv,application/zip");
+
+        // Define the download directory as the project's root folder
+        firefoxProfile.setPreference("browser.download.dir", System.getProperty("user.dir"));
+
+        // Disable the download popup and automatically save files of specified MIME types
+        firefoxProfile.setPreference(
+                "browser.helperApps.neverAsk.saveToDisk",
+                "text/csv,application/zip"
+        );
+
+        // Attach the customized profile to FirefoxOptions
         firefoxOptions.setProfile(firefoxProfile);
+
+        // Initialize FirefoxDriver with the configured options
         driver = new FirefoxDriver(firefoxOptions);
+
+        // Maximize the browser window for better visibility
         driver.manage().window().maximize();
     }
 
@@ -59,6 +76,7 @@ public class FileDownloadTest {
         WebElement downloadLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='chromedriver_win32.zip']")));
 
         // Click on the download link
+        Assert.assertNotNull(downloadLink);
         downloadLink.click();
 
         // Wait for a specific time (You might need a more reliable wait strategy)

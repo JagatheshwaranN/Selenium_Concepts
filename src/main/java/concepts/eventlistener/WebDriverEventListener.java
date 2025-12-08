@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverListener;
 
+@SuppressWarnings("ALL")
 public class WebDriverEventListener implements WebDriverListener {
 	
 	public void beforeGet(WebDriver driver, String url) {

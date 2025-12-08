@@ -25,16 +25,28 @@ public class FileDownloadTest {
 	private static final Duration WAIT_TIMEOUT = Duration.ofSeconds(10);
 
 	@BeforeMethod
-	public void setUp() {
-		System.setProperty("webdriver.http.factory", "jdk-http-client");
-		HashMap<String, Object> preferences = new HashMap<>();
-		preferences.put("profile.default_content_settings.popups", 0);
-		preferences.put("download.default_directory", System.getProperty("user.dir"));
-		ChromeOptions chromeOptions = new ChromeOptions();
-		chromeOptions.setExperimentalOption("prefs", preferences);
-		driver = new ChromeDriver(chromeOptions);
-		driver.manage().window().maximize();
-	}
+    public void setUp() {
+        // Create a HashMap to store custom browser preferences for Google Chrome
+        HashMap<String, Object> preferences = new HashMap<>();
+
+        // Disable pop-up dialogs that appear during file downloads
+        preferences.put("profile.default_content_settings.popups", 0);
+
+        // Set the default file download location to the project's root directory
+        preferences.put("download.default_directory", System.getProperty("user.dir"));
+
+        // Create ChromeOptions to configure Chrome browser behavior
+        ChromeOptions chromeOptions = new ChromeOptions();
+
+        // Apply the custom preferences to Chrome using experimental options
+        chromeOptions.setExperimentalOption("prefs", preferences);
+
+        // Initialize the ChromeDriver instance with the configured options
+        driver = new ChromeDriver(chromeOptions);
+
+        // Maximize the browser window for better visibility
+        driver.manage().window().maximize();
+    }
 
 	@AfterMethod
 	public void tearDown() {
@@ -58,7 +70,8 @@ public class FileDownloadTest {
 		WebElement downloadLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='chromedriver_win32.zip']")));
 
 		// Click on the download link
-		downloadLink.click();
+        Assert.assertNotNull(downloadLink);
+        downloadLink.click();
 
 		// Wait for a specific time (You might need a more reliable wait strategy)
 		Thread.sleep(WAIT_TIMEOUT);
@@ -92,7 +105,11 @@ public class FileDownloadTest {
 		Assert.assertTrue(found, "Downloaded document is not found");
 
 		// Optionally, you can delete the file after test completion
-		downloadedFile.deleteOnExit();
+        if (downloadedFile.delete()) {
+            System.out.println("File deleted successfully");
+        } else {
+            System.out.println("Failed to delete the file");
+        }
 	}
 
 	@Test(priority = 2)
@@ -108,7 +125,8 @@ public class FileDownloadTest {
 		WebElement downloadLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='chromedriver_win32.zip']")));
 
 		// Click on the download link
-		downloadLink.click();
+        Assert.assertNotNull(downloadLink);
+        downloadLink.click();
 
 		// Define the downloaded file path
 		String downloadedFilePath = System.getProperty("user.dir") + File.separator + expectedFileName;
@@ -128,7 +146,7 @@ public class FileDownloadTest {
 			Assert.assertTrue(downloadedFile.exists(), "Downloaded file is found in the directory");
 		}
 
-		// Cleanup: You may delete the file after test completion or keep it for further use
+		// Cleanup: You may delete the file after test completion
 		downloadedFile.deleteOnExit();
 	}
 

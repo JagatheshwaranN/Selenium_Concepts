@@ -12,9 +12,6 @@ import org.openqa.selenium.firefox.ProfilesIni;
 public class DriverConfiguration {
 
     public static WebDriver browserSetup() {
-        // Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Initialize a ChromeDriver instance for browser automation.
         WebDriver driver = new ChromeDriver();
 
@@ -26,9 +23,6 @@ public class DriverConfiguration {
     }
 
     public static WebDriver edgeBrowserSetup() {
-        // Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Initialize an EdgeDriver instance for browser automation.
         WebDriver driver = new EdgeDriver();
 
@@ -40,14 +34,11 @@ public class DriverConfiguration {
     }
 
     public static WebDriver fireFoxBrowserSetup() {
-        // Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Create a ProfilesIni instance to manage Firefox profiles.
         ProfilesIni profile = new ProfilesIni();
 
         // Get the specific Firefox profile named "testAutomation."
-        FirefoxProfile profileInstance = profile.getProfile("testAutomation");
+        FirefoxProfile profileInstance = profile.getProfile("TestAutomation");
 
         // Create FirefoxOptions to customize the Firefox browser behavior.
         FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -66,9 +57,6 @@ public class DriverConfiguration {
     }
 
     public static ChromeDriver cdpBrowserSetup() {
-        // Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Initialize a ChromeDriver instance for browser automation.
         ChromeDriver driver = new ChromeDriver();
 
@@ -80,9 +68,6 @@ public class DriverConfiguration {
     }
 
     public static WebDriver bidiBrowserSetup() {
-        // Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Create an instance of ChromeOptions to customize ChromeDriver settings
         ChromeOptions chromeOptions = new ChromeOptions();
 
