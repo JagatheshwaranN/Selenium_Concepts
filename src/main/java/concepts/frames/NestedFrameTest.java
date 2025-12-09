@@ -38,7 +38,7 @@ public class NestedFrameTest {
         driver.get("https://letcode.in/frame");
 
         // Check if the first frame exists before switching to it.
-        if (driver.findElements(By.id("firstFr")).size() > 0) {
+        if (!driver.findElements(By.id("firstFr")).isEmpty()) {
 
             // Switch to the first frame.
             driver.switchTo().frame("firstFr");
@@ -47,15 +47,15 @@ public class NestedFrameTest {
         }
 
         // Check if the second frame exists before switching to it.
-        if (driver.findElements(By.xpath("//iframe[@src='innerFrame']")).size() > 0) {
+        if (!driver.findElements(By.xpath("//iframe[@src='innerframe']")).isEmpty()) {
 
             // Find the WebElement for the second frame.
-            WebElement childFr = driver.findElement(By.xpath("//iframe[@src='innerFrame']"));
+            WebElement childFr = driver.findElement(By.xpath("//iframe[@src='innerframe']"));
 
             // Switch to the second frame.
             driver.switchTo().frame(childFr);
         } else {
-            System.out.println("The frame with the src attribute set to \"innerFrame\" does not exist.");
+            System.out.println("The frame with the src attribute set to \"innerframe\" does not exist.");
         }
 
         // Enter text into the input element.
@@ -74,7 +74,7 @@ public class NestedFrameTest {
         driver.switchTo().defaultContent();
 
         // Assert that the element with the XPATH is displayed.
-        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='hero-body']//h1")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.xpath("//h1[contains(@class,'title') and text()='Frame']")).isDisplayed());
     }
 
 }

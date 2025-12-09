@@ -34,26 +34,26 @@ public class SwitchToFrameByIndexTest {
 		String expectedValue = "John";
 
 		// Navigate to a website with a frame.
-		driver.get("https://demo.automationtesting.in/Frames.html");
+		driver.get("https://letcode.in/frame");
 
-		// Check if the frame with the ID "singleframe" exists before switching to it.
-		if (!driver.findElements(By.id("singleframe")).isEmpty()) {
+		// Check if the frame with the ID "firstFr" exists before switching to it.
+		if (!driver.findElements(By.id("firstFr")).isEmpty()) {
 
 			// Switch to the frame by Index.
 			driver.switchTo().frame(1);
 
 			// Send text to an input element inside the frame.
-			driver.findElement(By.tagName("input")).sendKeys("John");
+			driver.findElement(By.xpath("//input[@name='fname']")).sendKeys("John");
 
 			// Get the value of the input element.
-			String valueFromInput = driver.findElement(By.tagName("input")).getAttribute("value");
+			String valueFromInput = driver.findElement(By.xpath("//input[@name='fname']")).getAttribute("value");
 
 			// Assert that the text was sent to the input element successfully.
 			Assert.assertEquals(valueFromInput, expectedValue);
 		} else {
 			// Print a message to the console indicating that the frame with the ID
 			// "singleframe" does not exist.
-			System.out.println("The frame with the ID \"singleframe\" does not exist.");
+			System.out.println("The frame with the ID \"firstFr\" does not exist.");
 
 		}
 	}
