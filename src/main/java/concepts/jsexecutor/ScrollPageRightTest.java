@@ -1,5 +1,6 @@
 package concepts.jsexecutor;
 
+import concepts.jsexecutor.util.ViewPortUtil;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,6 +10,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
+
+import java.io.File;
 
 public class ScrollPageRightTest {
 
@@ -33,9 +36,11 @@ public class ScrollPageRightTest {
 
 	@Test(priority = 1)
 	public void testScrollPageRight() {
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/HorizontalScroll.html";
 
-		// Load a local HTML file with a horizontal scroll
-		driver.get("D:\\Environment_Collection\\Intellij_Env\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\HorizontalScroll.html");
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
 		// Create a JavaScript Executor instance
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -53,29 +58,7 @@ public class ScrollPageRightTest {
 		WebElement itemSection = driver.findElement(By.xpath("//div[@class='scroll-item'][text()='Item 5']"));
 
 		// Verify that the element is visible within the viewport after scrolling
-		Assert.assertTrue(inViewport(itemSection));
-	}
-
-
-	public boolean inViewport(WebElement element) {
-		// Define a JavaScript script to check if the element is within the viewport
-		String script = """
-        // Calculate the cumulative offset positions of the element and its ancestors
-        for (var e = arguments[0], f = e.offsetTop, t = e.offsetLeft, o = e.offsetWidth, n = e.offsetHeight;
-            e.offsetParent;) {
-            f += (e = e.offsetParent).offsetTop;
-            t += e.offsetLeft;
-        }
-
-        // Check if the element's top and left positions are within the viewport's boundaries
-        return f < window.pageYOffset + window.innerHeight &&
-            t < window.pageXOffset + window.innerWidth &&
-            f + n > window.pageYOffset &&
-            t + o > window.pageXOffset;
-    """;
-
-		// Execute the JavaScript script and return the result (whether the element is in viewport)
-		return (boolean) ((JavascriptExecutor) driver).executeScript(script, element);
+		Assert.assertTrue(ViewPortUtil.inViewport(itemSection, driver));
 	}
 
 }

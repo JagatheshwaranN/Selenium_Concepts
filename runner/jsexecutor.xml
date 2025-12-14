@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+    <test thread-count="5" name="Element">
+        <classes>
+            <class name="concepts.jsexecutor.ClearElementTest"/>
+            <class name="concepts.jsexecutor.ClickElementTest"/>
+            <class name="concepts.jsexecutor.EnableElementTest"/>
+            <class name="concepts.jsexecutor.EnterTextTest"/>
+            <class name="concepts.jsexecutor.GetElementAndScrollTest"/>
+            <class name="concepts.jsexecutor.GetElementsTest"/>
+            <class name="concepts.jsexecutor.GetElementTest"/>
+            <class name="concepts.jsexecutor.GetPageTextTest"/>
+            <class name="concepts.jsexecutor.GetPageTitleTest"/>
+            <class name="concepts.jsexecutor.GetWindowSizeTest"/>
+            <class name="concepts.jsexecutor.HandleSyncIssueTest"/>
+            <class name="concepts.jsexecutor.HighlightElementTest"/>
+            <class name="concepts.jsexecutor.NavigateToPageTest"/>
+            <class name="concepts.jsexecutor.RefreshPageType1Test"/>
+            <class name="concepts.jsexecutor.RefreshPageType2Test"/>
+            <class name="concepts.jsexecutor.ScrollPageDownByPixelTest"/>
+            <class name="concepts.jsexecutor.ScrollPageDownTest"/>
+            <class name="concepts.jsexecutor.ScrollPageLeftTest"/>
+            <class name="concepts.jsexecutor.ScrollPageRightTest"/>
+            <class name="concepts.jsexecutor.ScrollPageUpByPixelTest"/>
+            <class name="concepts.jsexecutor.ScrollToElementType1Test"/>
+            <class name="concepts.jsexecutor.ScrollToElementType2Test"/>
+            <class name="concepts.jsexecutor.WaitForElementVisibleTest"/>
+            <class name="concepts.jsexecutor.zoom.ChromePageZoomByPercentTest"/>
+            <class name="concepts.jsexecutor.zoom.FirefoxPageZoomByPercentTest"/>
+        </classes>
+    </test>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</suite>

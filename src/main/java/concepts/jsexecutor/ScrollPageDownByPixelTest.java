@@ -1,5 +1,7 @@
 package concepts.jsexecutor;
 
+import com.google.common.util.concurrent.Uninterruptibles;
+import concepts.jsexecutor.util.ViewPortUtil;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,6 +11,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
+
+import java.util.concurrent.TimeUnit;
 
 public class ScrollPageDownByPixelTest {
 
@@ -45,31 +49,15 @@ public class ScrollPageDownByPixelTest {
 		jsExecutor.executeScript("window.scrollBy(0, " + pixel + ")");
 
 		// Locate the seleniumSponsors element, which is the navbar brand element
-		WebElement seleniumSponsors = driver.findElement(By.xpath("//h2[@class='selenium text-center']"));
+		WebElement seleniumSponsors = driver.findElement(By.id("selenium-level"));
 
-		// Verify that the seleniumSponsors element is visible within the viewport
-		Assert.assertTrue(inViewport(seleniumSponsors));
+        // Uninterruptible sleep for 3 seconds
+        Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
+
+        // Verify that the seleniumSponsors element is visible within the viewport
+		Assert.assertTrue(ViewPortUtil.inViewport(seleniumSponsors, driver));
 	}
 
-	public boolean inViewport(WebElement element) {
-		// Define a JavaScript script to check if the element is within the viewport
-		String script = """
-        // Calculate the cumulative offset positions of the element and its ancestors
-        for (var e = arguments[0], f = e.offsetTop, t = e.offsetLeft, o = e.offsetWidth, n = e.offsetHeight;
-            e.offsetParent;) {
-            f += (e = e.offsetParent).offsetTop;
-            t += e.offsetLeft;
-        }
 
-        // Check if the element's top and left positions are within the viewport's boundaries
-        return f < window.pageYOffset + window.innerHeight &&
-            t < window.pageXOffset + window.innerWidth &&
-            f + n > window.pageYOffset &&
-            t + o > window.pageXOffset;
-    """;
-
-		// Execute the JavaScript script and return the result (whether the element is in viewport)
-		return (boolean) ((JavascriptExecutor) driver).executeScript(script, element);
-	}
 
 }

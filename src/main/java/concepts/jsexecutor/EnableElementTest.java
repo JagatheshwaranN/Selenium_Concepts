@@ -7,6 +7,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.io.File;
+
 public class EnableElementTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
@@ -34,8 +36,11 @@ public class EnableElementTest {
 		String expectedValue1 = ""; // Empty string for disabled state
 		String expectedValue2 = "Selenium"; // Value for enabled state
 
-		// Load the HTML page containing the disabled element
-		driver.get("D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/DisabledElement.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
 		// Locate the input element with ID "myText"
 		WebElement input = driver.findElement(By.id("myText"));
@@ -50,7 +55,7 @@ public class EnableElementTest {
 		String actualValue1 = input.getText();
 
 		// Verify that the element remains disabled after the button clicks
-		Assert.assertEquals(actualValue1, expectedValue1);
+		Assert.assertEquals(expectedValue1, actualValue1);
 
 		// Create a JavaScriptExecutor object to execute JavaScript scripts
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -62,7 +67,7 @@ public class EnableElementTest {
 		String actualValue2 = input.getAttribute("value");
 
 		// Verify that the element is now enabled and contains the expected value "Selenium"
-		Assert.assertEquals(actualValue2, expectedValue2);
+		Assert.assertEquals(expectedValue2, actualValue2);
 	}
 
 }

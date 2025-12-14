@@ -10,6 +10,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.io.File;
+
 public class ClearElementTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
@@ -38,8 +40,11 @@ public class ClearElementTest {
 		// The expected value after clearing the input field
 		String expectedValue = "";
 
-		// Navigate to the HTML file containing the input field
-		driver.get("file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/DisabledElement.html");
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/DisabledElement.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
 		// Find the input field by its ID and enter text into it
 		WebElement input = driver.findElement(By.id("myText"));

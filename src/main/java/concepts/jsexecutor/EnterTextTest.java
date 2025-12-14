@@ -10,6 +10,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.io.File;
+
 public class EnterTextTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
@@ -35,8 +37,11 @@ public class EnterTextTest {
 		// The text expected to be entered into the input field
 		String expectedValue = "Selenium";
 
-		// Navigate to the HTML file containing the input field
-		driver.get("file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/DisabledElement.html");
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/DisabledElement.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
 		// Find the input field by its ID
 		WebElement input = driver.findElement(By.id("myText"));

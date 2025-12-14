@@ -10,6 +10,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.util.Objects;
+
 public class GetPageTextTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
@@ -32,11 +34,11 @@ public class GetPageTextTest {
 
 	@Test(priority = 1)
 	public void testGetPageText() {
-		// Navigate to the Google homepage
-		driver.get("https://www.google.com/");
+		// Navigate to the Selenium homepage
+		driver.get("https://www.selenium.dev/");
 
 		// Find the first element with the specified XPath
-		WebElement input = driver.findElement(By.xpath("(//a[@class='gb_E'])[1]"));
+		WebElement input = driver.findElement(By.xpath("//a[@href='/downloads']//span"));
 
 		// Get the expected value by retrieving the text of the found element
 		String expectedValue = input.getText();
@@ -45,7 +47,7 @@ public class GetPageTextTest {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
 		// Use JavascriptExecutor to get the entire text content of the page
-		String actualValue = jsExecutor.executeScript("return document.documentElement.innerText;").toString();
+		String actualValue = Objects.requireNonNull(jsExecutor.executeScript("return document.documentElement.innerText;")).toString();
 
 		// Perform assertion to check if the actual page text contains the expected value
 		Assert.assertTrue(actualValue.contains(expectedValue));

@@ -8,6 +8,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.util.Objects;
+
 public class GetPageTitleTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
@@ -40,7 +42,7 @@ public class GetPageTitleTest {
 		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
 		// Execute JavaScript to retrieve the page title
-		String actualValue = jsExecutor.executeScript("return document.title").toString();
+		String actualValue = Objects.requireNonNull(jsExecutor.executeScript("return document.title")).toString();
 
 		// Verify that the actual page title matches the expected value
 		Assert.assertEquals(actualValue, expectedValue);

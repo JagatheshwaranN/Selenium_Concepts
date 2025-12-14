@@ -63,7 +63,8 @@ public class GetElementTest {
 		WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT);
 
 		// Wait until the search bar is clickable
-		wait.until(ExpectedConditions.elementToBeClickable(searchBar));
+        Assert.assertNotNull(searchBar);
+        wait.until(ExpectedConditions.elementToBeClickable(searchBar));
 
 		// Send "Javascript" to the search bar
 		searchBar.sendKeys("Javascript");

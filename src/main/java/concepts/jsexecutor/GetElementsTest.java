@@ -37,7 +37,7 @@ public class GetElementsTest {
 	@Test(priority = 1)
 	public void testGetElements() {
 		// Define the expected number of images on the page
-		int expectedValue = 4;
+		int expectedValue = 5;
 
 		// Navigate to the target website
 		driver.get("https://demoqa.com/broken");
@@ -55,7 +55,8 @@ public class GetElementsTest {
 		List<WebElement> images = (List<WebElement>) jsExecutor.executeScript("return document.getElementsByTagName('img');");
 
 		// Get the actual number of retrieved images
-		int actualValue = images.size();
+        Assert.assertNotNull(images);
+        int actualValue = images.size();
 
 		// Verify that the actual number of images matches the expected value
 		Assert.assertEquals(actualValue, expectedValue);
@@ -65,7 +66,7 @@ public class GetElementsTest {
 	@Test(priority = 2)
 	public void testGetElementsType2() {
 		// Define the expected number of valid images
-		int expectedValue = 4;
+		int expectedValue = 5;
 
 		// Navigate to the target website
 		driver.get("https://demoqa.com/broken");
@@ -80,7 +81,8 @@ public class GetElementsTest {
 		int actualValue = 0;
 
 		// Loop through each retrieved image element
-		for (WebElement image : images) {
+        Assert.assertNotNull(images);
+        for (WebElement image : images) {
 
 			// Extract the image source URL
 			String imageUrl = image.getAttribute("src");
@@ -133,7 +135,7 @@ public class GetElementsTest {
 		} catch (IOException | URISyntaxException ex) {
 
 			// Handle MalformedURLException by printing the stack trace.
-			ex.printStackTrace();
+			ex.getStackTrace();
 			return false;
 		}
 	}

@@ -10,6 +10,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.io.File;
+
 public class HighlightElementTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
@@ -35,8 +37,11 @@ public class HighlightElementTest {
 		// Define the expected background value
 		String expectedValue = "rgb(255, 255, 0) none repeat scroll 0% 0% / auto padding-box border-box";
 
-		// Load the web page
-		driver.get("file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/DisabledElement.html");
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/DisabledElement.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
 		// Find the element to highlight
 		WebElement input = driver.findElement(By.id("myText"));

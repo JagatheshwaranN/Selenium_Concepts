@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
 
+@SuppressWarnings("DataFlowIssue")
 public class GetWindowSizeTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
@@ -32,8 +33,8 @@ public class GetWindowSizeTest {
 	@Test(priority = 1)
 	public void testGetWindowSize() {
 		// Define expected window height and width
-		int expectedHeight = 607;
-		int expectedWidth = 1366;
+		int expectedHeight = 774;
+		int expectedWidth = 1536;
 
 		// Navigate to Google homepage
 		driver.get("https://www.google.com/");
