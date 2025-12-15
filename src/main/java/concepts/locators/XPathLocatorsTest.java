@@ -8,7 +8,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
-@SuppressWarnings("All")
+import java.io.File;
+
 public class XPathLocatorsTest {
 
     // Declare a WebDriver instance to interact with the web browser.
@@ -35,9 +36,9 @@ public class XPathLocatorsTest {
         driver.get("https://www.facebook.com/");
 
         // xpath=//tag[contains(@attribute, value)]
-        // Selects the input element whose `data-testid` attribute contains the value
-        // `royal_email`.
-        Assert.assertTrue(driver.findElement(By.xpath("//input[contains(@data-testid,'royal_email')]")).isDisplayed());
+        // Selects the input element whose `name` attribute contains the value
+        // `email`.
+        Assert.assertTrue(driver.findElement(By.xpath("//input[contains(@name,'email')]")).isDisplayed());
 
         // xpath=//tag[@attribute=value or @attribute=value]
         // Selects the input element whose `type` attribute is either `password` or `pass`.
@@ -49,15 +50,14 @@ public class XPathLocatorsTest {
         Assert.assertTrue(driver.findElement(By.xpath("//input[@type='password' and @name='pass']")).isDisplayed());
 
         // xpath=//tag[starts-with(@attribute, value)]
-        // Selects the input element whose `data-testid` attribute starts with the value `royal`.
-        Assert.assertTrue(driver.findElement(By.xpath("//input[starts-with(@data-testid,'royal')]")).isDisplayed());
+        // Selects the input element whose `name` attribute starts with the value `em`.
+        Assert.assertTrue(driver.findElement(By.xpath("//input[starts-with(@name,'em')]")).isDisplayed());
 
         // xpath=//tag[text()=value]
-        // Selects the `h2` element whose text content is equal to the value `Facebook helps
-        // you connect and share with the people in your life.`
+        // Selects the `h2` element whose text content is equal to the value `Connect with friends and the world around you on Facebook.`
         Assert.assertTrue(driver
                 .findElement(
-                        By.xpath("//h2[text()='Facebook helps you connect and share with the people in your life.']"))
+                        By.xpath("//h2[text()='Connect with friends and the world around you on Facebook.']"))
                 .isDisplayed());
 
         // xpath=//tag[@attribute=value]//following::tag
@@ -119,8 +119,11 @@ public class XPathLocatorsTest {
 
     @Test(priority = 1)
     public void testXPathFunctions() {
-        // Navigate to the Local HTML file
-        driver.get("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
+        // Navigate to the local HTML file
+        String filePath = "src/main/resources/supportFiles/List.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
         // Assert that the last <li> element in the <ul> with id 'unorderedList' is displayed
         Assert.assertTrue(

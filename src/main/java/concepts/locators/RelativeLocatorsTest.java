@@ -117,7 +117,7 @@ public class RelativeLocatorsTest {
 		wait.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
 
 		// Find the input element near the element with the name "btnI" using RelativeLocator
-		String buttonValue = driver.findElement(with(By.tagName("input")).near(By.name("btnI"))).getAttribute("value");
+		String buttonValue = driver.findElement(with(By.tagName("input")).near(By.id("gbqfbb"))).getAttribute("value");
 
 		// Assert that the retrieved element's value matches the expected value "Google Search"
 		Assert.assertEquals(buttonValue, "Google Search");

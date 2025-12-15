@@ -8,6 +8,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.io.File;
+
 public class CSSLocatorsTest {
 
     // Declare a WebDriver instance to interact with the web browser.
@@ -39,7 +41,7 @@ public class CSSLocatorsTest {
         Assert.assertTrue(driver.findElement(By.cssSelector("input#email")).isDisplayed());
 
         // css=tag.class[attribute=value]
-        // Selects the input element with the class `inputtext` and the attribute `name`
+        // Selects the input element with the class `input text` and the attribute `name`
         // set to `email`.
         Assert.assertTrue(driver.findElement(By.cssSelector("input.inputtext[name=email]")).isDisplayed());
 
@@ -74,13 +76,16 @@ public class CSSLocatorsTest {
         Assert.assertTrue(driver.findElement(By.cssSelector("div[id='pageFooter'] > ul > li:nth-of-type(2)")).isDisplayed());
 
         // Navigate to the local HTML file
-        driver.navigate().to("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
+        String filePath = "src/main/resources/supportFiles/List.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
         // ~: Descendant combinator (e.g., div ~ p selects any paragraph that is a descendant of the div element)
         // css=sibling1 ~ sibling2
         Assert.assertTrue(driver.findElement(By.cssSelector("a[id='google'] ~ a[id='playwright']")).isDisplayed());
 
-        // +: Adjacent sibling combinator (e.g., h2 + p selects the paragraph following an h2 heading)
+        // +: Adjacent sibling combinator (e.g., h2 + p selects the paragraph following a h2 heading)
         // css=sibling1 + adjacent sibling
         Assert.assertTrue(driver.findElement(By.cssSelector("h1 + ul[id='unorderedList']")).isDisplayed());
 

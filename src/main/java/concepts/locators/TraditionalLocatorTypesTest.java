@@ -59,12 +59,10 @@ public class TraditionalLocatorTypesTest {
 
 		// 6. Class
 		// Selects the element with the class `ui-droppable`.
-		driver.get("https://www.selenium.dev/selenium/web/droppable.html");
 		Assert.assertTrue(driver.findElement(By.className("ui-droppable")).isDisplayed());
 
 		// 7. CSS
 		// Selects the element with the class `ui-widget-header` and the class `ui-droppable`.
-		driver.get("https://www.selenium.dev/selenium/web/droppable.html");
 		Assert.assertTrue(driver.findElement(By.cssSelector(".ui-widget-header.ui-droppable")).isDisplayed());
 
 		// 8. Tag

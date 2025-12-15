@@ -39,7 +39,7 @@ public class CopyPasteTest {
 		// Find the input field element by its ID
 		WebElement input = driver.findElement(By.id("textInput"));
 
-		// Determine the command key (CMD for MacOS, CTRL for other platforms)
+		// Determine the command key (CMD for macOS, CTRL for other platforms)
 		Keys cmdCtrl = Platform.getCurrent().is(Platform.MAC) ? Keys.COMMAND : Keys.CONTROL;
 
 		// Use Actions class to perform a series of keyboard actions on the 'input' element
