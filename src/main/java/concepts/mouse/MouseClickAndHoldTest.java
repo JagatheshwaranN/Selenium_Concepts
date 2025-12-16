@@ -42,7 +42,7 @@ public class MouseClickAndHoldTest {
 		String expectedMessage = "Button has been long pressed";
 
 		// Load the webpage that contains the button for click and hold action
-		driver.get("https://letcode.in/buttons");
+		driver.get("https://letcode.in/button");
 
 		// Perform a click and hold action on the specific button using Actions class
 		new Actions(driver)
@@ -53,10 +53,10 @@ public class MouseClickAndHoldTest {
 		WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT);
 
 		// Wait until the message element with the expected text is present
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[text()='Button has been long pressed']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h2[contains(text(),'Button has been long pressed')]")));
 
 		// Retrieve the text of the element to verify the resulting message
-		String actualMessage = driver.findElement(By.xpath("//h2[text()='Button has been long pressed']")).getText();
+		String actualMessage = driver.findElement(By.xpath("//h2[contains(text(),'Button has been long pressed')]")).getText();
 
 		// Verify if the actual message matches the expected message
 		Assert.assertEquals(actualMessage, expectedMessage);

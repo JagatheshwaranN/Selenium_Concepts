@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+    <test thread-count="5" name="Page">
+        <classes>
+            <class name="concepts.page.GetPageSourceTest"/>
+            <class name="concepts.page.GetPageTitleTest"/>
+            <class name="concepts.page.GetPageUrlTest"/>
+        </classes>
+    </test>
+</suite>

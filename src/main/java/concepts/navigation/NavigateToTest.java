@@ -48,7 +48,7 @@ public class NavigateToTest {
 		driver.navigate().to(url);
 
 		// Asserts that the title of the current page is equal to the specified title
-		Assert.assertEquals(driver.getTitle(), "GitHub: Let’s build from here · GitHub");
+		Assert.assertEquals(driver.getTitle(), "GitHub · Change is constant. GitHub keeps you ahead. · GitHub");
 	}
 
 }

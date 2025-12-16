@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+    <test thread-count="5" name="Screenshot">
+        <classes>
+            <class name="concepts.screenshot.ElementScreenShotTest"/>
+            <class name="concepts.screenshot.FirefoxFullPageScreenShotTest"/>
+            <class name="concepts.screenshot.FullPageScreenShotTest"/>
+            <class name="concepts.screenshot.FullPageScreenShotUsingAshotTest"/>
+            <class name="concepts.screenshot.PageScreenShotTest"/>
+            <class name="concepts.screenshot.PrintPageTest"/>
+        </classes>
+    </test>
+</suite>

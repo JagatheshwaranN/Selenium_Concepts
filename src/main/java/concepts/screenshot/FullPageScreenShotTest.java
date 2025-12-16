@@ -15,6 +15,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class FullPageScreenShotTest {
 
@@ -53,16 +54,16 @@ public class FullPageScreenShotTest {
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
 
         // Get the total width of the page
-        int totalWidth = ((Long) javascriptExecutor.executeScript("return document.body.scrollWidth")).intValue();
+        int totalWidth = ((Long) Objects.requireNonNull(javascriptExecutor.executeScript("return document.body.scrollWidth"))).intValue();
 
         // Get the total height of the page
-        int totalHeight = ((Long) javascriptExecutor.executeScript("return document.body.scrollHeight")).intValue();
+        int totalHeight = ((Long) Objects.requireNonNull(javascriptExecutor.executeScript("return document.body.scrollHeight"))).intValue();
 
         // Get the viewport width (the width of the visible part of the page)
-        int viewPortWidth = ((Long) javascriptExecutor.executeScript("return window.innerWidth")).intValue();
+        int viewPortWidth = ((Long) Objects.requireNonNull(javascriptExecutor.executeScript("return window.innerWidth"))).intValue();
 
         // Get the viewport height (the height of the visible part of the page)
-        int viewPortHeight = ((Long) javascriptExecutor.executeScript("return window.innerHeight")).intValue();
+        int viewPortHeight = ((Long) Objects.requireNonNull(javascriptExecutor.executeScript("return window.innerHeight"))).intValue();
 
         // Create a BufferedImage to hold the stitched screenshot
         BufferedImage stitchedImage = new BufferedImage(totalWidth, totalHeight, BufferedImage.TYPE_INT_ARGB);

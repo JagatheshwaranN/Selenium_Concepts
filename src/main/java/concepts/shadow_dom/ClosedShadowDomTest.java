@@ -33,8 +33,8 @@ public class ClosedShadowDomTest {
         // Navigate to the URL where the shadow DOM elements are present
         driver.get("https://selectorshub.com/xpath-practice-page/");
 
-        // Find the input element with id "userPass"
-        WebElement input = driver.findElement(By.id("userPass"));
+        // Find the input element with id "pass"
+        WebElement input = driver.findElement(By.id("pass"));
 
         // Click on the input element to focus it
         input.click();

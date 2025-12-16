@@ -86,20 +86,20 @@ public class SetPointerEventAttributesTest {
         int centerYAxis = (int) (double) (rectangle.height / 2 + rectangle.getY());
 
         // Assertions to validate the properties of pointer actions
-        Assert.assertEquals("-1", moveTo.get("button"));
-        Assert.assertEquals("pen", moveTo.get("pointerType"));
+        Assert.assertEquals(moveTo.get("button"), "-1");
+        Assert.assertEquals(moveTo.get("pointerType"), "pen");
         Assert.assertEquals(String.valueOf(centerXAxis), moveTo.get("pageX"));
         Assert.assertEquals(String.valueOf(centerYAxis), moveTo.get("pageY"));
-        Assert.assertEquals("0", down.get("button"));
-        Assert.assertEquals("pen", down.get("pointerType"));
+        Assert.assertEquals(down.get("button"), "0");
+        Assert.assertEquals(down.get("pointerType"), "pen");
         Assert.assertEquals(String.valueOf(centerXAxis), down.get("pageX"));
         Assert.assertEquals(String.valueOf(centerYAxis), down.get("pageY"));
-        Assert.assertEquals("-1", moveBy.get("button"));
-        Assert.assertEquals("pen", moveBy.get("pointerType"));
+        Assert.assertEquals(moveBy.get("button"), "-1");
+        Assert.assertEquals(moveBy.get("pointerType"), "pen");
         Assert.assertEquals(String.valueOf(centerXAxis + 2), moveBy.get("pageX"));
         Assert.assertEquals(String.valueOf(centerYAxis + 2), moveBy.get("pageY"));
-        Assert.assertEquals("0", up.get("button"));
-        Assert.assertEquals("pen", up.get("pointerType"));
+        Assert.assertEquals(up.get("button"), "0");
+        Assert.assertEquals(up.get("pointerType"), "pen");
         Assert.assertEquals(String.valueOf(centerXAxis + 2), up.get("pageX"));
         Assert.assertEquals(String.valueOf(centerYAxis + 2), up.get("pageY"));
     }

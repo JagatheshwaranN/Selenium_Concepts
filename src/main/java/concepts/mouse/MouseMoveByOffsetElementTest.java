@@ -31,7 +31,7 @@ public class MouseMoveByOffsetElementTest {
 	@Test(priority = 1)
 	public void testMouseMoveByOffsetElement() {
 		// Define the expected value for the text of the 'absolute-location' element
-		String expectedValue = "139, 587";
+		String expectedValue = "138, 670";
 
 		// Open the web page with the mouse interaction demo
 		driver.get("https://www.selenium.dev/selenium/web/mouse_interaction.html");

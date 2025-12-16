@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Test Suite" parallel="classes">
-<test thread-count="5" name="Keyboard">
-    <classes>
-        <class name="concepts.keyboard.ClearElementValueUsingKeysTest"/>
-        <class name="concepts.keyboard.CopyPasteTest"/>
-        <class name="concepts.keyboard.KeyChordTest"/>
-        <class name="concepts.keyboard.KeyDownTest"/>
-        <class name="concepts.keyboard.KeyUpTest"/>
-        <class name="concepts.keyboard.ReturnKeyTest"/>
-        <class name="concepts.keyboard.SendKeysToActiveElementTest"/>
-        <class name="concepts.keyboard.SendKeysToDesignatedElementTest"/>
-    </classes>
-</test>
+    <test thread-count="5" name="Keyboard">
+        <classes>
+            <class name="concepts.keyboard.ClearElementValueUsingKeysTest"/>
+            <class name="concepts.keyboard.CopyPasteTest"/>
+            <class name="concepts.keyboard.KeyChordTest"/>
+            <class name="concepts.keyboard.KeyDownTest"/>
+            <class name="concepts.keyboard.KeyUpTest"/>
+            <class name="concepts.keyboard.ReturnKeyTest"/>
+            <class name="concepts.keyboard.SendKeysToActiveElementTest"/>
+            <class name="concepts.keyboard.SendKeysToDesignatedElementTest"/>
+        </classes>
+    </test>
 </suite>

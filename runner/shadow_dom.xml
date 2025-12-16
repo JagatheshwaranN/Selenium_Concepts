@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+    <test thread-count="5" name="Shadow DOM">
+        <classes>
+            <class name="concepts.shadow_dom.ClosedShadowDomTest"/>
+            <class name="concepts.shadow_dom.GetShadowRootTest"/>
+            <class name="concepts.shadow_dom.NestedShadowDOMUsingGetShadowRootTest"/>
+            <class name="concepts.shadow_dom.OpenShadowDomTest"/>
+            <class name="concepts.shadow_dom.ShadowDomInsideFrameTest"/>
+        </classes>
+    </test>
+</suite>

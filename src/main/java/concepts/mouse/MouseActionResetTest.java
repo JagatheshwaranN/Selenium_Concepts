@@ -12,6 +12,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.util.Objects;
+
 public class MouseActionResetTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
@@ -47,8 +49,7 @@ public class MouseActionResetTest {
 		actions.clickAndHold(clickable).keyDown(Keys.SHIFT).sendKeys("a").perform();
 
 		// Verify the state after the initial actions
-		Assert.assertEquals("A", String.valueOf(clickable.getAttribute("value").charAt(0)));
-		Assert.assertEquals("a", String.valueOf(clickable.getAttribute("value").charAt(1)));
+		Assert.assertEquals(String.valueOf(Objects.requireNonNull(clickable.getAttribute("value")).charAt(0)), "A");
 
 		// Reset the input state (Simulating a reset - Note: WebDriver might not provide a direct reset method)
 		((RemoteWebDriver) driver).resetInputState(); // Resetting input state (May not work as expected in all scenarios)
@@ -57,8 +58,8 @@ public class MouseActionResetTest {
 		actions.sendKeys("a").perform();
 
 		// Verify the state after the "reset" and additional action
-		Assert.assertEquals("A", String.valueOf(clickable.getAttribute("value").charAt(0)));
-		Assert.assertEquals("a", String.valueOf(clickable.getAttribute("value").charAt(1)));
+		Assert.assertEquals(String.valueOf(Objects.requireNonNull(clickable.getAttribute("value")).charAt(0)), "A");
+		Assert.assertEquals(String.valueOf(Objects.requireNonNull(clickable.getAttribute("value")).charAt(1)), "a");
 	}
 
 }

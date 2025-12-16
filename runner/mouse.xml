@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+    <test thread-count="5" name="Mouse">
+        <classes>
+            <class name="concepts.mouse.MouseActionPauseTest"/>
+            <class name="concepts.mouse.MouseActionResetTest"/>
+            <class name="concepts.mouse.MouseBackClickTest"/>
+            <class name="concepts.mouse.MouseClickAndHoldTest"/>
+            <class name="concepts.mouse.MouseClickAndReleaseTest"/>
+            <class name="concepts.mouse.MouseDoubleClickTest"/>
+            <class name="concepts.mouse.MouseDragDropByOffsetTest"/>
+            <class name="concepts.mouse.MouseDragDropTest"/>
+            <class name="concepts.mouse.MouseDragDropWithoutBuiltInOptionTest"/>
+            <class name="concepts.mouse.MouseForwardClickTest"/>
+            <class name="concepts.mouse.MouseMoveByCurrentPositionTest"/>
+            <class name="concepts.mouse.MouseMoveByOffsetElementTest"/>
+            <class name="concepts.mouse.MouseMoveByViewportTest"/>
+            <class name="concepts.mouse.MouseMoveToElementTest"/>
+            <class name="concepts.mouse.MouseRightClickTest"/>
+            <class name="concepts.mouse.SendKeysTest"/>
+        </classes>
+    </test>
+</suite>

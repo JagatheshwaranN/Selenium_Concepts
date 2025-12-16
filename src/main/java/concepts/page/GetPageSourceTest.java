@@ -37,7 +37,8 @@ public class GetPageSourceTest {
 		String pageSource = driver.getPageSource();
 
 		// Assert that the page source contains the specified title tag
-		Assert.assertTrue(pageSource.contains("<title>Example Domain</title>"));
+        Assert.assertNotNull(pageSource);
+        Assert.assertTrue(pageSource.contains("<title>Example Domain</title>"));
 	}
 
 }

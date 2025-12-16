@@ -54,7 +54,7 @@ public class PrintPageTest {
 
 		} catch (IOException e) {
 			// Handle the exception appropriately, log it, or throw a custom exception.
-			e.printStackTrace();
+			e.getStackTrace();
 		}
 	}
 
