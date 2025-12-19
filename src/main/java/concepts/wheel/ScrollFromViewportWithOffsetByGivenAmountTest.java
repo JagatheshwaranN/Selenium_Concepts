@@ -1,7 +1,7 @@
 package concepts.wheel;
 
+import concepts.jsexecutor.util.ViewPortUtil;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -59,28 +59,8 @@ public class ScrollFromViewportWithOffsetByGivenAmountTest {
         WebElement seleniumSponsors = driver.findElement(By.cssSelector(".selenium.text-center"));
 
         // Assert if the 'seleniumSponsors' element is within the viewport after scrolling
-        Assert.assertTrue(inViewport(seleniumSponsors));
+        Assert.assertTrue(ViewPortUtil.inViewport(seleniumSponsors, driver));
     }
 
-    public boolean inViewport(WebElement element) {
-        // Define a JavaScript script to check if the element is within the viewport
-        String script = """
-        // Calculate the cumulative offset positions of the element and its ancestors
-        for (var e = arguments[0], f = e.offsetTop, t = e.offsetLeft, o = e.offsetWidth, n = e.offsetHeight;
-            e.offsetParent;) {
-            f += (e = e.offsetParent).offsetTop;
-            t += e.offsetLeft;
-        }
-
-        // Check if the element's top and left positions are within the viewport's boundaries
-        return f < window.pageYOffset + window.innerHeight &&
-            t < window.pageXOffset + window.innerWidth &&
-            f + n > window.pageYOffset &&
-            t + o > window.pageXOffset;
-    """;
-
-        // Execute the JavaScript script and return the result (whether the element is in viewport)
-        return (boolean) ((JavascriptExecutor) driver).executeScript(script, element);
-    }
 
 }

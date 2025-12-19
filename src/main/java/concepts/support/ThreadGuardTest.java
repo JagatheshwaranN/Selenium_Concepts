@@ -1,39 +1,33 @@
 package concepts.support;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ThreadGuard;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
 
 public class ThreadGuardTest {
 
-    // Declare a WebDriver instance protected by ThreadGuard for thread safety
-    private final WebDriver protectedDriver = ThreadGuard.protect(new ChromeDriver());
+    @Test
+    public void openSeleniumSite() {
+        // Get the WebDriver instance specific to the current TestNG thread
+        WebDriver driver = ThreadGuardDriverManager.getDriver();
 
-    // Static block to set system properties before the class is initialized
-    static {
-        // Set the HTTP client factory to use the JDK's built-in HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
-        // Set the path to the ChromeDriver executable
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Jagatheshwaran N\\.cache\\selenium\\chromedriver\\win64\\120.0.6099.109\\chromedriver.exe");
+        // Navigate to the Selenium official website
+        driver.get("https://selenium.dev");
     }
 
-    // Main method to start the program
-    public static void main(String[] args) {
-        // Create an instance of ThreadGuardTest and run the thread
-        new ThreadGuardTest().runThread();
+    @Test
+    public void openExampleSite() {
+        // Get the WebDriver instance specific to the current TestNG thread
+        WebDriver driver = ThreadGuardDriverManager.getDriver();
+
+        // Navigate to the Example domain website
+        driver.get("https://example.com");
     }
 
-    // Runnable task to navigate the protected driver to a URL
-    Runnable runnable = () -> protectedDriver.get("https://selenium.dev");
-
-    // Thread to execute the runnable task
-    Thread thread = new Thread(runnable);
-
-    // Method to start the thread
-    public void runThread() {
-        thread.start();
+    @AfterMethod
+    public void tearDown() {
+        // Quit and clean up the WebDriver instance after each test method
+        // This ensures no browser or thread-local data leaks into other tests
+        ThreadGuardDriverManager.quitDriver();
     }
-
 }
-

@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.io.File;
 import java.time.Duration;
 
 public class CreateNewWindowTest {
@@ -39,8 +40,11 @@ public class CreateNewWindowTest {
 		// Define the expected title
 		String expectedTitle = "SignIn";
 
-		// Access the specified URL
-		driver.get("file:///D:/Environment_Collection/Intellij_Env/Selenium_Concepts/src/main/resources/supportFiles/Login.html");
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/window/Login.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
 		// Store the current window handle for later reference
 		String parentWindow = driver.getWindowHandle();
@@ -55,8 +59,11 @@ public class CreateNewWindowTest {
 		// Wait for the number of windows to be 2
 		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
+        // URL of the HTML file
+        filePath = "src/main/resources/supportFiles/window/Sign.html";
+
 		// Navigate the new tab to the specified URL
-		driver.navigate().to("file:///D:/Environment_Collection/Intellij_Env/Selenium_Concepts/src/main/resources/supportFiles/Sign.html");
+		driver.navigate().to(new File(filePath).toURI().toString());
 
 		// Get the handle of the newly opened tab
 		String childWindow = driver.getWindowHandle();

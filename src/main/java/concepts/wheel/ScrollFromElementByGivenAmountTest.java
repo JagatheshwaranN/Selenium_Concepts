@@ -1,7 +1,7 @@
 package concepts.wheel;
 
+import concepts.jsexecutor.util.ViewPortUtil;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -35,49 +35,28 @@ public class ScrollFromElementByGivenAmountTest {
     @Test(priority = 1)
     public void testScrollFromElementByGivenAmount() {
         // Initializing x-axis scroll amount to 0
-        int xaxis = 0;
+        int xAxis = 0;
 
         // Initializing y-axis scroll amount to 200 pixels
-        int yaxis = 200;
+        int yAxis = 500;
 
         // Open the Selenium website
         driver.get("https://www.selenium.dev/");
 
         // Locate the Selenium Donation button
-        WebElement seleniumDonation = driver.findElement(By.xpath("//input[@type='image']"));
+        WebElement seleniumDonation = driver.findElement(By.xpath("//h2[text()='Donate to Selenium']"));
 
         // Create a scroll origin object from the Selenium Donation button
         WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromElement(seleniumDonation);
 
         // Scroll the page from the Selenium Donation button by 200 pixels vertically
-        new Actions(driver).scrollFromOrigin(scrollOrigin, xaxis, yaxis).perform();
+        new Actions(driver).scrollFromOrigin(scrollOrigin, xAxis, yAxis).perform();
 
         // Locate the copyright content element
         WebElement copyRightContent = driver.findElement(By.xpath("//small[@class='text-white']"));
 
         // Verify that the copyright content element is now visible within the viewport
-        Assert.assertTrue(inViewport(copyRightContent));
-    }
-
-    public boolean inViewport(WebElement element) {
-        // Define a JavaScript script to check if the element is within the viewport
-        String script = """
-        // Calculate the cumulative offset positions of the element and its ancestors
-        for (var e = arguments[0], f = e.offsetTop, t = e.offsetLeft, o = e.offsetWidth, n = e.offsetHeight;
-            e.offsetParent;) {
-            f += (e = e.offsetParent).offsetTop;
-            t += e.offsetLeft;
-        }
-
-        // Check if the element's top and left positions are within the viewport's boundaries
-        return f < window.pageYOffset + window.innerHeight &&
-            t < window.pageXOffset + window.innerWidth &&
-            f + n > window.pageYOffset &&
-            t + o > window.pageXOffset;
-    """;
-
-        // Execute the JavaScript script and return the result (whether the element is in viewport)
-        return (boolean) ((JavascriptExecutor) driver).executeScript(script, element);
+        Assert.assertTrue(ViewPortUtil.inViewport(copyRightContent, driver));
     }
 
 }
