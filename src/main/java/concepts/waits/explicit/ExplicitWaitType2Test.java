@@ -41,25 +41,36 @@ public class ExplicitWaitType2Test {
 	}
 
 	@Test(priority = 1)
-	public void testExplicitWaitType2() {
-		// Define the expected value
-		String expectedValue = "Dashboard";
+    public void testExplicitWaitType2() {
+        // Define the expected success message displayed after a successful login
+        String expectedValue = "Logged In Successfully";
 
-		// Load the login page
-		driver.get("https://admin-demo.nopcommerce.com/login");
+        // Navigate to the practice test login page
+        driver.get("https://practicetestautomation.com/practice-test-login/");
 
-		// Wait for the login button to be clickable
-		WebElement loginButton = new WebDriverWait(driver, WAIT_TIMEOUT, WAIT_SLEEP)
-				.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".button-1.login-button")));
+        // Enter the valid username into the username field
+        driver.findElement(By.id("username")).sendKeys("student");
 
-		// Click on the login button
-		loginButton.click();
+        // Enter the valid password into the password field
+        driver.findElement(By.id("password")).sendKeys("Password123");
 
-		// Retrieve the text of the content header after clicking the login button
-		String actualValue = driver.findElement(By.xpath("//div[@class='content-header']//h1")).getText();
+        // Create an explicit wait and wait until the login button
+        // is visible and clickable (enabled + displayed)
+        WebElement loginButton = new WebDriverWait(driver, WAIT_TIMEOUT, WAIT_SLEEP)
+                .until(ExpectedConditions.elementToBeClickable(By.id("submit")));
 
-		// Assert whether the actual value matches the expected value
-		Assert.assertEquals(actualValue, expectedValue);
-	}
+        // Ensure the login button is not null after waiting
+        Assert.assertNotNull(loginButton);
+
+        // Click the login button once it becomes clickable
+        loginButton.click();
+
+        // Locate the page title element displayed after login
+        // and retrieve its visible text
+        String actualValue = driver.findElement(By.className("post-title")).getText();
+
+        // Validate that the actual page title matches the expected value
+        Assert.assertEquals(actualValue, expectedValue);
+    }
 
 }

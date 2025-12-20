@@ -43,26 +43,38 @@ public class ExplicitWaitType3Test {
 	}
 
 	@Test(priority = 1)
-	public void testExplicitWaitType3() {
-		// Define the expected value
-		String expectedValue = "Dashboard";
+    public void testExplicitWaitType3() {
+        // Define the expected success message after a successful login
+        String expectedValue = "Logged In Successfully";
 
-		// Load the login page
-		driver.get("https://admin-demo.nopcommerce.com/login");
+        // Navigate to the login page
+        driver.get("https://practicetestautomation.com/practice-test-login/");
 
-		// Wait for the presence of the login button
-		WebElement loginButton = new WebDriverWait(driver, WAIT_TIMEOUT, WAIT_SLEEP,
-				Clock.systemDefaultZone(), Sleeper.SYSTEM_SLEEPER)
-				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".button-1.login-button")));
+        // Enter the username into the username input field
+        driver.findElement(By.id("username")).sendKeys("student");
 
-		// Click on the login button
-		loginButton.click();
+        // Enter the password into the password input field
+        driver.findElement(By.id("password")).sendKeys("Password123");
 
-		// Retrieve the text of the content header after clicking the login button
-		String actualValue = driver.findElement(By.xpath("//div[@class='content-header']//h1")).getText();
+        // Create an explicit wait and wait until the login button
+        // is present in the DOM (not necessarily visible or clickable)
+        WebElement loginButton = new WebDriverWait(
+                driver,                 // WebDriver instance
+                WAIT_TIMEOUT,            // Maximum time to wait
+                WAIT_SLEEP,              // Polling interval
+                Clock.systemDefaultZone(), // System clock
+                Sleeper.SYSTEM_SLEEPER   // Thread sleep mechanism
+        ).until(ExpectedConditions.presenceOfElementLocated(By.id("submit")));
 
-		// Assert whether the actual value matches the expected value
-		Assert.assertEquals(actualValue, expectedValue);
-	}
+        // Click on the login button once it is present
+        loginButton.click();
+
+        // Locate the page header that appears after login
+        // and retrieve its text content
+        String actualValue = driver.findElement(By.className("post-title")).getText();
+
+        // Verify that the actual header text matches the expected value
+        Assert.assertEquals(actualValue, expectedValue);
+    }
 
 }

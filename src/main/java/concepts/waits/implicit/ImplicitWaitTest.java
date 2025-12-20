@@ -1,17 +1,15 @@
 package concepts.waits.implicit;
 
-import com.google.common.base.Function;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
-import java.time.Clock;
+import java.io.File;
 import java.time.Duration;
 
 public class ImplicitWaitTest {
@@ -45,10 +43,13 @@ public class ImplicitWaitTest {
 		// Set the implicit wait timeout for the WebDriver
 		driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT);
 
-		// Load the webpage
-		driver.get("D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/DisabledElement.html";
 
-		// Find the input element using a CSS Selector
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
+
+        // Find the input element using a CSS Selector
 		WebElement input = driver.findElement(By.cssSelector("input[id='myText']"));
 
 		// Enter text 'admin' into the input field

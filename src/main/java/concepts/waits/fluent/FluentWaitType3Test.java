@@ -41,11 +41,17 @@ public class FluentWaitType3Test {
 
     @Test(priority = 1)
     public void testFluentWaitType3() {
-        // Define the expected value
-        String expectedValue = "Dashboard";
+        // Define the expected success message displayed after a successful login
+        String expectedValue = "Logged In Successfully";
 
-        // Navigate to the login page
-        driver.get("https://admin-demo.nopcommerce.com/login");
+        // Navigate to the practice test login page
+        driver.get("https://practicetestautomation.com/practice-test-login/");
+
+        // Enter the valid username into the username field
+        driver.findElement(By.id("username")).sendKeys("student");
+
+        // Enter the valid password into the password field
+        driver.findElement(By.id("password")).sendKeys("Password123");
 
         // Set up a FluentWait for the login button
         Wait<WebDriver> wait = new FluentWait<>(driver)
@@ -68,7 +74,7 @@ public class FluentWaitType3Test {
         Function<WebDriver, WebElement> function = driver -> {
             try {
                 // Attempt to find the login button
-                WebElement element = driver.findElement(By.cssSelector(".button-1.login-button"));
+                WebElement element = driver.findElement(By.id("submit"));
                 return element.isDisplayed() ? element : null;
             } catch (NoSuchElementException | StaleElementReferenceException e) {
                 // Catch exceptions if the element is not found or stale
@@ -82,8 +88,9 @@ public class FluentWaitType3Test {
         // Click on the login button
         loginButton.click();
 
-        // Get the text of the header after clicking
-        String actualValue = driver.findElement(By.xpath("//div[@class='content-header']//h1")).getText();
+        // Locate the page title element displayed after login
+        // and retrieve its visible text
+        String actualValue = driver.findElement(By.className("post-title")).getText();
 
         // Assert if the actual header text matches the expected value
         Assert.assertEquals(actualValue, expectedValue);

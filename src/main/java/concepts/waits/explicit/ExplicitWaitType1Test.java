@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.io.File;
 import java.time.Duration;
 
 public class ExplicitWaitType1Test {
@@ -45,8 +46,11 @@ public class ExplicitWaitType1Test {
 		// Define the expected value
 		String expectedValue = "Selenium";
 
-		// Load the webpage
-		driver.get("D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/DisabledElement.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
 		// Wait for the presence of the input element
 		WebElement input = new WebDriverWait(driver, WAIT_TIMEOUT)

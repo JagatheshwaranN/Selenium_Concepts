@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.Arrays;
 
@@ -43,8 +44,11 @@ public class FluentWaitType1Test {
 		// Define the expected value
 		String expectedValue = "Selenium";
 
-		// Load the webpage
-		driver.get("file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/DisabledElement.html");
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/DisabledElement.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
 		try {
 			// Set up FluentWait with specific timeout, polling interval, and exceptions to ignore

@@ -1,4 +1,4 @@
-package concepts.waits;
+package concepts.waits.common;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,17 +9,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
-import java.time.Duration;
+import java.io.File;
 
 public class PauseTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
 
-	// Define a constant duration for the maximum wait time, set to 5 seconds
-	private static final Duration WAIT_TIMEOUT = Duration.ofSeconds(5);
-
-	@BeforeMethod
+    @BeforeMethod
 	public void setUp() {
 		// Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
 		driver = DriverConfiguration.browserSetup();
@@ -34,15 +31,19 @@ public class PauseTest {
 		}
 	}
 
-	@Test(priority = 1)
+	@SuppressWarnings("SynchronizeOnNonFinalField")
+    @Test(priority = 1)
 	public void testImplicitWait() {
 		// Define the expected value
 		String expectedValue = "Selenium";
 
-		// Load the webpage
-		driver.get("D:\\Environment_Collection\\Eclipse_Env\\Workspace\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\DisabledElement.html");
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/DisabledElement.html";
 
-		// Find the input element using a CSS Selector
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
+
+        // Find the input element using a CSS Selector
 		WebElement input = driver.findElement(By.cssSelector("input[id='myText']"));
 
 		// Acquires the lock on the "driver" object
