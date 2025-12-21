@@ -26,14 +26,23 @@ public class CreateAuthenticatorTest {
 
     @Test
     public void testCreateAuthenticator() {
+
+        // Expected number of credentials in a newly created authenticator
         int expectedSize = 0;
 
+        // Configure virtual authenticator with U2F protocol and no resident keys
         VirtualAuthenticatorOptions options = new VirtualAuthenticatorOptions()
-                .setProtocol(VirtualAuthenticatorOptions.Protocol.U2F)
-                .setHasResidentKey(false);
+                .setProtocol(VirtualAuthenticatorOptions.Protocol.U2F) // Use U2F protocol
+                .setHasResidentKey(false);                              // No resident credentials supported
 
-        VirtualAuthenticator virtualAuthenticator = ((HasVirtualAuthenticator) driver).addVirtualAuthenticator(options);
+        // Add a virtual authenticator to the current browser session
+        VirtualAuthenticator virtualAuthenticator =
+                ((HasVirtualAuthenticator) driver).addVirtualAuthenticator(options);
+
+        // Retrieve all credentials in the newly created authenticator
         List<Credential> credentialList = virtualAuthenticator.getCredentials();
+
+        // Verify that the authenticator starts with zero credentials
         Assert.assertEquals(credentialList.size(), expectedSize);
     }
 

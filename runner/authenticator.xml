@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+    <test thread-count="5" name="Authenticator">
+        <classes>
+            <class name="concepts.authenticator.CreateAuthenticatorAndAddNonResidentKeyTest"/>
+            <class name="concepts.authenticator.CreateAuthenticatorAndAddResidentKeyTest"/>
+            <class name="concepts.authenticator.CreateAuthenticatorAndAddResidentKeyWhenNotSupportTest"/>
+            <class name="concepts.authenticator.CreateAuthenticatorTest"/>
+            <class name="concepts.authenticator.GetCredentialTest"/>
+            <class name="concepts.authenticator.RemoveAllCredentialsTest"/>
+            <class name="concepts.authenticator.RemoveAuthenticatorTest"/>
+            <class name="concepts.authenticator.RemoveCredentialTest"/>
+            <class name="concepts.authenticator.VirtualAuthenticationOptionTest"/>
+            <class name="concepts.authenticator.VirtualAuthenticatorTest"/>
+        </classes>
+    </test>
+</suite>

@@ -25,15 +25,26 @@ public class RemoveAuthenticatorTest {
 
     @Test
     public void testRemoveAuthenticator() {
+
+        // Configure virtual authenticator to use U2F protocol
+        // Resident keys are disabled for this test scenario
         VirtualAuthenticatorOptions options = new VirtualAuthenticatorOptions()
                 .setProtocol(VirtualAuthenticatorOptions.Protocol.U2F)
                 .setHasResidentKey(false);
 
-        VirtualAuthenticator virtualAuthenticator = ((HasVirtualAuthenticator) driver).addVirtualAuthenticator(options);
+        // Add a virtual authenticator to the current browser session
+        VirtualAuthenticator virtualAuthenticator =
+                ((HasVirtualAuthenticator) driver).addVirtualAuthenticator(options);
 
-        ((HasVirtualAuthenticator)driver).removeVirtualAuthenticator(virtualAuthenticator);
+        // Remove the previously added virtual authenticator
+        ((HasVirtualAuthenticator) driver).removeVirtualAuthenticator(virtualAuthenticator);
 
-        Assert.assertThrows(InvalidArgumentException.class, virtualAuthenticator::getCredentials);
+        // Validate that accessing credentials after removal throws an exception
+        // This confirms the authenticator has been completely detached
+        Assert.assertThrows(
+                InvalidArgumentException.class,
+                virtualAuthenticator::getCredentials
+        );
     }
 
     @AfterMethod

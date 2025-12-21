@@ -15,6 +15,7 @@ import scenarios.DriverConfiguration;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 
+@SuppressWarnings("ALL")
 public class CreateAuthenticatorAndAddResidentKeyWhenNotSupportTest {
 
     // Declare a WebDriver instance to interact with the web browser
@@ -43,6 +44,8 @@ public class CreateAuthenticatorAndAddResidentKeyWhenNotSupportTest {
                     + "NpLwcR8fqaYOdAHWWz636osVEqosRrHzJOGpf9x2RSWzQJ+dq8+6fACgfFZOVpN644+sAHfNPAI/gnNKU5OfUv+eav8fB"
                     + "nzlf1A3y3GIkyMyzFN3DE7e0n/lyqxE4HBYGpI8g==";
 
+    // Decode a Base64-encoded RSA private key string and create a PKCS8EncodedKeySpec
+    // This key is used for signing WebAuthn credentials in virtual authenticator tests
     private final static PKCS8EncodedKeySpec rsaPrivateKey =
             new PKCS8EncodedKeySpec(Base64.getMimeDecoder().decode(base64EncodedRsaPK));
 
@@ -54,20 +57,38 @@ public class CreateAuthenticatorAndAddResidentKeyWhenNotSupportTest {
 
     @Test
     public void testCreateAuthenticatorAndAddResidentKeyWhenNotSupport() {
+
+        // Configure virtual authenticator with U2F protocol
+        // But enable resident keys, even though U2F does not support them
         VirtualAuthenticatorOptions options = new VirtualAuthenticatorOptions()
-                .setProtocol(VirtualAuthenticatorOptions.Protocol.U2F)
-                .setHasResidentKey(true)
-                .setHasUserVerification(true)
-                .setIsUserVerified(true);
+                .setProtocol(VirtualAuthenticatorOptions.Protocol.U2F) // U2F protocol
+                .setHasResidentKey(true)                                 // Attempt to enable resident keys
+                .setHasUserVerification(true)                            // User verification supported
+                .setIsUserVerified(true);                                // User already verified
 
-        VirtualAuthenticator virtualAuthenticator = ((HasVirtualAuthenticator) driver).addVirtualAuthenticator(options);
+        // Add the virtual authenticator to the current browser session
+        VirtualAuthenticator virtualAuthenticator =
+                ((HasVirtualAuthenticator) driver).addVirtualAuthenticator(options);
 
+        // Define credential ID and user handle
         byte[] credentialId = {1, 2, 3, 4};
         byte[] userHandle = {1};
-        Credential residentCredential = Credential.createResidentCredential(
-                credentialId, "localhost", rsaPrivateKey, userHandle, 0);
 
-        Assert.assertThrows(InvalidArgumentException.class, () -> virtualAuthenticator.addCredential(residentCredential));
+        // Create a resident credential for testing
+        Credential residentCredential = Credential.createResidentCredential(
+                credentialId,
+                "localhost",      // Relying Party ID
+                rsaPrivateKey,    // Private key for signing
+                userHandle,       // User handle
+                0                 // Signature counter
+        );
+
+        // Attempting to add a resident credential to a U2F authenticator should fail
+        // Assert that InvalidArgumentException is thrown
+        Assert.assertThrows(
+                InvalidArgumentException.class,
+                () -> virtualAuthenticator.addCredential(residentCredential)
+        );
     }
 
     @AfterMethod

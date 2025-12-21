@@ -38,23 +38,42 @@ public class RemoveAllCredentialsTest {
 
     @Test
     public void testRemoveAllCredentials() {
+
+        // Expected number of credentials after removing all entries
         int expectedCredential = 0;
 
+        // Configure virtual authenticator to use U2F protocol
+        // Resident keys are disabled for this scenario
         VirtualAuthenticatorOptions options = new VirtualAuthenticatorOptions()
                 .setProtocol(VirtualAuthenticatorOptions.Protocol.U2F)
                 .setHasResidentKey(false);
 
-        VirtualAuthenticator virtualAuthenticator = ((HasVirtualAuthenticator) driver).addVirtualAuthenticator(options);
+        // Add a virtual authenticator to the current browser session
+        VirtualAuthenticator virtualAuthenticator =
+                ((HasVirtualAuthenticator) driver).addVirtualAuthenticator(options);
 
+        // Define a mock credential ID
         byte[] credentialId = {1, 2, 3, 4};
-        Credential nonResidentCredential = Credential.createNonResidentCredential(
-                credentialId, "localhost", ec256PrivateKey, 0);
 
+        // Create a non-resident credential for testing
+        Credential nonResidentCredential = Credential.createNonResidentCredential(
+                credentialId,
+                "localhost",          // Relying Party ID
+                ec256PrivateKey,      // Private key used for signing
+                0                     // Initial signature counter
+        );
+
+        // Add the credential to the virtual authenticator
         virtualAuthenticator.addCredential(nonResidentCredential);
 
+        // Remove all credentials associated with the virtual authenticator
         virtualAuthenticator.removeAllCredentials();
 
-        Assert.assertEquals(virtualAuthenticator.getCredentials().size(), expectedCredential);
+        // Verify that no credentials remain after cleanup
+        Assert.assertEquals(
+                virtualAuthenticator.getCredentials().size(),
+                expectedCredential
+        );
     }
 
     @AfterMethod

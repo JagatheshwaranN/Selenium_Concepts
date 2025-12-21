@@ -38,23 +38,42 @@ public class RemoveCredentialTest {
 
     @Test
     public void testRemoveCredential() {
+
+        // Expected number of credentials after removal
         int expectedCredential = 0;
 
+        // Configure virtual authenticator to use U2F protocol
+        // Resident keys are disabled for this scenario
         VirtualAuthenticatorOptions options = new VirtualAuthenticatorOptions()
                 .setProtocol(VirtualAuthenticatorOptions.Protocol.U2F)
                 .setHasResidentKey(false);
 
-        VirtualAuthenticator virtualAuthenticator = ((HasVirtualAuthenticator) driver).addVirtualAuthenticator(options);
+        // Add a virtual authenticator to the current browser session
+        VirtualAuthenticator virtualAuthenticator =
+                ((HasVirtualAuthenticator) driver).addVirtualAuthenticator(options);
 
+        // Define a mock credential ID
         byte[] credentialId = {1, 2, 3, 4};
-        Credential nonResidentCredential = Credential.createNonResidentCredential(
-                credentialId, "localhost", ec256PrivateKey, 0);
 
+        // Create a non-resident (server-side stored) credential
+        Credential nonResidentCredential = Credential.createNonResidentCredential(
+                credentialId,
+                "localhost",          // Relying Party ID
+                ec256PrivateKey,      // Private key used for signing
+                0                     // Signature counter
+        );
+
+        // Add the credential to the virtual authenticator
         virtualAuthenticator.addCredential(nonResidentCredential);
 
+        // Remove the credential using its credential ID
         virtualAuthenticator.removeCredential(credentialId);
 
-        Assert.assertEquals(virtualAuthenticator.getCredentials().size(), expectedCredential);
+        // Verify that the credential has been successfully removed
+        Assert.assertEquals(
+                virtualAuthenticator.getCredentials().size(),
+                expectedCredential
+        );
     }
 
     @AfterMethod

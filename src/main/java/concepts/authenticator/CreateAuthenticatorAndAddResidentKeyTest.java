@@ -15,6 +15,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 import java.util.List;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class CreateAuthenticatorAndAddResidentKeyTest {
 
     // Declare a WebDriver instance to interact with the web browser
@@ -43,8 +44,11 @@ public class CreateAuthenticatorAndAddResidentKeyTest {
                     + "NpLwcR8fqaYOdAHWWz636osVEqosRrHzJOGpf9x2RSWzQJ+dq8+6fACgfFZOVpN644+sAHfNPAI/gnNKU5OfUv+eav8fB"
                     + "nzlf1A3y3GIkyMyzFN3DE7e0n/lyqxE4HBYGpI8g==";
 
+    // Decode a Base64-encoded RSA private key string and create a PKCS8EncodedKeySpec
+    // This key is used for signing WebAuthn credentials in virtual authenticator tests
     private final static PKCS8EncodedKeySpec rsaPrivateKey =
             new PKCS8EncodedKeySpec(Base64.getMimeDecoder().decode(base64EncodedRsaPK));
+
 
     @BeforeMethod
     public void setUp() {
@@ -56,25 +60,35 @@ public class CreateAuthenticatorAndAddResidentKeyTest {
     public void testCreateAuthenticatorAndAddResidentKey() {
         int expectedCredentialSet = 1;
 
+        // Configure a virtual authenticator supporting CTAP2, resident keys, and user verification
         VirtualAuthenticatorOptions options = new VirtualAuthenticatorOptions()
                 .setProtocol(VirtualAuthenticatorOptions.Protocol.CTAP2)
                 .setHasResidentKey(true)
                 .setHasUserVerification(true)
                 .setIsUserVerified(true);
 
+        // Add the configured virtual authenticator to the browser session
         VirtualAuthenticator virtualAuthenticator = ((HasVirtualAuthenticator) driver).addVirtualAuthenticator(options);
 
+        // Define credential ID and user handle for the resident credential
         byte[] credentialId = {1, 2, 3, 4};
         byte[] userHandle = {1};
+
+        // Create a resident credential with the given ID, RP, private key, and user handle
         Credential residentCredential = Credential.createResidentCredential(
                 credentialId, "localhost", rsaPrivateKey, userHandle, 0);
 
+        // Add the resident credential to the virtual authenticator
         virtualAuthenticator.addCredential(residentCredential);
 
+        // Retrieve all credentials stored in the authenticator
         List<Credential> credentialList = virtualAuthenticator.getCredentials();
+
+        // Verify that exactly one credential is present
         Assert.assertEquals(credentialList.size(), expectedCredentialSet);
 
-        Credential credential = credentialList.get(0);
+        // Validate that the stored credential ID matches the expected ID
+        Credential credential = credentialList.getFirst();
         Assert.assertEquals(credential.getId(), credentialId);
     }
 
