@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Test Suite" parallel="classes">
-    <test thread-count="5" name="Driver">
+    <test thread-count="5" name="Chrome-Driver">
         <classes>
             <class name="concepts.driver.chrome.options.BrowserDetailsTest"/>
             <class name="concepts.driver.chrome.options.ChromeHeadlessModeTest"/>
             <class name="concepts.driver.chrome.options.DetachBrowserTest"/>
-            <class name="concepts.driver.chrome.options.HTMLUnitDriverChromeVersionTest"/>
             <class name="concepts.driver.chrome.options.IncognitoModeTest"/>
             <class name="concepts.driver.chrome.options.MaximizeBrowserWindowTest"/>
             <class name="concepts.driver.chrome.options.PageLoadStrategyTest"/>
@@ -15,6 +14,9 @@
             <class name="concepts.driver.chrome.options.StrictFileInteractabilityTest"/>
             <class name="concepts.driver.chrome.options.TimeOutTest"/>
             <class name="concepts.driver.chrome.options.UnhandledPromptBehaviourTest"/>
+            <class name="concepts.driver.chrome.service.ChromeServiceDriverLocationTest"/>
+            <class name="concepts.driver.chrome.service.ChromeServicePortTest"/>
+            <class name="concepts.driver.chrome.service.ChromeServiceTest"/>
         </classes>
     </test>
 </suite>

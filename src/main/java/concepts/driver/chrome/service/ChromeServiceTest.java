@@ -18,9 +18,6 @@ public class ChromeServiceTest {
 
     @BeforeMethod
     public void setUp() {
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Create a new ChromeDriverService instance using a builder pattern
         chromeDriverService = new ChromeDriverService.Builder()
                 .build();  // Construct the service with default settings

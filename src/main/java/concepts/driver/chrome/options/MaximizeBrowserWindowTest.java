@@ -14,9 +14,6 @@ public class MaximizeBrowserWindowTest {
 
     @Test(priority = 1)
     public void openMaximizedBrowser() {
-        // Set the system property for the webdriver factory
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Initialize ChromeOptions and add arguments
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("start-maximized");

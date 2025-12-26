@@ -5,38 +5,27 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import scenarios.DriverConfiguration;
 
-import java.time.Duration;
+import java.io.File;
 
 public class StrictFileInteractabilityTest {
 
 	// Declare a WebDriver instance to interact with the web browser.
 	private WebDriver driver;
 
-	// Define a constant duration for the maximum wait time, set to 5 seconds
-	private static final Duration WAIT_TIMEOUT = Duration.ofSeconds(5);
-	
 	@BeforeMethod
 	public void setUp() {
-		// Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
-		System.setProperty("webdriver.http.factory", "jdk-http-client");
-
 		// Declare a ChromeOptions instance to interact with the web browser.
 		ChromeOptions chromeOptions = new ChromeOptions();
-
 		/*
 			Another way to achieve the functionality
 			========================================
 			chromeOptions.setCapability("strictFileInteractability", true);
 		*/
-
 		// Enable strict file interactability mode for enhanced security (Enforce stricter
 		// security measures for file interactions)
 		chromeOptions.setStrictFileInteractability(true);
@@ -47,25 +36,29 @@ public class StrictFileInteractabilityTest {
 
 	@Test(priority = 1)
 	public void testStrictFileInteractability() {
-		// Load the webpage for file upload
-		driver.get("https://demo.guru99.com/test/upload/");
+        // Define the expected file name
+        String expectedFileName = "testData.json";
 
-		// File path for upload using forward slashes or properly escaped backward slashes
-		String filePath = "D:\\Environment_Collection\\Intellij_Env\\Selenium_Concepts\\src\\main\\resources\\supportFiles\\demo.png";
+        // Navigate to the file upload page
+        driver.get("https://the-internet.herokuapp.com/upload");
 
-		// Provide a file path for upload
-		WebElement uploadElement = driver.findElement(By.id("uploadfile_0"));
-		uploadElement.sendKeys(filePath);
+        // Create a File object pointing to the file you want to upload
+        File uploadFile = new File("src/main/resources/supportFiles/testData.json");
 
-		// Click on the submit button
-		driver.findElement(By.id("submitbutton")).click();
+        // Locate the file input element (type='file') on the webpage
+        WebElement uploadElement = driver.findElement(By.cssSelector("input[type=file]"));
 
-		// Explicitly wait for the file upload success message to be displayed
-		WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT);
-		WebElement fileUploadMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//center)[2]")));
+        // Upload the file by sending the absolute file path to the input element
+        uploadElement.sendKeys(uploadFile.getAbsolutePath());
 
-		// Verify if the file upload a success message is displayed
-		Assert.assertTrue(fileUploadMessage.isDisplayed(), "File upload success message is displayed.");
+        // Click on the upload/submit button to complete the file upload
+        driver.findElement(By.id("file-submit")).click();
+
+        // Locate the element that displays the uploaded file name
+        WebElement fileName = driver.findElement(By.id("uploaded-files"));
+
+        // Assert that the uploaded file name matches the expected name
+        Assert.assertEquals(fileName.getText(), expectedFileName);
 	}
 
 	@AfterMethod

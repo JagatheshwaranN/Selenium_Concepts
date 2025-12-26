@@ -18,9 +18,6 @@ public class PageLoadStrategyTest {
         // Define the expected title for comparison
         String expectedTitle = "People | Unsplash";
 
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Instantiate ChromeOptions to configure the ChromeDriver
         ChromeOptions chromeOptions = new ChromeOptions();
 
@@ -62,7 +59,7 @@ public class PageLoadStrategyTest {
         driver.get("https://unsplash.com/t/people");
 
         // Compare the expected title with the actual title and assert their equality
-        Assert.assertEquals(expectedTitle, driver.getTitle(), "Actual title does not match expected title.");
+        Assert.assertEquals(driver.getTitle(), expectedTitle, "Actual title does not match expected title.");
     }
 
     @AfterMethod

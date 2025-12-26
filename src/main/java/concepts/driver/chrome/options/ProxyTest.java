@@ -17,9 +17,6 @@ public class ProxyTest {
 
     @BeforeMethod
     public void setUp() {
-        // Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Declare a ChromeOptions instance to interact with the web browser.
         ChromeOptions chromeOptions = new ChromeOptions();
 

@@ -18,9 +18,6 @@ public class ChromeServicePortTest {
 
     @BeforeMethod
     public void setUp() {
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Create a ChromeDriverService instance and configure it to use port 1234
         chromeDriverService = new ChromeDriverService.Builder()
                 .usingPort(8081) // Specify the port to be used for communication

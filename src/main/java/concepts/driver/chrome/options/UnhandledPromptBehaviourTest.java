@@ -71,7 +71,7 @@ public class UnhandledPromptBehaviourTest {
                 driver.quit();
 
             } catch (Exception e) {
-                e.printStackTrace();
+                e.getStackTrace();
             }
         }
     }

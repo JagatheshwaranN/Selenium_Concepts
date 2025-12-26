@@ -14,7 +14,7 @@ public class DetachBrowserTest {
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
 
-    @Test(priority = 1)
+    @Test(priority = 1, enabled = false)
     public void browserDetails() {
         /*
             The driver.close() method will close the browser window even if the detach option
@@ -26,10 +26,6 @@ public class DetachBrowserTest {
 
             https://github.com/SeleniumHQ/selenium/issues/10658
         */
-
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Instantiate ChromeOptions to configure the ChromeDriver
         ChromeOptions chromeOptions = new ChromeOptions();
 

@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.manager.SeleniumManagerOutput;
 import org.openqa.selenium.remote.service.DriverFinder;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -29,9 +28,6 @@ public class ChromeServiceDriverLocationTest {
 
     @BeforeMethod
     public void setUp() {
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Obtain paths to Chrome browser and ChromeDriver executable
         setBinaryPath();
 
