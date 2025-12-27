@@ -56,21 +56,21 @@ public class BrowsingContextTreeWithDepthTest {
         List<BrowsingContextInfo> contextInfo = browsingContext.getTree(0);
 
         // Get the first browsing context information object from the list
-        BrowsingContextInfo info = contextInfo.get(0);
+        BrowsingContextInfo info = contextInfo.getFirst();
 
         // Close the browsing context
         browsingContext.close();
 
-        // Assert that the browsing context ID is not null
+        // Verify that only one browsing context is returned
+        Assert.assertEquals(contextInfo.size(), 1);
+
+        // Ensure the captured browsing context ID is not null
         Assert.assertNotNull(browsingContextId);
 
-        // Assert that the list of browsing contexts is not empty (meaning the current context is not isolated)
-        Assert.assertTrue(contextInfo.size() > 0);
+        // Verify that the context has no child contexts (i.e., it is a leaf node)
+        Assert.assertNull(info.getChildren());
 
-        // Assert that the first context has child contexts (meaning it's not a leaf node)
-        Assert.assertTrue(info.getChildren().size() > 0);
-
-        // Assert that the ID of the first context matches the previously obtained context ID
+        // Validate that the context ID matches the previously stored context ID
         Assert.assertEquals(contextId, info.getId());
     }
 

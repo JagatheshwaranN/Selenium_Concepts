@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Test Suite" parallel="classes">
-<!--    <test thread-count="5" name="Chrome-Driver">-->
-<!--        <classes>-->
-<!--            <class name="concepts.driver.chrome.options.BrowserDetailsTest"/>-->
-<!--            <class name="concepts.driver.chrome.options.ChromeHeadlessModeTest"/>-->
-<!--            <class name="concepts.driver.chrome.options.DetachBrowserTest"/>-->
-<!--            <class name="concepts.driver.chrome.options.IncognitoModeTest"/>-->
-<!--            <class name="concepts.driver.chrome.options.MaximizeBrowserWindowTest"/>-->
-<!--            <class name="concepts.driver.chrome.options.PageLoadStrategyTest"/>-->
-<!--            <class name="concepts.driver.chrome.options.ProxyTest"/>-->
-<!--            <class name="concepts.driver.chrome.options.SSLSecurityIssueTest"/>-->
-<!--            <class name="concepts.driver.chrome.options.StrictFileInteractabilityTest"/>-->
-<!--            <class name="concepts.driver.chrome.options.TimeOutTest"/>-->
-<!--            <class name="concepts.driver.chrome.options.UnhandledPromptBehaviourTest"/>-->
-<!--            <class name="concepts.driver.chrome.service.ChromeServiceDriverLocationTest"/>-->
-<!--            <class name="concepts.driver.chrome.service.ChromeServicePortTest"/>-->
-<!--            <class name="concepts.driver.chrome.service.ChromeServiceTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test thread-count="5" name="Edge-Driver">-->
-<!--        <classes>-->
-<!--            <class name="concepts.driver.edge.BrowserDetailsTest"/>-->
-<!--            <class name="concepts.driver.edge.DetachBrowserTest"/>-->
-<!--            <class name="concepts.driver.edge.EdgeHeadlessModeTest"/>-->
-<!--            <class name="concepts.driver.edge.MaximizeBrowserWindowTest"/>-->
-<!--            <class name="concepts.driver.edge.PageLoadStrategyTest"/>-->
-<!--            <class name="concepts.driver.edge.PrivateModeTest"/>-->
-<!--            <class name="concepts.driver.edge.SSLSecurityIssueTest"/>-->
-<!--            <class name="concepts.driver.edge.TimeOutTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test thread-count="5" name="Chrome-Driver">
+        <classes>
+            <class name="concepts.driver.chrome.options.BrowserDetailsTest"/>
+            <class name="concepts.driver.chrome.options.ChromeHeadlessModeTest"/>
+            <class name="concepts.driver.chrome.options.DetachBrowserTest"/>
+            <class name="concepts.driver.chrome.options.IncognitoModeTest"/>
+            <class name="concepts.driver.chrome.options.MaximizeBrowserWindowTest"/>
+            <class name="concepts.driver.chrome.options.PageLoadStrategyTest"/>
+            <class name="concepts.driver.chrome.options.ProxyTest"/>
+            <class name="concepts.driver.chrome.options.SSLSecurityIssueTest"/>
+            <class name="concepts.driver.chrome.options.StrictFileInteractabilityTest"/>
+            <class name="concepts.driver.chrome.options.TimeOutTest"/>
+            <class name="concepts.driver.chrome.options.UnhandledPromptBehaviourTest"/>
+            <class name="concepts.driver.chrome.service.ChromeServiceDriverLocationTest"/>
+            <class name="concepts.driver.chrome.service.ChromeServicePortTest"/>
+            <class name="concepts.driver.chrome.service.ChromeServiceTest"/>
+        </classes>
+    </test>
+    <test thread-count="5" name="Edge-Driver">
+        <classes>
+            <class name="concepts.driver.edge.BrowserDetailsTest"/>
+            <class name="concepts.driver.edge.DetachBrowserTest"/>
+            <class name="concepts.driver.edge.EdgeHeadlessModeTest"/>
+            <class name="concepts.driver.edge.MaximizeBrowserWindowTest"/>
+            <class name="concepts.driver.edge.PageLoadStrategyTest"/>
+            <class name="concepts.driver.edge.PrivateModeTest"/>
+            <class name="concepts.driver.edge.SSLSecurityIssueTest"/>
+            <class name="concepts.driver.edge.TimeOutTest"/>
+        </classes>
+    </test>
     <test thread-count="5" name="Firefox-Driver">
         <classes>
             <class name="concepts.driver.firefox.BrowserDetailsTest"/>

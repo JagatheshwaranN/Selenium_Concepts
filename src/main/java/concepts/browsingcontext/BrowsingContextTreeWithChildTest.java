@@ -56,7 +56,7 @@ public class BrowsingContextTreeWithChildTest {
         List<BrowsingContextInfo> contextInfo = browsingContext.getTree();
 
         // Get the first browsing context information object from the list
-        BrowsingContextInfo info = contextInfo.get(0);
+        BrowsingContextInfo info = contextInfo.getFirst();
 
         // Close the browsing context
         browsingContext.close();
@@ -65,16 +65,16 @@ public class BrowsingContextTreeWithChildTest {
         Assert.assertNotNull(browsingContextId);
 
         // Assert that the list of browsing contexts is not empty (meaning the current context is not isolated)
-        Assert.assertTrue(contextInfo.size() > 0);
+        Assert.assertFalse(contextInfo.isEmpty());
 
         // Assert that the first context has child contexts (meaning it's not a leaf node)
-        Assert.assertTrue(info.getChildren().size() > 0);
+        Assert.assertFalse(info.getChildren().isEmpty());
 
         // Assert that the ID of the first context matches the previously obtained context ID
         Assert.assertEquals(contextId, info.getId());
 
         // Assert that the first child context's URL contains the string "formPage.html"
-        Assert.assertTrue(info.getChildren().get(0).getUrl().contains("formPage.html"));
+        Assert.assertTrue(info.getChildren().getFirst().getUrl().contains("formPage.html"));
     }
 
 }

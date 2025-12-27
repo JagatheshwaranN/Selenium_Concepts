@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+    <test thread-count="5" name="Browsing Context">
+        <classes>
+            <class name="concepts.browsingcontext.BrowsingContextTreeTest"/>
+            <class name="concepts.browsingcontext.BrowsingContextTreeWithChildTest"/>
+            <class name="concepts.browsingcontext.BrowsingContextTreeWithDepthTest"/>
+            <class name="concepts.browsingcontext.CloseBrowsingContextTabsTest"/>
+            <class name="concepts.browsingcontext.CloseBrowsingContextWindowsTest"/>
+            <class name="concepts.browsingcontext.CreateBrowsingContextForHandleTest"/>
+            <class name="concepts.browsingcontext.CreateBrowsingContextTabTest"/>
+            <class name="concepts.browsingcontext.CreateBrowsingContextWindowTest"/>
+            <class name="concepts.browsingcontext.NavigationResultTest"/>
+            <class name="concepts.browsingcontext.NavigationResultWithReadinessTest"/>
+            <class name="concepts.browsingcontext.OpenTabWithReferenceContextTest"/>
+            <class name="concepts.browsingcontext.OpenWindowWithReferenceContextTest"/>
+            <class name="concepts.browsingcontext.TopLevelBrowsingContextTest"/>
+        </classes>
+    </test>
+</suite>

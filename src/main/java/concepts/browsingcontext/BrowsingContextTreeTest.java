@@ -61,7 +61,7 @@ public class BrowsingContextTreeTest {
         Assert.assertNotNull(browsingContextId);
 
         // Assert that the list of browsing contexts is not empty (meaning the current context is not isolated)
-        Assert.assertTrue(contextInfo.size() > 0);
+        Assert.assertFalse(contextInfo.isEmpty());
     }
 
 }
