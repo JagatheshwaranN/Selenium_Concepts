@@ -36,7 +36,7 @@ public class SSLSecurityIssueTest {
         driver.get("https://untrusted-root.badssl.com/");
 
         // Compare the expected title with the actual title and assert their equality
-        Assert.assertEquals(expectedTitle, driver.getTitle(), "Actual title does not match expected title.");
+        Assert.assertEquals(driver.getTitle(), expectedTitle, "Actual title does not match expected title.");
     }
 
     @AfterMethod

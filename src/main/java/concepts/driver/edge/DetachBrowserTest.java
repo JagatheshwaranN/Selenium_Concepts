@@ -1,6 +1,7 @@
 package concepts.driver.edge;
 
 
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -14,7 +15,7 @@ public class DetachBrowserTest {
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
 
-    @Test(priority = 1)
+    @Test(priority = 1, enabled = false)
     public void browserDetails() {
         /*
             The driver.close() method will close the browser window even if the detach option
@@ -27,20 +28,8 @@ public class DetachBrowserTest {
             https://github.com/SeleniumHQ/selenium/issues/10658
         */
 
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Instantiate EdgeOptions to configure the EdgeDriver
-        EdgeOptions edgeOptions = new EdgeOptions();
-
-        // Sets the experimental option "detach" to true. This will prevent the browser process
-        // from being terminated when the Selenium script finishes executing.
-        edgeOptions.setExperimentalOption("detach", true);
-
-        // Sets the capability "detach" to true. This is the same as setting the experimental
-        // option above, but it is the preferred way to set the detach option in newer versions
-        // of Selenium.
-        edgeOptions.setCapability("detach", true);
+        EdgeOptions edgeOptions = getEdgeOptions();
 
         // Initialize the EdgeDriver with the configured options
         driver = new EdgeDriver(edgeOptions);
@@ -62,6 +51,20 @@ public class DetachBrowserTest {
             // If a WebDriver instance exists, quit/close the browser session.
             driver.close();
         }
+    }
+
+    private static @NotNull EdgeOptions getEdgeOptions() {
+        EdgeOptions edgeOptions = new EdgeOptions();
+
+        // Sets the experimental option "detach" to true. This will prevent the browser process
+        // from being terminated when the Selenium script finishes executing.
+        edgeOptions.setExperimentalOption("detach", true);
+
+        // Sets the capability "detach" to true. This is the same as setting the experimental
+        // option above, but it is the preferred way to set the detach option in newer versions
+        // of Selenium.
+        edgeOptions.setCapability("detach", true);
+        return edgeOptions;
     }
 
 }

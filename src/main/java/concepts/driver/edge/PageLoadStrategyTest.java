@@ -44,7 +44,7 @@ public class PageLoadStrategyTest {
         driver.get("https://unsplash.com/t/people");
 
         // Compare the expected title with the actual title and assert their equality
-        Assert.assertEquals(expectedTitle, driver.getTitle(), "Actual title does not match expected title.");
+        Assert.assertEquals(driver.getTitle(), expectedTitle, "Actual title does not match expected title.");
     }
 
     @AfterMethod

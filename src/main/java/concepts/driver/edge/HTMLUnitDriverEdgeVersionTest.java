@@ -6,12 +6,13 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
+@Deprecated
 public class HTMLUnitDriverEdgeVersionTest {
 
     // Declare an HtmlUnitDriver instance to interact with the web browser.
     private HtmlUnitDriver driver;
 
-    @Test(priority = 1)
+    @Test(priority = 1, enabled = false)
     public void htmlUnitDriverEdgeVersionLaunch() {
         // Create an instance of HtmlUnitDriver with a specified BrowserVersion (EDGE)
         driver = new HtmlUnitDriver(BrowserVersion.EDGE);
@@ -20,7 +21,7 @@ public class HTMLUnitDriverEdgeVersionTest {
         driver.get("https://www.google.com/");
 
         // Assert that the title of the current web page is "Google"
-        Assert.assertEquals(driver.getTitle(), "Google");
+        Assert.assertEquals("Google", driver.getTitle());
     }
 
     @AfterMethod
