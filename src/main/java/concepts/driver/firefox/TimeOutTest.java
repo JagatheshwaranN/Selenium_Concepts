@@ -1,5 +1,6 @@
 package concepts.driver.firefox;
 
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -8,6 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.time.Duration;
 
 public class TimeOutTest {
@@ -18,12 +20,31 @@ public class TimeOutTest {
     @Test(priority = 1)
     public void waitTimeout() {
         // Define the expected title for comparison
-        String expectedTitle = "Online Tutorials, Courses, and eBooks Library | Tutorialspoint";
-
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
+        String expectedTitle = "Selenium";
 
         // Instantiate FirefoxOptions to configure the FirefoxDriver
+        FirefoxOptions firefoxOptions = getFirefoxOptions();
+
+        // Initialize the FirefoxDriver with the configured options
+        driver = new FirefoxDriver(firefoxOptions);
+
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/SiteLoadDelay.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
+
+        // Find and click the button using its XPath
+        driver.findElement(By.xpath("//button[@onclick='load()']")).click();
+
+        // Check if the element with the class "selenium_webdriver" is displayed
+        driver.findElement(By.cssSelector("#selenium_webdriver")).isDisplayed();
+
+        // Compare the expected title with the actual title and assert their equality
+        Assert.assertEquals(driver.getTitle(), expectedTitle, "Actual title does not match expected title.");
+    }
+
+    private static @NotNull FirefoxOptions getFirefoxOptions() {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
 
         // Set the page load timeout to 10 seconds to define the maximum amount of time to wait for a page to load
@@ -34,21 +55,7 @@ public class TimeOutTest {
 
         // Set the script timeout to 10 seconds to define the maximum amount of time to wait for an asynchronous script to finish execution
         firefoxOptions.setScriptTimeout(Duration.ofSeconds(10));
-
-        // Initialize the FirefoxDriver with the configured options
-        driver = new FirefoxDriver(firefoxOptions);
-
-        // Navigate to the specified file URL
-        driver.get("file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/SiteLoadDelay.html");
-
-        // Find and click the button using its XPath
-        driver.findElement(By.xpath("//button[@onclick='load()']")).click();
-
-        // Check if the element with the class "logo-desktop" is displayed
-        driver.findElement(By.cssSelector(".logo-desktop")).isDisplayed();
-
-        // Compare the expected title with the actual title and assert their equality
-        Assert.assertEquals(expectedTitle, driver.getTitle(), "Actual title does not match expected title.");
+        return firefoxOptions;
     }
 
     @AfterMethod

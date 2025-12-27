@@ -15,9 +15,6 @@ public class FirefoxHeadlessModeTest {
 
     @BeforeMethod
     public void setUp() {
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Create FirefoxOptions instance
         FirefoxOptions firefoxOptions = new FirefoxOptions();
 

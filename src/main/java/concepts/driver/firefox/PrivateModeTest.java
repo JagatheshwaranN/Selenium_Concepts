@@ -14,9 +14,6 @@ public class PrivateModeTest {
 
     @Test(priority = 1)
     public void openFirefoxInPrivate() {
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Instantiate FirefoxOptions to configure the FirefoxDriver
         FirefoxOptions firefoxOptions = new FirefoxOptions();
 

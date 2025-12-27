@@ -19,16 +19,27 @@
 <!--            <class name="concepts.driver.chrome.service.ChromeServiceTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
-    <test thread-count="5" name="Edge-Driver">
+<!--    <test thread-count="5" name="Edge-Driver">-->
+<!--        <classes>-->
+<!--            <class name="concepts.driver.edge.BrowserDetailsTest"/>-->
+<!--            <class name="concepts.driver.edge.DetachBrowserTest"/>-->
+<!--            <class name="concepts.driver.edge.EdgeHeadlessModeTest"/>-->
+<!--            <class name="concepts.driver.edge.MaximizeBrowserWindowTest"/>-->
+<!--            <class name="concepts.driver.edge.PageLoadStrategyTest"/>-->
+<!--            <class name="concepts.driver.edge.PrivateModeTest"/>-->
+<!--            <class name="concepts.driver.edge.SSLSecurityIssueTest"/>-->
+<!--            <class name="concepts.driver.edge.TimeOutTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+    <test thread-count="5" name="Firefox-Driver">
         <classes>
-            <class name="concepts.driver.edge.BrowserDetailsTest"/>
-            <class name="concepts.driver.edge.DetachBrowserTest"/>
-            <class name="concepts.driver.edge.EdgeHeadlessModeTest"/>
-            <class name="concepts.driver.edge.MaximizeBrowserWindowTest"/>
-            <class name="concepts.driver.edge.PageLoadStrategyTest"/>
-            <class name="concepts.driver.edge.PrivateModeTest"/>
-            <class name="concepts.driver.edge.SSLSecurityIssueTest"/>
-            <class name="concepts.driver.edge.TimeOutTest"/>
+            <class name="concepts.driver.firefox.BrowserDetailsTest"/>
+            <class name="concepts.driver.firefox.DetachBrowserTest"/>
+            <class name="concepts.driver.firefox.FirefoxHeadlessModeTest"/>
+            <class name="concepts.driver.firefox.PageLoadStrategyTest"/>
+            <class name="concepts.driver.firefox.PrivateModeTest"/>
+            <class name="concepts.driver.firefox.SSLSecurityIssueTest"/>
+            <class name="concepts.driver.firefox.TimeOutTest"/>
         </classes>
     </test>
 </suite>

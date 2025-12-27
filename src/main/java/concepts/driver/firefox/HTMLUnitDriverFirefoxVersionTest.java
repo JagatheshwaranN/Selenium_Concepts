@@ -1,17 +1,18 @@
 package concepts.driver.firefox;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import junit.framework.Assert;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
+@Deprecated
 public class HTMLUnitDriverFirefoxVersionTest {
 
     // Declare an HtmlUnitDriver instance to interact with the web browser.
     private HtmlUnitDriver driver;
 
-    @Test(priority = 1)
+    @Test(priority = 1, enabled = false)
     public void htmlUnitDriverFirefoxVersionLaunch() {
         // Create an instance of HtmlUnitDriver with a specified BrowserVersion (FIREFOX)
         driver = new HtmlUnitDriver(BrowserVersion.FIREFOX);

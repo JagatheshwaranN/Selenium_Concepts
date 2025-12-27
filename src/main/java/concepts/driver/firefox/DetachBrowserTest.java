@@ -1,6 +1,7 @@
 package concepts.driver.firefox;
 
 
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -14,7 +15,7 @@ public class DetachBrowserTest {
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
 
-    @Test(priority = 1)
+    @Test(priority = 1, enabled = false)
     public void browserDetails() {
         /*
             The driver.close() method will close the browser window even if the detach option
@@ -27,10 +28,20 @@ public class DetachBrowserTest {
             https://github.com/SeleniumHQ/selenium/issues/10658
         */
 
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Instantiate FirefoxOptions to configure the FirefoxDriver
+        FirefoxOptions firefoxOptions = getFirefoxOptions();
+
+        // Initialize the FirefoxDriver with the configured options
+        driver = new FirefoxDriver(firefoxOptions);
+
+        // Starts the Firefox browser in detached mode.
+        driver.get("https://www.google.com/");
+
+        // Asserts that the title of the browser window is "Google".
+        Assert.assertEquals(driver.getTitle(), "Google");
+    }
+
+    private static @NotNull FirefoxOptions getFirefoxOptions() {
         FirefoxOptions firefoxOptions = new FirefoxOptions();
 
         // Sets the option "detach" to true. This will prevent the browser process
@@ -41,15 +52,7 @@ public class DetachBrowserTest {
         // option above, but it is the preferred way to set the detach option in newer versions
         // of Selenium.
         firefoxOptions.setCapability("detach", true);
-
-        // Initialize the FirefoxDriver with the configured options
-        driver = new FirefoxDriver(firefoxOptions);
-
-        // Starts the Firefox browser in detached mode.
-        driver.get("https://www.google.com/");
-
-        // Asserts that the title of the browser window is "Google".
-        Assert.assertEquals(driver.getTitle(), "Google");
+        return firefoxOptions;
     }
 
     @AfterMethod
