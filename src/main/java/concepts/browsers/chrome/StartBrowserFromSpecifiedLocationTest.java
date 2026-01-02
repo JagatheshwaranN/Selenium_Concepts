@@ -21,9 +21,6 @@ public class StartBrowserFromSpecifiedLocationTest {
 
     @Test(priority = 1)
     public void testStartBrowserFromSpecifiedLocation() {
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Instantiate ChromeOptions to configure the ChromeDriver
         chromeOptions = new ChromeOptions();
 
@@ -53,7 +50,7 @@ public class StartBrowserFromSpecifiedLocationTest {
     }
 
     // Method to get a chrome binary path for ChromeOptions
-    private File getChromeLocation(){
+    private File getChromeLocation() {
         // Create a ChromeOptions instance
         chromeOptions = new ChromeOptions();
 

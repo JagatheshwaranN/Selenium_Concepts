@@ -14,9 +14,6 @@ public class ArgumentsTest {
 
     @Test(priority = 1)
     public void testArguments() {
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Instantiate ChromeOptions to configure the ChromeDriver
         ChromeOptions chromeOptions = new ChromeOptions();
 

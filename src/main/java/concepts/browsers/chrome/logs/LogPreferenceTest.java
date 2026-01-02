@@ -23,9 +23,6 @@ public class LogPreferenceTest {
 
     @BeforeMethod
     public void setUp() {
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Create a ChromeOptions instance
         chromeOptions = new ChromeOptions();
 

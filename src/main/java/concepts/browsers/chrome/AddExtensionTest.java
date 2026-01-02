@@ -1,5 +1,6 @@
 package concepts.browsers.chrome;
 
+import com.google.common.util.concurrent.Uninterruptibles;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,7 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.concurrent.TimeUnit;
 
 public class AddExtensionTest {
 
@@ -20,20 +22,20 @@ public class AddExtensionTest {
 
     @Test(priority = 1)
     public void testAddExtension() {
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Instantiate ChromeOptions to configure the ChromeDriver
         ChromeOptions chromeOptions = new ChromeOptions();
 
         // Create a Path object pointing to the extension file
-        Path path = Paths.get("src/main/resources/extension/webextensions-selenium-example.crx");
+        Path path = Paths.get("src/main/resources/extension/chrome/selenium-example");
 
         // Convert the Path to a URI and creating a File object from it
         File extensionFilePath = new File(path.toUri());
-
+//
         // Add the extension file to ChromeOptions
-        chromeOptions.addExtensions(extensionFilePath);
+//        chromeOptions.addExtensions(extensionFilePath);
+        chromeOptions.addArguments(
+                "--load-extension=" + path.toAbsolutePath()
+        );
 
         // Initialize ChromeDriver with ChromeOptions
         driver = new ChromeDriver(chromeOptions);
@@ -46,6 +48,8 @@ public class AddExtensionTest {
 
         // Find an element on the page by its ID
         WebElement element = driver.findElement(By.id("webextensions-selenium-example"));
+
+        Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
 
         // Assert that the element's text matches an expected value
         Assert.assertEquals(element.getText(), "Content injected by webextensions-selenium-example");
