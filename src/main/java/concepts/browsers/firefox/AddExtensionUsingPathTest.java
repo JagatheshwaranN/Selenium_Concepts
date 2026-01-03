@@ -17,9 +17,6 @@ public class AddExtensionUsingPathTest {
 
     @Test(priority = 1)
     public void testAddExtensionUsingPath() {
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Create a Path object pointing to the extension file
         Path path = Paths.get("src/main/resources/extension/selenium-example");
 

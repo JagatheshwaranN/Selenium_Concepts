@@ -1,13 +1,13 @@
 package concepts.browsers.firefox;
 
 import concepts.browsers.FileUtil;
-import junit.framework.Assert;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxDriverService;
 import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -27,11 +27,8 @@ public class FirefoxProfileLocationTest {
 
     @BeforeMethod
     public void setUp() {
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Create a temporary directory to store the Firefox profile
-        File profileDirectory = FileUtil.getTempDirectory("profile_");
+        profileDirectory = FileUtil.getTempDirectory("profile-");
 
         // Build a GeckoDriverService (the driver that controls Firefox)
         // Specify the profile directory to be used for this instance
@@ -58,6 +55,7 @@ public class FirefoxProfileLocationTest {
         System.out.println(profileDirectory.getAbsolutePath());
 
         // Assert that the actual profile path matches the expected one
+        Assert.assertNotNull(location);
         Assert.assertTrue(location.contains(profileDirectory.getAbsolutePath()));
     }
 

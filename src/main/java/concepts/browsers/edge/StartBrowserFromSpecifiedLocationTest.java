@@ -21,9 +21,6 @@ public class StartBrowserFromSpecifiedLocationTest {
 
     @Test(priority = 1)
     public void testStartBrowserFromSpecifiedLocation() {
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Instantiate EdgeOptions to configure the EdgeDriver
         edgeOptions = new EdgeOptions();
 

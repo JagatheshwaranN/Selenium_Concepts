@@ -17,11 +17,8 @@ public class AddExtensionTest {
 
     @Test(priority = 1)
     public void testAddExtension() {
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Create a Path object pointing to the extension file
-        Path path = Paths.get("src/main/resources/extension/selenium-example.xpi");
+        Path path = Paths.get("src/main/resources/extension/firefox/selenium-example.xpi");
 
         // Create a FirefoxDriver instance
         driver = new FirefoxDriver();

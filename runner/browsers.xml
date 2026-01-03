@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Test Suite" parallel="none">
-    <test thread-count="5" name="Chrome Browser">
+    <!--<test thread-count="5" name="Chrome Browser">
         <classes>
             <class name="concepts.browsers.chrome.logs.LogConsoleOutputTest"/>
             <class name="concepts.browsers.chrome.logs.LogDisableBuildCheckTest"/>
@@ -27,6 +27,20 @@
             <class name="concepts.browsers.edge.ArgumentsTest"/>
             <class name="concepts.browsers.edge.ExcludeSwitchesTest"/>
             <class name="concepts.browsers.edge.StartBrowserFromSpecifiedLocationTest"/>
+        </classes>
+    </test>-->
+    <test thread-count="5" name="Firefox Browser">
+        <classes>
+            <class name="concepts.browsers.firefox.logs.LogConsoleOutputTest"/>
+            <class name="concepts.browsers.firefox.logs.LogFileFeaturesTest"/>
+            <class name="concepts.browsers.firefox.logs.LogFileOutputTest"/>
+            <class name="concepts.browsers.firefox.logs.LogWithLevelTest"/>
+            <class name="concepts.browsers.firefox.AddExtensionTest"/>
+            <class name="concepts.browsers.firefox.AddExtensionUsingPathTest"/>
+            <class name="concepts.browsers.firefox.ArgumentsTest"/>
+            <class name="concepts.browsers.firefox.FirefoxProfileLocationTest"/>
+            <class name="concepts.browsers.firefox.RemoveExtensionTest"/>
+            <class name="concepts.browsers.firefox.StartBrowserFromSpecifiedLocationTest"/>
         </classes>
     </test>
 </suite>
