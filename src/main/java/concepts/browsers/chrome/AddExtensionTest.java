@@ -4,6 +4,9 @@ import com.google.common.util.concurrent.Uninterruptibles;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.bidi.webextension.ExtensionPath;
+import org.openqa.selenium.bidi.webextension.InstallExtensionParameters;
+import org.openqa.selenium.bidi.webextension.WebExtension;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
@@ -20,25 +23,30 @@ public class AddExtensionTest {
     // Declare a WebDriver instance to interact with the web browser.
     private WebDriver driver;
 
-    @Test(priority = 1)
+    @Test(priority = 1, enabled = false,
+            description = "Chrome blocks automation-installed extensions on Windows due to security policies"
+    )
     public void testAddExtension() {
         // Instantiate ChromeOptions to configure the ChromeDriver
         ChromeOptions chromeOptions = new ChromeOptions();
+
+        chromeOptions.enableBiDi();
+        chromeOptions.addArguments("--remote-debugging-pipe");
+        chromeOptions.addArguments("--enable-unsafe-extension-debugging");
 
         // Create a Path object pointing to the extension file
         Path path = Paths.get("src/main/resources/extension/chrome/selenium-example");
 
         // Convert the Path to a URI and creating a File object from it
         File extensionFilePath = new File(path.toUri());
-//
-        // Add the extension file to ChromeOptions
-//        chromeOptions.addExtensions(extensionFilePath);
-        chromeOptions.addArguments(
-                "--load-extension=" + path.toAbsolutePath()
-        );
 
         // Initialize ChromeDriver with ChromeOptions
         driver = new ChromeDriver(chromeOptions);
+
+        WebExtension extension = new WebExtension(driver);
+        ExtensionPath extensionPath = new ExtensionPath(path.toString());
+        InstallExtensionParameters parameters = new InstallExtensionParameters(extensionPath);
+        extension.install(parameters);
 
         // Maximize the browser window
         driver.manage().window().maximize();

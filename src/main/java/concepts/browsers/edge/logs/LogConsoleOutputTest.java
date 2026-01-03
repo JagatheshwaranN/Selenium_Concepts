@@ -10,9 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.nio.file.Files;
 
 public class LogConsoleOutputTest {
@@ -28,24 +26,12 @@ public class LogConsoleOutputTest {
 
     @BeforeMethod
     public void setUp() {
-        // Set the system property for the WebDriver to use the JDK HTTP client
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Create a temporary log file using FileUtil and assigning it to logLocation
         logLocation = FileUtil.getTempFile("logsCaptureToConsole", ".log");
 
-        // Redirect standard output to the log file
-        try {
-            // Create a PrintStream object to write to the log file
-            System.setOut(new PrintStream(logLocation));
-        } catch (FileNotFoundException e) {
-            // Handle any file not found exceptions by wrapping them in a RuntimeException
-            throw new RuntimeException(e);
-        }
-
         // Create a EdgeDriverService instance, directing its logs to the standard output (which is now the log file)
         edgeDriverService = new EdgeDriverService.Builder()
-                .withLogOutput(System.out)  // Redirect ChromeDriver logs to the standard output
+                .withLogFile(logLocation)
                 .build();
 
         // Initialize the EdgeDriver with the configured options

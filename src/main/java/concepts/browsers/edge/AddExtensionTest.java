@@ -27,7 +27,7 @@ public class AddExtensionTest {
         EdgeOptions edgeOptions = new EdgeOptions();
 
         // Create a Path object pointing to the extension file
-        Path path = Paths.get("src/main/resources/extension/webextensions-selenium-example.crx");
+        Path path = Paths.get("src/main/resources/extension/edge/webextensions-selenium-example.crx");
 
         // Convert the Path to a URI and creating a File object from it
         File extensionFilePath = new File(path.toUri());
