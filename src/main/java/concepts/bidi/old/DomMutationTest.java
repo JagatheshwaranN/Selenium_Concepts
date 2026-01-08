@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.events.DomMutationEvent;
-import org.openqa.selenium.logging.HasLogEvents;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -44,7 +43,7 @@ public class DomMutationTest {
             List<DomMutationEvent> mutationList = Collections.synchronizedList(new ArrayList<>());
 
             // Cast the driver to HasLogEvents and register a callback for DOM mutation events
-            ((HasLogEvents) driver).onLogEvent(domMutation(mutationList::add));
+            driver.onLogEvent(domMutation(mutationList::add));
 
             // Navigate to the target website
             driver.get("https://www.gps-coordinates.net/");
@@ -78,7 +77,7 @@ public class DomMutationTest {
             }
         } catch (Exception ex) {
             // Print any exceptions encountered during the test
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
     }
 

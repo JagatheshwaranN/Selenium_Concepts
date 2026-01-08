@@ -1,8 +1,8 @@
 package concepts.cdp.bidi_api;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.logging.HasLogEvents;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -35,7 +35,7 @@ public class ElementMutationTest {
 		CopyOnWriteArrayList<WebElement> elementMutation = new CopyOnWriteArrayList<>();
 
 		// Register a listener for DOM mutation events
-		((HasLogEvents) driver).onLogEvent(domMutation(element -> elementMutation.add(element.getElement())));
+		driver.onLogEvent(domMutation(element -> elementMutation.add(element.getElement())));
 
 		// Trigger a DOM mutation by clicking an element
 		driver.findElement(By.id("reveal")).click();
@@ -48,7 +48,7 @@ public class ElementMutationTest {
 		WebElement mutatedElement = driver.findElement(By.id("revealed"));
 
 		// Assert that the mutated element is the expected one
-		Assert.assertEquals(elementMutation.get(0), mutatedElement);
+		Assert.assertEquals(elementMutation.getFirst(), mutatedElement);
 	}
 
 	@AfterMethod

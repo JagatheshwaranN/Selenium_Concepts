@@ -33,6 +33,7 @@ public class NetworkInterceptTest {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Test(priority = 1)
     public void testNetworkIntercept() {
         // Define the expected value
@@ -60,6 +61,7 @@ public class NetworkInterceptTest {
             String source = driver.getPageSource();
 
             // Assert that the intercepted response contains the expected value in its source
+            Assert.assertNotNull(source);
             Assert.assertTrue(source.contains(expectedValue));
         }
     }

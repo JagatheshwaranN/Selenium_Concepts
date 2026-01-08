@@ -51,7 +51,7 @@ public class WebSocketOperationTest {
      * Many modern chat applications, for example, Whatsapp, viber and multiplier games use
      * underneath Websockets to operate. So, we are able to work with them.
      */
-    @Test(priority = 1)
+    @Test(priority = 1, enabled = false, description = "Relies on external PieSocket demo API which may reject connections. Need to create API Key with own account")
     public void testWebSocketOperation() {
         // Define expected values for connection status messages
         String expectedValue1 = "Connection Established";

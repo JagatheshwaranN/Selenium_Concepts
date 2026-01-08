@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+    <test thread-count="5" name="CPD - BIDI API">
+        <classes>
+            <class name="concepts.cdp.bidi_api.BasicAuthenticationTest"/>
+            <class name="concepts.cdp.bidi_api.ConsoleLogTest"/>
+            <class name="concepts.cdp.bidi_api.ElementMutationTest"/>
+            <class name="concepts.cdp.bidi_api.PinTest"/>
+            <class name="concepts.cdp.bidi_api.RequestInterceptTest"/>
+            <class name="concepts.cdp.bidi_api.ResponseRecordTest"/>
+            <class name="concepts.cdp.bidi_api.ResponseTransformTest"/>
+        </classes>
+    </test>
+</suite>
+
+
+
+
+
+
+
+
+
+
+
+
+

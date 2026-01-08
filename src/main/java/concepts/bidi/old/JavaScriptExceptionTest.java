@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -49,12 +50,15 @@ public class JavaScriptExceptionTest {
         // Add a listener to capture JavaScript exceptions
         devTools.getDomains().events().addJavascriptExceptionListener(addEntry);
 
-        // Accessing a local HTML file
-        driver.get("file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/WebTable.html");
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/WebTable.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
         // Locating an element and triggering a JavaScript exception by setting an 'onclick' attribute
         WebElement link = driver.findElement(By.xpath("//div//a[text()='Canada']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
+        driver.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",
                 link, "onclick", "throw new Error('JavaScriptException Demo!')");
 
         // Click the element to trigger the exception
@@ -69,7 +73,7 @@ public class JavaScriptExceptionTest {
             System.out.println("JS Exception SysInfo : " + jse.getSystemInformation());
 
             // Print the stack trace of the exception
-            jse.printStackTrace();
+            jse.getStackTrace();
         }
     }
 

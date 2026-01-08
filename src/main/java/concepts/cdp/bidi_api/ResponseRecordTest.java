@@ -29,7 +29,7 @@ public class ResponseRecordTest {
     @Test
     public void testResponseRecord() {
         // Set expected Content-Type header
-        String expectedContentType = "[application/json; charset=utf-8]";
+        String expectedContentType = "[application/json]";
 
         // Create a list to store captured Content-Type headers
         CopyOnWriteArrayList<String> contentType = new CopyOnWriteArrayList<>();
@@ -45,7 +45,7 @@ public class ResponseRecordTest {
                 })) {
 
             // Navigate to the target URL
-            driver.get("https://reqres.in/api/users/2");
+            driver.get("https://api.restful-api.dev/objects/7");
 
             // Wait for at least one response to be captured
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -53,7 +53,7 @@ public class ResponseRecordTest {
         }
 
         // Assert that the captured Content-Type matches the expected value
-        Assert.assertEquals(contentType.get(0), expectedContentType);
+        Assert.assertEquals(contentType.getFirst(), expectedContentType);
     }
 
     @AfterMethod

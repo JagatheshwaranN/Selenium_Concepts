@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+    <test thread-count="5" name="BIDI">
+        <classes>
+            <class name="concepts.bidi.log.ConsoleLogTest"/>
+            <class name="concepts.bidi.log.JavaScriptErrorLogTest"/>
+            <class name="concepts.bidi.log.JavaScriptErrorLogWithMultiConsumerTest"/>
+            <class name="concepts.bidi.log.JavaScriptErrorTest"/>
+            <class name="concepts.bidi.log.JavaScriptLogTest"/>
+            <class name="concepts.bidi.log.JavaScriptStackTraceLogTest"/>
+        </classes>
+    </test>
+    <test thread-count="5" name="BIDI-Old">
+        <classes>
+            <class name="concepts.bidi.old.BasicAuthenticationTest"/>
+            <class name="concepts.bidi.old.CacheRequestTest"/>
+            <class name="concepts.bidi.old.DomMutationTest"/>
+            <class name="concepts.bidi.old.EventSourceMessageTest"/>
+            <class name="concepts.bidi.old.JavaScriptExceptionTest"/>
+            <class name="concepts.bidi.old.NetworkInterceptTest"/>
+            <class name="concepts.bidi.old.WebSocketOperationTest"/>
+        </classes>
+    </test>
+</suite>
+
+
+
+
+
+
+
+
+
+
+
+
+

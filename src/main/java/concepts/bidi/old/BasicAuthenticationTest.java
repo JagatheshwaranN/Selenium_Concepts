@@ -1,7 +1,6 @@
 package concepts.bidi.old;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.HasAuthentication;
 import org.openqa.selenium.UsernameAndPassword;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -44,7 +43,7 @@ public class BasicAuthenticationTest {
         // Registering authentication credentials (username and password) with the driver
         // Assuming 'driver' implements the 'HasAuthentication' interface
         // (Only basic authentication for "herokuapp.com" will be performed)
-        ((HasAuthentication) driver).register(uriPredicate, UsernameAndPassword.of("admin", "admin"));
+        driver.register(uriPredicate, UsernameAndPassword.of("admin", "admin"));
 
         // Navigate to the target URL
         driver.get("https://the-internet.herokuapp.com/basic_auth");

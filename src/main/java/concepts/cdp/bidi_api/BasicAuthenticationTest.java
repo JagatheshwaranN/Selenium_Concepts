@@ -2,7 +2,6 @@ package concepts.cdp.bidi_api;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Credentials;
-import org.openqa.selenium.HasAuthentication;
 import org.openqa.selenium.UsernameAndPassword;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -38,7 +37,7 @@ public class BasicAuthenticationTest {
 		Supplier<Credentials> authSupplier = UsernameAndPassword.of("admin", "admin");
 
 		// Register the predicate and supplier with the driver for authentication
-		((HasAuthentication) driver).register(uriPredicate, authSupplier);
+		driver.register(uriPredicate, authSupplier);
 
 		// Navigate to a URL that requires Basic Authentication
 		driver.get("https://the-internet.herokuapp.com/basic_auth");

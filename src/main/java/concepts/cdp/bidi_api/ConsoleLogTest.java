@@ -2,7 +2,6 @@ package concepts.cdp.bidi_api;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.logging.HasLogEvents;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -40,7 +39,7 @@ public class ConsoleLogTest {
         CopyOnWriteArrayList<String> messages = new CopyOnWriteArrayList<>();
 
         // Register a listener for console log events
-        ((HasLogEvents) driver).onLogEvent(consoleEvent(element -> messages.add(element.getMessages().get(0))));
+        driver.onLogEvent(consoleEvent(element -> messages.add(element.getMessages().getFirst())));
 
         // Trigger console logs by clicking buttons
         driver.findElement(By.id("consoleLog")).click();
