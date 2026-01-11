@@ -11,7 +11,7 @@ import java.net.URI;
 
 public class SeleniumGridDemo2Test {
 
-	public static ThreadLocal<WebDriver> driverLocal = new ThreadLocal<WebDriver>();
+	public static ThreadLocal<WebDriver> driverLocal = new ThreadLocal<>();
 	public DesiredCapabilities capabilities = new DesiredCapabilities();
 	
 	public WebDriver getDriver() {
@@ -29,7 +29,6 @@ public class SeleniumGridDemo2Test {
 
 	public void launchBrowser(String browser) throws MalformedURLException, InterruptedException {
 		if (browser.equalsIgnoreCase("chrome")) {
-			System.setProperty("webdriver.http.factory", "jdk-http-client");
 			capabilities.setPlatform(Platform.WINDOWS);
 			capabilities.setBrowserName(browser);
 		}

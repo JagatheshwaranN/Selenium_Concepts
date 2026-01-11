@@ -21,13 +21,12 @@ public class HubAndSingleNodeTest {
     @Test
     public void testHubAndSingleNode() {
         String browser = "chrome";
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
         capabilities.setPlatform(Platform.ANY);
         capabilities.setBrowserName(browser);
         ChromeOptions options = new ChromeOptions();
         options.merge(capabilities);
         try {
-            driver = new RemoteWebDriver(URI.create("http://192.168.1.5:4444").toURL(), capabilities);
+            driver = new RemoteWebDriver(URI.create("http://localhost:4444").toURL(), capabilities);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }

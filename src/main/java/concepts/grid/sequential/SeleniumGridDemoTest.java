@@ -1,9 +1,5 @@
 package concepts.grid.sequential;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,9 +10,12 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+
 public class SeleniumGridDemoTest {
 
-	public static ThreadLocal<WebDriver> driverLocal = new ThreadLocal<WebDriver>();
+	public static ThreadLocal<WebDriver> driverLocal = new ThreadLocal<>();
 	public DesiredCapabilities capabilities = new DesiredCapabilities();
 	
 	public WebDriver getDriver() {
@@ -31,30 +30,21 @@ public class SeleniumGridDemoTest {
 	@Test
 	public void launchBrowser(String browser) throws MalformedURLException, InterruptedException {
 
-		ChromeOptions chromeOptions = null;
+		ChromeOptions chromeOptions;
 		if (browser.equalsIgnoreCase("chrome")) {
-			System.setProperty("webdriver.http.factory", "jdk-http-client");
 			capabilities.setPlatform(Platform.WINDOWS);
 			capabilities.setBrowserName(browser);
 			chromeOptions = new ChromeOptions();
-			// Selenium 4.21.0 version bug - Unable to launch session with Grid without below parameter
-			chromeOptions.setEnableDownloads(true);
 			chromeOptions.merge(capabilities);
 		} else if (browser.equalsIgnoreCase("firefox")) {
-			System.setProperty("webdriver.http.factory", "jdk-http-client");
 			capabilities.setPlatform(Platform.WINDOWS);
 			capabilities.setBrowserName(browser);
 			FirefoxOptions options = new FirefoxOptions();
-			// Selenium 4.21.0 version bug - Unable to launch session with Grid without below parameter
-			options.setEnableDownloads(true);
 			options.merge(capabilities);
 		} else if (browser.equalsIgnoreCase("edge")) {
-			System.setProperty("webdriver.http.factory", "jdk-http-client");
 			capabilities.setPlatform(Platform.WINDOWS);
 			capabilities.setBrowserName("MicrosoftEdge");
 			EdgeOptions options = new EdgeOptions();
-			// Selenium 4.21.0 version bug - Unable to launch session with Grid without below parameter
-			options.setEnableDownloads(true);
 			options.merge(capabilities);
 		}
 		WebDriver driver = new RemoteWebDriver((URI.create("http://localhost:4444").toURL()), capabilities);
