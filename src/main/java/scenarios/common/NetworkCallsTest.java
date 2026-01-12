@@ -1,69 +1,60 @@
 package scenarios.common;
 
 import java.time.Duration;
+import java.util.Optional;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.devtools.DevTools;
+import org.openqa.selenium.devtools.v142.network.Network;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.blibli.oss.qa.util.services.NetworkListener;
 import scenarios.DriverConfiguration;
 
 public class NetworkCallsTest {
 
-	// Declare a WebDriver instance to interact with the web browser.
-	private WebDriver driver;
+    private ChromeDriver driver;
 
-	@BeforeMethod
-	public void setUp() {
-		// Set up the WebDriver instance by calling a method named 'browserSetup' from the 'DriverConfiguration' class
-		driver = DriverConfiguration.browserSetup();
-	}
+    @BeforeMethod
+    public void setUp() {
+        driver = (ChromeDriver) DriverConfiguration.browserSetup();
+        DevTools devTools = driver.getDevTools();
+        devTools.createSession();
 
-	@AfterMethod
-	public void tearDown() {
-		// Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
-		if (driver != null) {
-			// If a WebDriver instance exists, quit/close the browser session.
-			driver.quit();
-		}
-	}
+        devTools.send(Network.enable(
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty(),
+                Optional.empty()
+        ));
 
-	@Test(priority = 1)
-	public void testNetworkCalls() {
-		// Start a network listener using the 'startNetworkListener()' method or function
-		NetworkListener networkListener = startNetworkListener();
+        devTools.addListener(Network.responseReceived(), response -> {
+            System.out.println("URL    : " + response.getResponse().getUrl());
+            System.out.println("Status : " + response.getResponse().getStatus());
+        });
+    }
 
-		// Instruct the WebDriver instance (already configured) to navigate to the URL "https://www.selenium.dev/"
-		driver.get("https://www.selenium.dev/");
+    @Test
+    public void testNetworkCalls() {
+        driver.get("https://www.selenium.dev/");
+        waitForPageLoad();
+    }
 
-		// Wait for the page to load completely.
-		waitForPageLoad();
+    @AfterMethod
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 
-		// Create the HAR (HTTP Archive) file after capturing network activity.
-		networkListener.createHarFile();
-	}
-
-	private NetworkListener startNetworkListener() {
-		// Create a new instance of a 'NetworkListener' with the WebDriver instance 'driver' and a file name "NetworkRequest.har"
-		NetworkListener networkListener = new NetworkListener(driver, "NetworkRequest.har");
-
-		// Start capturing network activity.
-		networkListener.start();
-
-		// Return the network listener for further use or reference.
-		return networkListener;
-	}
-
-	private void waitForPageLoad() {
-		// Create a WebDriverWait instance with a timeout of 10 seconds.
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-		// Use an ExpectedCondition with JavaScript expression to wait until the document's ready state is 'complete.'
-		wait.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete'"));
-	}
-
+    private void waitForPageLoad() {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.jsReturnsValue(
+                        "return document.readyState === 'complete'"
+                ));
+    }
 }

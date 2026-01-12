@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+    <test thread-count="5" name="Alerts">
+        <classes>
+            <class name="scenarios.common.AjaxCallTest"/>
+            <class name="scenarios.common.DisableExtensionsTest"/>
+            <class name="scenarios.common.NetworkCallsTest"/>
+            <class name="scenarios.common.POMWithCacheLookupTest"/>
+            <class name="scenarios.common.SiteNotificationTest"/>
+            <class name="scenarios.common.SyncUpIssueUsingCustomApproachTest"/>
+            <class name="scenarios.common.TooltipTest"/>
+        </classes>
+    </test>
+</suite>

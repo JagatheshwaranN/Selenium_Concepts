@@ -10,6 +10,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.io.File;
+
 
 public class SyncUpIssueUsingCustomApproachTest {
 
@@ -33,8 +35,11 @@ public class SyncUpIssueUsingCustomApproachTest {
 
     @Test(priority = 1)
     public void testSyncUpIssueUsingCustomApproach() {
-        // Load the web page from a local file
-        driver.get("file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/SiteLoadDelay.html");
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/SiteLoadDelay.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
         // Click on the button with the specified onclick attribute
         driver.findElement(By.xpath("//button[@onclick='load()']")).click();
