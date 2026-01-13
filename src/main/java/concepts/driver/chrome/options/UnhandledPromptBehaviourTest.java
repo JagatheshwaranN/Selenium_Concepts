@@ -41,7 +41,7 @@ public class UnhandledPromptBehaviourTest {
             WebDriver driver = new ChromeDriver(chromeOptions);
 
             // Open the HTML page with the prompt
-            driver.get("file:///D:/Environment_Collection/Intellij_Env/Selenium_Concepts/src/main/resources/supportFiles/prompt.html");
+            driver.get("file:///D:/Environment_Collection/Intellij_Env/Selenium_Concepts/src/main/resources/supportFiles/Prompt.html");
 
             // Click the button to trigger the prompt
             driver.findElement(By.tagName("button")).click();

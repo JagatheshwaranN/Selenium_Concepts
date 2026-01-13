@@ -19,9 +19,6 @@ public class DisableExtensionsTest {
 
 	@Test(priority = 1)
 	public void testDisableExtension() {
-		// Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
-		System.setProperty("webdriver.http.factory", "jdk-http-client");
-
 		// Create ChromeOptions instance to configure the browser.
 		chromeOptions = new ChromeOptions();
 

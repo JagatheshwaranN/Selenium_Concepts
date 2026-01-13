@@ -8,6 +8,8 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import scenarios.DriverConfiguration;
 
+import java.io.File;
+
 
 public class POMWithCacheLookupTest {
 
@@ -33,8 +35,11 @@ public class POMWithCacheLookupTest {
 		// Set up the WebDriver instance by calling the 'browserSetup' method or function
 		driver = DriverConfiguration.browserSetup();
 
-		// Navigate to the website you want to test.
-		driver.get("file:///D://Environment_Collection//Eclipse_Env//Workspace//Selenium_Concepts//src//main//resources//supportFiles//DisabledElement.html");
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/DisabledElement.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
 		// Initialize a Page Object instance for HandlePOMWithCacheLookupTest class using PageFactory.
 		POMWithCacheLookupTest pageObject = PageFactory.initElements(driver, POMWithCacheLookupTest.class);

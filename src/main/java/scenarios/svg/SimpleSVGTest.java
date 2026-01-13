@@ -30,7 +30,7 @@ public class SimpleSVGTest {
     @Test
     public void testSimpleSVG() {
         // Navigate to the local HTML file containing the SVG element
-        driver.get("file:///D:/Environment_Collection/Intellij_Env/Selenium_Concepts/src/main/resources/supportFiles/svg.html");
+        driver.get("file:///D:/Environment_Collection/Intellij_Env/Selenium_Concepts/src/main/resources/supportFiles/SVG.html");
 
         // Find the SVG text element using XPath
         String text = driver.findElement(By.xpath("//*[name()='svg']//*[local-name()='text']")).getText();

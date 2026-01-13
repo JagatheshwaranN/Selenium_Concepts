@@ -83,7 +83,7 @@ public class DatePickerSingleDateDisplayTest {
             driver.findElement(By.xpath("//td[@data-handler='selectDay']//a[text()='" + day + "']")).click();
         } catch (Exception ex) {
             // Print any exceptions that occur during the click action
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
 
     }

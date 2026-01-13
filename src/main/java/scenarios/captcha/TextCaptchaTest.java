@@ -34,9 +34,6 @@ public class TextCaptchaTest {
 
     @BeforeMethod
     public void setUp() {
-        // Set the WebDriver HTTP factory to "jdk-http-client" for improved HTTP request handling.
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-
         // Create ChromeOptions instance to configure the browser.
         ChromeOptions chromeOptions = new ChromeOptions();
 
@@ -68,7 +65,7 @@ public class TextCaptchaTest {
         WebDriverWait wait = new WebDriverWait(driver, WAIT_TIMEOUT);
 
         // Wait for a Login link to be visible and click it
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[normalize-space()='LOGIN']"))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[normalize-space()='LOGIN / REGISTER']"))).click();
 
         // Wait for login modal to be visible
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='modal-content']")));
