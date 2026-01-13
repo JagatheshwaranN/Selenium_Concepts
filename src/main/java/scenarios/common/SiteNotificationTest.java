@@ -19,9 +19,6 @@ public class SiteNotificationTest {
 
 	@BeforeMethod
 	public void setUp() {
-		// Set the WebDriver property for HTTP factory to jdk-http-client
-		System.setProperty("webdriver.http.factory", "jdk-http-client");
-
 		// Create a ChromeOptions object to configure Chrome WebDriver settings
 		ChromeOptions chromeOptions = new ChromeOptions();
 
@@ -64,7 +61,7 @@ public class SiteNotificationTest {
 		driver.get("https://www.facebook.com/");
 
 		// Assert that the title of the current web page matches the expected title.
-		Assert.assertEquals(driver.getTitle(), "Facebook – log in or sign up");
+		Assert.assertEquals("Facebook - log in or sign up", driver.getTitle());
 	}
 
 }

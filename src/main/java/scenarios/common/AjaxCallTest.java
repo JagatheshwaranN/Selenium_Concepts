@@ -1,6 +1,7 @@
 package scenarios.common;
 
 import java.time.Duration;
+import java.util.Objects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -63,7 +64,7 @@ public class AjaxCallTest {
 
 		// Create a WebDriverWait instance with a specified timeout (WAIT_TIMEOUT)
 		// and wait for the 'flipkart' element to be clickable within the given timeout
-		new WebDriverWait(driver, WAIT_TIMEOUT).until(ExpectedConditions.elementToBeClickable(flipkart)).click();
+		Objects.requireNonNull(new WebDriverWait(driver, WAIT_TIMEOUT).until(ExpectedConditions.elementToBeClickable(flipkart))).click();
 
 		// Get the current URL of the web page and store it in the 'result' variable
 		String result = driver.getCurrentUrl();
@@ -82,7 +83,7 @@ public class AjaxCallTest {
 
 			// Execute a JavaScript snippet to check if jQuery.active is equal to 0
 			// This indicates that there are no active jQuery AJAX requests
-			String jsResult = ((JavascriptExecutor) driver).executeScript("return jQuery.active==0").toString();
+			String jsResult = Objects.requireNonNull(((JavascriptExecutor) driver).executeScript("return jQuery.active==0")).toString();
 
 			// Return true if the result of the JavaScript execution is "true", indicating no active requests
 			return jsResult.equals("true");
@@ -97,7 +98,7 @@ public class AjaxCallTest {
 
 			// Execute a JavaScript snippet to retrieve the value of document.readyState
 			// This represents the loading state of the web page
-			String pageReadyState = ((JavascriptExecutor) driver).executeScript("return document.readyState").toString();
+			String pageReadyState = Objects.requireNonNull(((JavascriptExecutor) driver).executeScript("return document.readyState")).toString();
 
 			// Return true if the pageReadyState is "complete," indicating that the page has fully loaded
 			return pageReadyState.equals("complete");

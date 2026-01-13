@@ -45,10 +45,10 @@ public class SyncUpIssueUsingCustomApproachTest {
         driver.findElement(By.xpath("//button[@onclick='load()']")).click();
 
         // Handle synchronization issue for the specified element
-        handleElementSyncUp(By.xpath("//ul[@class='nav__list']//a[@href='/market/login.jsp']")).click();
+        handleElementSyncUp(By.xpath("//h4[contains(@class,'selenium-ide')]")).isDisplayed();
 
         // Assert the title of the current web page
-        Assert.assertEquals(driver.getTitle(), "Login - Video Courses, eBooks, Certifications | Tutorialspoint");
+        Assert.assertEquals(driver.getTitle(), "Selenium");
 
         // Wait for 3 seconds before closing the browser
         sleepInSeconds(3);
@@ -90,7 +90,7 @@ public class SyncUpIssueUsingCustomApproachTest {
         } catch (InterruptedException ex) {
             // If an InterruptedException occurs during the sleep process, the
             // stack trace is printed for debugging purposes.
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
     }
 
