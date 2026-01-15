@@ -1,5 +1,6 @@
 package scenarios.datepicker;
 
+import com.google.common.util.concurrent.Uninterruptibles;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +10,10 @@ import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class DatePickerDualDateDisplay1Test {
 
@@ -33,8 +37,12 @@ public class DatePickerDualDateDisplay1Test {
 
     @Test
     public void testDatePicker() {
-        // Call the method to select the date "5th April 2024" from the date picker
-        selectDateFromDatePicker("5", "April", "2024");
+        LocalDate dateToSelect = LocalDate.now().plusDays(60);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy");
+        String[] dateToSelectArray = formatter.format(dateToSelect).split(" ");
+
+        // Call the method to select the date from the date picker
+        selectDateFromDatePicker(dateToSelectArray[0], dateToSelectArray[1], dateToSelectArray[2]);
     }
 
     // Helper method to select the Date from the Date Picker
@@ -48,14 +56,20 @@ public class DatePickerDualDateDisplay1Test {
         // Close the login popup (assuming it exists)
         driver.findElement(By.xpath("//span[contains(@class,'logSprite icClose')]")).click();
 
+        // Pause execution for 5 seconds
+        Uninterruptibles.sleepUninterruptibly(5, TimeUnit.SECONDS);
+
         // Click on the "Departure" date field
-        driver.findElement(By.xpath("//span[text()='Departure']/following-sibling::p[contains(@class,'fswWidgetTitle')]")).click();
+        driver.findElement(By.xpath("//span[text()='Departure']")).click();
+
+        // Pause execution for 3 seconds
+        Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
 
         // Find all elements containing the current month and year details
         List<WebElement> monthYearDetailList = driver.findElements(By.xpath("//div[@class='DayPicker-Month']//div[@class='DayPicker-Caption']//div"));
 
         // Extract the current month and year from the first element
-        String monthYearText = monthYearDetailList.get(0).getText();
+        String monthYearText = monthYearDetailList.getFirst().getText();
 
         // Print the extracted month and year (for debugging purposes)
         System.out.println(getMonthYear(monthYearText)[0]);
@@ -69,11 +83,11 @@ public class DatePickerDualDateDisplay1Test {
 
             if (!monthNavigator.isEmpty()) {
                 // Click "Next Month" button to navigate
-                monthNavigator.get(0).click();
+                monthNavigator.getFirst().click();
 
                 // Update the monthYearDetailList after navigation
                 monthYearDetailList = driver.findElements(By.xpath("//div[@class='DayPicker-Month']//div[@class='DayPicker-Caption']//div"));
-                monthYearText = monthYearDetailList.get(0).getText();
+                monthYearText = monthYearDetailList.getFirst().getText();
 
             } else {
                 // If "Next Month" doesn't exist, navigate to the next year using the second element
@@ -92,7 +106,7 @@ public class DatePickerDualDateDisplay1Test {
             driver.findElement(By.xpath("//div[@class='DayPicker-Month']//div[contains(text(),'" + getMonthYear(monthYearText)[0].trim() + "')]//parent::div//following-sibling::div[@class='DayPicker-Body']//div[contains(@class,'DayPicker-Day')]//p[text()='" + day + "']")).click();
         } catch (Exception ex) {
             // Print any exceptions that occur during the click action
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
     }
 

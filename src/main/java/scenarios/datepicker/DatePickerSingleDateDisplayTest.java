@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DatePickerSingleDateDisplayTest {
 
@@ -32,8 +34,12 @@ public class DatePickerSingleDateDisplayTest {
 
     @Test
     public void testDatePicker() {
-        // Call the method to select the date "5th April 2024" from the date picker
-        selectDateFromDatePicker("5", "April", "2024");
+        LocalDate dateToSelect = LocalDate.now().plusDays(60);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy");
+        String[] dateToSelectArray = formatter.format(dateToSelect).split(" ");
+
+        // Call the method to select the date from the date picker
+        selectDateFromDatePicker(dateToSelectArray[0], dateToSelectArray[1], dateToSelectArray[2]);
     }
 
     // Helper method to select the Date from the Date Picker
