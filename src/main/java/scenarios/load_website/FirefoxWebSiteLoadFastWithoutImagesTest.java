@@ -1,4 +1,4 @@
-package scenarios.website_load;
+package scenarios.load_website;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +9,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -21,9 +22,6 @@ public class FirefoxWebSiteLoadFastWithoutImagesTest {
 
 	@BeforeMethod
 	public void setUp() {
-		// Set the system property for the HTTP factory
-		System.setProperty("webdriver.http.factory", "jdk-http-client");
-
 		// Initialize FirefoxOptions
 		FirefoxOptions firefoxOptions = new FirefoxOptions();
 
@@ -42,6 +40,15 @@ public class FirefoxWebSiteLoadFastWithoutImagesTest {
 		// Maximize the browser window
 		driver.manage().window().maximize();
 	}
+
+    @AfterMethod
+    public void tearDown() {
+        // Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
+        if (driver != null) {
+            // If a WebDriver instance exists, quit/close the browser session.
+            driver.quit();
+        }
+    }
 
 	@Test(priority = 1)
 	public void testWebSiteLoadFastWithoutImagesOnFirefox(){

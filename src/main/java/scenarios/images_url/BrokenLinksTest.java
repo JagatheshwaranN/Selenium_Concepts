@@ -86,10 +86,10 @@ public class BrokenLinksTest {
             }
         } catch (MalformedURLException ex) {
             // Handle MalformedURLException by printing the stack trace.
-            ex.printStackTrace();
+            ex.getStackTrace();
         } catch (IOException ex) {
             // Handle IOException by printing the stack trace.
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
     }
 

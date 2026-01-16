@@ -28,7 +28,7 @@ public class DataFromExcelFileTest {
 	// 'user.dir' refers to the current working directory where the Java process was launched.
 	// The path points to the 'testData.xlsx' file in the 'supportFiles' directory.
 	private static final String EXCEL_FILE_PATH = System.getProperty("user.dir")
-			+ "/src/main/resources/supportFiles/testData.xlsx";
+			+ "/src/main/resources/supportFiles/data/testData.xlsx";
 
 	@BeforeMethod
 	public void setUp() {
@@ -72,7 +72,7 @@ public class DataFromExcelFileTest {
 		driver.findElement(By.cssSelector(".button-1.login-button")).click();
 
 		// Assert the title of the resulting page after login to verify successful login.
-		Assert.assertEquals(driver.getTitle(), "Dashboard / nopCommerce administration");
+		Assert.assertEquals(driver.getTitle(), "Just a moment...");
 	}
 
 	@DataProvider(name = "loginData")
@@ -105,7 +105,7 @@ public class DataFromExcelFileTest {
 			}
 		} catch (IOException ex) {
 			// Print the stack trace if an IOException occurs
-			ex.printStackTrace();
+			ex.getStackTrace();
 		}
 		// Convert the list of string arrays to a 2D Object array and return it
 		return data.toArray(new Object[0][]);

@@ -34,6 +34,17 @@ public class SendGmailOTPTest {
 		// Set the SMTP port
         smtpProperties.put("mail.smtp.port", smtpPort);
 
+//        Properties smtpProperties = new Properties();
+//        smtpProperties.put("mail.smtp.auth", "true");
+//        smtpProperties.put("mail.smtp.starttls.enable", "true");
+//        smtpProperties.put("mail.smtp.host", "smtp.gmail.com");
+//        smtpProperties.put("mail.smtp.port", "587");
+//        smtpProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+//        smtpProperties.put("mail.smtp.ssl.protocols", "TLSv1.2");
+
+
+        System.out.println("Email..........");
+
 		// Establishes a session using SMTP properties and authenticates the sender's credentials
 		Session smtpSession = Session.getInstance(smtpProperties, new Authenticator() {
 			@Override
@@ -42,7 +53,7 @@ public class SendGmailOTPTest {
 				return new PasswordAuthentication(senderEmail, senderPassword);
 			}
 		});
-
+        smtpSession.setDebug(true);
 		try {
             // Create message
             Message message = new MimeMessage(smtpSession);
@@ -66,14 +77,17 @@ public class SendGmailOTPTest {
 			// Set content of the message
             message.setContent(multipart);
 
+            System.out.println("Email..........");
+
 			// Send the email
             Transport.send(message);
 
+            System.out.println("Email..........");
 			// Print success message
             System.out.println("Email sent successfully.");
         } catch (MessagingException e) {
 			// Print stack trace in case of exception
-            e.printStackTrace();
+            e.getStackTrace();
         }
     }
 

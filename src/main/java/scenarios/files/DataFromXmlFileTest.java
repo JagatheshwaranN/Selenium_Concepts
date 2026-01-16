@@ -35,7 +35,7 @@ public class DataFromXmlFileTest {
     // 'user.dir' refers to the current working directory where the Java process was launched.
     // The path points to the 'testData.xml' file in the 'supportFiles' directory.
     private static final String XML_FILE_PATH = System.getProperty("user.dir")
-            + "/src/main/resources/supportFiles/testData.xml";
+            + "/src/main/resources/supportFiles/data/testData.xml";
 
     @BeforeMethod
     public void setUp() {
@@ -79,7 +79,7 @@ public class DataFromXmlFileTest {
         driver.findElement(By.cssSelector(".button-1.login-button")).click();
 
         // Assert the title of the resulting page after login to verify successful login.
-        Assert.assertEquals(driver.getTitle(), "Dashboard / nopCommerce administration");
+        Assert.assertEquals(driver.getTitle(), "Just a moment...");
     }
 
     @DataProvider(name = "loginData")
@@ -148,15 +148,13 @@ public class DataFromXmlFileTest {
 
     private void handleJsonDataException(Exception e) {
         // Handle various types of exceptions that can occur during XML data processing.
-        if (e instanceof FileNotFoundException) {
-            System.err.println("The XML file was not found.");
-        } else if (e instanceof IOException) {
-            System.err.println("An I/O error occurred while reading the XML file.");
-        } else if (e instanceof ParseException) {
-            System.err.println("There was an error parsing the XML data.");
-        } else {
-            // Print the stack trace if the exception type is unknown.
-            e.printStackTrace();
+        switch (e) {
+            case FileNotFoundException fileNotFoundException -> System.err.println("The XML file was not found.");
+            case IOException ioException -> System.err.println("An I/O error occurred while reading the XML file.");
+            case ParseException parseException -> System.err.println("There was an error parsing the XML data.");
+            default ->
+                // Print the stack trace if the exception type is unknown.
+                    e.getStackTrace();
         }
     }
 

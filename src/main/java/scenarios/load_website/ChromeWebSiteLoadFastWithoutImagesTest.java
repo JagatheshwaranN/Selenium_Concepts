@@ -1,4 +1,4 @@
-package scenarios.website_load;
+package scenarios.load_website;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,9 +23,6 @@ public class ChromeWebSiteLoadFastWithoutImagesTest {
 
 	@BeforeMethod
 	public void setUp() {
-		// Set the system property for the HTTP factory
-		System.setProperty("webdriver.http.factory", "jdk-http-client");
-
 		// Initialize ChromeOptions
 		ChromeOptions chromeOptions = new ChromeOptions();
 

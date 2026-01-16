@@ -1,6 +1,7 @@
 package scenarios.images_url;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -31,7 +32,8 @@ public class BrokenImagesTest {
 		}
 	}
 
-	@Test(priority = 1)
+	@SuppressWarnings("DataFlowIssue")
+    @Test(priority = 1)
 	public void testBrokenImagesType1() {
 		// Instruct the WebDriver instance (already configured) to navigate to the URL "https://demoqa.com/broken"
 		driver.get("https://demoqa.com/broken");
@@ -58,7 +60,7 @@ public class BrokenImagesTest {
 				}
 			} catch (Exception ex) {
 				// Catch and print any exceptions that may occur during the process
-				ex.printStackTrace();
+				ex.getStackTrace();
 			}
 		}
 	}
@@ -72,7 +74,7 @@ public class BrokenImagesTest {
 		WebElement image = driver.findElement(By.xpath("//img[@src='/images/Toolsqa_1.jpg']"));
 
 		// Check if the 'naturalWidth' attribute of the 'image' WebElement is equal to "0"
-		if (image.getAttribute("naturalWidth").equals("0")) {
+		if (Objects.equals(image.getAttribute("naturalWidth"), "0")) {
 			// If 'naturalWidth' is "0," it indicates that the image is not displayed, so print "Image display Broken"
 			System.out.println("Image display Broken");
 		} else {

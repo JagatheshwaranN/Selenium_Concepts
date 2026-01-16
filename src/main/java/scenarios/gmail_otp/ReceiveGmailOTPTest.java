@@ -52,7 +52,7 @@ public class ReceiveGmailOTPTest {
 			}
 		} catch (Exception e) {
 			// Prints the stack trace if an exception occurs
-			e.printStackTrace();
+			e.getStackTrace();
 			// Returns an empty string in case of an exception
 			return "";
 		}

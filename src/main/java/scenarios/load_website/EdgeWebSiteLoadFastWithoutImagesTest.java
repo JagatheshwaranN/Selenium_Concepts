@@ -1,4 +1,4 @@
-package scenarios.website_load;
+package scenarios.load_website;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -21,9 +21,6 @@ public class EdgeWebSiteLoadFastWithoutImagesTest {
 
 	@BeforeMethod
 	public void setUp() {
-		// Set the system property for the HTTP factory
-		System.setProperty("webdriver.http.factory", "jdk-http-client");
-
 		// Initialize EdgeOptions
 		EdgeOptions edgeOptions = new EdgeOptions();
 
@@ -45,6 +42,14 @@ public class EdgeWebSiteLoadFastWithoutImagesTest {
 		driver.manage().window().maximize();
 	}
 
+    @AfterMethod
+    public void tearDown() {
+        // Check if the 'driver' variable is not null, indicating that a WebDriver instance exists.
+        if (driver != null) {
+            // If a WebDriver instance exists, quit/close the browser session.
+            driver.quit();
+        }
+    }
 
 	@Test(priority = 1)
 	public void testWebSiteLoadFastWithoutImagesOnEdge(){

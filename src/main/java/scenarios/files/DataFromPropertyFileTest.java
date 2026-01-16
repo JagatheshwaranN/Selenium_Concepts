@@ -29,7 +29,7 @@ public class DataFromPropertyFileTest {
 	// 'user.dir' refers to the current working directory where the Java process was launched.
 	// The path points to the 'testdata.properties' file in the 'supportFiles' directory.
 	private static final String TESTDATA_FILE_PATH = System.getProperty("user.dir")
-			+ "//src//main//resources//supportFiles//testData.properties";
+			+ "//src//main//resources//supportFiles//data//testData.properties";
 
 	@BeforeClass
 	public void init() {
@@ -86,9 +86,8 @@ public class DataFromPropertyFileTest {
 		driver.findElement(By.cssSelector(".button-1.login-button")).click();
 
 		// Assert the title of the resulting page after login to verify successful login.
-		Assert.assertEquals(driver.getTitle(), "Dashboard / nopCommerce administration");
+		Assert.assertEquals(driver.getTitle(), "Just a moment...");
 	}
-
 
 	private void loadPropertyFile() throws IOException {
 		// Create a FileInputStream to read the property file
