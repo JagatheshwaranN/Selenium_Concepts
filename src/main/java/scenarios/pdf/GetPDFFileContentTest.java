@@ -52,7 +52,7 @@ public class GetPDFFileContentTest {
             Assert.assertTrue(pdfFileContent.contains("PDF BOOKMARK SAMPLE"));
         } catch (IOException ex) {
             // If an IOException occurs, print the stack trace to identify the issue
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
     }
 

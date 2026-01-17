@@ -3,6 +3,7 @@ package takeaway;
 import org.openqa.selenium.WebDriver;
 
 import java.util.List;
+import java.util.Objects;
 
 public class WindowsHandler {
 
@@ -13,7 +14,7 @@ public class WindowsHandler {
             if(!mainBrowserWindow.equalsIgnoreCase(currentBrowserWindow)){
                 var childBrowserWindow = driver.switchTo().window(currentBrowserWindow);
                 childBrowserWindow.manage().window().maximize();
-                if(driver.getTitle().equalsIgnoreCase(title)){
+                if(Objects.requireNonNull(driver.getTitle()).equalsIgnoreCase(title)){
                     action.run();
                 }
                 if(shouldClose) {
