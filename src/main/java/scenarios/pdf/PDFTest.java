@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -41,8 +42,12 @@ public class PDFTest {
             // Wrap the input stream in a buffered input stream for efficiency
             BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 
+            byte[] pdfBytes;
+
+            pdfBytes = bufferedInputStream.readAllBytes();   // Java 9+
+
             // Load the PDF document from the buffered input stream
-           // document = PDDocument.load(bufferedInputStream);
+           document = Loader.loadPDF(pdfBytes);
         } catch (IOException ex) {
             // If an I/O exception occurs during the loading of the document, print the stack trace
             ex.printStackTrace();

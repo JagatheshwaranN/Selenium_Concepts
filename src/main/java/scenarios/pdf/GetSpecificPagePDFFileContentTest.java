@@ -55,7 +55,7 @@ public class GetSpecificPagePDFFileContentTest {
             Assert.assertTrue(pdfFileContent.contains("Sample Files"));
         } catch (IOException ex) {
             // If an IOException occurs, print the stack trace to identify the issue
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
     }
 

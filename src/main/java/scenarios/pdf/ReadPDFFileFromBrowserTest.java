@@ -1,5 +1,6 @@
 package scenarios.pdf;
 
+import org.apache.pdfbox.Loader;
 import org.apache.poi.util.NotImplemented;
 import scenarios.DriverConfiguration;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -50,7 +51,7 @@ public class ReadPDFFileFromBrowserTest {
     @Test(priority = 1)
     public void testReadPDFFileFromBrowser() {
         // Navigate the WebDriver to a specific URL
-        driver.get("https://www.inkit.com/blog/pdf-the-best-digital-document-management");
+            driver.get("https://www.inkit.com/blog/pdf-the-best-digital-document-management");
 
         // Find the 'Agree' button element
         WebElement agreeButton = driver.findElement(By.xpath("//a[text()='Accept']"));
@@ -75,6 +76,7 @@ public class ReadPDFFileFromBrowserTest {
 
         try {
             // Create a URL object
+            Assert.assertNotNull(pdfFileURL);
             URL url = URI.create(pdfFileURL).toURL();
 
             // Open a URL connection
@@ -89,26 +91,32 @@ public class ReadPDFFileFromBrowserTest {
             // Create a buffered input stream
             BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 
-            // Load the PDF document
-            //PDDocument pdDocument = PDDocument.load(bufferedInputStream);
+            byte[] pdfBytes;
 
-//            // Get the number of pages in the PDF
-//            int pdfFilePages = pdDocument.getNumberOfPages();
-//
-//            // Validate the number of pages
-//            validatePDFPages(pdfFilePages);
-//
-//            // Extract the text from the PDF
-//            String pdfFileContent = extractTextFromPDF(pdDocument);
-//
-//            // Print the PDF content
-//            System.out.println(pdfFileContent);
-//
-//            // Validate the content of the PDF
-//            validatePDFContent(pdfFileContent);
-//
-//            // Close the PDF document
-//            pdDocument.close();
+            try (InputStream is = urlConnection.getInputStream()) {
+                pdfBytes = is.readAllBytes();   // Java 9+
+            }
+
+//             Load the PDF document
+            PDDocument pdDocument = Loader.loadPDF(pdfBytes);
+
+            // Get the number of pages in the PDF
+            int pdfFilePages = pdDocument.getNumberOfPages();
+
+            // Validate the number of pages
+            validatePDFPages(pdfFilePages);
+
+            // Extract the text from the PDF
+            String pdfFileContent = extractTextFromPDF(pdDocument);
+
+            // Print the PDF content
+            System.out.println(pdfFileContent);
+
+            // Validate the content of the PDF
+            validatePDFContent(pdfFileContent);
+
+            // Close the PDF document
+            pdDocument.close();
         } catch (IOException ex) {
 
             // Handle IO exceptions
