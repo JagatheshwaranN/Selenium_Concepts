@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PDF Link Example</title>
+</head>
+<body>
+<h1>PDF Example</h1>
+<p>
+    Open a PDF file
+    <a id="pdf" href="sample.pdf">samplePDF</a>.
+</p>
+<hr>
+<h2>Issues & Notes</h2>
+<ul>
+    <li>
+        <strong>Relative Path:</strong>
+        <p>
+            The <code>href="sample.pdf"</code> is a relative path.
+            This works only if <code>sample.pdf</code> is located in the
+            <strong>same directory</strong> as this HTML file.
+        </p>
+    </li>
+    <li>
+        <strong>Browser Context:</strong>
+        <p>
+            If this HTML is opened using Selenium with
+            <code>driver.get()</code>, the browser must be able to resolve
+            the relative path correctly.
+        </p>
+    </li>
+    <li>
+        <strong>Portability:</strong>
+        <p>
+            Relative paths are preferred over absolute paths because they
+            work across different machines, CI pipelines, and operating systems.
+        </p>
+    </li>
+    <li>
+        <strong>PDF Loading:</strong>
+        <p>
+            Some browsers may open PDFs in a built-in viewer instead of
+            downloading them, which is expected behavior.
+        </p>
+    </li>
+    <li>
+        <strong>Language Attribute:</strong>
+        <p>
+            The <code>lang</code> attribute in the <code>&lt;html&gt;</code> tag
+            is empty. It should be set (for example: <code>lang="en"</code>)
+            for accessibility and standards compliance.
+        </p>
+    </li>
+</ul>
+</body>
+</html>

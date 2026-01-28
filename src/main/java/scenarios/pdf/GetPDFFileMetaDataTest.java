@@ -1,19 +1,20 @@
 package scenarios.pdf;
 
-import org.apache.poi.util.NotImplemented;
-import scenarios.DriverConfiguration;
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import scenarios.DriverConfiguration;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -21,7 +22,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.time.Duration;
 
-@NotImplemented
 public class GetPDFFileMetaDataTest {
 
     // Declare a WebDriver instance to interact with the web browser.
@@ -47,32 +47,28 @@ public class GetPDFFileMetaDataTest {
 
     @Test(priority = 1)
     public void testGetPDFFileMetaData() {
-        // Navigate the WebDriver to a specific URL
-        driver.get("https://www.inkit.com/blog/pdf-the-best-digital-document-management");
 
-        // Find the 'Agree' button element
-        WebElement agreeButton = driver.findElement(By.xpath("//a[text()='Accept']"));
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/pdf/openPDF.html";
 
-        // Find the 'trillions of PDFs' element
-        WebElement trillionsOfPDF = driver.findElement(By.xpath("//a[text()='trillions of PDFs']"));
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
+
+        // Find the 'samplePDF' button element
+        WebElement samplePDFButton = driver.findElement(By.id("pdf"));
 
         // Apply a wait condition
-        new WebDriverWait(driver, WAIT_TIMEOUT).until(ExpectedConditions.visibilityOf(agreeButton));
+        new WebDriverWait(driver, WAIT_TIMEOUT).until(ExpectedConditions.visibilityOf(samplePDFButton));
 
-        // Click the 'Agree' button
-        agreeButton.click();
-
-        // Scroll to the 'trillions of PDFs' element
-        new Actions(driver).scrollToElement(trillionsOfPDF).perform();
-
-        // Click the 'trillions of PDFs' element
-        trillionsOfPDF.click();
+        // Click the 'samplePDF' button
+        samplePDFButton.click();
 
         // Get the current URL of the page
         String pdfFileURL = driver.getCurrentUrl();
 
         try {
             // Create a URL object
+            Assert.assertNotNull(pdfFileURL);
             URL url = URI.create(pdfFileURL).toURL();
 
             // Open a URL connection
@@ -87,36 +83,40 @@ public class GetPDFFileMetaDataTest {
             // Create a buffered input stream
             BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 
+            byte[] pdfBytes;
+
+            try (InputStream is = urlConnection.getInputStream()) {
+                pdfBytes = is.readAllBytes();   // Java 9+
+            }
+
             // Load the PDF document
-////            PDDocument pdDocument = PDDocument.load(bufferedInputStream);
-////
-////            // Print the PDF file version
-////            System.out.println("PDF File Version          ==> " + pdDocument.getVersion());
-////            // Print the print option availability
-////            System.out.println("PDF File Print Option     ==> " + pdDocument.getCurrentAccessPermission().canPrint());
-////            // Print the read-only status
-////            System.out.println("PDF File ReadOnly         ==> " + pdDocument.getCurrentAccessPermission().isReadOnly());
-////            // Print the owner permission status
-////            System.out.println(
-////                    "PDF File Owner Permission ==> " + pdDocument.getCurrentAccessPermission().isOwnerPermission());
-////            // Print the author of the PDF
-////            System.out.println("PDF File Author           ==> " + pdDocument.getDocumentInformation().getAuthor());
-////            // Print the subject of the PDF
-////            System.out.println("PDF File Subject          ==> " + pdDocument.getDocumentInformation().getSubject());
-////            // Print the title of the PDF
-////            System.out.println("PDF File Title            ==> " + pdDocument.getDocumentInformation().getTitle());
-////            // Print the creator of the PDF
-////            System.out.println("PDF File Creator          ==> " + pdDocument.getDocumentInformation().getCreator());
-////            // Print the creation date of the PDF
-////            System.out.println(
-////                    "PDF File Creator Date     ==> " + pdDocument.getDocumentInformation().getCreationDate());
-////            // Print the encryption status of the PDF
-////            System.out.println("PDF File Encrypted        ==> " + pdDocument.isEncrypted());
-////            // Print the document ID of the PDF
-////            System.out.println("PDF File Document Id      ==> " + pdDocument.getDocumentId());
-////
-//            // Close the PDF document
-//            pdDocument.close();
+            PDDocument pdDocument = Loader.loadPDF(pdfBytes);
+
+            // Print the PDF file version
+            System.out.println("PDF File Version          ==> " + pdDocument.getVersion());
+            // Print the print option availability
+            System.out.println("PDF File Print Option     ==> " + pdDocument.getCurrentAccessPermission().canPrint());
+            // Print the read-only status
+            System.out.println("PDF File ReadOnly         ==> " + pdDocument.getCurrentAccessPermission().isReadOnly());
+            // Print the owner permission status
+            System.out.println(
+                    "PDF File Owner Permission ==> " + pdDocument.getCurrentAccessPermission().isOwnerPermission());
+            // Print the author of the PDF
+            System.out.println("PDF File Author           ==> " + pdDocument.getDocumentInformation().getAuthor());
+            // Print the subject of the PDF
+            System.out.println("PDF File Subject          ==> " + pdDocument.getDocumentInformation().getSubject());
+            // Print the title of the PDF
+            System.out.println("PDF File Title            ==> " + pdDocument.getDocumentInformation().getTitle());
+            // Print the creator of the PDF
+            System.out.println("PDF File Creator          ==> " + pdDocument.getDocumentInformation().getCreator());
+            // Print the creation date of the PDF
+            System.out.println(
+                    "PDF File Creator Date     ==> " + pdDocument.getDocumentInformation().getCreationDate());
+            // Print the encryption status of the PDF
+            System.out.println("PDF File Encrypted        ==> " + pdDocument.isEncrypted());
+            // Print the document ID of the PDF
+            System.out.println("PDF File Document Id      ==> " + pdDocument.getDocumentId());
+
         } catch (IOException ex) {
 
             // Handle IO exceptions
