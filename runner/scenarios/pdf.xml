@@ -9,7 +9,6 @@
             <class name="scenarios.pdf.GetPDFFilePageCountTest"/>
             <class name="scenarios.pdf.GetSpecificPagePDFFileContentTest"/>
             <class name="scenarios.pdf.ReadPDFFileFromBrowserTest"/>
-
         </classes>
     </test>
 </suite>

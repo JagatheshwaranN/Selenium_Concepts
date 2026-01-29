@@ -34,7 +34,7 @@ public class ComparePDFImagesTest {
     }
 
     @Test(priority = 2)
-    public void testCompareImages() throws IOException {
+    public void testCompareImages() {
         // Create File objects for the specified image files
         File file1 = new File(HDFC_COLOR_FILE);
         File file2 = new File(HDFC_COLOR_FILE);

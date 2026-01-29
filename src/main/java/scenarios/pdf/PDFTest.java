@@ -50,7 +50,7 @@ public class PDFTest {
            document = Loader.loadPDF(pdfBytes);
         } catch (IOException ex) {
             // If an I/O exception occurs during the loading of the document, print the stack trace
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
         // Return the loaded PDF document
         return document;
@@ -93,7 +93,7 @@ public class PDFTest {
                 pdxObject = resources.getXObject(cosName);
             } catch (IOException ex) {
                 // Handle any IO exceptions that may occur during the process
-                ex.printStackTrace();
+                ex.getStackTrace();
             }
 
             // Check if the XObject is a PDFormXObject, then recursively extract images from its resources
@@ -106,7 +106,7 @@ public class PDFTest {
                     images.add(((PDImageXObject) pdxObject).getImage());
                 } catch (IOException ex) {
                     // Handle any IO exceptions that may occur during the process
-                    ex.printStackTrace();
+                    ex.getStackTrace();
                 }
             }
         }
@@ -144,7 +144,7 @@ public class PDFTest {
                     }
                 } catch (IOException ex) {
                     // Handle any IO exceptions that may occur during the process
-                    ex.printStackTrace();
+                    ex.getStackTrace();
                 }
             }
         }
@@ -184,7 +184,7 @@ public class PDFTest {
             }
         } catch (IOException ex) {
             // Handle any IO exceptions that may occur
-            ex.printStackTrace();
+            ex.getStackTrace();
         }
     }
 
