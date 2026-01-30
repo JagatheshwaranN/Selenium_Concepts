@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import scenarios.DriverConfiguration;
 
+import java.io.File;
 import java.util.List;
 
 public class WebTableType2Test {
@@ -33,8 +34,11 @@ public class WebTableType2Test {
 
     @Test(priority = 1)
     public void testWebTableType2() {
-        // Navigate to the specified URL using the WebDriver instance
-        driver.get("file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/WebTable.html");
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/WebTable.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
         // Find the HTML table element by its ID
         WebElement table = driver.findElement(By.id("data-table"));

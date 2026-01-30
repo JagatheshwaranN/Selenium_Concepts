@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test Suite" parallel="classes">
+    <test thread-count="5" name="WEB TABLE">
+        <classes>
+            <class name="scenarios.webtable.FindCellDataExistAndPrintRowColValueTest"/>
+            <class name="scenarios.webtable.WebTableFindTableCellDataUsingColumnNameTest"/>
+            <class name="scenarios.webtable.WebTableType1Test"/>
+            <class name="scenarios.webtable.WebTableType2Test"/>
+        </classes>
+    </test>
+</suite>

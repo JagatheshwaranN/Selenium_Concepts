@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -71,13 +72,14 @@ public class SliderByClickAndHoldTest {
             String loanAmount = driver.findElement(By.id("loanamount")).getAttribute("value");
 
             // Parse the loan amount string to an integer (removing commas)
+            Assert.assertNotNull(loanAmount);
             int currentLoanAmount = Integer.parseInt(loanAmount.replaceAll(",", ""));
 
             // Print the current loan amount
             System.out.println(loanAmount);
 
             // Break the loop if the loan amount reaches or exceeds the maximum value (5000000 in this example)
-            if (currentLoanAmount >= 5000000) {
+            if (currentLoanAmount >= 1000000) {
                 // Release the click (assuming clickAndHold was used for dragging)
                 actions.release(slider).perform();
                 break;

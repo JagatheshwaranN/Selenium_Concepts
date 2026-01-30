@@ -1,5 +1,6 @@
 package scenarios.webtable;
 
+import java.io.File;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -33,8 +34,11 @@ public class WebTableType1Test {
 
     @Test(priority = 1)
     public void testWebTableType1() {
-        // Navigate to the specified URL using the WebDriver instance
-        driver.get("file:///D:/Environment_Collection/Eclipse_Env/Workspace/Selenium_Concepts/src/main/resources/supportFiles/WebTable.html");
+        // URL of the HTML file
+        String filePath = "src/main/resources/supportFiles/WebTable.html";
+
+        // Open the webpage
+        driver.get(new File(filePath).toURI().toString());
 
         // Find the HTML table element by its ID
         WebElement table = driver.findElement(By.id("data-table"));
